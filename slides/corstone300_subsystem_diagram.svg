@@ -1,0 +1,299 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 720" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070C12"/>
+      <stop offset="100%" stop-color="#0D1520"/>
+    </linearGradient>
+    
+    <!-- Software Headers -->
+    <linearGradient id="swZephyrGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7B1FA2"/>
+      <stop offset="100%" stop-color="#AB47BC"/>
+    </linearGradient>
+    <linearGradient id="swVelaGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#E65100"/>
+      <stop offset="100%" stop-color="#FB8C00"/>
+    </linearGradient>
+    <linearGradient id="swTfmGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1B5E20"/>
+      <stop offset="100%" stop-color="#43A047"/>
+    </linearGradient>
+    <linearGradient id="swMemGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#006064"/>
+      <stop offset="100%" stop-color="#00ACC1"/>
+    </linearGradient>
+    <linearGradient id="swPeriphGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#263238"/>
+      <stop offset="100%" stop-color="#455A64"/>
+    </linearGradient>
+
+    <!-- Hardware Headers -->
+    <linearGradient id="hwCpuGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0091BD"/>
+      <stop offset="100%" stop-color="#00C1DE"/>
+    </linearGradient>
+    <linearGradient id="hwNpuGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#D84315"/>
+      <stop offset="100%" stop-color="#FF7043"/>
+    </linearGradient>
+    <linearGradient id="hwTzGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2E7D32"/>
+      <stop offset="100%" stop-color="#66BB6A"/>
+    </linearGradient>
+
+    <filter id="cardShadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000000" flood-opacity="0.75"/>
+    </filter>
+  </defs>
+
+  <!-- Canvas Background -->
+  <rect width="1180" height="720" fill="url(#bgGrad)" rx="14"/>
+  <rect x="18" y="18" width="1144" height="684" fill="none" stroke="#1B293A" stroke-width="1.5" rx="10"/>
+
+  <!-- Top Title & Badge -->
+  <g transform="translate(40, 48)">
+    <text font-family="'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="800" fill="#FFFFFF" letter-spacing="0.5">Arm Corstone-300: Hardware Subsystem to Software Stack Mapping</text>
+    <text y="24" font-family="'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="500" fill="#8EADC6">Comprehensive breakdown of Operating System (Zephyr), AI Engine (TFLM/Vela), Security (TF-M), and Hardware Silicon Blocks</text>
+  </g>
+
+  <!-- Legend Header -->
+  <g transform="translate(860, 42)">
+    <rect width="270" height="34" fill="#0C1520" stroke="#1E3347" rx="6"/>
+    <circle cx="20" cy="17" r="6" fill="#AB47BC"/>
+    <text x="32" y="21" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#E1BEE7">Software Stack</text>
+    <circle cx="150" cy="17" r="6" fill="#00C1DE"/>
+    <text x="162" y="21" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#B2EBF2">Hardware Block</text>
+  </g>
+
+  <!-- ==================== ROW 1: CORE PROCESSING UNITS ==================== -->
+
+  <!-- BLOCK 1: Cortex-M55 CPU + Zephyr / TFLM / CMSIS-NN -->
+  <g transform="translate(40, 95)">
+    <rect width="350" height="235" fill="#0B131C" stroke="#0091BD" stroke-width="2" rx="10" filter="url(#cardShadow)"/>
+    
+    <!-- Software Compartment -->
+    <rect x="1" y="1" width="348" height="24" fill="url(#swZephyrGrad)" rx="9"/>
+    <rect x="1" y="16" width="348" height="9" fill="url(#swZephyrGrad)"/>
+    <text x="175" y="17" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="800" fill="#FFFFFF" letter-spacing="0.5">SOFTWARE RUNNING ON CORTEX-M55</text>
+    
+    <g transform="translate(14, 38)">
+      <text font-family="'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#CE93D8">&bull; Zephyr RTOS Microkernel (v3.5+)</text>
+      <text x="12" y="16" font-family="'Segoe UI', sans-serif" font-size="11" fill="#B0BEC5">Multi-threaded scheduler, SysTick preemption</text>
+
+      <text y="36" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#00E5FF">&bull; CMSIS-NN &amp; Helium Vector Kernels</text>
+      <text x="12" y="52" font-family="'Segoe UI', sans-serif" font-size="11" fill="#B0BEC5">DSP Audio MFCC/FFT feature extraction (5x speedup)</text>
+
+      <text y="72" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#80D8FF">&bull; TensorFlow Lite for Microcontrollers (TFLM)</text>
+      <text x="12" y="88" font-family="'Segoe UI', sans-serif" font-size="11" fill="#B0BEC5">Operator graph traversal &amp; CPU fallback dispatch</text>
+    </g>
+
+    <!-- Divider -->
+    <line x1="1" y1="145" x2="349" y2="145" stroke="#0091BD" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+    <!-- Hardware Compartment -->
+    <rect x="1" y="146" width="348" height="22" fill="url(#hwCpuGrad)"/>
+    <text x="175" y="161" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="800" fill="#070C12" letter-spacing="0.5">UNDERLYING HARDWARE: CORTEX-M55</text>
+    
+    <g transform="translate(14, 182)">
+      <text font-family="'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#FFFFFF">&bull; Armv8.1-M Mainline CPU Core @ 25-500 MHz</text>
+      <text y="18" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#00E5FF">&bull; Helium MVE (M-Profile Vector Extension)</text>
+      <text y="36" font-family="'Segoe UI', sans-serif" font-size="11" fill="#8EADC6">&bull; 512KB ITCM (Code) + 512KB DTCM (Data Stack)</text>
+    </g>
+  </g>
+
+  <!-- BLOCK 2: Ethos-U55 microNPU + Vela Command Stream -->
+  <g transform="translate(415, 95)">
+    <rect width="350" height="235" fill="#0B131C" stroke="#FF6B00" stroke-width="2" rx="10" filter="url(#cardShadow)"/>
+    
+    <!-- Software Compartment -->
+    <rect x="1" y="1" width="348" height="24" fill="url(#swVelaGrad)" rx="9"/>
+    <rect x="1" y="16" width="348" height="9" fill="url(#swVelaGrad)"/>
+    <text x="175" y="17" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="800" fill="#FFFFFF" letter-spacing="0.5">SOFTWARE / DRIVER RUNNING ON ETHOS-U</text>
+    
+    <g transform="translate(14, 38)">
+      <text font-family="'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#FFCC80">&bull; Ethos-U Core Driver (v5.2.0)</text>
+      <text x="12" y="16" font-family="'Segoe UI', sans-serif" font-size="11" fill="#B0BEC5">MMIO base 0x48102000, PMU cycle monitor</text>
+
+      <text y="36" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#FFA726">&bull; Arm Vela Compiled Command Stream</text>
+      <text x="12" y="52" font-family="'Segoe UI', sans-serif" font-size="11" fill="#B0BEC5">Low-level DMA micro-ops executed autonomously</text>
+
+      <text y="72" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#FFE0B2">&bull; Hardware IRQ Handler (IRQ #56)</text>
+      <text x="12" y="88" font-family="'Segoe UI', sans-serif" font-size="11" fill="#B0BEC5">Wakes Zephyr inference thread on tensor completion</text>
+    </g>
+
+    <!-- Divider -->
+    <line x1="1" y1="145" x2="349" y2="145" stroke="#FF6B00" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+    <!-- Hardware Compartment -->
+    <rect x="1" y="146" width="348" height="22" fill="url(#hwNpuGrad)"/>
+    <text x="175" y="161" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="800" fill="#070C12" letter-spacing="0.5">UNDERLYING HARDWARE: ETHOS-U55 NPU</text>
+    
+    <g transform="translate(14, 182)">
+      <text font-family="'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#FFFFFF">&bull; 128 MACs/Cycle Parallel Neural Compute Engine</text>
+      <text y="18" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#FF9E80">&bull; Dual-AXI Master Interfaces (Weights &amp; Activations)</text>
+      <text y="36" font-family="'Segoe UI', sans-serif" font-size="11" fill="#8EADC6">&bull; Hardware Clustered Weight Decompression Unit</text>
+    </g>
+  </g>
+
+  <!-- BLOCK 3: TrustZone & Trusted Firmware-M -->
+  <g transform="translate(790, 95)">
+    <rect width="350" height="235" fill="#0B131C" stroke="#00C853" stroke-width="2" rx="10" filter="url(#cardShadow)"/>
+    
+    <!-- Software Compartment -->
+    <rect x="1" y="1" width="348" height="24" fill="url(#swTfmGrad)" rx="9"/>
+    <rect x="1" y="16" width="348" height="9" fill="url(#swTfmGrad)"/>
+    <text x="175" y="17" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="800" fill="#FFFFFF" letter-spacing="0.5">SECURE PROCESSING STACK (TF-M)</text>
+    
+    <g transform="translate(14, 38)">
+      <text font-family="'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#A5D6A7">&bull; Trusted Firmware-M (TF-M Core)</text>
+      <text x="12" y="16" font-family="'Segoe UI', sans-serif" font-size="11" fill="#B0BEC5">PSA Certified Level 2 Secure Root of Trust</text>
+
+      <text y="36" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#C8E6C9">&bull; PSA Crypto &amp; Secure Storage</text>
+      <text x="12" y="52" font-family="'Segoe UI', sans-serif" font-size="11" fill="#B0BEC5">Hardware key store, model weight authentication</text>
+
+      <text y="72" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#81C784">&bull; Non-Secure Callable (NSC) Veneers</text>
+      <text x="12" y="88" font-family="'Segoe UI', sans-serif" font-size="11" fill="#B0BEC5">Guard entry from Zephyr non-secure application</text>
+    </g>
+
+    <!-- Divider -->
+    <line x1="1" y1="145" x2="349" y2="145" stroke="#00C853" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+    <!-- Hardware Compartment -->
+    <rect x="1" y="146" width="348" height="22" fill="url(#hwTzGrad)"/>
+    <text x="175" y="161" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="800" fill="#070C12" letter-spacing="0.5">UNDERLYING HARDWARE: TRUSTZONE SPE</text>
+    
+    <g transform="translate(14, 182)">
+      <text font-family="'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#FFFFFF">&bull; Security Attribution Unit (SAU) &amp; IDAU</text>
+      <text y="18" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#B9F6CA">&bull; TZC-400 Bus Memory Protection Controller</text>
+      <text y="36" font-family="'Segoe UI', sans-serif" font-size="11" fill="#8EADC6">&bull; Hardware Bus Intercept: Throws SecureFault on DMA Leak</text>
+    </g>
+  </g>
+
+  <!-- ==================== BUS MATRIX: AXI5 INTERCONNECT ==================== -->
+  <g transform="translate(40, 350)">
+    <rect width="1100" height="40" fill="#11202E" stroke="#00C1DE" stroke-width="2" rx="8" filter="url(#cardShadow)"/>
+    <text x="550" y="25" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="13" font-weight="800" fill="#00E5FF" letter-spacing="1">MULTI-LAYER AXI5 64-BIT HIGH-SPEED BUS MATRIX &amp; DMA CROSSBAR</text>
+    <text x="1000" y="25" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#8EADC6">Peak: 3.73 GB/s</text>
+  </g>
+
+  <!-- Connection Traces (Top to Bus) -->
+  <line x1="215" y1="330" x2="215" y2="350" stroke="#0091BD" stroke-width="3"/>
+  <line x1="590" y1="330" x2="590" y2="350" stroke="#FF6B00" stroke-width="3"/>
+  <line x1="965" y1="330" x2="965" y2="350" stroke="#00C853" stroke-width="3"/>
+
+  <!-- ==================== ROW 2: MEMORY, STORAGE & PERIPHERALS ==================== -->
+
+  <!-- BLOCK 4: Internal Shared SRAM (Tensor Arena & RTOS Data) -->
+  <g transform="translate(40, 410)">
+    <rect width="350" height="235" fill="#0B131C" stroke="#00E5FF" stroke-width="2" rx="10" filter="url(#cardShadow)"/>
+    
+    <!-- Software Compartment -->
+    <rect x="1" y="1" width="348" height="24" fill="url(#swMemGrad)" rx="9"/>
+    <rect x="1" y="16" width="348" height="9" fill="url(#swMemGrad)"/>
+    <text x="175" y="17" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="800" fill="#FFFFFF" letter-spacing="0.5">SOFTWARE MAPPING IN SRAM</text>
+    
+    <g transform="translate(14, 38)">
+      <text font-family="'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#80DEEA">&bull; Section: .sram.tensor_arena (64 KiB)</text>
+      <text x="12" y="16" font-family="'Segoe UI', sans-serif" font-size="11" fill="#B0BEC5">TFLM activation tensors &amp; NPU DMA scratchpad</text>
+
+      <text y="36" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#B2EBF2">&bull; Linker Overflow Guard (ASSERT)</text>
+      <text x="12" y="52" font-family="'Segoe UI', sans-serif" font-size="11" fill="#B0BEC5">Enforces strict 64KB boundary limit at build time</text>
+
+      <text y="72" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#E0F7FA">&bull; Zephyr Kernel BSS &amp; Thread Stacks</text>
+      <text x="12" y="88" font-family="'Segoe UI', sans-serif" font-size="11" fill="#B0BEC5">Task Control Blocks, message queues, RTOS heap</text>
+    </g>
+
+    <!-- Divider -->
+    <line x1="1" y1="145" x2="349" y2="145" stroke="#00E5FF" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+    <!-- Hardware Compartment -->
+    <rect x="1" y="146" width="348" height="22" fill="#162D3D"/>
+    <text x="175" y="161" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="800" fill="#00E5FF" letter-spacing="0.5">UNDERLYING HARDWARE: INTERNAL SRAM</text>
+    
+    <g transform="translate(14, 182)">
+      <text font-family="'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#FFFFFF">&bull; 4MB Physical Internal SRAM (ISRAM)</text>
+      <text y="18" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#80DEEA">&bull; Base Address: 0x21000000 (Non-Secure Alias)</text>
+      <text y="36" font-family="'Segoe UI', sans-serif" font-size="11" fill="#8EADC6">&bull; Multi-Banked High Bandwidth Low Latency Access</text>
+    </g>
+  </g>
+
+  <!-- BLOCK 5: QSPI Flash (Firmware Image & Model Weights) -->
+  <g transform="translate(415, 410)">
+    <rect width="350" height="235" fill="#0B131C" stroke="#78909C" stroke-width="2" rx="10" filter="url(#cardShadow)"/>
+    
+    <!-- Software Compartment -->
+    <rect x="1" y="1" width="348" height="24" fill="#37474F" rx="9"/>
+    <rect x="1" y="16" width="348" height="9" fill="#37474F"/>
+    <text x="175" y="17" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="800" fill="#FFFFFF" letter-spacing="0.5">SOFTWARE STORED IN FLASH</text>
+    
+    <g transform="translate(14, 38)">
+      <text font-family="'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#CFD8DC">&bull; Section: .rodata.model (35.9 KiB)</text>
+      <text x="12" y="16" font-family="'Segoe UI', sans-serif" font-size="11" fill="#B0BEC5">Vela INT8 weights + Ethos-U command stream</text>
+
+      <text y="36" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#ECEFF1">&bull; 16-Byte Alignment (__aligned(16))</text>
+      <text x="12" y="52" font-family="'Segoe UI', sans-serif" font-size="11" fill="#B0BEC5">Required for burst DMA transfers into Ethos-U</text>
+
+      <text y="72" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#B0BEC5">&bull; Zephyr Kernel Binary &amp; Vectors (.text)</text>
+      <text x="12" y="88" font-family="'Segoe UI', sans-serif" font-size="11" fill="#B0BEC5">Freestanding executable image (42.8 KiB)</text>
+    </g>
+
+    <!-- Divider -->
+    <line x1="1" y1="145" x2="349" y2="145" stroke="#78909C" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+    <!-- Hardware Compartment -->
+    <rect x="1" y="146" width="348" height="22" fill="#263238"/>
+    <text x="175" y="161" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="800" fill="#CFD8DC" letter-spacing="0.5">UNDERLYING HARDWARE: QSPI FLASH</text>
+    
+    <g transform="translate(14, 182)">
+      <text font-family="'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#FFFFFF">&bull; 4MB Non-Volatile Memory (Flash / BRAM)</text>
+      <text y="18" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#ECEFF1">&bull; Base Address: 0x00000000 (Flash Origin)</text>
+      <text y="36" font-family="'Segoe UI', sans-serif" font-size="11" fill="#8EADC6">&bull; Read-Only Memory for Boot Code &amp; AI Weights</text>
+    </g>
+  </g>
+
+  <!-- BLOCK 6: Peripherals, Drivers & Virtual Platform -->
+  <g transform="translate(790, 410)">
+    <rect width="350" height="235" fill="#0B131C" stroke="#78909C" stroke-width="2" rx="10" filter="url(#cardShadow)"/>
+    
+    <!-- Software Compartment -->
+    <rect x="1" y="1" width="348" height="24" fill="#37474F" rx="9"/>
+    <rect x="1" y="16" width="348" height="9" fill="#37474F"/>
+    <text x="175" y="17" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="800" fill="#FFFFFF" letter-spacing="0.5">DRIVERS &amp; SIMULATION SOFTWARE</text>
+    
+    <g transform="translate(14, 38)">
+      <text font-family="'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#CFD8DC">&bull; APB UART0 Driver (uart_corstone.c)</text>
+      <text x="12" y="16" font-family="'Segoe UI', sans-serif" font-size="11" fill="#B0BEC5">Real-time profiling &amp; test assertions telemetry</text>
+
+      <text y="36" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#ECEFF1">&bull; Arm Semihosting Interface (BKPT 0xAB)</text>
+      <text x="12" y="52" font-family="'Segoe UI', sans-serif" font-size="11" fill="#B0BEC5">Graceful simulator exit return code (0 = PASS)</text>
+
+      <text y="72" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#00E5FF">&bull; AVH Headless Mode Switch</text>
+      <text x="12" y="88" font-family="'Segoe UI', sans-serif" font-size="11" fill="#B0BEC5">-C disable-visualisation=1 (Prevents X11 crash)</text>
+    </g>
+
+    <!-- Divider -->
+    <line x1="1" y1="145" x2="349" y2="145" stroke="#78909C" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+    <!-- Hardware Compartment -->
+    <rect x="1" y="146" width="348" height="22" fill="#263238"/>
+    <text x="175" y="161" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="800" fill="#CFD8DC" letter-spacing="0.5">UNDERLYING HARDWARE: PERIPHERALS</text>
+    
+    <g transform="translate(14, 182)">
+      <text font-family="'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#FFFFFF">&bull; CMSDK APB UART0 (Base: 0x49303000)</text>
+      <text y="18" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#ECEFF1">&bull; CMSDK Dual-Timer &amp; Core SysTick (25 MHz)</text>
+      <text y="36" font-family="'Segoe UI', sans-serif" font-size="11" fill="#8EADC6">&bull; Arm Virtual Hardware (AVH) / Corstone-300 FVP</text>
+    </g>
+  </g>
+
+  <!-- Connection Traces (Bus to Bottom) -->
+  <line x1="215" y1="390" x2="215" y2="410" stroke="#00E5FF" stroke-width="3"/>
+  <line x1="590" y1="390" x2="590" y2="410" stroke="#78909C" stroke-width="3"/>
+  <line x1="965" y1="390" x2="965" y2="410" stroke="#78909C" stroke-width="3"/>
+
+  <!-- Footer Banner -->
+  <g transform="translate(40, 660)">
+    <rect width="1100" height="34" fill="#0C1520" stroke="#1E3347" rx="6"/>
+    <text x="20" y="22" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="800" fill="#00E5FF">CO-DESIGN PRINCIPLE:</text>
+    <text x="160" y="22" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="500" fill="#CFD8DC">Every software component is tailored to the underlying Arm silicon IP &mdash; maximizing performance, enforcing security, and eliminating runtime memory overflow.</text>
+  </g>
+</svg>

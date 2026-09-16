@@ -1,0 +1,58 @@
+{
+  "session_id": "arm-lab-1788723961",
+  "timestamp": "2026-09-06T19:46:01.930318Z",
+  "stages": {
+    "Pre-Flight Sanity Check": {
+      "duration_sec": 0.79,
+      "success": true,
+      "details": {
+        "returncode": 0
+      }
+    },
+    "Vela Model Compilation (Ethos-U55)": {
+      "duration_sec": 0.433,
+      "success": true,
+      "details": {
+        "returncode": 0
+      }
+    },
+    "Vela Operator Fallback Demonstration": {
+      "duration_sec": 0.412,
+      "success": true,
+      "details": {
+        "returncode": 0
+      }
+    },
+    "Model C-Array Generation": {
+      "duration_sec": 0.258,
+      "success": true,
+      "details": {
+        "returncode": 0
+      }
+    },
+    "Clean Build Directory": {
+      "duration_sec": 0.042,
+      "success": true,
+      "details": {
+        "returncode": 0
+      }
+    },
+    "Cortex-M55 & Ethos-U55 Firmware Link": {
+      "duration_sec": 0.764,
+      "success": true,
+      "details": {
+        "returncode": 0
+      }
+    },
+    "Corstone-300 Virtual Platform Simulation": {
+      "duration_sec": 0.081,
+      "success": true,
+      "details": {
+        "returncode": 0
+      }
+    }
+  },
+  "bottlenecks": [],
+  "overall_success": true,
+  "total_duration_sec": 2.78
+}

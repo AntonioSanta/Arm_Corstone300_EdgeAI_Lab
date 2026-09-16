@@ -1,0 +1,9 @@
+{
+  "accelerator": "ethos-u55-128",
+  "fallback_mode": true,
+  "sram_used_kib": 21.69,
+  "flash_used_kib": 29.52,
+  "npu_ops": 48,
+  "cpu_ops": 1,
+  "macs_per_batch": 2664024
+}

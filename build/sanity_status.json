@@ -1,0 +1,11 @@
+{
+  "ready": true,
+  "details": {
+    "python": true,
+    "vela": true,
+    "gcc_m55": true,
+    "make": true,
+    "virtual_platform": true,
+    "model_asset": true
+  }
+}
