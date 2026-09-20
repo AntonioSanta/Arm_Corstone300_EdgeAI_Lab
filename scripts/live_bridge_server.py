@@ -130,12 +130,32 @@ class BridgeHandler(BaseHTTPRequestHandler):
                 audio_np = np.array(audio_samples, dtype=np.float32)
                 raw_peak = float(np.max(np.abs(audio_np)))
 
-            # If silence (ambient noise floor, peak < 0.008)
-            if raw_peak < 0.008 and (not mfcc_list or np.max(np.abs(mfcc_list)) < 15):
+            raw_peak_unboosted = float(data.get("raw_peak", raw_peak))
+
+            # Compute frame energy variance to detect speech burst vs flat stationary room noise
+            is_silent = False
+            dynamic_ratio = 1.0
+            if audio_samples and len(audio_samples) >= 1000:
+                audio_np = np.array(audio_samples, dtype=np.float32)
+                frame_len = 320  # 20ms at 16 kHz
+                frames_e = [float(np.mean(audio_np[i:i+frame_len]**2)) for i in range(0, len(audio_np) - frame_len, frame_len)]
+                if frames_e:
+                    max_e = max(frames_e)
+                    min_e = max(1e-9, min(frames_e))
+                    dynamic_ratio = max_e / min_e
+
+            # Silence criteria:
+            # - Unboosted mic amplitude < 2.8% (ambient room noise floor)
+            # - OR stationary background noise with no speech burst (dynamic_ratio < 5.0 and raw_peak_unboosted < 0.06)
+            if raw_peak_unboosted < 0.028 or (dynamic_ratio < 5.0 and raw_peak_unboosted < 0.06):
+                is_silent = True
+
+            if is_silent and (not mfcc_list or np.max(np.abs(mfcc_list)) < 15):
                 pred_label = "Silence"
                 pred_idx = 0
                 confidence_pct = 95.0
                 scores_list = [120, -120, -128, -128, -128, -128, -128, -128, -128, -128, -128, -128]
+                print(f"[BRIDGE] Classified as Silence: raw_peak_unboosted={raw_peak_unboosted:.4f}, dynamic_ratio={dynamic_ratio:.2f}")
             elif audio_samples and len(audio_samples) >= 1000:
                 audio_np = np.array(audio_samples, dtype=np.float32)
                 # Full buffer spectral energy distribution (sr = 16,000 Hz)
@@ -161,7 +181,7 @@ class BridgeHandler(BaseHTTPRequestHandler):
                         t_low = np.sum(fft_tail[(f_tail >= 150) & (f_tail < 2400)])
                         tail_ratio = float(t_high / (t_high + t_low + 1e-6))
 
-                print(f"[BRIDGE] peak={raw_peak:.4f}, len={speech_len}, full_high={full_high_ratio:.4f}, tail={tail_ratio:.4f}")
+                print(f"[BRIDGE] peak={raw_peak:.4f}, unboosted={raw_peak_unboosted:.4f}, dynamic={dynamic_ratio:.2f}, len={speech_len}, full_high={full_high_ratio:.4f}, tail={tail_ratio:.4f}")
 
                 # Acoustic Decision Boundary:
                 # "YES" possesses strong /s/ fricative high frequencies (full_high_ratio >= 0.15 or tail_ratio >= 0.22)

@@ -1661,16 +1661,16 @@ Info: /OSCI/SystemC: Simulation stopped by user.
                         if (Math.abs(val) > rawPeak) rawPeak = Math.abs(val);
                     }
 
-                    // Adaptive Sensitivity Boost: boost voice even if mic volume is set low
+                    // Adaptive Sensitivity Boost: only boost if sound exceeds silence threshold (>= 2.8%)
                     let boost = 1.0;
-                    if (rawPeak >= 0.003) {
-                        boost = Math.min(60.0, 0.75 / rawPeak);
+                    if (rawPeak >= 0.028) {
+                        boost = Math.min(25.0, 0.75 / rawPeak);
                         for (let i = 0; i < targetLength; i++) {
                             resampled16k[i] *= boost;
                         }
                     }
 
-                    if (rawPeak < 0.003) {
+                    if (rawPeak < 0.028) {
                         status.innerText = `Captured 16,000 samples (Peak: ${(rawPeak * 100).toFixed(2)}% — Silence / Ambient Noise Floor).`;
                         status.style.color = "#8EADC6";
                     } else {
@@ -1812,7 +1812,8 @@ Info: /OSCI/SystemC: Simulation stopped by user.
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ 
                             audio: Array.from(samples),
-                            mfcc: Array.from(mfccTensor) 
+                            mfcc: Array.from(mfccTensor),
+                            raw_peak: rawPeak
                         })
                     });
                     if (resp.ok) {
