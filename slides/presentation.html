@@ -1591,13 +1591,13 @@ Info: /OSCI/SystemC: Simulation stopped by user.
                 status.innerText = "Requesting microphone access...";
                 status.style.color = "#FF9100";
 
-                // Step 1: Ensure permission is granted FIRST before starting recording timer
+                // Step 1: Ensure permission is granted FIRST
                 if (!micMediaStream || !micMediaStream.active) {
                     micMediaStream = await navigator.mediaDevices.getUserMedia({
                         audio: {
                             echoCancellation: false,
                             noiseSuppression: false,
-                            autoGainControl: true
+                            autoGainControl: false
                         }
                     });
                 }
@@ -1609,14 +1609,10 @@ Info: /OSCI/SystemC: Simulation stopped by user.
                     await audioCtx.resume();
                 }
 
-                // Step 2: Visual Countdown so user is completely ready
-                status.innerText = "Get ready to speak... 1";
-                btn.innerText = "Speak in 1s...";
-                await new Promise(r => setTimeout(r, 600));
-
-                btn.innerText = "🔴 LISTENING NOW (Say 'YES')...";
+                // Step 2: Start capturing immediately without delay so user never misses the window
+                btn.innerText = "🔴 LISTENING NOW (Say 'YES' or 'NO')...";
                 btn.style.background = "#E65100";
-                status.innerText = "🎙️ RECORDING NOW (1s) — Speak 'YES' clearly into microphone!";
+                status.innerText = "🎙️ RECORDING NOW (1.2s) — Say 'YES' or 'NO' clearly into microphone!";
                 status.style.color = "#FF9100";
                 keywordBox.innerText = "Listening...";
                 keywordBox.style.color = "#FF9100";
@@ -1624,12 +1620,15 @@ Info: /OSCI/SystemC: Simulation stopped by user.
                 // Step 3: Now start capturing audio
                 const source = audioCtx.createMediaStreamSource(micMediaStream);
                 const nativeRate = audioCtx.sampleRate;
-                const recordSamplesTarget = nativeRate; // 1 second at hardware rate
+                const recordSamplesTarget = Math.floor(nativeRate * 1.2); // 1.2s at hardware rate
                 const rawBuffer = [];
 
                 const processor = audioCtx.createScriptProcessor(2048, 1, 1);
+                const silentGain = audioCtx.createGain();
+                silentGain.gain.value = 0; // Prevent speaker feedback loop that mutes mic
                 source.connect(processor);
-                processor.connect(audioCtx.destination);
+                processor.connect(silentGain);
+                silentGain.connect(audioCtx.destination);
 
                 processor.onaudioprocess = (e) => {
                     const input = e.inputBuffer.getChannelData(0);
@@ -1640,10 +1639,11 @@ Info: /OSCI/SystemC: Simulation stopped by user.
                     }
                 };
 
-                // Record for exactly 1.1s AFTER countdown
+                // Record for 1.25s
                 setTimeout(() => {
                     processor.disconnect();
                     source.disconnect();
+                    silentGain.disconnect();
 
                     btn.disabled = false;
                     btn.style.background = "#00E676";
@@ -1661,26 +1661,26 @@ Info: /OSCI/SystemC: Simulation stopped by user.
                         if (Math.abs(val) > rawPeak) rawPeak = Math.abs(val);
                     }
 
-                    // Software AGC / Boost: only boost if actual voice is spoken above the noise floor
+                    // Adaptive Sensitivity Boost: boost voice even if mic volume is set low
                     let boost = 1.0;
-                    if (rawPeak >= 0.032) {
-                        boost = Math.min(30.0, 0.75 / rawPeak);
+                    if (rawPeak >= 0.003) {
+                        boost = Math.min(60.0, 0.75 / rawPeak);
                         for (let i = 0; i < targetLength; i++) {
                             resampled16k[i] *= boost;
                         }
                     }
 
-                    if (rawPeak < 0.032) {
-                        status.innerText = `Captured 16,000 samples (Peak: ${(rawPeak * 100).toFixed(1)}% — Silence / Ambient Noise Floor).`;
+                    if (rawPeak < 0.003) {
+                        status.innerText = `Captured 16,000 samples (Peak: ${(rawPeak * 100).toFixed(2)}% — Silence / Ambient Noise Floor).`;
                         status.style.color = "#8EADC6";
                     } else {
-                        status.innerText = `Captured 16,000 samples (Peak: ${(rawPeak * 100).toFixed(1)}%, Boost: ${boost.toFixed(1)}x). Processing MFCC...`;
+                        status.innerText = `Captured 16,000 samples (Peak: ${(rawPeak * 100).toFixed(1)}%, Boost: ${boost.toFixed(1)}x). Evaluating with Arm FVP...`;
                         status.style.color = "#00E676";
                     }
                     document.getElementById('pcmByteCount').innerText = "32,000 / 32,000 B (100%)";
 
                     processCapturedAudio(resampled16k, rawPeak);
-                }, 1100);
+                }, 1250);
 
             } catch (err) {
                 console.error("Microphone access error:", err);
@@ -1810,7 +1810,10 @@ Info: /OSCI/SystemC: Simulation stopped by user.
                     const resp = await fetch('http://127.0.0.1:8080/predict', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ mfcc: Array.from(mfccTensor) })
+                        body: JSON.stringify({ 
+                            audio: Array.from(samples),
+                            mfcc: Array.from(mfccTensor) 
+                        })
                     });
                     if (resp.ok) {
                         const data = await resp.json();

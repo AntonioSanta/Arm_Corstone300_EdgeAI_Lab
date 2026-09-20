@@ -1,37 +1,37 @@
 {
-  "session_id": "arm-lab-1789933637",
-  "timestamp": "2026-09-20T19:47:17.550010Z",
+  "session_id": "arm-lab-1789934609",
+  "timestamp": "2026-09-20T20:03:29.838666Z",
   "stages": {
     "Pre-Flight Sanity Check": {
-      "duration_sec": 0.657,
+      "duration_sec": 0.643,
       "success": true,
       "details": {
         "returncode": 0
       }
     },
     "Vela Model Compilation (Ethos-U55)": {
-      "duration_sec": 0.364,
+      "duration_sec": 0.36,
       "success": true,
       "details": {
         "returncode": 0
       }
     },
     "Vela Operator Fallback Demonstration": {
-      "duration_sec": 0.345,
+      "duration_sec": 0.34,
       "success": true,
       "details": {
         "returncode": 0
       }
     },
     "Model C-Array Generation": {
-      "duration_sec": 0.209,
+      "duration_sec": 0.186,
       "success": true,
       "details": {
         "returncode": 0
       }
     },
     "Clean Build Directory": {
-      "duration_sec": 0.033,
+      "duration_sec": 0.032,
       "success": true,
       "details": {
         "returncode": 0
@@ -45,7 +45,7 @@
       }
     },
     "Arm Virtual Hardware (Corstone-300 FVP) Simulation": {
-      "duration_sec": 1.33,
+      "duration_sec": 1.179,
       "success": true,
       "details": {
         "returncode": 0
@@ -54,5 +54,5 @@
   },
   "bottlenecks": [],
   "overall_success": true,
-  "total_duration_sec": 3.633
+  "total_duration_sec": 3.442
 }
