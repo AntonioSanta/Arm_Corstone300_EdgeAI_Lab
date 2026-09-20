@@ -1842,7 +1842,7 @@ Info: /OSCI/SystemC: Simulation stopped by user.
                             keywordBox.style.color = color;
                         }
                         if (confFill) {
-                            confFill.className = "bar-fill bar-sram";
+                            confFill.className = (label === "Silence") ? "bar-fill bar-cpu" : "bar-fill bar-sram";
                             confFill.style.width = `${Math.min(100, Math.max(15, data.confidence))}%`;
                         }
                         if (confVal) {

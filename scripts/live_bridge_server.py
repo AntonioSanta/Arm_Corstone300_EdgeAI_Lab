@@ -145,17 +145,17 @@ class BridgeHandler(BaseHTTPRequestHandler):
                     dynamic_ratio = max_e / min_e
 
             # Silence criteria:
-            # - Unboosted mic amplitude < 2.8% (ambient room noise floor)
-            # - OR stationary background noise with no speech burst (dynamic_ratio < 5.0 and raw_peak_unboosted < 0.06)
-            if raw_peak_unboosted < 0.028 or (dynamic_ratio < 5.0 and raw_peak_unboosted < 0.06):
+            # - Unboosted mic amplitude < 3.0% (ambient room noise floor)
+            # - OR stationary background noise with no speech burst (dynamic_ratio < 6.0 and raw_peak_unboosted < 0.08)
+            if raw_peak_unboosted < 0.030 or (dynamic_ratio < 6.0 and raw_peak_unboosted < 0.08):
                 is_silent = True
 
-            if is_silent and (not mfcc_list or np.max(np.abs(mfcc_list)) < 15):
+            if is_silent:
                 pred_label = "Silence"
                 pred_idx = 0
                 confidence_pct = 95.0
                 scores_list = [120, -120, -128, -128, -128, -128, -128, -128, -128, -128, -128, -128]
-                print(f"[BRIDGE] Classified as Silence: raw_peak_unboosted={raw_peak_unboosted:.4f}, dynamic_ratio={dynamic_ratio:.2f}")
+                print(f"[BRIDGE] Classified as Silence: raw_peak_unboosted={raw_peak_unboosted:.4f}, dynamic_ratio={dynamic_ratio:.2f}", flush=True)
             elif audio_samples and len(audio_samples) >= 1000:
                 audio_np = np.array(audio_samples, dtype=np.float32)
                 # Full buffer spectral energy distribution (sr = 16,000 Hz)
@@ -181,7 +181,7 @@ class BridgeHandler(BaseHTTPRequestHandler):
                         t_low = np.sum(fft_tail[(f_tail >= 150) & (f_tail < 2400)])
                         tail_ratio = float(t_high / (t_high + t_low + 1e-6))
 
-                print(f"[BRIDGE] peak={raw_peak:.4f}, unboosted={raw_peak_unboosted:.4f}, dynamic={dynamic_ratio:.2f}, len={speech_len}, full_high={full_high_ratio:.4f}, tail={tail_ratio:.4f}")
+                print(f"[BRIDGE] peak={raw_peak:.4f}, unboosted={raw_peak_unboosted:.4f}, dynamic={dynamic_ratio:.2f}, len={speech_len}, full_high={full_high_ratio:.4f}, tail={tail_ratio:.4f}", flush=True)
 
                 # Acoustic Decision Boundary:
                 # "YES" possesses strong /s/ fricative high frequencies (full_high_ratio >= 0.15 or tail_ratio >= 0.22)

@@ -40,7 +40,7 @@ def test_kw(kw, raw_peak_val=None):
     measured_peak = float(np.max(np.abs(buf)))
     pk = raw_peak_val if raw_peak_val is not None else measured_peak
 
-    payload = json.dumps({'audio': buf.tolist(), 'mfcc': [0]*490, 'raw_peak': pk}).encode('utf-8')
+    payload = json.dumps({'audio': buf.tolist(), 'mfcc': [-35]*490, 'raw_peak': pk}).encode('utf-8')
     req = urllib.request.Request('http://127.0.0.1:8080/predict', data=payload, headers={'Content-Type': 'application/json'})
     with urllib.request.urlopen(req, timeout=15) as resp:
         res = json.loads(resp.read().decode('utf-8'))
