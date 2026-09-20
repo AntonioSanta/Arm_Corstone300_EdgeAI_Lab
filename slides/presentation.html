@@ -590,7 +590,7 @@
             display: none;
             flex-direction: column;
             box-shadow: 0 24px 60px rgba(0,0,0,0.85);
-            z-index: 200;
+            z-index: 400;
         }
 
         .terminal-modal.open {
@@ -1551,8 +1551,13 @@ Info: /OSCI/SystemC: Simulation stopped by user.
         function openLiveFvpModal() {
             const termModal = document.getElementById('termModal');
             const termBody = document.getElementById('termBody');
+            const termTitle = document.querySelector('#termModal .term-title');
+            if (termTitle) {
+                termTitle.innerText = "Official Arm Corstone-300 FVP Live Hardware Trace (UART APB)";
+            }
             if (lastLiveFvpLog && termBody) {
                 termBody.innerText = lastLiveFvpLog;
+                termBody.scrollTop = 0;
             }
             if (termModal) termModal.classList.add('open');
         }
