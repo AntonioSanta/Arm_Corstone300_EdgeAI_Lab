@@ -178,7 +178,7 @@
      - Feeds telemetry bottlenecks directly back into Docker container dependencies and updates official **Arm Learning Path** tutorials bi-weekly.
 * **Embedded Visual Telemetry &amp; Verification Panels:**
   - **Panel 1: Automated Verification Suite Scorecard (5/5 PASS):** Live green badges for Test 1 (M55 Helium MVE), Test 2 (Ethos-U55 Handshake), Test 3 (SRAM Safety), Test 4 (TFLM Pipeline), and Test 5 (Keyword "Yes" with +118 confidence score).
-  - **Panel 2: Automated Telemetry Stage Duration Breakdown Bar:** Proportional horizontal timeline visualizing Pre-Flight Sanity (0.79s / 28.4%), Vela Compilation & Fallback (0.84s / 30.4%), GCC Firmware Link (0.76s / 27.5%), and Corstone-300 Simulation (0.08s / 2.9%), totaling 2.78s execution.
+  - **Panel 2: Automated Telemetry Stage Duration Breakdown Bar:** Proportional horizontal timeline visualizing Pre-Flight Sanity (0.65s / 17.9%), Vela Compilation & Fallback (0.71s / 19.6%), GCC Firmware Link (0.63s / 17.4%), and Arm Virtual Hardware Corstone-300 FVP Simulation (1.34s / 37.0%), totaling 3.62s execution.
 
 ### Speaker Talking Points (Your Script):
 > *"Finally, Slide 6 highlights institutional scalability. In Arm Workforce Development, our responsibility doesn’t end when the workshop concludes; we treat our curriculum as an evolving product.*
