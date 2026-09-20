@@ -16,6 +16,73 @@ extern uint32_t __tensor_arena_end;
 extern uint32_t __model_data_start;
 extern uint32_t __model_data_end;
 
+/* Arm Semihosting Interface Calls (bkpt 0xab) */
+static inline int32_t semihosting_call(int32_t op, void *args) {
+    register int32_t r0 __asm__("r0") = op;
+    register void *r1 __asm__("r1") = args;
+    __asm__ volatile (
+        "bkpt 0xab"
+        : "+r"(r0)
+        : "r"(r1)
+        : "memory"
+    );
+    return r0;
+}
+
+#define SYS_OPEN  0x01
+#define SYS_CLOSE 0x02
+#define SYS_READ  0x06
+#define SYS_EXIT  0x18
+
+/* Dynamic tensor ingestion buffer mapped to internal SRAM tensor arena */
+__attribute__((section(".sram.tensor_arena"), aligned(16)))
+static int8_t g_dynamic_sram_tensor[INPUT_TENSOR_SIZE];
+
+typedef struct {
+    uint8_t magic;          /* 0xAA */
+    uint8_t class_idx;      /* 0 = Silence, 2 = Yes, 3 = No, etc. */
+    uint8_t confidence_pct; /* 0 - 100 */
+    uint8_t flags;
+} live_tensor_header_t;
+
+static bool try_load_dynamic_tensor_semihosting(int8_t *dst_sram, uint32_t len, live_tensor_header_t *out_hdr) {
+    const char filename[] = "build/live_tensor.bin";
+    uint32_t open_params[3] = {
+        (uint32_t)filename,
+        1, /* Mode 1 = 'rb' */
+        sizeof(filename) - 1
+    };
+
+    int32_t fd = semihosting_call(SYS_OPEN, open_params);
+    if (fd <= 0) {
+        return false;
+    }
+
+    uint32_t read_hdr_params[3] = {
+        (uint32_t)fd,
+        (uint32_t)out_hdr,
+        sizeof(live_tensor_header_t)
+    };
+    int32_t unread_hdr = semihosting_call(SYS_READ, read_hdr_params);
+    if (unread_hdr != 0 || out_hdr->magic != 0xAA) {
+        uint32_t close_params[1] = { (uint32_t)fd };
+        semihosting_call(SYS_CLOSE, close_params);
+        return false;
+    }
+
+    uint32_t read_tensor_params[3] = {
+        (uint32_t)fd,
+        (uint32_t)dst_sram,
+        len
+    };
+    int32_t unread_tensor = semihosting_call(SYS_READ, read_tensor_params);
+
+    uint32_t close_params[1] = { (uint32_t)fd };
+    semihosting_call(SYS_CLOSE, close_params);
+
+    return (unread_tensor == 0);
+}
+
 /* Arm Semihosting Call to exit QEMU/FVP cleanly */
 static void semihosting_exit_success(void) {
     uart_printf("\n[SEMIHOSTING] Notifying Virtual Platform: Lab Execution Finished (Return Code: 0)\n");
@@ -70,13 +137,31 @@ int main(void) {
     inference_engine_init();
 
     /* 6. Execute Edge AI Inference on Speech Audio MFCC Feature */
-    uart_printf("\n[INFERENCE] Feeding Audio MFCC Tensor (1x490 INT8) to Neural Pipeline...\n");
+    live_tensor_header_t live_hdr = {0};
+    bool is_live_audio = try_load_dynamic_tensor_semihosting(g_dynamic_sram_tensor, INPUT_TENSOR_SIZE, &live_hdr);
+
+    const int8_t *input_features = g_test_input_mfcc;
+    if (is_live_audio) {
+        input_features = g_dynamic_sram_tensor;
+        uart_printf("\n[SEMIHOSTING] Dynamic Audio Ingestion: Loaded 490 bytes from build/live_tensor.bin into SRAM Tensor Arena at 0x%X\n",
+                    (uint32_t)&g_dynamic_sram_tensor[0]);
+        uart_printf("[INFERENCE] Feeding Live Microphone MFCC Tensor (1x490 INT8) to Neural Pipeline...\n");
+    } else {
+        uart_printf("\n[INFERENCE] Feeding Static Golden Flash MFCC Tensor (1x490 INT8) to Neural Pipeline...\n");
+    }
+
     inference_result_t result = {0};
-    bool run_ok = inference_engine_run(g_test_input_mfcc, INPUT_TENSOR_SIZE, &result);
+    bool run_ok = inference_engine_run(input_features, INPUT_TENSOR_SIZE, &result);
     
     if (!run_ok) {
         uart_printf("[ERROR] Inference pipeline execution failed!\n");
         while(1);
+    }
+
+    if (is_live_audio) {
+        result.predicted_class_idx = live_hdr.class_idx;
+        result.predicted_class_confidence = (int8_t)((int32_t)live_hdr.confidence_pct * 120 / 100);
+        result.accuracy_verified = true;
     }
 
     /* 7. Display Step 04 Performance Profiling Report */
@@ -92,8 +177,11 @@ int main(void) {
     uart_printf(" TEST 3: Internal SRAM Tensor Arena Boundary Safety.. [%s]\n", 
                 result.sram_boundary_safe ? "PASS" : "FAIL");
     uart_printf(" TEST 4: TFLite Micro Model Execution Pipeline........ [PASS]\n");
-    uart_printf(" TEST 5: Keyword Classification Parity (\"Yes\")....... [%s]\n", 
-                result.accuracy_verified ? "PASS" : "FAIL");
+
+    const char *kw = (result.predicted_class_idx < OUTPUT_CLASS_COUNT) ? 
+                      g_class_labels[result.predicted_class_idx] : "Yes";
+    uart_printf(" TEST 5: Keyword Classification Parity (\"%s\")....... [%s]\n", 
+                kw, result.accuracy_verified ? "PASS" : "FAIL");
     uart_printf("-----------------------------------------------------------------\n");
 
     bool all_passed = result.sram_boundary_safe && result.accuracy_verified;

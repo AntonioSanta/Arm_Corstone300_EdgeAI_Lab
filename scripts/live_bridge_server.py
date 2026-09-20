@@ -51,11 +51,24 @@ def find_fvp_binary():
 FVP_BIN = find_fvp_binary()
 print(f"[BRIDGE] Arm FVP Binary: {FVP_BIN or 'Not found (fallback mode)'}")
 
-def run_simulations(pred_label="Yes", pred_idx=2, confidence_pct=95.0):
+def run_simulations(pred_label="Yes", pred_idx=2, confidence_pct=95.0, mfcc_list=None):
     """Runs both the official Arm Corstone-300 FVP and Cortex-M55 QEMU platforms."""
     firmware_elf = os.path.join(PROJECT_ROOT, "build", "firmware.elf")
     if not os.path.exists(firmware_elf):
         subprocess.run(["make"], cwd=PROJECT_ROOT, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+    # Ingest live tensor via ARM Semihosting binary file
+    live_tensor_path = os.path.join(PROJECT_ROOT, "build", "live_tensor.bin")
+    try:
+        hdr = bytes([0xAA, int(pred_idx), int(min(100, max(0, round(confidence_pct)))), 0])
+        if mfcc_list and len(mfcc_list) >= 490:
+            tensor_bytes = bytes([int(s) & 0xFF for s in mfcc_list[:490]])
+        else:
+            tensor_bytes = bytes([0] * 490)
+        with open(live_tensor_path, "wb") as f:
+            f.write(hdr + tensor_bytes)
+    except Exception as e:
+        print(f"[WARN] Failed to write live_tensor.bin: {e}", flush=True)
 
     fvp_log = ""
     fvp_ms = 0.0
@@ -74,28 +87,6 @@ def run_simulations(pred_label="Yes", pred_idx=2, confidence_pct=95.0):
             res = subprocess.run(cmd, cwd=PROJECT_ROOT, capture_output=True, text=True, timeout=10)
             fvp_ms = round((time.time() - t0) * 1000, 1)
             raw_out = res.stdout
-            if pred_label:
-                raw_out = re.sub(
-                    r'Detected Keyword:\s+"[^"]+"\s+\(Class #\d+\)',
-                    f'Detected Keyword:       "{pred_label}" (Class #{pred_idx})',
-                    raw_out
-                )
-                score_val = int(min(127, max(100, round(float(confidence_pct) * 1.2))))
-                raw_out = re.sub(
-                    r'Quantized Score \(INT8\):\s+\d+',
-                    f'Quantized Score (INT8): {score_val}',
-                    raw_out
-                )
-                raw_out = re.sub(
-                    r'TEST 5: Keyword Classification Parity \("[^"]+"\)',
-                    f'TEST 5: Keyword Classification Parity ("{pred_label}")',
-                    raw_out
-                )
-                raw_out = re.sub(
-                    r'Golden Model Parity:\s+\[PASSED \(100% MATCH\)\]',
-                    f'Live Audio Classification Parity: [PASSED (100% MATCH)]',
-                    raw_out
-                )
 
             fvp_cmd_str = (
                 f"{FVP_BIN} \\\n"
@@ -142,28 +133,6 @@ def run_simulations(pred_label="Yes", pred_idx=2, confidence_pct=95.0):
             res_q = subprocess.run(qcmd, cwd=PROJECT_ROOT, capture_output=True, text=True, timeout=8)
             qemu_ms = round((time.time() - t1) * 1000, 1)
             raw_q = res_q.stdout
-            if pred_label:
-                raw_q = re.sub(
-                    r'Detected Keyword:\s+"[^"]+"\s+\(Class #\d+\)',
-                    f'Detected Keyword:       "{pred_label}" (Class #{pred_idx})',
-                    raw_q
-                )
-                score_val = int(min(127, max(100, round(float(confidence_pct) * 1.2))))
-                raw_q = re.sub(
-                    r'Quantized Score \(INT8\):\s+\d+',
-                    f'Quantized Score (INT8): {score_val}',
-                    raw_q
-                )
-                raw_q = re.sub(
-                    r'TEST 5: Keyword Classification Parity \("[^"]+"\)',
-                    f'TEST 5: Keyword Classification Parity ("{pred_label}")',
-                    raw_q
-                )
-                raw_q = re.sub(
-                    r'Golden Model Parity:\s+\[PASSED \(100% MATCH\)\]',
-                    f'Live Audio Classification Parity: [PASSED (100% MATCH)]',
-                    raw_q
-                )
 
             qcmd_str = (
                 f"{qemu_bin} \\\n"
@@ -338,7 +307,7 @@ class BridgeHandler(BaseHTTPRequestHandler):
                     scores_list = [int(s) for s in raw_scores]
             
             # Run real hardware simulations (Arm Fast Models FVP + QEMU Cortex-M55)
-            fvp_log, qemu_log = run_simulations(pred_label, pred_idx, confidence_pct)
+            fvp_log, qemu_log = run_simulations(pred_label, pred_idx, confidence_pct, mfcc_list)
 
             response = {
                 "success": True,
