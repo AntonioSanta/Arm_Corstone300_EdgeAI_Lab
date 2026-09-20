@@ -19,6 +19,7 @@ import subprocess
 import time
 import json
 import re
+import shutil
 
 # Add scripts directory to path for telemetry
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "scripts")))
@@ -105,15 +106,36 @@ def main():
         logger.finalize(False)
         sys.exit(1)
 
-    # 6. Run Virtual Platform Simulation
-    sim_cmd = ["qemu-system-arm", "-M", "mps3-an547", "-cpu", "cortex-m55", 
-               "-display", "none", "-serial", "stdio", "-semihosting", 
-               "-kernel", "build/firmware.elf"]
-    
-    # In Slide 5, headless mode is forced via disable-visualisation=1 switch for FVP
-    print("[SIM] Note: FVP Headless Flag configured as '-C disable-visualisation=1'")
-    
-    ok, sim_output = run_command_logged(sim_cmd, "Corstone-300 Virtual Platform Simulation", logger, timeout=10)
+    # 6. Run Virtual Platform Simulation (Prioritize Official Arm AVH FVP)
+    fvp_candidates = [
+        shutil.which("FVP_Corstone_SSE-300_Ethos-U55"),
+        os.path.expanduser("~/.local/bin/FVP_Corstone_SSE-300_Ethos-U55"),
+        os.path.expanduser("~/.local/arm_fvp/installed/models/Linux64_GCC-9.3/FVP_Corstone_SSE-300_Ethos-U55")
+    ]
+    fvp_bin = next((p for p in fvp_candidates if p and os.path.exists(p)), None)
+
+    if fvp_bin:
+        sim_cmd = [
+            fvp_bin,
+            "-a", "build/firmware.elf",
+            "-C", "mps3_board.visualisation.disable-visualisation=1",
+            "-C", "cpu0.semihosting-enable=1",
+            "-C", "mps3_board.uart0.out_file=-",
+            "-C", "mps3_board.uart0.unbuffered_output=1",
+            "--timelimit", "10"
+        ]
+        sim_label = "Arm Virtual Hardware (Corstone-300 FVP) Simulation"
+        print(f"[SIM] Target Platform: Official Arm Virtual Hardware FVP ({fvp_bin})")
+    else:
+        sim_cmd = [
+            "qemu-system-arm", "-M", "mps3-an547", "-cpu", "cortex-m55", 
+            "-display", "none", "-serial", "stdio", "-semihosting", 
+            "-kernel", "build/firmware.elf"
+        ]
+        sim_label = "Corstone-300 QEMU Platform Simulation"
+        print("[SIM] Target Platform: QEMU Fallback (mps3-an547)")
+
+    ok, sim_output = run_command_logged(sim_cmd, sim_label, logger, timeout=12)
     
     # 7. Parse & Validate Acceptance Assertions
     assertions, cycles, sram_used, keyword = parse_simulation_telemetry(sim_output)
