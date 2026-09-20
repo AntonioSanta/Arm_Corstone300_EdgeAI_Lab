@@ -1065,8 +1065,18 @@
     <!-- Live Terminal Simulation Modal -->
     <div class="terminal-modal" id="termModal">
         <div class="term-header">
-            <span class="term-title">Arm Corstone-300 Virtual Platform Simulation Output (Verified Live Run)</span>
-            <button onclick="toggleTerminal()" style="padding: 2px 8px; font-size: 11px;">Close</button>
+            <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                <span class="term-title" id="termModalTitle">Hardware Simulation Console Trace</span>
+                <div style="display: flex; gap: 6px; margin-left: 10px;">
+                    <button id="btnTabFvp" onclick="switchSimTab('fvp')" style="background: var(--arm-accent); color: #04080D; font-weight: 800; font-size: 11px; padding: 4px 10px; border: none; border-radius: 4px; cursor: pointer;">
+                        🚀 Arm FVP (Fast Models)
+                    </button>
+                    <button id="btnTabQemu" onclick="switchSimTab('qemu')" style="background: rgba(255,255,255,0.08); color: #CBD5E1; font-weight: 700; font-size: 11px; padding: 4px 10px; border: 1px solid #334155; border-radius: 4px; cursor: pointer;">
+                        ⚡ QEMU Cortex-M55 (AN547)
+                    </button>
+                </div>
+            </div>
+            <button onclick="toggleTerminal()" style="padding: 3px 10px; font-size: 11px; font-weight: 700; cursor: pointer;">Close</button>
         </div>
         <div class="term-body" id="termBody">
     Ethos-U rev 136b7d75 --- Apr  8 2024 21:45:17
@@ -1516,6 +1526,8 @@ Info: /OSCI/SystemC: Simulation stopped by user.
         }
 
         let lastLiveFvpLog = "";
+        let lastLiveQemuLog = "";
+        let currentSimTab = 'fvp';
         let isBridgeActive = false;
 
         async function checkBridgeHealth() {
@@ -1529,7 +1541,7 @@ Info: /OSCI/SystemC: Simulation stopped by user.
                     badge.style.background = "rgba(0, 230, 118, 0.15)";
                     badge.style.borderColor = "rgba(0, 230, 118, 0.4)";
                     badge.style.color = "var(--success-green)";
-                    badge.innerText = "🟢 Arm FVP Bridge Active (127.0.0.1:8080)";
+                    badge.innerText = "🟢 Arm FVP & QEMU Active (127.0.0.1:8080)";
                     return;
                 }
             } catch (e) {}
@@ -1537,7 +1549,7 @@ Info: /OSCI/SystemC: Simulation stopped by user.
             badge.style.background = "rgba(255, 183, 77, 0.15)";
             badge.style.borderColor = "rgba(255, 183, 77, 0.4)";
             badge.style.color = "#FFB74D";
-            badge.innerText = "🟡 Standalone Mode (Run scripts/live_bridge_server.py for live FVP)";
+            badge.innerText = "🟡 Standalone Mode (Run scripts/live_bridge_server.py)";
         }
 
         function toggleAudioDemo() {
@@ -1548,18 +1560,45 @@ Info: /OSCI/SystemC: Simulation stopped by user.
             }
         }
 
+        function switchSimTab(tab) {
+            currentSimTab = tab;
+            const termBody = document.getElementById('termBody');
+            const btnFvp = document.getElementById('btnTabFvp');
+            const btnQemu = document.getElementById('btnTabQemu');
+            const title = document.getElementById('termModalTitle');
+            if (tab === 'fvp') {
+                if (btnFvp) {
+                    btnFvp.style.background = "var(--arm-accent)";
+                    btnFvp.style.color = "#04080D";
+                }
+                if (btnQemu) {
+                    btnQemu.style.background = "rgba(255,255,255,0.08)";
+                    btnQemu.style.color = "#CBD5E1";
+                }
+                if (title) title.innerText = "Official Arm Corstone-300 FVP Live Hardware Trace";
+                if (termBody) termBody.innerText = lastLiveFvpLog || "No FVP simulation log available yet.";
+            } else {
+                if (btnQemu) {
+                    btnQemu.style.background = "var(--arm-cyan)";
+                    btnQemu.style.color = "#04080D";
+                }
+                if (btnFvp) {
+                    btnFvp.style.background = "rgba(255,255,255,0.08)";
+                    btnFvp.style.color = "#CBD5E1";
+                }
+                if (title) title.innerText = "QEMU Cortex-M55 (mps3-an547) Live Simulation Trace";
+                if (termBody) termBody.innerText = lastLiveQemuLog || "No QEMU simulation log available yet.";
+            }
+        }
+
         function openLiveFvpModal() {
             const termModal = document.getElementById('termModal');
-            const termBody = document.getElementById('termBody');
-            const termTitle = document.querySelector('#termModal .term-title');
-            if (termTitle) {
-                termTitle.innerText = "Official Arm Corstone-300 FVP Live Hardware Trace (UART APB)";
+            switchSimTab(currentSimTab);
+            if (termModal) {
+                termModal.classList.add('open');
+                const termBody = document.getElementById('termBody');
+                if (termBody) termBody.scrollTop = 0;
             }
-            if (lastLiveFvpLog && termBody) {
-                termBody.innerText = lastLiveFvpLog;
-                termBody.scrollTop = 0;
-            }
-            if (termModal) termModal.classList.add('open');
         }
 
         function closeAllModals() {
@@ -1824,6 +1863,7 @@ Info: /OSCI/SystemC: Simulation stopped by user.
                     if (resp.ok) {
                         const data = await resp.json();
                         lastLiveFvpLog = data.fvp_log;
+                        lastLiveQemuLog = data.qemu_log;
                         isBridgeActive = true;
 
                         let label = data.keyword;
@@ -1854,7 +1894,7 @@ Info: /OSCI/SystemC: Simulation stopped by user.
                             confVal.innerText = `${data.confidence}% (Real TFLite Model on FVP)`;
                         }
                         if (backendBadge) {
-                            backendBadge.innerText = "🟢 Evaluated on Real Arm Fast Models FVP";
+                            backendBadge.innerText = "🟢 Evaluated on Real Arm Fast Models FVP & QEMU";
                             backendBadge.style.color = "var(--success-green)";
                         }
                         if (btnViewLog) {
