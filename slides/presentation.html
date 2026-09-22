@@ -910,7 +910,7 @@
             
             <!-- Visual Sequence Diagram / Flowchart SVG -->
             <div class="seq-diagram-box">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 290" width="100%" height="290">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 305" width="100%" height="305">
                     <defs>
                         <!-- Actor Header Gradients -->
                         <linearGradient id="actBrowser" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -921,11 +921,11 @@
                             <stop offset="0%" stop-color="#E65100"/>
                             <stop offset="100%" stop-color="#FB8C00"/>
                         </linearGradient>
-                        <linearGradient id="actAvh" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <linearGradient id="actCore" x1="0%" y1="0%" x2="100%" y2="0%">
                             <stop offset="0%" stop-color="#1565C0"/>
                             <stop offset="100%" stop-color="#1E88E5"/>
                         </linearGradient>
-                        <linearGradient id="actCore" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <linearGradient id="actNpu" x1="0%" y1="0%" x2="100%" y2="0%">
                             <stop offset="0%" stop-color="#2E7D32"/>
                             <stop offset="100%" stop-color="#43A047"/>
                         </linearGradient>
@@ -941,6 +941,9 @@
                         <marker id="arrowOrange" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
                             <polygon points="0 0, 8 4, 0 8" fill="#FFB74D"/>
                         </marker>
+                        <marker id="arrowBlue" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                            <polygon points="0 0, 8 4, 0 8" fill="#42A5F5"/>
+                        </marker>
                         <marker id="arrowGreen" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
                             <polygon points="0 0, 8 4, 0 8" fill="#00E676"/>
                         </marker>
@@ -950,11 +953,11 @@
                     </defs>
 
                     <!-- Actor Lifelines (Dotted vertical lines) -->
-                    <line x1="110" y1="46" x2="110" y2="280" stroke="#1E3347" stroke-width="2" stroke-dasharray="4,4"/>
-                    <line x1="330" y1="46" x2="330" y2="280" stroke="#1E3347" stroke-width="2" stroke-dasharray="4,4"/>
-                    <line x1="550" y1="46" x2="550" y2="280" stroke="#1E3347" stroke-width="2" stroke-dasharray="4,4"/>
-                    <line x1="770" y1="46" x2="770" y2="280" stroke="#1E3347" stroke-width="2" stroke-dasharray="4,4"/>
-                    <line x1="990" y1="46" x2="990" y2="280" stroke="#1E3347" stroke-width="2" stroke-dasharray="4,4"/>
+                    <line x1="110" y1="46" x2="110" y2="295" stroke="#1E3347" stroke-width="2" stroke-dasharray="4,4"/>
+                    <line x1="330" y1="46" x2="330" y2="295" stroke="#1E3347" stroke-width="2" stroke-dasharray="4,4"/>
+                    <line x1="550" y1="46" x2="550" y2="295" stroke="#1E3347" stroke-width="2" stroke-dasharray="4,4"/>
+                    <line x1="770" y1="46" x2="770" y2="295" stroke="#1E3347" stroke-width="2" stroke-dasharray="4,4"/>
+                    <line x1="990" y1="46" x2="990" y2="295" stroke="#1E3347" stroke-width="2" stroke-dasharray="4,4"/>
 
                     <!-- Actor Header Boxes -->
                     <g transform="translate(20, 8)">
@@ -970,76 +973,83 @@
                     </g>
 
                     <g transform="translate(460, 8)">
-                        <rect width="180" height="38" rx="6" fill="url(#actAvh)" stroke="#64B5F6" stroke-width="1.2"/>
-                        <text x="90" y="16" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="800" fill="#FFFFFF">🚀 3. AVH VIRTUAL SoC</text>
-                        <text x="90" y="30" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="10" font-weight="600" fill="#E3F2FD">FVP Corstone-300 + Ethos</text>
+                        <rect width="180" height="38" rx="6" fill="url(#actCore)" stroke="#64B5F6" stroke-width="1.2"/>
+                        <text x="90" y="16" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="800" fill="#FFFFFF">⚡ 3. CORTEX-M55 CPU</text>
+                        <text x="90" y="30" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="10" font-weight="600" fill="#E3F2FD">Host Controller (firmware.elf)</text>
                     </g>
 
                     <g transform="translate(680, 8)">
-                        <rect width="180" height="38" rx="6" fill="url(#actCore)" stroke="#81C784" stroke-width="1.2"/>
-                        <text x="90" y="16" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="800" fill="#FFFFFF">⚡ 4. TARGET FIRMWARE</text>
-                        <text x="90" y="30" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="10" font-weight="600" fill="#E8F5E9">Cortex-M55 (firmware.elf)</text>
+                        <rect width="180" height="38" rx="6" fill="url(#actNpu)" stroke="#81C784" stroke-width="1.2"/>
+                        <text x="90" y="16" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="800" fill="#FFFFFF">🧠 4. ETHOS-U55 NPU</text>
+                        <text x="90" y="30" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="10" font-weight="600" fill="#E8F5E9">Neural Co-Processor (128 MACs)</text>
                     </g>
 
                     <g transform="translate(900, 8)">
                         <rect width="180" height="38" rx="6" fill="url(#actTelemetry)" stroke="#BA68C8" stroke-width="1.2"/>
-                        <text x="90" y="16" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="800" fill="#FFFFFF">📋 5. LAB TELEMETRY</text>
-                        <text x="90" y="30" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="10" font-weight="600" fill="#F3E5F5">APB UART &amp; UI Feedback</text>
+                        <text x="90" y="16" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="800" fill="#FFFFFF">📊 5. UART &amp; UI TELEMETRY</text>
+                        <text x="90" y="30" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="10" font-weight="600" fill="#F3E5F5">APB UART (0x49303000)</text>
                     </g>
 
                     <!-- Step 1: Internal DSP Feature Extraction -->
-                    <g transform="translate(0, 68)">
+                    <g transform="translate(0, 66)">
                         <path d="M 110 0 C 170 0, 170 24, 115 24" fill="none" stroke="#00E5FF" stroke-width="2" marker-end="url(#arrowCyan)"/>
                         <rect x="140" y="2" width="170" height="20" rx="4" fill="#04121F" stroke="#00E5FF" stroke-width="0.8"/>
                         <text x="225" y="15" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="10" font-weight="700" fill="#00E5FF">1. 16 kHz PCM → 490 INT8 MFCC</text>
                     </g>
 
                     <!-- Step 2: HTTP POST /predict -->
-                    <g transform="translate(0, 114)">
+                    <g transform="translate(0, 106)">
                         <line x1="110" y1="0" x2="322" y2="0" stroke="#00E5FF" stroke-width="2" marker-end="url(#arrowCyan)"/>
                         <rect x="135" y="-12" width="170" height="20" rx="4" fill="#04121F" stroke="#00E5FF" stroke-width="0.8"/>
-                        <text x="220" y="1" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="10" font-weight="700" fill="#E0F7FA">2. HTTP POST /predict (490B)</text>
+                        <text x="220" y="1" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="10" font-weight="700" fill="#E0F7FA">2. HTTP POST /predict (490B MFCC)</text>
                     </g>
 
-                    <!-- Step 3: Verify TFLite & Launch FVP -->
-                    <g transform="translate(0, 154)">
+                    <!-- Step 3: Spawn FVP & Semihosting Ingestion by Cortex-M55 -->
+                    <g transform="translate(0, 146)">
                         <line x1="330" y1="0" x2="542" y2="0" stroke="#FFB74D" stroke-width="2" marker-end="url(#arrowOrange)"/>
-                        <rect x="350" y="-12" width="180" height="20" rx="4" fill="#1C1004" stroke="#FFB74D" stroke-width="0.8"/>
-                        <text x="440" y="1" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="10" font-weight="700" fill="#FFE0B2">3. TFLite Eval &amp; Spawn FVP</text>
+                        <rect x="345" y="-12" width="190" height="20" rx="4" fill="#1C1004" stroke="#FFB74D" stroke-width="0.8"/>
+                        <text x="440" y="1" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="9.5" font-weight="700" fill="#FFE0B2">3. FVP: M55 reads live_tensor to SRAM</text>
                     </g>
 
-                    <!-- Step 4: Semihosting DMA Ingestion -->
-                    <g transform="translate(0, 194)">
-                        <line x1="550" y1="0" x2="762" y2="0" stroke="#00E676" stroke-width="2" marker-end="url(#arrowGreen)"/>
+                    <!-- Step 4: Cortex-M55 dispatches command stream to Ethos-U55 NPU -->
+                    <g transform="translate(0, 186)">
+                        <line x1="550" y1="0" x2="762" y2="0" stroke="#42A5F5" stroke-width="2" marker-end="url(#arrowBlue)"/>
+                        <rect x="565" y="-12" width="190" height="20" rx="4" fill="#0A192F" stroke="#42A5F5" stroke-width="0.8"/>
+                        <text x="660" y="1" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="9.5" font-weight="700" fill="#BBDEFB">4. AXI Dispatch: M55 triggers Ethos-U</text>
+                    </g>
+
+                    <!-- Step 5: Ethos-U55 completes inference & signals back to Cortex-M55 -->
+                    <g transform="translate(0, 224)">
+                        <line x1="770" y1="0" x2="558" y2="0" stroke="#00E676" stroke-width="2" marker-end="url(#arrowGreen)"/>
                         <rect x="565" y="-12" width="190" height="20" rx="4" fill="#041A0E" stroke="#00E676" stroke-width="0.8"/>
-                        <text x="660" y="1" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="10" font-weight="700" fill="#B9F6CA">4. Semihosting: Load to SRAM Arena</text>
+                        <text x="660" y="1" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="9.5" font-weight="700" fill="#B9F6CA">5. NPU IRQ: 24.6k cyc done (Activations in SRAM)</text>
                     </g>
 
-                    <!-- Step 5: NPU Inference & APB UART Telemetry -->
-                    <g transform="translate(0, 234)">
-                        <line x1="770" y1="0" x2="982" y2="0" stroke="#CE93D8" stroke-width="2" marker-end="url(#arrowPurple)"/>
-                        <rect x="785" y="-12" width="190" height="20" rx="4" fill="#180421" stroke="#CE93D8" stroke-width="0.8"/>
-                        <text x="880" y="1" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="10" font-weight="700" fill="#F3E5F5">5. Ethos-U Run (24.6k cyc) → UART</text>
+                    <!-- Step 6: Cortex-M55 prints result to UART -->
+                    <g transform="translate(0, 260)">
+                        <line x1="550" y1="0" x2="982" y2="0" stroke="#CE93D8" stroke-width="2" marker-end="url(#arrowPurple)"/>
+                        <rect x="670" y="-12" width="200" height="20" rx="4" fill="#180421" stroke="#CE93D8" stroke-width="0.8"/>
+                        <text x="770" y="1" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="9.5" font-weight="700" fill="#F3E5F5">6. M55 prints inference to APB UART</text>
                     </g>
 
-                    <!-- Step 6: Return Result to Browser -->
-                    <g transform="translate(0, 268)">
+                    <!-- Step 7: Return Result to Browser -->
+                    <g transform="translate(0, 292)">
                         <line x1="990" y1="0" x2="118" y2="0" stroke="#00E5FF" stroke-width="1.8" stroke-dasharray="6,4" marker-end="url(#arrowCyan)"/>
                         <rect x="420" y="-12" width="260" height="20" rx="4" fill="#071927" stroke="#00E5FF" stroke-width="0.9"/>
-                        <text x="550" y="1" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="10" font-weight="800" fill="#00E5FF">6. Return Keyword ("No"), Conf (95%) &amp; FVP UART Log</text>
+                        <text x="550" y="1" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="10" font-weight="800" fill="#00E5FF">7. Return Keyword ("No"), Conf (95%) &amp; FVP UART Log</text>
                     </g>
                 </svg>
 
                 <!-- Technical Highlights Strip -->
                 <div class="seq-chips-strip">
                     <div class="seq-chip">
-                        <span>⚡</span> <span><strong>Emulated DMA:</strong> Semihosting streams audio into SRAM without recompiling</span>
+                        <span>⚡</span> <span><strong>Cortex-M55 Ingestion:</strong> CPU executes Semihosting trap (<code>BKPT 0xAB</code>) to load audio into SRAM Arena</span>
                     </div>
                     <div class="seq-chip">
-                        <span>🧠</span> <span><strong>108.1x Speedup:</strong> 24,650 NPU cycles vs. 2,664,792 CPU baseline</span>
+                        <span>🧠</span> <span><strong>Ethos-U Offload:</strong> M55 delegates heavy convolution layers over 64-bit AXI bus (24.6k cycles)</span>
                     </div>
                     <div class="seq-chip">
-                        <span>🔒</span> <span><strong>SRAM Safety:</strong> 21.7 KiB consumed within strict 64 KiB boundary</span>
+                        <span>🔒</span> <span><strong>SRAM Safety:</strong> Strict 21.7 KiB boundary enforced within 64 KiB hardware limit</span>
                     </div>
                 </div>
             </div>

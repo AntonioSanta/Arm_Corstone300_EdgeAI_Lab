@@ -60,23 +60,25 @@
 * **Header Tag:** LIVE DEMONSTRATION ARCHITECTURE &bull; HARDWARE-IN-THE-LOOP TESTBENCH
 * **Title:** Live Speech to Virtual Silicon: Experiment Sequence Flow
 * **Subtitle:** *Simplified logical sequence tracing microphone capture, REST transport, and neural execution on virtual hardware.*
-* **Visual Schematic:** *Interactive Visual Sequence Diagram with 5 lifelines and 6 sequential data flow arrows (Browser → Bridge → AVH FVP → Target Firmware → Telemetry).*
-* **The 5-Step Logic Pipeline:**
-  1. **Step 01 — Browser Audio Capture:** HTML5 Web Audio API records 1-second 16 kHz PCM microphone stream. Computes 40-band Mel-Scale Filterbank + DCT into a 490 INT8 MFCC tensor (`16 kHz -> 1x490 INT8`).
-  2. **Step 02 — Python Bridge Server:** REST server (`scripts/live_bridge_server.py` at `127.0.0.1:8080`). Validates audio with genuine INT8 TFLite model, writes binary payload to `build/live_tensor.bin` (`HTTP POST /predict`).
-  3. **Step 03 — Local Arm Virtual Hardware:** Triggers local virtual platforms in parallel on native Linux / WSL (`FVP_Corstone_SSE-300_Ethos-U55` & `qemu-system-arm`).
-  4. **Step 04 — Target Firmware & NPU Run:** Firmware dynamically ingests audio into Internal SRAM (`0x21010000`) via ARM Semihosting (emulating physical microphone DMA without recompilation). Dispatches neural inference across Ethos-U55 and emits APB UART (`0x49303000`) telemetry.
-  5. **Step 05 — Telemetry & Parity Check:** Browser displays real keyword detection ("Yes", "No", "Silence") and confidence score. Clicking terminal button reveals exact FVP & QEMU UART logs.
+* **Visual Schematic:** *Interactive Visual Sequence Diagram with 5 lifelines and 7 sequential data flow arrows (Browser → Python Bridge → Cortex-M55 CPU → Ethos-U55 NPU → UART & Telemetry → Browser UI).*
+* **The 5-Actor Architecture & Sequence Flow:**
+  1. **Web Browser (HTML5 Web Audio & DSP):** Captures 1-second 16 kHz PCM microphone audio and computes 40-band Mel-Scale Filterbanks + DCT into a 490-byte INT8 MFCC spectrogram.
+  2. **Python Bridge Server (`scripts/live_bridge_server.py` on Port 8080):** Receives HTTP POST `/predict`, writes `build/live_tensor.bin`, and launches the Corstone-300 Fast Models FVP.
+  3. **Cortex-M55 CPU (Host Controller / `firmware.elf`):** The master processor boots `firmware.elf`, executes Semihosting trap (`BKPT 0xAB`) to load `live_tensor.bin` directly into the SRAM Tensor Arena (`0x21010000`), emulating physical DMA ingestion.
+  4. **Ethos-U55 microNPU (Hardware Neural Co-Processor):** Cortex-M55 configures and dispatches the compiled neural model command stream across the 64-bit AXI bus. Ethos-U executes 49/49 convolution layers in 24,650 cycles and signals completion back to Cortex-M55.
+  5. **UART & UI Telemetry:** Cortex-M55 prints classification ("Yes", "No", "Silence") and cycle metrics to CMSDK APB UART (`0x49303000`). Bridge server forwards results as SSE/JSON back to the Browser UI.
 * **Interactive Live Mic Prompt:** Press `M` or click "Live Mic Test" to record live audio from your microphone!
 
 ### Speaker Talking Points (Your Script):
-> *"Slide 3 illustrates the complete end-to-end experiment architecture. We built an interactive Hardware-in-the-Loop testbench that bridges real live audio to bare-metal virtual silicon.*
+> *"Slide 3 illustrates the complete end-to-end experiment architecture. Notice how the lifelines are organized from left to right.*
 >
-> *When I speak 'NO' or 'YES' into the browser, the Web Audio API captures 16 kHz audio and computes a 490-byte INT8 MFCC spectrogram. It sends this tensor to our local Python bridge server.*
+> *When I speak into the browser, the Web Audio DSP pipeline converts the speech into a 490-byte INT8 MFCC spectrogram and sends it to our local Python bridge.*
 >
-> *The bridge evaluates the neural graph with genuine quantized weights, writes the tensor to disk, and triggers both the **Arm Corstone-300 Fast Models FVP** and **QEMU** simultaneously.*
+> *The bridge writes `live_tensor.bin` and boots the Arm Corstone-300 simulator. And here is the crucial embedded design point: **the Cortex-M55 CPU is the host brain of the chip**. The Cortex-M55 firmware boots, executes an Arm Semihosting trap (`BKPT 0xAB`), and ingests the audio tensor directly into its internal SRAM Arena at `0x21010000`—exactly emulating how physical DMA transfers I2S/PDM digital microphone data without requiring any code recompilation.*
 >
-> *Inside the simulator, how does the firmware ingest live audio without recompiling? It executes an ARM Semihosting breakpoint (`bkpt 0xab`), reading the 490 bytes directly into the SRAM Tensor Arena at `0x21010000`. This perfectly emulates how physical silicon DMA transfers I2S/PDM digital microphone data straight into SRAM. The firmware dispatches inference, checks memory boundaries, and prints verified UART telemetry back to our terminal modal."*
+> *Once the input tensor is sitting in SRAM, the Cortex-M55 dispatches the neural model command stream to the **Ethos-U55 NPU** over the 64-bit AXI bus. The Ethos-U55 executes all matrix multiplications in just 24,650 cycles and interrupts the Cortex-M55.*
+>
+> *Finally, the Cortex-M55 reads the predictions, formats the output, and transmits it over the APB UART console at `0x49303000`, which our bridge captures and presents live on the screen."*
 
 ---
 
