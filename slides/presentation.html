@@ -977,21 +977,21 @@
                     </div>
 
                     <div class="cmd-item">
-                        <div class="cmd-label"><span>3. Build Bare-Metal Firmware Image</span> <span style="color: #00E676;">arm-none-eabi-gcc</span></div>
+                        <div class="cmd-label"><span>3. Compile Target Firmware (ELF Binary)</span> <span style="color: #00E676;">arm-none-eabi-gcc</span></div>
                         <div class="cmd-code">make clean &amp;&amp; make</div>
-                        <div class="cmd-result">Links <code>build/firmware.elf</code>: text: 43,272 B | data: 20 B | bss: 82,420 B.</div>
+                        <div class="cmd-result">Produces <code>build/firmware.elf</code> (the executable flashed into virtual memory). Contains startup vectors, APB UART, Ethos-U drivers, and model weights (text: 43.3 KB, BSS: 82.4 KB).</div>
                     </div>
 
                     <div class="cmd-item">
-                        <div class="cmd-label"><span>4. Automated 7-Stage Validation Harness</span> <span style="color: #00E676;">7/7 PASS</span></div>
+                        <div class="cmd-label"><span>4. Automated Test Harness (Launches AVH FVP)</span> <span style="color: #00E676;">7/7 PASS</span></div>
                         <div class="cmd-code">python3 tests/test_harness.py</div>
-                        <div class="cmd-result">Executes all 7 stages in ~3.6s (Memory layout, FVP simulation, classification parity).</div>
+                        <div class="cmd-result">Launches the Arm FVP simulator with <code>firmware.elf</code>, executes inference, and validates 5/5 hardware UART assertions (latency, SRAM bounds, accuracy) in ~3.6s.</div>
                     </div>
 
                     <div class="cmd-item">
-                        <div class="cmd-label"><span>5. Start Live Audio Bridge &amp; Web Interface</span> <span style="color: #00E676;">Port 8080</span></div>
+                        <div class="cmd-label"><span>5. Live Audio Testbench Bridge</span> <span style="color: #00E676;">Port 8080</span></div>
                         <div class="cmd-code">python3 scripts/live_bridge_server.py</div>
-                        <div class="cmd-result">Listens on <code>http://127.0.0.1:8080</code> for browser microphone interaction.</div>
+                        <div class="cmd-result">REST server for browser mic: runs <code>firmware.elf</code> inside FVP and QEMU on every live voice capture via semihosting audio ingestion.</div>
                     </div>
                 </div>
             </div>

@@ -111,16 +111,16 @@
 * **The 5 Step-by-Step Operative Commands:**
   1. `python3 scripts/sanity_check.py` — Audits GNU Arm GCC 10.3+, Vela 5.2.0, FVP binary, and QEMU.
   2. `vela model/ds_cnn_s_quantized.tflite --accelerator-config ethos-u55-128 --output-dir model/output_vela` — Uses the pre-packaged Arm ML-Zoo reference model; compiles 49/49 ops for Ethos-U55 (21.7 KiB SRAM arena, 30.5 KiB Flash).
-  3. `make clean && make` — Compiles bare-metal firmware with `arm-none-eabi-gcc`. Links `build/firmware.elf` (text: 43,272 B, data: 20 B, bss: 82,420 B).
-  4. `python3 tests/test_harness.py` — Executes all 7 automated test stages in ~3.6s with 100% pass rate.
-  5. `python3 scripts/live_bridge_server.py` — Listens on `http://127.0.0.1:8080` for browser microphone interaction.
+  3. `make clean && make` — Compiles target firmware with `arm-none-eabi-gcc`. Produces `build/firmware.elf` (the executable binary loaded into virtual Flash memory containing startup vectors, APB UART, Ethos-U drivers, and model weights).
+  4. `python3 tests/test_harness.py` — Automated CI test runner: launches the Arm FVP simulator with `build/firmware.elf`, executes inference, and validates 5/5 hardware assertions in ~3.6s.
+  5. `python3 scripts/live_bridge_server.py` — Starts the live audio bridge on port 8080: dynamically feeds browser mic audio to `build/firmware.elf` running in FVP and QEMU.
 
 ### Speaker Talking Points (Your Script):
 > *"Slide 4 is the operative blueprint. Any engineer or student can clone this repository and follow these exact 5 steps to build and run the entire lab on their own workstation.*
 >
-> *Step 1 runs our automated sanity check script, verifying toolchain paths. Step 2 compiles the neural model with Vela, producing the NPU command stream. Step 3 invokes standard GNU Make and `arm-none-eabi-gcc` to produce `firmware.elf`.*
+> *Step 1 verifies all toolchains. Step 2 compiles the neural model with Vela, producing the NPU command stream. In Step 3, `make clean && make` compiles our bare-metal C firmware into `build/firmware.elf`—the exact binary image that gets flashed into the virtual SoC.*
 >
-> *Step 4 executes our 7-stage automated test harness in 3.6 seconds, verifying linker boundaries and classification parity against the golden reference. Finally, Step 5 launches the live audio bridge, enabling the web-based interactive voice testbench."*
+> *In Step 4, `tests/test_harness.py` launches the Arm FVP simulator, boots `firmware.elf`, and asserts all 5 hardware tests in 3.6 seconds. Finally, Step 5 starts the live speech bridge, allowing participants to test their own voices against the virtual hardware."*
 
 ---
 
