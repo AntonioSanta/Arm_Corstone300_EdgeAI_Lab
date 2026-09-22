@@ -907,11 +907,11 @@
 
                 <div class="flow-step-card">
                     <div class="flow-step-num">Step 04</div>
-                    <div class="flow-step-title">&#128190; Bare-Metal Cortex-M55</div>
+                    <div class="flow-step-title">&#128190; Target Firmware &amp; NPU Run</div>
                     <div class="flow-step-body">
-                        ARM Semihosting trap (<code>bkpt 0xab</code>) pulls <code>live_tensor.bin</code> directly into SRAM Arena (<code>0x21010000</code>). Runs pipeline &amp; emits APB UART (<code>0x49303000</code>).
+                        Firmware dynamically ingests audio into Internal SRAM (<code>0x21010000</code>) via ARM Semihosting (emulating microphone DMA without recompilation). Dispatches neural inference and emits APB UART (<code>0x49303000</code>) telemetry.
                     </div>
-                    <div class="flow-arrow-badge">bkpt 0xab &rarr; SRAM</div>
+                    <div class="flow-arrow-badge">Dynamic Audio Ingest &rarr; NPU</div>
                 </div>
 
                 <div class="flow-step-card">

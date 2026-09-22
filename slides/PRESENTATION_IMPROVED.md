@@ -66,7 +66,7 @@
   3. **Step 03 — Local Arm Virtual Hardware:** Triggers local virtual platforms in parallel on native Linux / WSL:
      - **AVH Fast Models FVP:** `FVP_Corstone_SSE-300_Ethos-U55` (Cycle-approximate Arm Virtual Hardware simulating Cortex-M55 + Ethos-U55 microNPU)
      - **QEMU:** `qemu-system-arm -M mps3-an547 -cpu cortex-m55` (Fast CPU instruction emulator)
-  4. **Step 04 — Bare-Metal Cortex-M55 Firmware:** ARM Semihosting trap (`bkpt 0xab`) pulls `live_tensor.bin` directly into SRAM Arena (`0x21010000`). Runs pipeline & emits APB UART (`0x49303000`) telemetry.
+  4. **Step 04 — Target Firmware & NPU Run:** Firmware dynamically ingests audio into Internal SRAM (`0x21010000`) via ARM Semihosting (emulating physical microphone DMA without recompilation). Dispatches neural inference across Ethos-U55 and emits APB UART (`0x49303000`) telemetry.
   5. **Step 05 — Telemetry & Parity Check:** Browser displays real keyword detection ("Yes", "No", "Silence") and confidence score. Clicking terminal button reveals exact FVP & QEMU UART logs.
 * **Interactive Live Mic Prompt:** Press `M` or click "Live Mic Test" to record live audio from your microphone!
 
