@@ -58,14 +58,13 @@
 
 ### On-Slide Content:
 * **Header Tag:** LIVE DEMONSTRATION ARCHITECTURE &bull; HARDWARE-IN-THE-LOOP TESTBENCH
-* **Title:** Live Speech to Virtual Silicon: Experiment Logic Flow
-* **Subtitle:** *How browser microphone audio is captured, transformed into frequency features, and executed across local virtual platforms.*
+* **Title:** Live Speech to Virtual Silicon: Experiment Sequence Flow
+* **Subtitle:** *Simplified logical sequence tracing microphone capture, REST transport, and neural execution on virtual hardware.*
+* **Visual Schematic:** *Interactive Visual Sequence Diagram with 5 lifelines and 6 sequential data flow arrows (Browser → Bridge → AVH FVP → Target Firmware → Telemetry).*
 * **The 5-Step Logic Pipeline:**
   1. **Step 01 — Browser Audio Capture:** HTML5 Web Audio API records 1-second 16 kHz PCM microphone stream. Computes 40-band Mel-Scale Filterbank + DCT into a 490 INT8 MFCC tensor (`16 kHz -> 1x490 INT8`).
   2. **Step 02 — Python Bridge Server:** REST server (`scripts/live_bridge_server.py` at `127.0.0.1:8080`). Validates audio with genuine INT8 TFLite model, writes binary payload to `build/live_tensor.bin` (`HTTP POST /predict`).
-  3. **Step 03 — Local Arm Virtual Hardware:** Triggers local virtual platforms in parallel on native Linux / WSL:
-     - **AVH Fast Models FVP:** `FVP_Corstone_SSE-300_Ethos-U55` (Cycle-approximate Arm Virtual Hardware simulating Cortex-M55 + Ethos-U55 microNPU)
-     - **QEMU:** `qemu-system-arm -M mps3-an547 -cpu cortex-m55` (Fast CPU instruction emulator)
+  3. **Step 03 — Local Arm Virtual Hardware:** Triggers local virtual platforms in parallel on native Linux / WSL (`FVP_Corstone_SSE-300_Ethos-U55` & `qemu-system-arm`).
   4. **Step 04 — Target Firmware & NPU Run:** Firmware dynamically ingests audio into Internal SRAM (`0x21010000`) via ARM Semihosting (emulating physical microphone DMA without recompilation). Dispatches neural inference across Ethos-U55 and emits APB UART (`0x49303000`) telemetry.
   5. **Step 05 — Telemetry & Parity Check:** Browser displays real keyword detection ("Yes", "No", "Silence") and confidence score. Clicking terminal button reveals exact FVP & QEMU UART logs.
 * **Interactive Live Mic Prompt:** Press `M` or click "Live Mic Test" to record live audio from your microphone!
