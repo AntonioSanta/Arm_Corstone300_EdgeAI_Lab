@@ -820,7 +820,7 @@
                 </div>
                 <div class="meta-item">
                     <h4>AI Workload</h4>
-                    <p>DS-CNN Speech KWS (INT8)</p>
+                    <p>Arm ML-Zoo DS-CNN (INT8)</p>
                 </div>
                 <div class="meta-item">
                     <h4>Execution Engines</h4>
@@ -945,8 +945,8 @@
                 <div class="tree-container">
 <span class="tree-folder">Arm_Corstone300_EdgeAI_Lab/</span>
 ├── <span class="tree-folder">model/</span>
-│   ├── <span class="tree-file">ds_cnn_s_quantized.tflite</span>   <span class="tree-comment"># Raw INT8 KWS model</span>
-│   └── <span class="tree-folder">output_vela/</span>                <span class="tree-comment"># Vela command stream</span>
+│   ├── <span class="tree-file">ds_cnn_s_quantized.tflite</span>   <span class="tree-comment"># Arm ML-Zoo Model (Bundled in repo)</span>
+│   └── <span class="tree-folder">output_vela/</span>                <span class="tree-comment"># Vela command stream &amp; CSV</span>
 ├── <span class="tree-folder">src/</span>
 │   ├── <span class="tree-file">startup_cortex_m55.c</span>        <span class="tree-comment"># Reset vector &amp; IRQs</span>
 │   ├── <span class="tree-file">uart_corstone.c</span>             <span class="tree-comment"># APB UART driver (0x49303000)</span>
@@ -972,9 +972,9 @@
                     </div>
 
                     <div class="cmd-item">
-                        <div class="cmd-label"><span>2. Vela NPU Model Compilation</span> <span style="color: #00E676;">100% Offload</span></div>
+                        <div class="cmd-label"><span>2. Vela NPU Model Compilation</span> <span style="color: #00E676;">Arm ML-Zoo Model</span></div>
                         <div class="cmd-code">vela model/ds_cnn_s_quantized.tflite --accelerator-config ethos-u55-128 --output-dir model/output_vela</div>
-                        <div class="cmd-result">Compiles 49/49 operators for Ethos-U55 (21.7 KiB SRAM arena, 30.5 KiB Flash).</div>
+                        <div class="cmd-result">Pre-packaged from official <strong>Arm ML-Zoo</strong> (GitHub). Vela compiles 49/49 ops for Ethos-U55 (21.7 KiB SRAM arena, 30.5 KiB Flash).</div>
                     </div>
 
                     <div class="cmd-item">

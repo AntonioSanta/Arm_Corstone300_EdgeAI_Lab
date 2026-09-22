@@ -91,8 +91,8 @@
   ```text
   Arm_Corstone300_EdgeAI_Lab/
   ├── model/
-  │   ├── ds_cnn_s_quantized.tflite   # Raw INT8 KWS model
-  │   └── output_vela/                # Vela command stream
+  │   ├── ds_cnn_s_quantized.tflite   # Arm ML-Zoo KWS Model (Bundled in repo)
+  │   └── output_vela/                # Vela command stream & CSV
   ├── src/
   │   ├── startup_cortex_m55.c        # Reset vector & IRQs
   │   ├── uart_corstone.c             # APB UART driver (0x49303000)
@@ -110,7 +110,7 @@
   ```
 * **The 5 Step-by-Step Operative Commands:**
   1. `python3 scripts/sanity_check.py` — Audits GNU Arm GCC 10.3+, Vela 5.2.0, FVP binary, and QEMU.
-  2. `vela model/ds_cnn_s_quantized.tflite --accelerator-config ethos-u55-128 --output-dir model/output_vela` — Compiles 49/49 ops for Ethos-U55 (21.7 KiB SRAM arena, 30.5 KiB Flash).
+  2. `vela model/ds_cnn_s_quantized.tflite --accelerator-config ethos-u55-128 --output-dir model/output_vela` — Uses the pre-packaged Arm ML-Zoo reference model; compiles 49/49 ops for Ethos-U55 (21.7 KiB SRAM arena, 30.5 KiB Flash).
   3. `make clean && make` — Compiles bare-metal firmware with `arm-none-eabi-gcc`. Links `build/firmware.elf` (text: 43,272 B, data: 20 B, bss: 82,420 B).
   4. `python3 tests/test_harness.py` — Executes all 7 automated test stages in ~3.6s with 100% pass rate.
   5. `python3 scripts/live_bridge_server.py` — Listens on `http://127.0.0.1:8080` for browser microphone interaction.
