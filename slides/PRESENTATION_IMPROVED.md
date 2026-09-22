@@ -63,9 +63,9 @@
 * **The 5-Step Logic Pipeline:**
   1. **Step 01 — Browser Audio Capture:** HTML5 Web Audio API records 1-second 16 kHz PCM microphone stream. Computes 40-band Mel-Scale Filterbank + DCT into a 490 INT8 MFCC tensor (`16 kHz -> 1x490 INT8`).
   2. **Step 02 — Python Bridge Server:** REST server (`scripts/live_bridge_server.py` at `127.0.0.1:8080`). Validates audio with genuine INT8 TFLite model, writes binary payload to `build/live_tensor.bin` (`HTTP POST /predict`).
-  3. **Step 03 — Local Virtual Simulators:** Triggers local simulators in parallel on native Linux / WSL:
-     - **Arm Fast Models FVP:** `FVP_Corstone_SSE-300_Ethos-U55`
-     - **QEMU:** `qemu-system-arm -M mps3-an547 -cpu cortex-m55`
+  3. **Step 03 — Local Arm Virtual Hardware:** Triggers local virtual platforms in parallel on native Linux / WSL:
+     - **AVH Fast Models FVP:** `FVP_Corstone_SSE-300_Ethos-U55` (Cycle-approximate Arm Virtual Hardware simulating Cortex-M55 + Ethos-U55 microNPU)
+     - **QEMU:** `qemu-system-arm -M mps3-an547 -cpu cortex-m55` (Fast CPU instruction emulator)
   4. **Step 04 — Bare-Metal Cortex-M55 Firmware:** ARM Semihosting trap (`bkpt 0xab`) pulls `live_tensor.bin` directly into SRAM Arena (`0x21010000`). Runs pipeline & emits APB UART (`0x49303000`) telemetry.
   5. **Step 05 — Telemetry & Parity Check:** Browser displays real keyword detection ("Yes", "No", "Silence") and confidence score. Clicking terminal button reveals exact FVP & QEMU UART logs.
 * **Interactive Live Mic Prompt:** Press `M` or click "Live Mic Test" to record live audio from your microphone!
