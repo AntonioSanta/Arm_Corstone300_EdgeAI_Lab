@@ -546,11 +546,12 @@
             background: #050B12;
             border: 1px solid var(--card-border);
             border-radius: 8px;
-            padding: 12px 14px;
+            padding: 14px 16px;
             font-family: 'Consolas', 'Courier New', monospace;
             font-size: 11px;
-            line-height: 1.42;
+            line-height: 1.5;
             color: #CBD5E1;
+            white-space: pre;
             overflow-x: auto;
             max-height: 440px;
         }
@@ -942,26 +943,24 @@
             
             <div class="guide-grid">
                 <!-- Left: Repository Structure Tree -->
-                <div class="tree-container">
-<span class="tree-folder">Arm_Corstone300_EdgeAI_Lab/</span>
+                <pre class="tree-container"><span class="tree-folder">Arm_Corstone300_EdgeAI_Lab/</span>
 ├── <span class="tree-folder">model/</span>
-│   ├── <span class="tree-file">ds_cnn_s_quantized.tflite</span>   <span class="tree-comment"># Arm ML-Zoo Model (Bundled in repo)</span>
+│   ├── <span class="tree-file">ds_cnn_s_quantized.tflite</span>   <span class="tree-comment"># Arm ML-Zoo Model (Bundled)</span>
 │   └── <span class="tree-folder">output_vela/</span>                <span class="tree-comment"># Vela command stream &amp; CSV</span>
 ├── <span class="tree-folder">src/</span>
 │   ├── <span class="tree-file">startup_cortex_m55.c</span>        <span class="tree-comment"># Reset vector &amp; IRQs</span>
-│   ├── <span class="tree-file">uart_corstone.c</span>             <span class="tree-comment"># APB UART driver (0x49303000)</span>
+│   ├── <span class="tree-file">uart_corstone.c</span>             <span class="tree-comment"># APB UART (0x49303000)</span>
 │   ├── <span class="tree-file">ethos_u_core.c</span>              <span class="tree-comment"># Ethos-U55 NPU driver &amp; DMA</span>
 │   ├── <span class="tree-file">inference_engine.c</span>          <span class="tree-comment"># TFLM / CMSIS-NN dispatch</span>
 │   ├── <span class="tree-file">main.c</span>                      <span class="tree-comment"># Semihosting &amp; test harness</span>
 │   └── <span class="tree-file">corstone300.ld</span>              <span class="tree-comment"># Linker script &amp; SRAM guards</span>
 ├── <span class="tree-folder">scripts/</span>
-│   ├── <span class="tree-file">sanity_check.py</span>             <span class="tree-comment"># Pre-flight environment check</span>
+│   ├── <span class="tree-file">sanity_check.py</span>             <span class="tree-comment"># Pre-flight check</span>
 │   └── <span class="tree-file">live_bridge_server.py</span>       <span class="tree-comment"># REST bridge (browser &lt;-&gt; FVP)</span>
 ├── <span class="tree-folder">tests/</span>
-│   └── <span class="tree-file">test_harness.py</span>             <span class="tree-comment"># 7-stage automated validation</span>
-├── <span class="tree-folder">slides/</span>                         <span class="tree-comment"># Web presentation &amp; mic demo</span>
-└── <span class="tree-file">Makefile</span>                        <span class="tree-comment"># GNU Make build system</span>
-                </div>
+│   └── <span class="tree-file">test_harness.py</span>             <span class="tree-comment"># 7-stage CI validation</span>
+├── <span class="tree-folder">slides/</span>                         <span class="tree-comment"># Presentation &amp; mic test</span>
+└── <span class="tree-file">Makefile</span>                        <span class="tree-comment"># GNU Make build system</span></pre>
 
                 <!-- Right: Step-by-Step Operative Commands -->
                 <div class="commands-list">
