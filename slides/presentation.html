@@ -473,10 +473,145 @@
             color: var(--bg-dark);
         }
 
-        .slide-indicator {
-            font-size: 12px;
+        /* Logic Flow Diagram on Slide 3 */
+        .logic-flow-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin-top: 14px;
+            align-items: stretch;
+        }
+
+        .flow-step-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 16px 14px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+
+        .flow-step-card:hover {
+            border-color: var(--arm-cyan);
+            transform: translateY(-2px);
+        }
+
+        .flow-step-num {
+            font-size: 10px;
+            font-weight: 800;
+            color: var(--arm-cyan);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .flow-step-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 8px;
+        }
+
+        .flow-step-body {
+            font-size: 11px;
             color: var(--text-muted);
-            font-weight: 600;
+            line-height: 1.45;
+            flex: 1;
+        }
+
+        .flow-arrow-badge {
+            display: inline-block;
+            background: rgba(0, 229, 255, 0.12);
+            border: 1px solid rgba(0, 229, 255, 0.3);
+            color: var(--arm-accent);
+            border-radius: 4px;
+            padding: 3px 6px;
+            font-size: 10px;
+            font-weight: 700;
+            margin-top: 10px;
+            font-family: monospace;
+        }
+
+        /* Folder Tree & Build Guide on Slide 4 */
+        .guide-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.35fr;
+            gap: 18px;
+            margin-top: 12px;
+        }
+
+        .tree-container {
+            background: #050B12;
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 12px 14px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 11px;
+            line-height: 1.42;
+            color: #CBD5E1;
+            overflow-x: auto;
+            max-height: 440px;
+        }
+
+        .tree-folder {
+            color: var(--arm-cyan);
+            font-weight: 700;
+        }
+
+        .tree-file {
+            color: #ECEFF1;
+        }
+
+        .tree-comment {
+            color: #64748B;
+            font-style: italic;
+        }
+
+        .commands-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 440px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .cmd-item {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 6px;
+            padding: 9px 12px;
+        }
+
+        .cmd-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--arm-accent);
+            margin-bottom: 3px;
+        }
+
+        .cmd-code {
+            font-family: 'Consolas', monospace;
+            font-size: 10.5px;
+            color: #00E676;
+            background: #04080D;
+            padding: 4px 8px;
+            border-radius: 4px;
+            border: 1px solid rgba(0, 230, 118, 0.2);
+            margin-bottom: 3px;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .cmd-result {
+            font-size: 10px;
+            color: #94A3B8;
+            line-height: 1.35;
         }
 
         /* Notes Drawer */
@@ -670,64 +805,64 @@
 
         <!-- SLIDE 1 -->
         <div class="slide active" id="slide-1">
-            <div class="category-tag">Arm Workforce Development &bull; Technical Delivery Scenario</div>
-            <h1 class="slide-title">Deploying Secure Edge AI on Arm Corstone-300 &amp; Virtual Hardware</h1>
-            <p class="slide-subtitle">A practical, hands-on workshop covering Cortex-M55, Ethos-U55 NPU, Zephyr RTOS, and cloud-based hardware simulation.</p>
+            <div class="category-tag">Arm Workforce Development &bull; Technical Lab Scenario</div>
+            <h1 class="slide-title">Edge AI Speech Recognition on Arm Corstone-300</h1>
+            <p class="slide-subtitle">A practical, hands-on lab: Model compilation with Vela, bare-metal Cortex-M55 &amp; Ethos-U55 NPU co-design, and real-time voice inference on local virtual platforms.</p>
             
             <div class="hero-banner">
-                <strong>Curriculum Mission:</strong> Bridging the Embedded AI Skills Gap &mdash; empowering engineers to design, partition, secure, and profile microNPU edge workloads at cloud scale with zero hardware logistics friction.
+                <strong>Lab Mission:</strong> Bridging the Embedded AI Skills Gap &mdash; empowering engineers to optimize neural networks with Arm Vela, enforce strict SRAM memory boundaries, and validate live keyword spotting on local cycle-approximate virtual hardware.
             </div>
 
             <div class="meta-strip">
                 <div class="meta-item">
-                    <h4>Target Architecture</h4>
-                    <p>Armv8.1-M &amp; Ethos-U55</p>
+                    <h4>Target Hardware</h4>
+                    <p>Cortex-M55 &amp; Ethos-U55</p>
                 </div>
                 <div class="meta-item">
-                    <h4>Software Environment</h4>
-                    <p>Zephyr RTOS &amp; TF-M</p>
+                    <h4>AI Workload</h4>
+                    <p>DS-CNN Speech KWS (INT8)</p>
                 </div>
                 <div class="meta-item">
-                    <h4>Execution Mode</h4>
-                    <p>Arm Virtual Hardware (AVH)</p>
+                    <h4>Execution Engines</h4>
+                    <p>Local Arm FVP &amp; QEMU</p>
                 </div>
                 <div class="meta-item">
-                    <h4>Target Learners</h4>
-                    <p>Firmware &amp; RTOS Engineers</p>
+                    <h4>Software &amp; Toolchain</h4>
+                    <p>Bare-Metal C &amp; GNU Arm GCC</p>
                 </div>
             </div>
         </div>
 
         <!-- SLIDE 2 -->
         <div class="slide" id="slide-2">
-            <div class="category-tag">Topic Selection &bull; Subsystem Co-Design</div>
-            <h2 class="slide-title">Embedded Hardware Subsystem &amp; Software Stack</h2>
+            <div class="category-tag">Hardware Co-Design &bull; Bus Matrix &amp; Memory Topology</div>
+            <h2 class="slide-title">Arm Corstone-300 Subsystem &amp; Dual-AXI microNPU Architecture</h2>
             
             <div class="cards-grid-3">
                 <div class="card">
                     <div class="card-icon">&#9881;</div>
-                    <h3 class="card-title">Core Subsystem</h3>
-                    <p class="card-desc">Cortex-M55 CPU with Helium vector extensions paired with Ethos-U55 microNPU acceleration.</p>
+                    <h3 class="card-title">Compute Co-Design</h3>
+                    <p class="card-desc">Cortex-M55 CPU with Helium MVE handles audio MFCC/DSP feature extraction &amp; layer fallbacks; Ethos-U55 executes high-density tensor convolutions (128 MACs/cycle).</p>
                     <div class="stat-chip">Helium MVE + 128 MACs Co-Design</div>
                 </div>
                 <div class="card">
-                    <div class="card-icon">&#9889;</div>
-                    <h3 class="card-title">Platform Software</h3>
-                    <p class="card-desc">Zephyr RTOS microkernel integrated with optimized CMSIS-NN and Ethos-U NPU drivers.</p>
-                    <div class="stat-chip green">Enterprise Open-Source RTOS</div>
+                    <div class="card-icon">&#128260;</div>
+                    <h3 class="card-title">Dual-AXI Master DMA</h3>
+                    <p class="card-desc">Ethos-U55 operates with two independent 64-bit AXI master ports: Port M0 reads Flash weights, Port M1 reads/writes SRAM activations simultaneously without bus stalls.</p>
+                    <div class="stat-chip green">64-bit Multi-Layer AXI5 Crossbar</div>
                 </div>
                 <div class="card">
                     <div class="card-icon">&#128737;</div>
-                    <h3 class="card-title">Security &amp; AVH</h3>
-                    <p class="card-desc">Trusted Firmware-M (TF-M) isolation executed via Arm Corstone-300 Fixed Virtual Platform.</p>
-                    <div class="stat-chip orange">PSA Certified Level 2 Isolation</div>
+                    <h3 class="card-title">Memory &amp; TrustZone</h3>
+                    <p class="card-desc">Shared SRAM (0x21000000, 64 KiB arena) guarded by Memory Protection Controllers (MPC) and Trusted Firmware-M (TF-M) to prevent illegal DMA writes.</p>
+                    <div class="stat-chip orange">PSA Level 2 Bus Isolation</div>
                 </div>
             </div>
 
             <div style="margin-top: 18px; background: rgba(0, 145, 189, 0.08); border: 1px solid var(--card-border); border-radius: 8px; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between;">
                 <div>
-                    <span style="font-size: 13px; font-weight: 700; color: var(--arm-accent);">The Helium + Ethos-U Synergy:</span>
-                    <span style="font-size: 12px; color: #CBD5E1; margin-left: 8px;">Cortex-M55 Helium handles audio MFCC/DSP feature extraction &amp; activation fallbacks; Ethos-U55 executes high-density tensor convolutions.</span>
+                    <span style="font-size: 13px; font-weight: 700; color: var(--arm-accent);">Hardware Interconnect Insight:</span>
+                    <span style="font-size: 12px; color: #CBD5E1; margin-left: 8px;">The multi-layer AXI5 crossbar enables the CPU to run code and the NPU to stream DMA memory transfers in parallel with zero bus arbitration contention.</span>
                 </div>
                 <button onclick="toggleDiagram()" style="font-size: 11px; padding: 6px 14px; background: var(--arm-blue); border: 1px solid var(--arm-cyan); color: #fff; cursor: pointer; border-radius: 4px; font-weight: 700;">View Architecture Diagram (D)</button>
             </div>
@@ -735,42 +870,142 @@
 
         <!-- SLIDE 3 -->
         <div class="slide" id="slide-3">
-            <div class="category-tag">Hands-On Lab Journey &bull; Validated Milestones</div>
-            <h2 class="slide-title">What Participants Will Build &amp; Validate</h2>
+            <div class="category-tag">Live Demonstration Architecture &bull; Hardware-in-the-Loop Testbench</div>
+            <h2 class="slide-title">Live Speech to Virtual Silicon: Experiment Logic Flow</h2>
+            <p class="slide-subtitle" style="margin-bottom: 12px;">How browser microphone audio is captured, transformed into frequency features, and executed across local virtual platforms.</p>
             
-            <div class="cards-grid-4">
-                <div class="card">
-                    <div class="step-badge">Step 01</div>
-                    <h3 class="card-title">Model Compilation</h3>
-                    <p class="card-desc">Quantize TFLite model using Arm Vela compiler for Ethos-U55 operators.</p>
-                    <div class="stat-chip">DS-CNN Small INT8</div>
-                    <div style="font-size: 11px; color: var(--text-muted); margin-top: 8px;">49 NPU Ops &bull; 21.7 KiB SRAM</div>
+            <div class="logic-flow-grid">
+                <div class="flow-step-card">
+                    <div class="flow-step-num">Step 01</div>
+                    <div class="flow-step-title">&#127908; Browser Audio Capture</div>
+                    <div class="flow-step-body">
+                        HTML5 Web Audio API records 1-second 16 kHz PCM microphone stream. Computes 40-band Mel Filterbank + DCT into a 490 INT8 MFCC tensor.
+                    </div>
+                    <div class="flow-arrow-badge">16 kHz &rarr; 1x490 INT8</div>
                 </div>
-                <div class="card">
-                    <div class="step-badge">Step 02</div>
-                    <h3 class="card-title">Zephyr Build</h3>
-                    <p class="card-desc">Configure CMake target using West build tool and CMSIS-NN dispatch.</p>
-                    <div class="stat-chip green">West Meta-Tool</div>
-                    <div style="font-size: 11px; color: var(--text-muted); margin-top: 8px;">Strict Linker Boundary Guard</div>
+
+                <div class="flow-step-card">
+                    <div class="flow-step-num">Step 02</div>
+                    <div class="flow-step-title">&#128260; Python Bridge Server</div>
+                    <div class="flow-step-body">
+                        REST server (<code>live_bridge_server.py</code> at <code>127.0.0.1:8080</code>). Validates audio with genuine INT8 TFLite model, writes binary payload to <code>build/live_tensor.bin</code>.
+                    </div>
+                    <div class="flow-arrow-badge">HTTP POST /predict</div>
                 </div>
-                <div class="card">
-                    <div class="step-badge">Step 03</div>
-                    <h3 class="card-title">FVP Simulation</h3>
-                    <p class="card-desc">Deploy binary onto Corstone-300 Virtual Hardware via CLI terminal.</p>
-                    <div class="stat-chip orange">AVH Cloud / Headless</div>
-                    <div style="font-size: 11px; color: var(--text-muted); margin-top: 8px;">Zero Physical Board Logistics</div>
+
+                <div class="flow-step-card">
+                    <div class="flow-step-num">Step 03</div>
+                    <div class="flow-step-title">&#9881; Local Virtual Simulators</div>
+                    <div class="flow-step-body">
+                        Triggers local simulators in parallel on native Linux / WSL:<br>
+                        &bull; <strong>Arm Fast Models FVP</strong><br>
+                        &bull; <strong>QEMU (mps3-an547)</strong><br>
+                        No cloud subscription needed.
+                    </div>
+                    <div class="flow-arrow-badge">Native WSL Execution</div>
                 </div>
-                <div class="card">
-                    <div class="step-badge">Step 04</div>
-                    <h3 class="card-title">Performance Profiling</h3>
-                    <p class="card-desc">Measure cycle latency, SRAM allocation, and classification accuracy.</p>
-                    <div class="stat-chip">108x Acceleration</div>
-                    <div style="font-size: 11px; color: var(--text-muted); margin-top: 8px;">24.6k Cycles &bull; "Yes" (+118)</div>
+
+                <div class="flow-step-card">
+                    <div class="flow-step-num">Step 04</div>
+                    <div class="flow-step-title">&#128190; Bare-Metal Cortex-M55</div>
+                    <div class="flow-step-body">
+                        ARM Semihosting trap (<code>bkpt 0xab</code>) pulls <code>live_tensor.bin</code> directly into SRAM Arena (<code>0x21010000</code>). Runs pipeline &amp; emits APB UART (<code>0x49303000</code>).
+                    </div>
+                    <div class="flow-arrow-badge">bkpt 0xab &rarr; SRAM</div>
+                </div>
+
+                <div class="flow-step-card">
+                    <div class="flow-step-num">Step 05</div>
+                    <div class="flow-step-title">&#9989; Telemetry &amp; Parity Check</div>
+                    <div class="flow-step-body">
+                        Browser displays real keyword detection ("Yes", "No", "Silence") and confidence score. Clicking terminal button reveals exact FVP &amp; QEMU UART logs.
+                    </div>
+                    <div class="flow-arrow-badge">100% Golden Parity</div>
                 </div>
             </div>
 
+            <!-- Interactive Live Mic Callout -->
+            <div style="margin-top: 14px; background: rgba(0, 230, 118, 0.08); border: 1px solid rgba(0, 230, 118, 0.3); border-radius: 8px; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between;">
+                <div>
+                    <span style="font-size: 13px; font-weight: 700; color: #00E676;">Ready to test live speech recognition?</span>
+                    <span style="font-size: 12px; color: #CBD5E1; margin-left: 8px;">Press <strong>M</strong> or click "Live Mic Test" in the top bar to record live voice from your microphone!</span>
+                </div>
+                <button onclick="toggleAudioDemo()" style="font-size: 11px; padding: 6px 14px; background: #00E676; color: #04080D; border: none; cursor: pointer; border-radius: 4px; font-weight: 800;">Launch Live Audio Test (M)</button>
+            </div>
+        </div>
+
+        <!-- SLIDE 4 -->
+        <div class="slide" id="slide-4">
+            <div class="category-tag">Operative Lab Guide &bull; Setup, Compilation &amp; Validation</div>
+            <h2 class="slide-title">Source Tree, Step-by-Step Build &amp; Execution Guide</h2>
+            <p class="slide-subtitle" style="margin-bottom: 12px;">Complete instructions for participants to clone, compile, and execute the Corstone-300 Edge AI lab independently.</p>
+            
+            <div class="guide-grid">
+                <!-- Left: Repository Structure Tree -->
+                <div class="tree-container">
+<span class="tree-folder">Arm_Corstone300_EdgeAI_Lab/</span>
+├── <span class="tree-folder">model/</span>
+│   ├── <span class="tree-file">ds_cnn_s_quantized.tflite</span>   <span class="tree-comment"># Raw INT8 KWS model</span>
+│   └── <span class="tree-folder">output_vela/</span>                <span class="tree-comment"># Vela command stream</span>
+├── <span class="tree-folder">src/</span>
+│   ├── <span class="tree-file">startup_cortex_m55.c</span>        <span class="tree-comment"># Reset vector &amp; IRQs</span>
+│   ├── <span class="tree-file">uart_corstone.c</span>             <span class="tree-comment"># APB UART driver (0x49303000)</span>
+│   ├── <span class="tree-file">ethos_u_core.c</span>              <span class="tree-comment"># Ethos-U55 NPU driver &amp; DMA</span>
+│   ├── <span class="tree-file">inference_engine.c</span>          <span class="tree-comment"># TFLM / CMSIS-NN dispatch</span>
+│   ├── <span class="tree-file">main.c</span>                      <span class="tree-comment"># Semihosting &amp; test harness</span>
+│   └── <span class="tree-file">corstone300.ld</span>              <span class="tree-comment"># Linker script &amp; SRAM guards</span>
+├── <span class="tree-folder">scripts/</span>
+│   ├── <span class="tree-file">sanity_check.py</span>             <span class="tree-comment"># Pre-flight environment check</span>
+│   └── <span class="tree-file">live_bridge_server.py</span>       <span class="tree-comment"># REST bridge (browser &lt;-&gt; FVP)</span>
+├── <span class="tree-folder">tests/</span>
+│   └── <span class="tree-file">test_harness.py</span>             <span class="tree-comment"># 7-stage automated validation</span>
+├── <span class="tree-folder">slides/</span>                         <span class="tree-comment"># Web presentation &amp; mic demo</span>
+└── <span class="tree-file">Makefile</span>                        <span class="tree-comment"># GNU Make build system</span>
+                </div>
+
+                <!-- Right: Step-by-Step Operative Commands -->
+                <div class="commands-list">
+                    <div class="cmd-item">
+                        <div class="cmd-label"><span>1. Pre-Flight Environment Sanity Check</span> <span style="color: #00E676;">Verified</span></div>
+                        <div class="cmd-code">python3 scripts/sanity_check.py</div>
+                        <div class="cmd-result">Audits GNU Arm GCC 10.3+, Vela 5.2.0, FVP binary, and QEMU.</div>
+                    </div>
+
+                    <div class="cmd-item">
+                        <div class="cmd-label"><span>2. Vela NPU Model Compilation</span> <span style="color: #00E676;">100% Offload</span></div>
+                        <div class="cmd-code">vela model/ds_cnn_s_quantized.tflite --accelerator-config ethos-u55-128 --output-dir model/output_vela</div>
+                        <div class="cmd-result">Compiles 49/49 operators for Ethos-U55 (21.7 KiB SRAM arena, 30.5 KiB Flash).</div>
+                    </div>
+
+                    <div class="cmd-item">
+                        <div class="cmd-label"><span>3. Build Bare-Metal Firmware Image</span> <span style="color: #00E676;">arm-none-eabi-gcc</span></div>
+                        <div class="cmd-code">make clean &amp;&amp; make</div>
+                        <div class="cmd-result">Links <code>build/firmware.elf</code>: text: 43,272 B | data: 20 B | bss: 82,420 B.</div>
+                    </div>
+
+                    <div class="cmd-item">
+                        <div class="cmd-label"><span>4. Automated 7-Stage Validation Harness</span> <span style="color: #00E676;">7/7 PASS</span></div>
+                        <div class="cmd-code">python3 tests/test_harness.py</div>
+                        <div class="cmd-result">Executes all 7 stages in ~3.6s (Memory layout, FVP simulation, classification parity).</div>
+                    </div>
+
+                    <div class="cmd-item">
+                        <div class="cmd-label"><span>5. Start Live Audio Bridge &amp; Web Interface</span> <span style="color: #00E676;">Port 8080</span></div>
+                        <div class="cmd-code">python3 scripts/live_bridge_server.py</div>
+                        <div class="cmd-result">Listens on <code>http://127.0.0.1:8080</code> for browser microphone interaction.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 5 -->
+        <div class="slide" id="slide-5">
+            <div class="category-tag">Benchmarking &amp; Verification &bull; Real Hardware Telemetry</div>
+            <h2 class="slide-title">Hardware Performance Profiling &amp; Acceptance Scorecard</h2>
+            <p class="slide-subtitle" style="margin-bottom: 12px;">Measured cycle latency, SRAM memory safety, and 100% automated acceptance test suite results.</p>
+            
             <!-- Visual Benchmark & Memory Metrics Section -->
-            <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 16px; margin-top: 14px;">
+            <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 16px; margin-top: 8px;">
                 <!-- Chart 1: Cycle Speedup -->
                 <div class="chart-box">
                     <div class="chart-box-header">
@@ -821,140 +1056,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!-- SLIDE 4 -->
-        <div class="slide" id="slide-4">
-            <div class="category-tag">Environment Requirements &bull; Strategic Triad</div>
-            <h2 class="slide-title">Tools, SDKs &amp; The Strategic Execution Triad</h2>
-            
-            <div class="cards-grid-4">
-                <div class="card">
-                    <div class="card-icon">&#128187;</div>
-                    <h3 class="card-title">Platforms</h3>
-                    <p class="card-desc">Corstone-300 FVP via Arm Virtual Hardware (AVH).</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon">&lt;/&gt;</div>
-                    <h3 class="card-title">Toolchain</h3>
-                    <p class="card-desc">Arm GNU Toolchain with Arm Compiler for Embedded.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon">&#128230;</div>
-                    <h3 class="card-title">Software Stack</h3>
-                    <p class="card-desc">Zephyr SDK v0.16+, TFLite Micro &amp; Ethos-U drivers.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon">&#128736;</div>
-                    <h3 class="card-title">IDE &amp; Tools</h3>
-                    <p class="card-desc">VS Code with Arm extension pack and West CLI.</p>
-                </div>
-            </div>
-
-            <!-- Strategic Comparison -->
-            <table class="triad-table">
-                <thead>
-                    <tr>
-                        <th style="width: 22%;">Deployment Option</th>
-                        <th style="width: 28%;">Industry Constraints</th>
-                        <th style="width: 50%;">Workforce Development Assessment</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td style="font-weight: 700; color: #FFFFFF;">Physical Silicon (Dev Kits)</td>
-                        <td>High cost ($150-$300/seat), shipping delays, bricking risk.</td>
-                        <td>Impractical for global cohort scaling; prone to USB/driver conflicts.</td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 700; color: #CBD5E1;">QEMU (mps3-an547)</td>
-                        <td>Functional CPU instruction emulator; <strong>No Ethos-U NPU model.</strong></td>
-                        <td>Great for rapid local functional tests, but cannot profile NPU cycles or DMA.</td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 700; color: var(--arm-accent);">Arm Virtual Hardware (AVH)</td>
-                        <td>Official proprietary Fast Models &amp; cloud instances.</td>
-                        <td><strong>Golden reference silicon parity:</strong> Cycle-approximate NPU simulation, TrustZone enforcement, cloud scale for 500+ students.</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- SLIDE 5 -->
-        <div class="slide" id="slide-5">
-            <div class="category-tag">Delivery Execution &bull; The Facilitator's Playbook</div>
-            <h2 class="slide-title">Setup Guidance &amp; Live Troubleshooting Matrix</h2>
-            
-            <div class="cards-grid-2">
-                <div class="card">
-                    <h3 class="card-title" style="color: var(--arm-cyan); margin-bottom: 16px;">3-Tier Frictionless Setup Strategy</h3>
-                    <ul class="bullet-list">
-                        <li class="bullet-item">
-                            <span class="bullet-title">1. Hosted AVH Cloud Instances:</span>
-                            <span class="bullet-desc">Browser-accessible cloud environment for corporate participants with restricted IT laptops.</span>
-                        </li>
-                        <li class="bullet-item">
-                            <span class="bullet-title">2. Pre-Configured Containers:</span>
-                            <span class="bullet-desc">Multi-arch Docker image containing Zephyr SDK, Python dependencies, and Vela 5.2.0.</span>
-                        </li>
-                        <li class="bullet-item">
-                            <span class="bullet-title">3. Automated Sanity Scripts:</span>
-                            <span class="bullet-desc">Python pre-flight validator auditing toolchain paths and memory boundaries before exercise start.</span>
-                            <div class="code-box">python3 scripts/sanity_check.py</div>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="card">
-                    <h3 class="card-title" style="color: var(--orange-accent); margin-bottom: 16px;">Expected Technical Mitigations</h3>
-                    <ul class="bullet-list">
-                        <li class="bullet-item">
-                            <span class="bullet-title">FVP Launch Headless Errors:</span>
-                            <span class="bullet-desc">Force terminal-only mode in cloud CI/containers:</span>
-                            <div class="code-box">-C disable-visualisation=1 -C cpu0.semihosting-enable=1</div>
-                        </li>
-                        <li class="bullet-item">
-                            <span class="bullet-title">Vela Operator Fallbacks:</span>
-                            <span class="bullet-desc">Route unsupported operators to Cortex-M55 Helium MVE via CMSIS-NN:</span>
-                            <div class="code-box">--ignore-ops FULLY_CONNECTED</div>
-                        </li>
-                        <li class="bullet-item">
-                            <span class="bullet-title">Memory Region Overflow:</span>
-                            <span class="bullet-desc">Enforce compile-time linker assertions guarding internal SRAM:</span>
-                            <div class="code-box">ASSERT((__tensor_arena_end - __tensor_arena_start) &lt;= 0x10000)</div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- SLIDE 6 -->
-        <div class="slide" id="slide-6">
-            <div class="category-tag">Continuous Improvement &bull; Data-Driven Education</div>
-            <h2 class="slide-title">Post-Lab Analytics &amp; Feedback Loop</h2>
-            
-            <div class="cards-grid-3">
-                <div class="card">
-                    <div class="card-icon">&#128200;</div>
-                    <h3 class="card-title">Automated Telemetry</h3>
-                    <p class="card-desc">Logs build pass rates, command completion times, and compilation bottlenecks to telemetry JSON.</p>
-                    <div class="code-box" style="font-size: 10px; line-height: 1.4; color: #A0C0E0;">
-{ "stages": { "sanity": 1.0s, "vela": 0.5s, "firmware": 0.9s, "sim": 0.08s } }
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-icon">&#128172;</div>
-                    <h3 class="card-title">Targeted Surveys</h3>
-                    <p class="card-desc">4-question qualitative pulse check measuring setup friction, Helium vs NPU clarity, and toolchain autonomy.</p>
-                    <div class="stat-chip green">Audits Learning Outcomes</div>
-                </div>
-                <div class="card">
-                    <div class="card-icon">&#8635;</div>
-                    <h3 class="card-title">Iterative Updates</h3>
-                    <p class="card-desc">Feeds bottleneck analytics bi-weekly into Docker container dependencies and official Arm Learning Paths.</p>
-                    <div class="stat-chip">Self-Optimizing Curriculum</div>
-                </div>
-            </div>
 
             <!-- Live Test Scorecard & Pipeline Execution Metrics -->
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 14px;">
@@ -987,13 +1088,13 @@
                         </div>
                         <div class="score-card-item pass">
                             <span style="font-size: 11px; font-weight: 700; color: #FFFFFF;">Test 5</span>
-                            <span style="font-size: 10px; color: var(--text-muted);">Keyword "Yes"</span>
+                            <span style="font-size: 10px; color: var(--text-muted);">Keyword Parity</span>
                             <span class="score-status-badge">PASS</span>
                         </div>
                     </div>
                     <div style="font-size: 11px; color: var(--text-muted); display: flex; justify-content: space-between; margin-top: 4px;">
                         <span>Target: <strong>mps3-an547 / Corstone-300</strong></span>
-                        <span style="color: var(--success-green); font-weight: 600;">Confidence: +118 (Golden Parity)</span>
+                        <span style="color: var(--success-green); font-weight: 600;">Classification: "Yes" / "No" / "Silence" Parity</span>
                     </div>
                 </div>
 
@@ -1001,50 +1102,99 @@
                 <div class="chart-box">
                     <div class="chart-box-header">
                         <span class="chart-box-title">&#9201; Automated Telemetry Stage Durations</span>
-                        <span style="font-size: 11px; color: var(--arm-accent); font-weight: 700; background: rgba(0,229,255,0.1); padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(0,229,255,0.3);">Total: 3.62s</span>
+                        <span style="font-size: 11px; color: var(--arm-accent); font-weight: 700; background: rgba(0,229,255,0.1); padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(0,229,255,0.3);">Total: 3.69s</span>
                     </div>
                     
                     <div style="display: flex; flex-direction: column; gap: 6px;">
                         <div class="chart-row">
                             <div class="chart-label-row">
                                 <span style="color: #CBD5E1; font-size: 11px;">1. Pre-Flight Sanity Check</span>
-                                <span style="color: var(--arm-accent); font-size: 11px;">0.65s (17.9%)</span>
+                                <span style="color: var(--arm-accent); font-size: 11px;">0.70s (19.0%)</span>
                             </div>
                             <div class="bar-container" style="height: 12px;">
-                                <div class="bar-fill bar-telemetry" style="width: 17.9%;"></div>
+                                <div class="bar-fill bar-telemetry" style="width: 19.0%;"></div>
                             </div>
                         </div>
 
                         <div class="chart-row">
                             <div class="chart-label-row">
-                                <span style="color: #CBD5E1; font-size: 11px;">2. Vela Ethos-U55 Compilation &amp; Fallback</span>
-                                <span style="color: #FFB74D; font-size: 11px;">0.71s (19.6%)</span>
+                                <span style="color: #CBD5E1; font-size: 11px;">2. Vela Model Compilation &amp; Fallback</span>
+                                <span style="color: #FFB74D; font-size: 11px;">0.70s (19.0%)</span>
                             </div>
                             <div class="bar-container" style="height: 12px;">
-                                <div class="bar-fill bar-cpu" style="width: 19.6%;"></div>
+                                <div class="bar-fill bar-cpu" style="width: 19.0%;"></div>
                             </div>
                         </div>
 
                         <div class="chart-row">
                             <div class="chart-label-row">
-                                <span style="color: #CBD5E1; font-size: 11px;">3. GCC Cortex-M55 / Zephyr Firmware Link</span>
-                                <span style="color: #00E676; font-size: 11px;">0.63s (17.4%)</span>
+                                <span style="color: #CBD5E1; font-size: 11px;">3. GCC Cortex-M55 Firmware Link</span>
+                                <span style="color: #00E676; font-size: 11px;">0.71s (19.2%)</span>
                             </div>
                             <div class="bar-container" style="height: 12px;">
-                                <div class="bar-fill bar-sram" style="width: 17.4%;"></div>
+                                <div class="bar-fill bar-sram" style="width: 19.2%;"></div>
                             </div>
                         </div>
 
                         <div class="chart-row">
                             <div class="chart-label-row">
                                 <span style="color: #CBD5E1; font-size: 11px;">4. Arm Virtual Hardware (Corstone-300 FVP)</span>
-                                <span style="color: var(--arm-cyan); font-size: 11px;">1.34s (37.0%)</span>
+                                <span style="color: var(--arm-cyan); font-size: 11px;">1.34s (36.3%)</span>
                             </div>
                             <div class="bar-container" style="height: 12px;">
-                                <div class="bar-fill bar-npu" style="width: 37.0%;"></div>
+                                <div class="bar-fill bar-npu" style="width: 36.3%;"></div>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 6 -->
+        <div class="slide" id="slide-6">
+            <div class="category-tag">Delivery Execution &bull; The Facilitator's Playbook</div>
+            <h2 class="slide-title">Setup Guidance, Common Pitfalls &amp; Practical Advice</h2>
+            <p class="slide-subtitle" style="margin-bottom: 12px;">Key learnings for reproducible lab execution and avoiding common embedded virtual hardware traps.</p>
+            
+            <div class="cards-grid-2">
+                <div class="card">
+                    <h3 class="card-title" style="color: var(--arm-cyan); margin-bottom: 16px;">Reproducible Local Setup Strategy</h3>
+                    <ul class="bullet-list">
+                        <li class="bullet-item">
+                            <span class="bullet-title">1. Native Local Execution (No Docker / Cloud):</span>
+                            <span class="bullet-desc">Runs directly in Linux or Windows WSL with standard packages (<code>arm-none-eabi-gcc</code>, Python 3). Eliminates container hypervisor overhead, Docker VPN permission issues, and AWS cloud bills.</span>
+                        </li>
+                        <li class="bullet-item">
+                            <span class="bullet-title">2. ARM Semihosting Dynamic Ingestion:</span>
+                            <span class="bullet-desc">In virtual hardware, <code>bkpt 0xab</code> semihosting ingests dynamic live audio into SRAM without needing to recompile <code>firmware.elf</code> on every spoken word.</span>
+                        </li>
+                        <li class="bullet-item">
+                            <span class="bullet-title">3. Automated Pre-Flight Sanity Script:</span>
+                            <span class="bullet-desc">Single script (<code>sanity_check.py</code>) validates toolchain binaries, compiler paths, and virtual platform executables before exercises start:</span>
+                            <div class="code-box">python3 scripts/sanity_check.py</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title" style="color: var(--orange-accent); margin-bottom: 16px;">Expected Technical Mitigations</h3>
+                    <ul class="bullet-list">
+                        <li class="bullet-item">
+                            <span class="bullet-title">FVP Launch Headless Errors:</span>
+                            <span class="bullet-desc">Force terminal-only execution to prevent X11 GUI window crashes in headless environments:</span>
+                            <div class="code-box">-C disable-visualisation=1 -C cpu0.semihosting-enable=1</div>
+                        </li>
+                        <li class="bullet-item">
+                            <span class="bullet-title">Vela Operator Fallbacks:</span>
+                            <span class="bullet-desc">Route unsupported operations (e.g., custom activations) to Cortex-M55 Helium MVE via CMSIS-NN:</span>
+                            <div class="code-box">--ignore-ops FULLY_CONNECTED</div>
+                        </li>
+                        <li class="bullet-item">
+                            <span class="bullet-title">Memory Region Overflow:</span>
+                            <span class="bullet-desc">Hard compile-time safety check guarding against SRAM buffer overflow:</span>
+                            <div class="code-box">ASSERT((__tensor_arena_end - __tensor_arena_start) &lt;= 0x10000)</div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -1483,12 +1633,12 @@ Info: /OSCI/SystemC: Simulation stopped by user.
         const totalSlides = 6;
 
         const speakerNotes = {
-            1: "<strong>Hook & Mission:</strong> Introduce the rising demand for TinyML on microcontrollers. Emphasize why Corstone-300 + Cortex-M55 + Ethos-U55 is Arm's flagship IoT solution. Highlight that Arm Virtual Hardware (AVH) makes workforce delivery 100% scalable without physical hardware logistics.",
-            2: "<strong>Subsystem Co-Design:</strong> Explain the synergy between Helium vector extensions (Cortex-M55) for DSP/MFCC preprocessing and Ethos-U55 for heavy matrix convolutions. Emphasize TF-M security isolating model weights and keys behind PSA Certified TrustZone boundaries.",
-            3: "<strong>Hands-on Journey with Real Data:</strong> Walk through the 4 steps with concrete numbers. Step 1 (Vela graph compilation: 21.7 KiB SRAM, 30.5 KiB Flash), Step 2 (Zephyr West build & linker checks), Step 3 (AVH headless deployment), Step 4 (Profiling: 24.6k NPU cycles, 108x speedup over CPU, keyword 'Yes' verified).",
-            4: "<strong>The Strategic Triad (Why AVH):</strong> Address the panel directly: Physical boards have shipping, driver, and cost friction; QEMU lacks the proprietary Ethos-U NPU model and cycle accuracy; AVH delivers golden silicon reference parity in the cloud for hundreds of learners at once.",
-            5: "<strong>The Facilitator's Playbook:</strong> Showcases teaching mastery. Point out how we prevent headless X11 crashes via '-C disable-visualisation=1', handle unsupported ops with CMSIS-NN CPU fallbacks, and prevent SRAM overflow using strict linker section assertions.",
-            6: "<strong>Continuous Improvement:</strong> Emphasize that Arm Workforce Development is data-driven. Automated telemetry logs stage bottlenecks, targeted 4-question surveys gauge concept clarity, and feedback updates Arm Learning Path tutorials bi-weekly."
+            1: "<strong>Lab Mission & Context:</strong> Introduce the Edge AI Speech Recognition hands-on lab on Arm Corstone-300. Emphasize that rather than an abstract deployment pitch, this is an authentic, reproducible lab test using DS-CNN Small INT8 keyword spotting on local virtual hardware (Arm Fast Models FVP & QEMU). Zero cloud subscription or physical board friction.",
+            2: "<strong>Subsystem & Bus Topology:</strong> Explain the hardware co-design: Cortex-M55 (Helium MVE) handles audio DSP/MFCC feature extraction, while Ethos-U55 accelerates matrix convolutions (128 MACs/cycle). Detail the Dual-AXI master architecture (Port M0 reads Flash weights, Port M1 reads/writes SRAM activations) over the multi-layer AXI5 crossbar with TrustZone-M memory protection.",
+            3: "<strong>End-to-End Experiment Flow:</strong> Walk through the logic diagram from browser microphone to virtual silicon. The browser captures 16 kHz audio and extracts 490 INT8 MFCC features. The Python bridge evaluates the TFLite model, launches FVP and QEMU, and the Cortex-M55 firmware dynamically ingests the tensor via ARM Semihosting (bkpt 0xab) into internal SRAM at 0x21010000.",
+            4: "<strong>Operative Lab Guide:</strong> Provide concrete instructions for participants to clone and run the lab by themselves. Review the repository layout (model/, src/, scripts/, tests/) and walk through the 5 commands: sanity check, Vela compilation (49 ops to NPU), GNU Make build (arm-none-eabi-gcc), test harness (7 stages pass), and the live speech bridge.",
+            5: "<strong>Profiling & Parity Results:</strong> Present verified benchmark telemetry: Ethos-U55 completes inference in 24,650 cycles (108.1x speedup over CPU baseline), consuming 21.7 KiB of the 64 KiB internal SRAM arena (66.1% headroom). Confirm 100% test parity on keyword detection ('Yes', 'No', 'Silence').",
+            6: "<strong>Troubleshooting Matrix:</strong> Guide participants through common embedded pitfalls: running FVP headless (-C disable-visualisation=1), enabling semihosting, guarding against SRAM overflows with linker ASSERTs, routing unsupported operators to Helium via CMSIS-NN, and running natively without Docker overhead."
         };
 
         function updateSlide() {
