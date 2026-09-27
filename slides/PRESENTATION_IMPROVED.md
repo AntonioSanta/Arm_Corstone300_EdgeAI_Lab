@@ -87,12 +87,12 @@
 
 ---
 
-## Slide 4: Source Tree, Step-by-Step Build & Execution Guide
+## Slide 4: Operative Lab Guide (Part 1) — Setup, Online Sources & Build Pipeline
 
 ### On-Slide Content:
-* **Header Tag:** OPERATIVE LAB GUIDE &bull; SETUP, COMPILATION &amp; VALIDATION
-* **Title:** Source Tree, Step-by-Step Build & Execution Guide
-* **Subtitle:** *Complete instructions for participants to clone, compile, and execute the Corstone-300 Edge AI lab independently.*
+* **Header Tag:** OPERATIVE LAB GUIDE (PART 1) &bull; SETUP, SOURCES &amp; REPOSITORY LAYOUT
+* **Title:** Operative Lab Guide (Part 1) — Setup, Online Sources &amp; Build Pipeline
+* **Subtitle:** *Where to obtain models and tooling, repository layout, operations pipeline, and step-by-step firmware build.*
 * **Prerequisites Strip:** Target: Arm Corstone-300 (MPS3-AN547) | OS: Ubuntu 20.04+ / WSL2 | Toolchain: `arm-none-eabi-gcc 10.3+` | Python: 3.8+ | Compiler: Arm Vela 5.2.0 | Simulators: Arm FVP & QEMU.
 * **Official Online Sources & Software Downloads Hub:**
   - **Pre-Trained Neural Network (Arm ML-Zoo):** [`https://github.com/ARM-software/ML-zoo`](https://github.com/ARM-software/ML-zoo) (DS-CNN Small INT8 model for keyword spotting)
@@ -130,22 +130,36 @@
   4. `python3 tests/test_harness.py` — [IN: `build/firmware.elf` / OUT: 5/5 Hardware UART Assertions]. Automated CI test runner: launches the Arm FVP simulator with `build/firmware.elf`, executes inference, and validates 5/5 hardware assertions in ~3.6s.
   5. `python3 scripts/live_bridge_server.py` — [IN: Browser Mic (16 kHz PCM) / OUT: Live Dual FVP & QEMU Telemetry]. Starts the live audio bridge on port 8080: dynamically feeds browser mic audio to `build/firmware.elf` running in FVP and QEMU via semihosting audio ingestion.
 
-* **Live Console Demonstration Playbook (Evaluator & Demo Cheat Sheet):**
-  - **Environment Setup:**
-    ```bash
-    wsl
-    cd /mnt/e/Arm_Corstone300_EdgeAI_Lab
-    ```
+### Speaker Talking Points (Your Script):
+> *"Slide 4 provides the complete setup blueprint for anyone approaching this lab for the first time.*
+>
+> *Across the top, notice the Online Sources & Downloads Hub: we provide direct links to the official Arm ML-Zoo repository for the pre-quantized DS-CNN model, the Arm Developer portal for the Corstone-300 Fast Models FVP and GNU toolchain, PyPI for the Vela compiler, and QEMU. Nothing is proprietary or locked behind enterprise paywalls.*
+>
+> *We walk learners through the repository structure, tracing how our bare-metal C drivers, linker scripts, and Python utilities interact. The 5 step-by-step commands guide participants seamlessly from pre-flight sanity checks to compiling the model with Vela and building `build/firmware.elf` with GNU Make.*
+>
+> *Once the firmware binary is compiled, we move to Slide 5 to see how to execute and debug it on the console."*
+
+---
+
+## Slide 5: Operative Lab Guide (Part 2) — Console Demonstration Playbook & Facilitator Notes
+
+### On-Slide Content:
+* **Header Tag:** OPERATIVE LAB GUIDE (PART 2) &bull; CONSOLE PLAYBOOK &amp; FACILITATOR MATRIX
+* **Title:** Console Demonstration Playbook &amp; Facilitator Troubleshooting Matrix
+* **Subtitle:** *Concrete console execution options for evaluators, reproducible local strategy, and common embedded mitigations.*
+* **Host Setup & Environment Strip:**
+  - **WSL / Shell Environment:** `wsl && cd /mnt/e/Arm_Corstone300_EdgeAI_Lab`
+  - **One-Time Host Package Install:** `sudo apt update && sudo apt install -y gcc-arm-none-eabi qemu-system-arm python3-pip make && pip install ethos-u-vela==5.2.0`
+* **Live Console Demonstration Playbook (The 3 Evaluator Options):**
   - **Option A: The "All-in-One" Acceptance Demo (Recommended — 3.5s):**
     ```bash
     python3 tests/test_harness.py
     ```
-    *Executes full CI: Vela compilation, GCC link, boots official Arm Corstone-300 FVP, prints UART telemetry, and validates 5/5 assertions.*
+    *Executes full CI: Vela compilation, GCC link, boots official Arm Corstone-300 FVP, prints UART telemetry, and validates 5/5 hardware assertions.*
   - **Option B: Step-by-Step Developer Workflow & Direct Simulator Launch:**
     ```bash
     # 1. Pre-flight check & firmware build
-    python3 scripts/sanity_check.py
-    make clean && make
+    python3 scripts/sanity_check.py && make clean && make
 
     # 2. Run directly on Official Arm Corstone-300 FVP
     /home/anton/.local/bin/FVP_Corstone_SSE-300_Ethos-U55 \
@@ -164,20 +178,31 @@
     python3 scripts/live_bridge_server.py
     ```
     *Starts REST bridge on port 8080; press key **A** in browser to record live voice ("Yes"/"No") and stream to virtual silicon.*
+* **Pillar 1: Reproducible Local Setup Strategy:**
+  - **Native Local Execution (No Docker / Cloud):** Runs directly in Linux or Windows WSL with standard packages (`arm-none-eabi-gcc`, Python 3). Eliminates container hypervisor overhead, Docker VPN permission issues, and AWS cloud bills.
+  - **ARM Semihosting Dynamic Ingestion:** In virtual hardware, `bkpt 0xab` semihosting ingests dynamic live audio into SRAM without needing to recompile `firmware.elf` on every spoken word.
+  - **Automated Pre-Flight Sanity Script:** Single command (`python3 scripts/sanity_check.py`) audits toolchain binaries and simulator executables before exercises start.
+* **Pillar 2: Expected Technical Mitigations:**
+  - **FVP Launch Headless Errors:** Force terminal-only execution to prevent X11 GUI window crashes in headless environments:
+    `-C disable-visualisation=1 -C cpu0.semihosting-enable=1`
+  - **Vela Operator Fallbacks:** Route unsupported operations (e.g., custom activations) to Cortex-M55 Helium MVE via CMSIS-NN:
+    `--ignore-ops FULLY_CONNECTED`
+  - **Memory Region Overflow:** Hard compile-time safety check guarding against SRAM buffer overflow:
+    `ASSERT((__tensor_arena_end - __tensor_arena_start) <= 0x10000)`
 
 ### Speaker Talking Points (Your Script):
-> *"Slide 4 is the operative blueprint for any workshop participant. Across the top, you can see our visual Operations Pipeline Flowchart mapping the exact sequence: Sanity Check, Vela Compiler, GCC Linker, FVP Test Harness, and Live Voice Testbench.*
+> *"Slide 5 is the console execution playbook and troubleshooting guide.*
 >
-> *Each command card shows explicit Input and Output artifacts, accompanied by a 1-click Copy button so students can copy the commands directly to their terminal.*
+> *If an interviewer or evaluator asks: 'Show me this working in the terminal right now,' this slide gives you the exact answer across three clear modes:*
+> * *If they want a fast, complete validation, **Option A** (`python3 tests/test_harness.py`) runs the entire test suite in 3.5 seconds and confirms all 5 hardware assertions pass.*
+> * *If they want to see manual silicon bring-up, **Option B** lets you run `make clean && make` and directly invoke the official Arm FVP binary with headless flags and UART console streaming.*
+> * *If they want an interactive demo, **Option C** launches the live bridge server on port 8080 so anyone can speak into the microphone and trigger real-time inference.*
 >
-> *Below the command list, we have embedded the complete **Live Console Demonstration Playbook**:*
-> * *If an evaluator asks for a fast, comprehensive demonstration, **Option A** (`python3 tests/test_harness.py`) runs the complete end-to-end pipeline and validates all 5 hardware assertions in 3.5 seconds.*
-> * *If they ask to see manual silicon bring-up, **Option B** walks through `make clean && make` and directly boots the official Arm Corstone-300 FVP binary with semihosting and UART streaming.*
-> * *If they want to speak into the microphone, **Option C** launches the live bridge server on port 8080, allowing immediate live speech testing."*
+> *At the bottom, we document the facilitator's local strategy—native execution without Docker friction, semihosting dynamic memory ingestion—and the three crucial mitigations: headless FVP flags, Vela CMSIS-NN fallbacks, and compile-time SRAM linker assertions."*
 
 ---
 
-## Slide 5: Hardware Performance Profiling & Acceptance Scorecard
+## Slide 6: Hardware Performance Profiling & Acceptance Scorecard
 
 ### On-Slide Content:
 * **Header Tag:** BENCHMARKING &amp; VERIFICATION &bull; REAL HARDWARE TELEMETRY
@@ -213,42 +238,17 @@
 * **Stage Durations:** Total lab run time ~3.69s (Sanity: 0.70s, Vela: 0.70s, Firmware Link: 0.71s, FVP Sim: 1.34s).
 
 ### Speaker Talking Points (Your Script):
-> *"Slide 5 presents the quantitative validation data with a direct head-to-head comparison between running on the Cortex-M55 CPU alone versus leveraging the dedicated Ethos-U55 microNPU.*
+> *"Slide 6 concludes our presentation with concrete hardware profiling data and our final acceptance scorecard.*
 >
-> *Looking at the numbers straight from the hardware cycle counters: executing the 2.66 million MAC neural network on the Cortex-M55 alone—even with Helium vector extensions—requires **2,664,792 cycles**. At 25 MHz, that takes **106.6 milliseconds**. Why is that a critical problem? In keyword spotting, audio frames arrive every 100 milliseconds. If the CPU takes 106.6 ms to process a frame, it is fundamentally impossible to maintain real-time operation—you will suffer continuous audio buffer underruns and dropped words.*
+> *Looking at our direct head-to-head comparison: running this 2.66 million MAC neural network on the Cortex-M55 CPU alone requires **2,664,792 cycles**, taking **106.6 milliseconds** at 25 MHz. Because audio frames arrive every 100 ms, CPU-only inference causes a fatal buffer overrun—it is physically impossible to keep up in real time.*
 >
-> *Now examine the row with the Ethos-U55 microNPU: because of its dedicated 128 MACs/cycle matrix engine and autonomous Dual-AXI DMA channels, the exact same inference finishes in just **24,650 cycles**—less than 1 millisecond (0.98 ms) at 25 MHz, and a blisteringly fast 49 microseconds at 500 MHz.*
+> *With the Ethos-U55 microNPU enabled, inference collapses to **24,650 cycles**—just **0.98 milliseconds**. That is an authentic **108.1x speedup**, saving 105.6 ms per inference.*
 >
-> *That translates to an authentic **108.1x speedup**, saving 105.6 milliseconds per inference. More importantly for edge devices, the CPU is active for less than 1% of the time, allowing it to enter low-power `WFI` sleep or handle concurrent sensor I/O while the NPU is power-gated via the Corstone Power Policy Unit (PPU). This slashes active energy consumption by over 99%, making edge speech recognition viable on small battery-powered devices."*
-
----
-
-## Slide 6: Setup Guidance, Common Pitfalls & Practical Advice
-
-### On-Slide Content:
-* **Header Tag:** DELIVERY EXECUTION &bull; THE FACILITATOR'S PLAYBOOK
-* **Title:** Setup Guidance, Common Pitfalls & Practical Advice
-* **Subtitle:** *Key learnings for reproducible lab execution and avoiding common embedded virtual hardware traps.*
-* **Pillar 1: Reproducible Local Setup Strategy:**
-  - **Native Local Execution (No Docker / Cloud):** Runs directly in Linux or Windows WSL with standard packages (`arm-none-eabi-gcc`, Python 3). Eliminates container hypervisor overhead, Docker VPN permission issues, and AWS cloud bills.
-  - **ARM Semihosting Dynamic Ingestion:** In virtual hardware, `bkpt 0xab` semihosting ingests dynamic live audio into SRAM without needing to recompile `firmware.elf` on every spoken word.
-  - **Automated Pre-Flight Sanity Script:** Single command (`python3 scripts/sanity_check.py`) audits toolchain binaries and simulator executables before exercises start.
-* **Pillar 2: Expected Technical Mitigations:**
-  - **FVP Launch Headless Errors:** Force terminal-only execution to prevent X11 GUI window crashes in headless environments:
-    `-C disable-visualisation=1 -C cpu0.semihosting-enable=1`
-  - **Vela Operator Fallbacks:** Route unsupported operations (e.g., custom activations) to Cortex-M55 Helium MVE via CMSIS-NN:
-    `--ignore-ops FULLY_CONNECTED`
-  - **Memory Region Overflow:** Hard compile-time safety check guarding against SRAM buffer overflow:
-    `ASSERT((__tensor_arena_end - __tensor_arena_start) <= 0x10000)`
-
-### Speaker Talking Points (Your Script):
-> *"Finally, Slide 6 covers the practical troubleshooting matrix.*
+> *Because the NPU handles the convolutions autonomously via its Dual-AXI DMA ports, the Cortex-M55 CPU remains active for less than 1% of the time, slashing active energy by over 99% and leaving 99 milliseconds of headroom per frame for application tasks.*
 >
-> *In real-world embedded training, setup friction kills learning momentum. We deliberately avoid heavy Docker containers or complex cloud subscriptions; everything runs locally and natively in WSL or Linux using standard GNU tools.*
+> *Finally, our memory gauge confirms that the entire tensor arena occupies just 21.7 KiB of our 64 KiB SRAM budget, and our automated acceptance test harness validates 5 out of 5 hardware assertions with 100% golden keyword parity.*
 >
-> *We teach learners three essential industry tricks: first, using `-C disable-visualisation=1` to prevent Fast Models from crashing in headless terminal or CI environments; second, using Vela `--ignore-ops` to fall back gracefully to Helium vector instructions when encountering unsupported neural layers; and third, implementing defensive linker `ASSERT` checks to catch SRAM buffer overflows at compile time rather than tracking down silent memory corruption in production."*
-
----
+> *Thank you, and I look forward to taking your questions or demonstrating any part of the console playbook live."*
 
 ## Appendix: Technical Acronyms & Terminology Reference
 
