@@ -94,6 +94,12 @@
 * **Title:** Source Tree, Step-by-Step Build & Execution Guide
 * **Subtitle:** *Complete instructions for participants to clone, compile, and execute the Corstone-300 Edge AI lab independently.*
 * **Prerequisites Strip:** Target: Arm Corstone-300 (MPS3-AN547) | OS: Ubuntu 20.04+ / WSL2 | Toolchain: `arm-none-eabi-gcc 10.3+` | Python: 3.8+ | Compiler: Arm Vela 5.2.0 | Simulators: Arm FVP & QEMU.
+* **Official Online Sources & Software Downloads Hub:**
+  - **Pre-Trained Neural Network (Arm ML-Zoo):** [`https://github.com/ARM-software/ML-zoo`](https://github.com/ARM-software/ML-zoo) (DS-CNN Small INT8 model for keyword spotting)
+  - **Arm Corstone-300 FVP (Virtual Hardware):** [`https://developer.arm.com/downloads/-/arm-ecosystem-fvps`](https://developer.arm.com/downloads/-/arm-ecosystem-fvps) (Official free cycle-approximate simulator: `FVP_Corstone_SSE-300_Ethos-U55`)
+  - **Arm GNU Embedded Toolchain:** [`https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads`](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads) (`arm-none-eabi-gcc 10.3+` / `sudo apt install gcc-arm-none-eabi`)
+  - **Arm Vela NPU Compiler:** [`https://pypi.org/project/ethos-u-vela/`](https://pypi.org/project/ethos-u-vela/) (`pip install ethos-u-vela==5.2.0`)
+  - **QEMU Machine Emulator:** [`https://www.qemu.org/download/`](https://www.qemu.org/download/) (`sudo apt install qemu-system-arm`)
 * **Operations Pipeline Flowchart (Visual Diagram):**
   - `[1. Pre-Flight Audit]` ➔ `[2. Vela Model Compiler]` ➔ `[3. GCC Firmware Link]` ➔ `[4. FVP Test Harness]` ➔ `[5. Live Voice Testbench]`
 * **Repository Source Tree:**
