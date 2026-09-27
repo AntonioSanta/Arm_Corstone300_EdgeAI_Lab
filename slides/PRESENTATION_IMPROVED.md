@@ -191,3 +191,29 @@
 > *In real-world embedded training, setup friction kills learning momentum. We deliberately avoid heavy Docker containers or complex cloud subscriptions; everything runs locally and natively in WSL or Linux using standard GNU tools.*
 >
 > *We teach learners three essential industry tricks: first, using `-C disable-visualisation=1` to prevent Fast Models from crashing in headless terminal or CI environments; second, using Vela `--ignore-ops` to fall back gracefully to Helium vector instructions when encountering unsupported neural layers; and third, implementing defensive linker `ASSERT` checks to catch SRAM buffer overflows at compile time rather than tracking down silent memory corruption in production."*
+
+---
+
+## Appendix: Technical Acronyms & Terminology Reference
+
+*Accessible in the HTML Presentation deck via the top-bar button `📖 Glossary (G)` or by pressing keyboard key `G` from any slide.*
+
+| Acronym | Full Form | Domain / Category | Context & Role in this Lab |
+| :--- | :--- | :--- | :--- |
+| **FVP** | **Fixed Virtual Platform** | Virtual Simulation | Arm's cycle-approximate, pre-configured software model (`FVP_Corstone_SSE-300_Ethos-U55`). Simulates the complete Corstone-300 SoC locally without physical silicon. |
+| **AVH** | **Arm Virtual Hardware** | Cloud & Simulation Ecosystem | Arm's umbrella platform and technology suite offering virtual targets (Corstone-300, Cortex-M, Ethos-U) for cloud CI/CD and automated firmware testing. |
+| **NPU** | **Neural Processing Unit** | Specialized Hardware IP | Dedicated ML acceleration core (Arm Ethos-U55) configured with 128 MACs/cycle for high-throughput, low-power INT8 convolution inference. |
+| **MVE** | **M-Profile Vector Extension** | CPU Architecture IP | Arm Helium vector processing extension inside the Cortex-M55 CPU. Accelerates 128-bit SIMD DSP audio preprocessing (FFT, Mel filterbanks, MFCC). |
+| **AXI** | **Advanced eXtensible Interface** | On-Chip Bus Interconnect | Arm AMBA high-performance multi-layer 64-bit interconnect crossbar. Ethos-U55 features Dual-AXI master ports: M0 (Flash weight read) & M1 (SRAM activation R/W). |
+| **APB** | **Advanced Peripheral Bus** | Peripheral Interconnect | Lower-power AMBA bus used for control registers and peripheral communication, connecting UART0 at base `0x49303000` for test log capture. |
+| **QEMU** | **Quick EMUlator** | Emulation Tooling | Fast open-source machine emulator (`-M mps3-an547 -cpu cortex-m55`) used for rapid instruction-accurate emulation, functional testing, and MVE debugging. |
+| **TFLM** | **TensorFlow Lite for Microcontrollers** | Embedded ML Runtime | Google & Arm's lightweight C++ runtime designed to run quantized neural network models within bare-metal microcontrollers without dynamic heap allocation. |
+| **CMSIS-NN** | **Cortex Microcontroller Software Interface Standard &ndash; Neural Network** | Optimized Compute Kernels | Arm-optimized DSP and vector assembly kernels tuned for Cortex-M processors with Helium (MVE) vector instructions, serving as fallback when operators bypass the NPU. |
+| **DS-CNN** | **Depthwise Separable Convolutional Neural Network** | Neural Model Architecture | Compact, parameter-efficient CNN topology that decomposes standard 2D convolution into depthwise and pointwise stages for low-latency keyword spotting (2.66M MACs). |
+| **MFCC** | **Mel-Frequency Cepstral Coefficients** | DSP & Feature Extraction | Standard speech acoustic feature representation. Audio frames are converted to frequency spectrum, warped to Mel scale, and transformed into 490 INT8 spectrogram values. |
+| **TF-M** | **Trusted Firmware-M** | Platform Security | Reference implementation of PSA Certified Level 2 security architecture on Armv8.1-M, enforcing hardware isolation via TrustZone for secure boot and key storage. |
+| **MPC** | **Memory Protection Controller** | Hardware Security IP | Bus-level access controller gating memory regions. Unauthorized NPU DMA accesses to protected memory trigger an instant hardware `SecureFault`. |
+| **PPU** | **Power Policy Unit** | System Power Management | Hardware logic controlling power domain transitions (ON, OFF, RETENTION) across Corstone-300 compute clusters to minimize static leakage during idle periods. |
+| **WAV** | **Waveform Audio File Format** | Audio Signal Processing | Linear pulse-code modulation (PCM) uncompressed digital audio format (16 kHz, 16-bit mono) captured from the browser microphone and streamed to the virtual testbench. |
+| **ELF** | **Executable and Linkable Format** | Binary Toolchain | The linked binary container (`build/firmware.elf`) containing executable machine code, initialized data sections, vector tables, and debug symbols loaded into FVP memory. |
+

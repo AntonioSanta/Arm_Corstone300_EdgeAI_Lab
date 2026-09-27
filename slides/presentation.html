@@ -822,6 +822,173 @@
         .seq-chip strong {
             color: var(--arm-accent);
         }
+
+        /* Acronyms Reference Strip on Slide 1 */
+        .acronym-strip {
+            margin-top: 14px;
+            background: #060B12;
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 10px 14px;
+        }
+
+        .acronym-strip-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11.5px;
+            font-weight: 700;
+            color: var(--arm-accent);
+            margin-bottom: 8px;
+            border-bottom: 1px solid #162434;
+            padding-bottom: 5px;
+        }
+
+        .acronym-expand-btn {
+            background: rgba(0, 229, 255, 0.1);
+            border: 1px solid rgba(0, 229, 255, 0.3);
+            color: var(--arm-accent);
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .acronym-expand-btn:hover {
+            background: var(--arm-accent);
+            color: #04080D;
+        }
+
+        .acronym-table-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .acronym-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 6px;
+            padding: 7px 9px;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .acronym-abbr {
+            font-family: 'Consolas', monospace;
+            font-size: 11px;
+            font-weight: 800;
+            color: #00E676;
+            background: rgba(0, 230, 118, 0.12);
+            padding: 2px 5px;
+            border-radius: 4px;
+            border: 1px solid rgba(0, 230, 118, 0.25);
+            white-space: nowrap;
+        }
+
+        .acronym-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+        }
+
+        .acronym-name {
+            font-size: 10.5px;
+            font-weight: 700;
+            color: #FFFFFF;
+        }
+
+        .acronym-desc {
+            font-size: 9.5px;
+            color: var(--text-muted);
+            line-height: 1.25;
+        }
+
+        /* Full Glossary Lightbox Modal */
+        .glossary-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 920px;
+            max-height: 85vh;
+            background: #080E16;
+            border: 2px solid var(--arm-cyan);
+            border-radius: 10px;
+            padding: 20px;
+            display: none;
+            flex-direction: column;
+            box-shadow: 0 24px 80px rgba(0,0,0,0.95);
+            z-index: 350;
+            overflow-y: auto;
+        }
+
+        .glossary-modal.open {
+            display: flex;
+        }
+
+        .glossary-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            border-bottom: 1px solid #1E3347;
+            padding-bottom: 8px;
+        }
+
+        .glossary-title {
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--arm-cyan);
+        }
+
+        .glossary-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11.5px;
+            margin-top: 6px;
+        }
+
+        .glossary-table th {
+            background: #0E1B29;
+            color: var(--arm-accent);
+            text-align: left;
+            padding: 8px 12px;
+            font-weight: 700;
+            border-bottom: 2px solid #1E3347;
+            font-size: 10.5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .glossary-table td {
+            padding: 7px 12px;
+            border-bottom: 1px solid #162434;
+            color: #CBD5E1;
+            line-height: 1.4;
+        }
+
+        .glossary-table tr:hover {
+            background: rgba(0, 229, 255, 0.04);
+        }
+
+        .glossary-cat {
+            font-size: 9.5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 2px 6px;
+            border-radius: 3px;
+            white-space: nowrap;
+        }
+
+        .cat-sim { background: rgba(0, 229, 255, 0.15); color: #00E5FF; }
+        .cat-hw  { background: rgba(0, 230, 118, 0.15); color: #00E676; }
+        .cat-sw  { background: rgba(255, 183, 77, 0.15); color: #FFB74D; }
+        .cat-bus { background: rgba(206, 147, 216, 0.15); color: #CE93D8; }
+
         .notes-drawer {
             position: fixed;
             bottom: 58px;
@@ -1004,6 +1171,7 @@
             <button onclick="toggleAudioDemo()" style="background: rgba(0, 230, 118, 0.15); border-color: #00E676; color: #00E676; font-weight: 700;">&#127908; Live Mic Test (M)</button>
             <button onclick="toggleDiagram()">Architecture Diagram (D)</button>
             <button onclick="toggleTerminal()">Live Demo Console (T)</button>
+            <button onclick="toggleGlossary()">📖 Glossary (G)</button>
             <button onclick="toggleNotes()">Speaker Notes (N)</button>
         </div>
     </header>
@@ -1036,6 +1204,58 @@
                 <div class="meta-item">
                     <h4>Software &amp; Toolchain</h4>
                     <p>Bare-Metal C &amp; GNU Arm GCC</p>
+                </div>
+            </div>
+
+            <!-- Acronyms & Terminology Reference Strip -->
+            <div class="acronym-strip">
+                <div class="acronym-strip-header">
+                    <span>📖 Key Lab Acronyms &amp; Architecture Terminology</span>
+                    <button onclick="toggleGlossary()" class="acronym-expand-btn">View Complete Acronym Table (G)</button>
+                </div>
+                <div class="acronym-table-grid">
+                    <div class="acronym-card">
+                        <span class="acronym-abbr">FVP</span>
+                        <div class="acronym-details">
+                            <span class="acronym-name">Fixed Virtual Platform</span>
+                            <span class="acronym-desc">Arm's complete cycle-approximate SoC software model (FVP_Corstone_SSE-300).</span>
+                        </div>
+                    </div>
+                    <div class="acronym-card">
+                        <span class="acronym-abbr">AVH</span>
+                        <div class="acronym-details">
+                            <span class="acronym-name">Arm Virtual Hardware</span>
+                            <span class="acronym-desc">Arm's ecosystem of virtual silicon models for cloud and local embedded AI development.</span>
+                        </div>
+                    </div>
+                    <div class="acronym-card">
+                        <span class="acronym-abbr">NPU</span>
+                        <div class="acronym-details">
+                            <span class="acronym-name">Neural Processing Unit</span>
+                            <span class="acronym-desc">Dedicated matrix convolution engine (Ethos-U55 @ 128 MACs/cycle co-processor).</span>
+                        </div>
+                    </div>
+                    <div class="acronym-card">
+                        <span class="acronym-abbr">MVE</span>
+                        <div class="acronym-details">
+                            <span class="acronym-name">M-Profile Vector Extension</span>
+                            <span class="acronym-desc">Arm Helium technology: 128-bit vector DSP engine inside the Cortex-M55 CPU.</span>
+                        </div>
+                    </div>
+                    <div class="acronym-card">
+                        <span class="acronym-abbr">AXI</span>
+                        <div class="acronym-details">
+                            <span class="acronym-name">Advanced eXtensible Interface</span>
+                            <span class="acronym-desc">64-bit multi-layer high-speed crossbar bus matrix (AXI5) for dual DMA channels.</span>
+                        </div>
+                    </div>
+                    <div class="acronym-card">
+                        <span class="acronym-abbr">TFLM</span>
+                        <div class="acronym-details">
+                            <span class="acronym-name">TensorFlow Lite for Microcontrollers</span>
+                            <span class="acronym-desc">Lightweight AI runtime executing quantized INT8 graphs within SRAM.</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1952,6 +2172,127 @@ Info: /OSCI/SystemC: Simulation stopped by user.
         </div>
     </div>
 
+    <!-- Complete Glossary & Acronym Reference Modal -->
+    <div class="glossary-modal" id="glossaryModal">
+        <div class="glossary-header">
+            <div>
+                <span class="glossary-title">📖 Arm Corstone-300 &amp; Edge AI Technical Glossary</span>
+                <span style="font-size: 11px; color: var(--text-muted); margin-left: 10px;">Quick reference for workshop participants</span>
+            </div>
+            <button onclick="toggleGlossary()" style="padding: 3px 12px; font-size: 11px; cursor: pointer; font-weight: 700;">Close (ESC)</button>
+        </div>
+        <div style="overflow-y: auto; max-height: calc(85vh - 70px);">
+            <table class="glossary-table">
+                <thead>
+                    <tr>
+                        <th style="width: 14%;">Acronym</th>
+                        <th style="width: 28%;">Full Expansion</th>
+                        <th style="width: 12%;">Category</th>
+                        <th style="width: 46%;">Context &amp; Meaning in this Lab</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong style="color: #00E676; font-family: monospace;">FVP</strong></td>
+                        <td><strong>Fixed Virtual Platform</strong></td>
+                        <td><span class="glossary-cat cat-sim">Simulation</span></td>
+                        <td>Arm's pre-configured, cycle-approximate system simulator (e.g. <code>FVP_Corstone_SSE-300_Ethos-U55</code>). Runs bare-metal firmware locally on Linux/WSL without physical development boards.</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color: #00E676; font-family: monospace;">AVH</strong></td>
+                        <td><strong>Arm Virtual Hardware</strong></td>
+                        <td><span class="glossary-cat cat-sim">Simulation</span></td>
+                        <td>Arm's overarching ecosystem and product family providing cloud and local virtual silicon models (Cortex-M, Cortex-A, Ethos-U) for automated CI/CD and embedded AI testing.</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color: #00E676; font-family: monospace;">QEMU</strong></td>
+                        <td><strong>Quick EMUlator</strong></td>
+                        <td><span class="glossary-cat cat-sim">Simulation</span></td>
+                        <td>Open-source machine emulator used for high-speed instruction-level verification of the Cortex-M55 CPU (<code>-M mps3-an547 -cpu cortex-m55</code>) and semihosting tests.</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color: #00E676; font-family: monospace;">NPU</strong></td>
+                        <td><strong>Neural Processing Unit</strong></td>
+                        <td><span class="glossary-cat cat-hw">Hardware IP</span></td>
+                        <td>Dedicated hardware matrix math coprocessor (here: <strong>Arm Ethos-U55</strong> with 128 MACs/cycle) designed specifically to accelerate convolutional neural networks.</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color: #00E676; font-family: monospace;">MVE</strong></td>
+                        <td><strong>M-Profile Vector Extension</strong></td>
+                        <td><span class="glossary-cat cat-hw">Hardware IP</span></td>
+                        <td>Commercial name: <strong>Arm Helium</strong>. 128-bit vector execution pipeline integrated inside Cortex-M55 for DSP, FFT, and audio feature preprocessing.</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color: #00E676; font-family: monospace;">Corstone-300</strong></td>
+                        <td><strong>Arm Corstone-300 / SSE-300</strong></td>
+                        <td><span class="glossary-cat cat-hw">Subsystem</span></td>
+                        <td>Arm's reference SoC architecture integrating the Cortex-M55 CPU, Ethos-U55 NPU, AXI5 crossbar, power control, TrustZone security, and memory controllers into a turnkey SoC design.</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color: #00E676; font-family: monospace;">AXI</strong></td>
+                        <td><strong>Advanced eXtensible Interface</strong></td>
+                        <td><span class="glossary-cat cat-bus">Interconnect</span></td>
+                        <td>64-bit multi-layer high-bandwidth bus protocol (AXI5). Ethos-U55 has two independent AXI master ports: <strong>Port M0</strong> (Flash weights read) and <strong>Port M1</strong> (SRAM activations read/write).</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color: #00E676; font-family: monospace;">APB</strong></td>
+                        <td><strong>Advanced Peripheral Bus</strong></td>
+                        <td><span class="glossary-cat cat-bus">Interconnect</span></td>
+                        <td>Low-power peripheral bus connecting control registers and communication interfaces like the CMSDK UART console at <code>0x49303000</code>.</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color: #00E676; font-family: monospace;">TFLM</strong></td>
+                        <td><strong>TensorFlow Lite for Microcontrollers</strong></td>
+                        <td><span class="glossary-cat cat-sw">AI Software</span></td>
+                        <td>Lightweight runtime engine executing quantized neural network models within bare-metal embedded SRAM constraints without OS or dynamic heap allocation.</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color: #00E676; font-family: monospace;">CMSIS-NN</strong></td>
+                        <td><strong>Cortex Microcontroller Software Interface Standard &bull; Neural Network</strong></td>
+                        <td><span class="glossary-cat cat-sw">Software</span></td>
+                        <td>Arm's collection of hand-optimized vector math kernels that maximize NN performance and memory efficiency on Cortex-M cores and Helium MVE.</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color: #00E676; font-family: monospace;">TF-M</strong></td>
+                        <td><strong>Trusted Firmware-M</strong></td>
+                        <td><span class="glossary-cat cat-sw">Security</span></td>
+                        <td>The reference open-source implementation of PSA Certified Level 2 security for Armv8-M TrustZone isolation between Secure and Non-Secure application domains.</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color: #00E676; font-family: monospace;">MPC</strong></td>
+                        <td><strong>Memory Protection Controller</strong></td>
+                        <td><span class="glossary-cat cat-hw">Security</span></td>
+                        <td>Hardware bus controller that intercepts illegal AXI/AHB memory accesses outside authorized domains and throws a <code>SecureFault</code>.</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color: #00E676; font-family: monospace;">MFCC</strong></td>
+                        <td><strong>Mel-Frequency Cepstral Coefficients</strong></td>
+                        <td><span class="glossary-cat cat-sw">DSP / Audio</span></td>
+                        <td>Audio feature representation: converts raw 16 kHz time-domain microphone speech into 49 time-frames &times; 10 frequency bins (490 INT8 values) passed to the AI model.</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color: #00E676; font-family: monospace;">INT8</strong></td>
+                        <td><strong>8-bit Integer Quantization</strong></td>
+                        <td><span class="glossary-cat cat-sw">AI Software</span></td>
+                        <td>Quantization format compressing 32-bit floating-point weights into signed 8-bit integers ([-128, 127]) for 4x memory savings and accelerated integer MAC throughput.</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color: #00E676; font-family: monospace;">Vela</strong></td>
+                        <td><strong>Arm Vela Compiler</strong></td>
+                        <td><span class="glossary-cat cat-sw">Compiler</span></td>
+                        <td>Open-source neural network compiler from Arm that compiles TFLite models into optimized hardware command streams specifically tailored for the Ethos-U microNPU.</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color: #00E676; font-family: monospace;">Semihosting</strong></td>
+                        <td><strong>Arm Semihosting (BKPT 0xAB)</strong></td>
+                        <td><span class="glossary-cat cat-sim">Debug / I/O</span></td>
+                        <td>Mechanism allowing bare-metal code running on a target/virtual core to request I/O services (file read, console print, exit code) directly from the host workstation.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
     <!-- Architecture Diagram Lightbox Modal -->
     <div class="diagram-modal" id="diagramModal">
         <div class="diagram-header">
@@ -2237,6 +2578,10 @@ Info: /OSCI/SystemC: Simulation stopped by user.
             document.getElementById('diagramModal').classList.toggle('open');
         }
 
+        function toggleGlossary() {
+            document.getElementById('glossaryModal').classList.toggle('open');
+        }
+
         function copyCmd(text, btn) {
             navigator.clipboard.writeText(text).then(() => {
                 const orig = btn.innerText;
@@ -2315,7 +2660,7 @@ Info: /OSCI/SystemC: Simulation stopped by user.
                 }
                 if (btnFvp) {
                     btnFvp.style.background = "rgba(255,255,255,0.08)";
-                    btnFvp.style.color = "#CBD5E1";
+                    btnQemu.style.color = "#CBD5E1";
                 }
                 if (title) title.innerText = "QEMU Cortex-M55 (mps3-an547) Live Simulation Trace";
                 if (termBody) termBody.innerText = lastLiveQemuLog || "No QEMU simulation log available yet.";
@@ -2337,6 +2682,7 @@ Info: /OSCI/SystemC: Simulation stopped by user.
             document.getElementById('termModal').classList.remove('open');
             document.getElementById('notesDrawer').classList.remove('open');
             document.getElementById('audioModal').classList.remove('open');
+            document.getElementById('glossaryModal').classList.remove('open');
         }
 
         document.addEventListener('keydown', (e) => {
@@ -2345,6 +2691,7 @@ Info: /OSCI/SystemC: Simulation stopped by user.
             if (e.key.toLowerCase() === 'n') toggleNotes();
             if (e.key.toLowerCase() === 't') toggleTerminal();
             if (e.key.toLowerCase() === 'd') toggleDiagram();
+            if (e.key.toLowerCase() === 'g') toggleGlossary();
             if (e.key.toLowerCase() === 'm') toggleAudioDemo();
             if (e.key === 'Escape') closeAllModals();
         });
