@@ -84,10 +84,10 @@
             left: 0;
             width: 100%;
             height: 100%;
-            padding: 40px 60px;
+            padding: 24px 50px 60px 50px;
             display: none;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             opacity: 0;
             transition: opacity 0.25s ease, transform 0.25s ease;
             transform: translateY(8px);
@@ -98,6 +98,10 @@
             display: flex;
             opacity: 1;
             transform: translateY(0);
+        }
+
+        #slide-1 {
+            justify-content: center;
         }
 
         .category-tag {
@@ -2397,29 +2401,29 @@
                         <span style="font-size: 11px; color: var(--arm-accent); font-weight: 700; background: rgba(0,229,255,0.1); padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(0,229,255,0.3);">Ultra-Compact</span>
                     </div>
                     <!-- Row 1: SRAM Tensor Arena -->
-                    <div class="chart-row" style="margin-bottom: 5px;">
+                    <div class="chart-row">
                         <div class="chart-label-row">
-                            <span style="color: #B2DFDB; font-size: 10.5px;"><strong>RAM (SRAM Activations):</strong> 21.7 KiB used / 64 KiB boundary</span>
-                            <span style="color: var(--success-green); font-weight: 700; font-size: 10.5px;">66.1% Headroom</span>
+                            <span style="color: #B2DFDB; font-size: 11px;"><strong>RAM (SRAM Activations):</strong> 21.7 KiB used / 64 KiB boundary</span>
+                            <span style="color: var(--success-green); font-weight: 700; font-size: 11px;">66.1% Headroom</span>
                         </div>
-                        <div class="bar-container" style="height: 15px;">
-                            <div class="bar-fill bar-sram" style="width: 33.9%; font-size: 9px; line-height: 15px;">21.7 KiB (33.9%)</div>
+                        <div class="bar-container" style="height: 18px;">
+                            <div class="bar-fill bar-sram" style="width: 33.9%; font-size: 10px; line-height: 18px; font-weight: 800;">21.7 KiB (33.9%)</div>
                         </div>
                     </div>
                     <!-- Row 2: Flash Code Footprint -->
-                    <div class="chart-row" style="margin-bottom: 5px;">
+                    <div class="chart-row">
                         <div class="chart-label-row">
-                            <span style="color: #FFCC80; font-size: 10.5px;"><strong>Flash (ROM / Code):</strong> 43.3 KiB total (35.9K Model + 7.4K C Drivers)</span>
-                            <span style="color: #69F0AE; font-weight: 700; font-size: 10.5px;">Fits in &lt;64 KiB Flash MCU</span>
+                            <span style="color: #FFCC80; font-size: 11px;"><strong>Flash (ROM / Code):</strong> 43.3 KiB total (35.9K Model + 7.4K C Drivers)</span>
+                            <span style="color: #69F0AE; font-weight: 700; font-size: 11px;">Fits in &lt;64 KiB Flash MCU</span>
                         </div>
-                        <div class="bar-container" style="height: 15px; background: rgba(255,183,77,0.15);">
-                            <div class="bar-fill" style="width: 67.6%; background: linear-gradient(90deg, #E65100, #FB8C00); font-size: 9px; line-height: 15px; color: #FFF;">43.3 KiB / 64 KiB</div>
+                        <div class="bar-container" style="height: 18px; background: rgba(255,183,77,0.15);">
+                            <div class="bar-fill" style="width: 67.6%; background: linear-gradient(90deg, #E65100, #FB8C00); font-size: 10px; line-height: 18px; font-weight: 800; color: #FFF;">43.3 KiB / 64 KiB</div>
                         </div>
                     </div>
                     <!-- Footnote breakdown -->
-                    <div style="font-size: 9.5px; color: #94A3B8; display: flex; justify-content: space-between; border-top: 1px solid #162434; padding-top: 4px; margin-top: 2px;">
-                        <span>CPU DTCM: <strong>16.4 KiB</strong> (Stack &amp; Globals)</span>
-                        <span>Total Active RAM: <strong>~38.1 KiB</strong></span>
+                    <div style="font-size: 10px; color: #94A3B8; display: flex; justify-content: space-between; border-top: 1px solid #162434; padding-top: 6px; margin-top: 2px;">
+                        <span>CPU DTCM: <strong style="color: #E2E8F0;">16.4 KiB</strong> (Stack &amp; Globals)</span>
+                        <span>Total Active RAM: <strong style="color: #00E5FF;">~38.1 KiB</strong></span>
                         <span style="color: var(--success-green); font-weight: 700;">&#10004; Linker Guard Asserted</span>
                     </div>
                 </div>
