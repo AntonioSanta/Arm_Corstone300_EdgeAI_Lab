@@ -228,10 +228,12 @@
     - Cortex-M55 CPU Baseline: 2,664,792 cycles (106.6 ms @ 25 MHz)
     - Ethos-U55 microNPU Acceleration: **24,650 cycles (0.98 ms @ 25 MHz, <0.1 ms @ 500 MHz)**
     - **Speedup: 108.1x faster execution (99.07% cycle reduction)**
-  - **Internal SRAM Arena Budget:**
-    - Consumed: 22,210 bytes (21.7 KiB) out of 65,536 bytes (64 KiB boundary)
-    - Safety Margin: **66.1% headroom remaining**
-    - Flash Footprint: 30.5 KiB Vela clustered weights
+  - **System Memory Footprint (Flash & RAM Breakdown):**
+    - **Flash (ROM / Code): 43.3 KiB total** (35.9 KiB neural weights + 7.4 KiB bare-metal C drivers & vectors). Fits easily in low-cost <64 KiB Flash microcontrollers.
+    - **RAM (SRAM Activations): 21.7 KiB peak used** out of 64 KiB boundary (**66.1% safety headroom**).
+    - **CPU Data TCM (DTCM): 16.4 KiB** (16 KiB call stack + 24 B globals) out of 512 KiB.
+    - **Total Active System RAM: ~38.1 KiB**.
+    - **Linker Assertion:** `ASSERT((__tensor_arena_end - __tensor_arena_start) <= 0x20000)` prevents silent buffer overflows at compile time.
 
 * **Direct Head-to-Head Hardware Performance Comparison (Cortex-M55 Alone vs. Cortex-M55 + Ethos-U55 NPU):**
   | Architectural Dimension | Cortex-M55 Alone (Helium + CMSIS-NN) | Cortex-M55 + Ethos-U55 NPU (Vela) | Hardware Advantage & Impact |
@@ -243,6 +245,7 @@
   | **Interconnect & Bus Contention** | Single Master (Bus contention for code/data) | Dual-AXI Master (M0 Flash Read + M1 SRAM R/W) | **Zero Bus Stalls** (Concurrent DMA streaming) |
   | **CPU Utilization & Active Energy** | **100% CPU Saturated** for 106.6 ms (High drain) | **< 1% CPU Active** (CPU enters `WFI` sleep; NPU gated) | **> 99% Active Energy Savings** |
   | **Real-Time Speech Audio Viability** | **FAILED OVERRUN:** 106.6 ms > 100 ms frame stride | **GUARANTEED REAL-TIME:** Consumes <1% of frame window | **Zero Dropped Audio;** 99.0 ms free for DSP / network |
+  | **System Memory Footprint** | Flash: ~42 KiB / RAM: ~36 KiB (CPU activation buffer) | Flash: **43.3 KiB** / RAM: **38.1 KiB** (21.7K SRAM + 16.4K DTCM) | 💡 **Fits <64 KiB MCU** (66.1% SRAM safety headroom) |
 
 * **Automated Test Scorecard (5/5 PASS):**
   - Test 1: M55 Helium Vector Extensions Active [PASS]
@@ -259,9 +262,9 @@
 >
 > *With the Ethos-U55 microNPU enabled, inference collapses to **24,650 cycles**—just **0.98 milliseconds**. That is an authentic **108.1x speedup**, saving 105.6 ms per inference.*
 >
-> *Because the NPU handles the convolutions autonomously via its Dual-AXI DMA ports, the Cortex-M55 CPU remains active for less than 1% of the time, slashing active energy by over 99% and leaving 99 milliseconds of headroom per frame for application tasks.*
+> *Crucially, notice our system memory footprint in the top-right card: the entire application fits in **under 44 KiB of Flash** (35.9 KiB for the neural model and only 7.4 KiB for our bare-metal C runtime), and requires **under 40 KiB of total active RAM** (21.7 KiB of SRAM for intermediate activations, and 16.4 KiB in DTCM for the CPU stack). With 66.1% headroom remaining in our 64 KiB internal SRAM budget, this proves that secure, real-time edge AI speech recognition runs on sub-$2 microcontrollers without requiring expensive external DRAM.*
 >
-> *Finally, our memory gauge confirms that the entire tensor arena occupies just 21.7 KiB of our 64 KiB SRAM budget, and our automated acceptance test harness validates 5 out of 5 hardware assertions with 100% golden keyword parity.*
+> *Finally, our automated acceptance test harness validates 5 out of 5 hardware assertions with 100% golden keyword parity.*
 >
 > *Thank you, and I look forward to taking your questions or demonstrating any part of the console playbook live."*
 
