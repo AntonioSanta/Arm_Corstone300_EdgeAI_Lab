@@ -124,14 +124,50 @@
   4. `python3 tests/test_harness.py` — [IN: `build/firmware.elf` / OUT: 5/5 Hardware UART Assertions]. Automated CI test runner: launches the Arm FVP simulator with `build/firmware.elf`, executes inference, and validates 5/5 hardware assertions in ~3.6s.
   5. `python3 scripts/live_bridge_server.py` — [IN: Browser Mic (16 kHz PCM) / OUT: Live Dual FVP & QEMU Telemetry]. Starts the live audio bridge on port 8080: dynamically feeds browser mic audio to `build/firmware.elf` running in FVP and QEMU via semihosting audio ingestion.
 
+* **Live Console Demonstration Playbook (Evaluator & Demo Cheat Sheet):**
+  - **Environment Setup:**
+    ```bash
+    wsl
+    cd /mnt/e/Arm_Corstone300_EdgeAI_Lab
+    ```
+  - **Option A: The "All-in-One" Acceptance Demo (Recommended — 3.5s):**
+    ```bash
+    python3 tests/test_harness.py
+    ```
+    *Executes full CI: Vela compilation, GCC link, boots official Arm Corstone-300 FVP, prints UART telemetry, and validates 5/5 assertions.*
+  - **Option B: Step-by-Step Developer Workflow & Direct Simulator Launch:**
+    ```bash
+    # 1. Pre-flight check & firmware build
+    python3 scripts/sanity_check.py
+    make clean && make
+
+    # 2. Run directly on Official Arm Corstone-300 FVP
+    /home/anton/.local/bin/FVP_Corstone_SSE-300_Ethos-U55 \
+      -a build/firmware.elf \
+      -C mps3_board.visualisation.disable-visualisation=1 \
+      -C cpu0.semihosting-enable=1 \
+      -C mps3_board.uart0.out_file=- \
+      -C mps3_board.uart0.unbuffered_output=1 \
+      --timelimit 10
+
+    # 3. (Alternative) Run on QEMU Corstone-300
+    qemu-system-arm -M mps3-an547 -cpu cortex-m55 -display none -serial stdio -semihosting -kernel build/firmware.elf
+    ```
+  - **Option C: Live Browser Voice Testbench Bridge:**
+    ```bash
+    python3 scripts/live_bridge_server.py
+    ```
+    *Starts REST bridge on port 8080; press key **A** in browser to record live voice ("Yes"/"No") and stream to virtual silicon.*
+
 ### Speaker Talking Points (Your Script):
 > *"Slide 4 is the operative blueprint for any workshop participant. Across the top, you can see our visual Operations Pipeline Flowchart mapping the exact sequence: Sanity Check, Vela Compiler, GCC Linker, FVP Test Harness, and Live Voice Testbench.*
 >
 > *Each command card shows explicit Input and Output artifacts, accompanied by a 1-click Copy button so students can copy the commands directly to their terminal.*
 >
-> *Step 1 verifies all toolchains. Step 2 compiles the neural model with Vela, producing the NPU command stream. In Step 3, `make clean && make` compiles our bare-metal C firmware into `build/firmware.elf`—the exact binary image flashed into the virtual SoC.*
->
-> *In Step 4, `tests/test_harness.py` launches the Arm FVP simulator, boots `firmware.elf`, and asserts all 5 hardware tests in 3.6 seconds. Finally, Step 5 starts the live speech bridge, allowing participants to test their own voices against the virtual hardware."*
+> *Below the command list, we have embedded the complete **Live Console Demonstration Playbook**:*
+> * *If an evaluator asks for a fast, comprehensive demonstration, **Option A** (`python3 tests/test_harness.py`) runs the complete end-to-end pipeline and validates all 5 hardware assertions in 3.5 seconds.*
+> * *If they ask to see manual silicon bring-up, **Option B** walks through `make clean && make` and directly boots the official Arm Corstone-300 FVP binary with semihosting and UART streaming.*
+> * *If they want to speak into the microphone, **Option C** launches the live bridge server on port 8080, allowing immediate live speech testing."*
 
 ---
 
