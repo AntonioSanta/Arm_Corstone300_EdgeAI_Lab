@@ -1973,6 +1973,11 @@
                     <span>🌐 ONLINE SOURCES &amp; DOWNLOADS:</span>
                 </div>
                 <div class="sources-links-row">
+                    <a href="https://github.com/AntonioSanta/Arm_Corstone300_EdgeAI_Lab" target="_blank" class="source-link-btn" style="border-color: #00E676; background: rgba(0, 230, 118, 0.12);" title="Clone the complete lab: drivers, scripts, tests, model &amp; interactive slides">
+                        <span class="source-icon">⭐</span>
+                        <span class="source-name" style="color: #69F0AE; font-weight: 800;">Lab Git Repo</span>
+                        <span class="source-badge" style="background: rgba(0, 230, 118, 0.25); color: #69F0AE;">All Code &amp; Slides</span>
+                    </a>
                     <a href="https://github.com/ARM-software/ML-zoo" target="_blank" class="source-link-btn" title="Download Pre-Trained DS-CNN Small INT8 Model from Arm ML-Zoo">
                         <span class="source-icon">🧠</span>
                         <span class="source-name">Arm ML-Zoo Model</span>
@@ -1998,6 +2003,19 @@
                         <span class="source-name">QEMU System ARM</span>
                         <span class="source-badge">Open Source</span>
                     </a>
+                </div>
+            </div>
+
+            <!-- Attendee Fast Clone & Laptop Quick-Start Bar -->
+            <div style="margin-top: 6px; margin-bottom: 6px; background: rgba(0, 230, 118, 0.06); border: 1px solid rgba(0, 230, 118, 0.3); border-radius: 6px; padding: 6px 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                    <span style="font-size: 13px;">💻</span>
+                    <span style="font-size: 11px; font-weight: 800; color: #FFFFFF;">Attendee Clone &amp; Run on Your Laptop:</span>
+                    <code style="color: #69F0AE; background: #06101A; padding: 3px 8px; border-radius: 4px; font-family: monospace; font-size: 10px;">git clone https://github.com/AntonioSanta/Arm_Corstone300_EdgeAI_Lab.git &amp;&amp; cd Arm_Corstone300_EdgeAI_Lab</code>
+                    <button class="cmd-copy-btn" onclick="copyCmd('git clone https://github.com/AntonioSanta/Arm_Corstone300_EdgeAI_Lab.git && cd Arm_Corstone300_EdgeAI_Lab', this)" style="padding: 2px 8px; font-size: 10px;">📋 Copy</button>
+                </div>
+                <div style="font-size: 10px; color: #94A3B8;">
+                    ⚡ <strong style="color: #00E5FF;">Zero-Install Test:</strong> Open <code style="color: #CBD5E1;">slides/presentation.html</code> in browser &amp; press key <strong style="color: #00E676;">A</strong>!
                 </div>
             </div>
 
@@ -2189,9 +2207,9 @@
                     </div>
                     <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
                         <div style="font-size: 10.5px; color: #94A3B8; display: flex; align-items: center; gap: 4px;">
-                            <span>Step 0 (Environment):</span>
-                            <code style="color: #69F0AE; background: #06101A; padding: 2px 6px; border-radius: 3px; font-family: monospace;">wsl &amp;&amp; cd /mnt/e/Arm_Corstone300_EdgeAI_Lab</code>
-                            <button class="cmd-copy-btn" onclick="copyCmd('wsl\ncd /mnt/e/Arm_Corstone300_EdgeAI_Lab', this)" style="padding: 2px 6px; font-size: 9px;">📋</button>
+                            <span>Step 0 (Clone Repo):</span>
+                            <code style="color: #69F0AE; background: #06101A; padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 9px;">git clone https://github.com/AntonioSanta/Arm_Corstone300_EdgeAI_Lab.git &amp;&amp; cd Arm_Corstone300_EdgeAI_Lab</code>
+                            <button class="cmd-copy-btn" onclick="copyCmd('git clone https://github.com/AntonioSanta/Arm_Corstone300_EdgeAI_Lab.git && cd Arm_Corstone300_EdgeAI_Lab', this)" style="padding: 2px 6px; font-size: 9px;">📋</button>
                         </div>
                         <div style="font-size: 10.5px; color: #94A3B8; display: flex; align-items: center; gap: 4px;">
                             <span>Host Setup (One-time):</span>
@@ -2199,6 +2217,16 @@
                             <button class="cmd-copy-btn" onclick="copyCmd('sudo apt update && sudo apt install -y gcc-arm-none-eabi qemu-system-arm python3-pip make && pip install ethos-u-vela==5.2.0', this)" style="padding: 2px 6px; font-size: 9px;">📋</button>
                         </div>
                     </div>
+                </div>
+
+                <!-- Attendee Quick Execution Guide Strip -->
+                <div style="background: rgba(0, 229, 255, 0.05); border-bottom: 1px solid rgba(0, 229, 255, 0.2); padding: 5px 12px; display: flex; justify-content: space-between; align-items: center; font-size: 10px; color: #CBD5E1;">
+                    <div>
+                        <strong style="color: #00E5FF;">🎯 2 Ways Attendees Can Run Right Now:</strong> 
+                        <span style="color: #69F0AE; margin-left: 6px;">1. Instant In-Browser:</span> Open <code>slides/presentation.html</code>, press key <strong>A</strong>, and speak! &bull; 
+                        <span style="color: #FFB74D; margin-left: 6px;">2. Virtual Silicon:</span> Clone repo, run Option A (<code>test_harness.py</code>) or Option C (<code>live_bridge_server.py</code>).
+                    </div>
+                    <span style="font-size: 9.5px; color: #94A3B8;">All scripts, C drivers, TFLite models &amp; slides included in repo</span>
                 </div>
 
                 <div class="playbook-modes-grid">
@@ -2239,8 +2267,8 @@
                         <div class="playbook-cmd-entry">
                             <span class="playbook-cmd-label">2. Run Directly on Official Arm Corstone-300 FVP:</span>
                             <div class="playbook-cmd-code">
-                                <code style="font-size: 8.5px;">/home/anton/.local/bin/FVP_Corstone_SSE-300_Ethos-U55 -a build/firmware.elf -C mps3_board.visualisation.disable-visualisation=1 -C cpu0.semihosting-enable=1 -C mps3_board.uart0.out_file=- -C mps3_board.uart0.unbuffered_output=1 --timelimit 10</code>
-                                <button class="cmd-copy-btn" onclick="copyCmd('/home/anton/.local/bin/FVP_Corstone_SSE-300_Ethos-U55 -a build/firmware.elf -C mps3_board.visualisation.disable-visualisation=1 -C cpu0.semihosting-enable=1 -C mps3_board.uart0.out_file=- -C mps3_board.uart0.unbuffered_output=1 --timelimit 10', this)">📋</button>
+                                <code style="font-size: 8.5px;">FVP_Corstone_SSE-300_Ethos-U55 -a build/firmware.elf -C mps3_board.visualisation.disable-visualisation=1 -C cpu0.semihosting-enable=1 -C mps3_board.uart0.out_file=- -C mps3_board.uart0.unbuffered_output=1 --timelimit 10</code>
+                                <button class="cmd-copy-btn" onclick="copyCmd('FVP_Corstone_SSE-300_Ethos-U55 -a build/firmware.elf -C mps3_board.visualisation.disable-visualisation=1 -C cpu0.semihosting-enable=1 -C mps3_board.uart0.out_file=- -C mps3_board.uart0.unbuffered_output=1 --timelimit 10', this)">📋</button>
                             </div>
                         </div>
 
@@ -3145,8 +3173,8 @@ Info: /OSCI/SystemC: Simulation stopped by user.
             1: "<strong>Lab Mission & Context:</strong> Introduce the Edge AI Speech Recognition hands-on lab on Arm Corstone-300. Emphasize that rather than an abstract deployment pitch, this is an authentic, reproducible lab test using DS-CNN Small INT8 keyword spotting on local virtual hardware (Arm Fast Models FVP & QEMU). Zero cloud subscription or physical board friction.",
             2: "<strong>Subsystem & Bus Topology:</strong> Explain the hardware co-design: Cortex-M55 (Helium MVE) handles audio DSP/MFCC feature extraction, while Ethos-U55 accelerates matrix convolutions (128 MACs/cycle). Detail the Dual-AXI master architecture (Port M0 reads Flash weights, Port M1 reads/writes SRAM activations) over the multi-layer AXI5 crossbar with TrustZone-M memory protection.",
             3: "<strong>End-to-End Experiment Flow:</strong> Walk through the logic diagram from browser microphone to virtual silicon. The browser captures 16 kHz audio and extracts 490 INT8 MFCC features. The Python bridge evaluates the TFLite model, launches FVP and QEMU, and the Cortex-M55 firmware dynamically ingests the tensor via ARM Semihosting (bkpt 0xab) into internal SRAM at 0x21010000.",
-            4: "<strong>Operative Lab Guide (Part 1) — Setup & Build Pipeline:</strong> Explain that this lab is designed to be completely reproducible for anyone starting from scratch. Point out the Online Sources & Software Downloads Hub at the top: official Arm ML-Zoo for the model, Arm Developer portal for the Corstone-300 FVP and GNU toolchain, PyPI for the Vela compiler, and QEMU. Walk through the directory layout, explain the pipeline flow, and review the 5 sequential build steps culminating in 'make clean && make' producing the Cortex-M55 executable 'build/firmware.elf'.",
-            5: "<strong>Operative Lab Guide (Part 2) — Console Playbook & Facilitator Matrix:</strong> Walk the panel through the concrete console execution playbook. Highlight Option A ('python3 tests/test_harness.py') as the recommended 3.5-second acceptance test validating all 5 hardware assertions. Explain Option B for direct silicon bring-up with 'make clean && make' and booting the official FVP binary with semihosting and UART redirection, plus the QEMU command. Explain Option C for the live interactive speech bridge on port 8080. Finally, cover the facilitator's local setup strategy (zero Docker overhead, semihosting dynamic ingestion) and technical mitigations (headless FVP flags, Vela fallback, linker SRAM ASSERT).",
+            4: "<strong>Operative Lab Guide (Part 1) — Setup & Build Pipeline:</strong> Explain that this lab is designed to be completely reproducible for anyone starting from scratch. Point out the primary Lab Git Repository link and the one-line clone command at the top: attendees can clone everything directly (<code>git clone https://github.com/AntonioSanta/Arm_Corstone300_EdgeAI_Lab.git</code>). This single repository provides all the custom Python bridge scripts, bare-metal C drivers, linker scripts, pre-quantized DS-CNN model, and even the interactive HTML presentation deck. Mention that attendees can run a zero-install speech test immediately by opening the slides in their browser, or follow the 5 sequential build steps to compile firmware on WSL or Linux.",
+            5: "<strong>Operative Lab Guide (Part 2) — Console Playbook & Facilitator Matrix:</strong> Walk the panel and audience through how to run this on their laptops. Highlight the two attendee execution paths: Mode 1 is instant zero-install—anyone with a laptop can open the presentation HTML in Chrome or Edge, hit key 'A', and test live keyword spotting with their microphone right now. Mode 2 is full virtual silicon—they clone the repo, run the one-time host install, and execute Option A ('python3 tests/test_harness.py') for a 3.5-second verification of all 5 hardware assertions, or Option C to bridge their browser mic directly into the virtual Corstone-300 FVP and Ethos-U55 NPU.",
             6: "<strong>Benchmarking, Profiling & Acceptance Scorecard:</strong> Present the grounded hardware proof from the virtual silicon execution. Walk through the direct head-to-head comparison between Cortex-M55 alone vs Cortex-M55 + Ethos-U55 NPU: 24,650 cycles vs 2,664,792 cycles (108.1x speedup, 99.07% cycle reduction). At 25 MHz, inference drops from 106.6 ms to 0.98 ms (saving 105.6 ms), turning what would be a fatal real-time audio buffer overrun (>100 ms) into a sub-millisecond task with >99% active CPU duty cycle savings. Highlight that 21.7 KiB of the 64 KiB internal SRAM arena is used (66.1% headroom), keyword accuracy achieves 100% golden parity ('Yes', 'No', 'Silence'), and all 5/5 automated hardware assertions PASS."
         };
 

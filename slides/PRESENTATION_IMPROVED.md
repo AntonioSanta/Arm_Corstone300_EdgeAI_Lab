@@ -95,11 +95,17 @@
 * **Subtitle:** *Where to obtain models and tooling, repository layout, operations pipeline, and step-by-step firmware build.*
 * **Prerequisites Strip:** Target: Arm Corstone-300 (MPS3-AN547) | OS: Ubuntu 20.04+ / WSL2 | Toolchain: `arm-none-eabi-gcc 10.3+` | Python: 3.8+ | Compiler: Arm Vela 5.2.0 | Simulators: Arm FVP & QEMU.
 * **Official Online Sources & Software Downloads Hub:**
+  - **Lab Git Repository (Complete Source & Slides):** [`https://github.com/AntonioSanta/Arm_Corstone300_EdgeAI_Lab`](https://github.com/AntonioSanta/Arm_Corstone300_EdgeAI_Lab) (All bare-metal C drivers, Python bridge, test harness, pre-quantized model, and presentation slides)
   - **Pre-Trained Neural Network (Arm ML-Zoo):** [`https://github.com/ARM-software/ML-zoo`](https://github.com/ARM-software/ML-zoo) (DS-CNN Small INT8 model for keyword spotting)
   - **Arm Corstone-300 FVP (Virtual Hardware):** [`https://developer.arm.com/downloads/-/arm-ecosystem-fvps`](https://developer.arm.com/downloads/-/arm-ecosystem-fvps) (Official free cycle-approximate simulator: `FVP_Corstone_SSE-300_Ethos-U55`)
   - **Arm GNU Embedded Toolchain:** [`https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads`](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads) (`arm-none-eabi-gcc 10.3+` / `sudo apt install gcc-arm-none-eabi`)
   - **Arm Vela NPU Compiler:** [`https://pypi.org/project/ethos-u-vela/`](https://pypi.org/project/ethos-u-vela/) (`pip install ethos-u-vela==5.2.0`)
   - **QEMU Machine Emulator:** [`https://www.qemu.org/download/`](https://www.qemu.org/download/) (`sudo apt install qemu-system-arm`)
+* **Attendee Fast Clone Bar (Run on Your Laptop):**
+  ```bash
+  git clone https://github.com/AntonioSanta/Arm_Corstone300_EdgeAI_Lab.git && cd Arm_Corstone300_EdgeAI_Lab
+  ```
+  *💡 Zero-Install Test: Open `slides/presentation.html` in browser & press key **A**!*
 * **Operations Pipeline Flowchart (Visual Diagram):**
   - `[1. Pre-Flight Audit]` ➔ `[2. Vela Model Compiler]` ➔ `[3. GCC Firmware Link]` ➔ `[4. FVP Test Harness]` ➔ `[5. Live Voice Testbench]`
 * **Repository Source Tree:**
@@ -133,11 +139,13 @@
 ### Speaker Talking Points (Your Script):
 > *"Slide 4 provides the complete setup blueprint for anyone approaching this lab for the first time.*
 >
-> *Across the top, notice the Online Sources & Downloads Hub: we provide direct links to the official Arm ML-Zoo repository for the pre-quantized DS-CNN model, the Arm Developer portal for the Corstone-300 Fast Models FVP and GNU toolchain, PyPI for the Vela compiler, and QEMU. Nothing is proprietary or locked behind enterprise paywalls.*
+> *Notice our Online Sources & Downloads Hub at the top: the very first entry is the **Lab Git Repository** on GitHub (`https://github.com/AntonioSanta/Arm_Corstone300_EdgeAI_Lab.git`). With a single `git clone`, attendees receive the entire codebase—bare-metal C drivers, linker scripts, Python bridge utilities, pre-quantized DS-CNN model, and the interactive slide deck itself.*
 >
-> *We walk learners through the repository structure, tracing how our bare-metal C drivers, linker scripts, and Python utilities interact. The 5 step-by-step commands guide participants seamlessly from pre-flight sanity checks to compiling the model with Vela and building `build/firmware.elf` with GNU Make.*
+> *We also link directly to the upstream official sources: the Arm ML-Zoo repository, the Arm Developer portal for the Corstone-300 Fast Models FVP and GNU toolchain, PyPI for Vela, and QEMU. Nothing is proprietary or locked behind enterprise paywalls.*
 >
-> *Once the firmware binary is compiled, we move to Slide 5 to see how to execute and debug it on the console."*
+> *The 5 sequential build commands take learners step-by-step from pre-flight sanity checks to compiling the neural model with Vela and producing `build/firmware.elf` with GNU Make.*
+>
+> *Now let's proceed to Slide 5 to see how anyone in the audience can run the speech recognition test on their own laptop."*
 
 ---
 
@@ -148,8 +156,11 @@
 * **Title:** Console Demonstration Playbook &amp; Facilitator Troubleshooting Matrix
 * **Subtitle:** *Concrete console execution options for evaluators, reproducible local strategy, and common embedded mitigations.*
 * **Host Setup & Environment Strip:**
-  - **WSL / Shell Environment:** `wsl && cd /mnt/e/Arm_Corstone300_EdgeAI_Lab`
+  - **Attendee Git Clone & Enter:** `git clone https://github.com/AntonioSanta/Arm_Corstone300_EdgeAI_Lab.git && cd Arm_Corstone300_EdgeAI_Lab`
   - **One-Time Host Package Install:** `sudo apt update && sudo apt install -y gcc-arm-none-eabi qemu-system-arm python3-pip make && pip install ethos-u-vela==5.2.0`
+* **Attendee Laptop Playbook (2 Ways to Run):**
+  - **Mode 1: Instant In-Browser Speech Recognition (Zero Installs):** Open `slides/presentation.html` in Chrome or Edge, press key **A** (or click "Live Audio Testbench"), speak *"Yes"* or *"No"*, and watch real-time keyword spotting with client-side Web Audio DSP!
+  - **Mode 2: Full Virtual Silicon Testbench (WSL / Linux):** Clone the repo and execute Option A or Option C below.
 * **Live Console Demonstration Playbook (The 3 Evaluator Options):**
   - **Option A: The "All-in-One" Acceptance Demo (Recommended — 3.5s):**
     ```bash
@@ -162,7 +173,7 @@
     python3 scripts/sanity_check.py && make clean && make
 
     # 2. Run directly on Official Arm Corstone-300 FVP
-    /home/anton/.local/bin/FVP_Corstone_SSE-300_Ethos-U55 \
+    FVP_Corstone_SSE-300_Ethos-U55 \
       -a build/firmware.elf \
       -C mps3_board.visualisation.disable-visualisation=1 \
       -C cpu0.semihosting-enable=1 \
@@ -193,10 +204,10 @@
 ### Speaker Talking Points (Your Script):
 > *"Slide 5 is the console execution playbook and troubleshooting guide.*
 >
-> *If an interviewer or evaluator asks: 'Show me this working in the terminal right now,' this slide gives you the exact answer across three clear modes:*
-> * *If they want a fast, complete validation, **Option A** (`python3 tests/test_harness.py`) runs the entire test suite in 3.5 seconds and confirms all 5 hardware assertions pass.*
-> * *If they want to see manual silicon bring-up, **Option B** lets you run `make clean && make` and directly invoke the official Arm FVP binary with headless flags and UART console streaming.*
-> * *If they want an interactive demo, **Option C** launches the live bridge server on port 8080 so anyone can speak into the microphone and trigger real-time inference.*
+> *For participants attending today's presentation who want to follow along on their own laptops, there are two distinct ways to run:*
+> * *If you want an **instant, zero-install experience**, simply open `slides/presentation.html` in Chrome or Edge, hit key **A**, and speak 'Yes' or 'No'. Our presentation includes a built-in client-side Web Audio DSP engine that performs Mel-frequency extraction and keyword classification right inside your browser.*
+> * *If you want the **full virtual silicon experience** with the official Arm Corstone-300 FVP, clone the repository, run the one-line package setup, and execute **Option A** (`python3 tests/test_harness.py`). In 3.5 seconds, it will compile the model, link the firmware, boot the virtual FVP platform, and assert that all 5 hardware metrics PASS.*
+> * *If you want to bridge your live microphone into the virtual silicon, launch **Option C** (`python3 scripts/live_bridge_server.py`) on port 8080. Every spoken word is dynamically loaded into Cortex-M55 SRAM via ARM semihosting and accelerated on Ethos-U55 in under 1 millisecond.*
 >
 > *At the bottom, we document the facilitator's local strategy—native execution without Docker friction, semihosting dynamic memory ingestion—and the three crucial mitigations: headless FVP flags, Vela CMSIS-NN fallbacks, and compile-time SRAM linker assertions."*
 
