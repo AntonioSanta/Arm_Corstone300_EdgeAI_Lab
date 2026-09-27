@@ -93,7 +93,7 @@
 * **Header Tag:** OPERATIVE LAB GUIDE (PART 1) &bull; SETUP, SOURCES &amp; REPOSITORY LAYOUT
 * **Title:** Operative Lab Guide (Part 1) — Setup, Online Sources &amp; Build Pipeline
 * **Subtitle:** *Where to obtain models and tooling, repository layout, operations pipeline, and step-by-step firmware build.*
-* **Prerequisites Strip:** Target: Arm Corstone-300 (MPS3-AN547) | OS: Ubuntu 20.04+ / WSL2 | Toolchain: `arm-none-eabi-gcc 10.3+` | Python: 3.8+ | Compiler: Arm Vela 5.2.0 | Simulators: Arm FVP & QEMU.
+* **Prerequisites Strip:** Target Silicon: Arm Corstone-300 (MPS3-AN547) | Host OS: Ubuntu 20.04+ / WSL2 | Runtime: Python 3.8+ & pip | Build Tools: GNU make & git | Toolchain: `arm-none-eabi-gcc 10.3+` | NPU Compiler: Arm Vela 5.2.0 | Simulators: Arm Fast Models FVP & QEMU.
 * **Official Online Sources & Software Downloads Hub:**
   - **Lab Git Repository (Complete Source & Slides):** [`https://github.com/AntonioSanta/Arm_Corstone300_EdgeAI_Lab`](https://github.com/AntonioSanta/Arm_Corstone300_EdgeAI_Lab) (All bare-metal C drivers, Python bridge, test harness, pre-quantized model, and presentation slides)
   - **Pre-Trained Neural Network (Arm ML-Zoo):** [`https://github.com/ARM-software/ML-zoo`](https://github.com/ARM-software/ML-zoo) (DS-CNN Small INT8 model for keyword spotting)
