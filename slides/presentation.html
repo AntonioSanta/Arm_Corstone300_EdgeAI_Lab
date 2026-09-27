@@ -2179,7 +2179,7 @@
                             <span class="cmd-code-text">python3 scripts/live_bridge_server.py</span>
                             <button class="cmd-copy-btn" onclick="copyCmd('python3 scripts/live_bridge_server.py', this)">📋 Copy</button>
                         </div>
-                        <div class="cmd-result">REST server for browser mic: runs <code>firmware.elf</code> inside FVP and QEMU on every live voice capture via semihosting audio ingestion.</div>
+                        <div class="cmd-result">REST server for browser mic: runs <code>firmware.elf</code> inside FVP and QEMU on every live voice capture via semihosting audio ingestion. <em>(From Windows: <code>wsl -d Ubuntu-22.04 -- bash -c "cd /mnt/e/Arm_Corstone300_EdgeAI_Lab &amp;&amp; python3 scripts/live_bridge_server.py"</code> or run <code>start_live_bridge.bat</code>)</em>.</div>
                     </div>
                 </div>
             </div>
@@ -2287,16 +2287,23 @@
                             <span class="playbook-tag tag-cyan">Option C &bull; Live Voice Testbench</span>
                         </div>
                         <div class="playbook-card-title">Real-Time Mic Speech Classification</div>
-                        <div class="playbook-note">Starts REST bridge on port 8080. Ingests browser microphone voice into FVP via semihosting.</div>
+                        <div class="playbook-note">Starts REST bridge on port 8080. Ingests browser mic audio into FVP via semihosting.</div>
                         <div class="playbook-cmd-entry">
-                            <span class="playbook-cmd-label">Terminal Command:</span>
+                            <span class="playbook-cmd-label">1. Inside WSL / Linux:</span>
                             <div class="playbook-cmd-code">
                                 <code>python3 scripts/live_bridge_server.py</code>
                                 <button class="cmd-copy-btn" onclick="copyCmd('python3 scripts/live_bridge_server.py', this)">📋</button>
                             </div>
                         </div>
-                        <div class="playbook-note" style="color: #BAE6FD; font-size: 9px;">
-                            <strong>Browser Action:</strong> Press keyboard key <strong>A</strong> (or click top nav "Live Audio Testbench"), speak "Yes" or "No", and watch live FVP telemetry!
+                        <div class="playbook-cmd-entry">
+                            <span class="playbook-cmd-label">2. From Windows PowerShell / CMD:</span>
+                            <div class="playbook-cmd-code">
+                                <code style="font-size: 8px;">wsl -d Ubuntu-22.04 -- bash -c "cd /mnt/e/Arm_Corstone300_EdgeAI_Lab &amp;&amp; python3 scripts/live_bridge_server.py"</code>
+                                <button class="cmd-copy-btn" onclick="copyCmd('wsl -d Ubuntu-22.04 -- bash -c &quot;cd /mnt/e/Arm_Corstone300_EdgeAI_Lab && python3 scripts/live_bridge_server.py&quot;', this)">📋</button>
+                            </div>
+                        </div>
+                        <div class="playbook-note" style="color: #BAE6FD; font-size: 8.5px; margin-top: 3px;">
+                            💡 <em>Or double-click <strong>start_live_bridge.bat</strong>. Then press <strong>A</strong> in browser to speak!</em>
                         </div>
                     </div>
                 </div>

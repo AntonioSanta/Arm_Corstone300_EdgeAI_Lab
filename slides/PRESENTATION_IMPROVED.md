@@ -134,7 +134,7 @@
   2. `vela model/ds_cnn_s_quantized.tflite --accelerator-config ethos-u55-128 --output-dir model/output_vela` — [IN: `model/ds_cnn_s_quantized.tflite` / OUT: `model/output_vela/` (30.5 KB)]. Uses the pre-packaged Arm ML-Zoo reference model; compiles 49/49 ops for Ethos-U55 (21.7 KiB SRAM arena, 30.5 KiB Flash).
   3. `make clean && make` — [IN: `src/*.c` & `corstone300.ld` / OUT: `build/firmware.elf`]. Compiles target firmware with `arm-none-eabi-gcc`. Produces `build/firmware.elf` (text: 43.3 KB, BSS: 82.4 KB) loaded into virtual Flash memory.
   4. `python3 tests/test_harness.py` — [IN: `build/firmware.elf` / OUT: 5/5 Hardware UART Assertions]. Automated CI test runner: launches the Arm FVP simulator with `build/firmware.elf`, executes inference, and validates 5/5 hardware assertions in ~3.6s.
-  5. `python3 scripts/live_bridge_server.py` — [IN: Browser Mic (16 kHz PCM) / OUT: Live Dual FVP & QEMU Telemetry]. Starts the live audio bridge on port 8080: dynamically feeds browser mic audio to `build/firmware.elf` running in FVP and QEMU via semihosting audio ingestion.
+  5. `python3 scripts/live_bridge_server.py` — [IN: Browser Mic (16 kHz PCM) / OUT: Live Dual FVP & QEMU Telemetry]. Starts the live audio bridge on port 8080: dynamically feeds browser mic audio to `build/firmware.elf` running in FVP and QEMU via semihosting audio ingestion. *(From Windows PowerShell: `wsl -d Ubuntu-22.04 -- bash -c "cd /mnt/e/Arm_Corstone300_EdgeAI_Lab && python3 scripts/live_bridge_server.py"` or double-click `start_live_bridge.bat`)*.
 
 ### Speaker Talking Points (Your Script):
 > *"Slide 4 provides the complete setup blueprint for anyone approaching this lab for the first time.*
@@ -186,9 +186,13 @@
     ```
   - **Option C: Live Browser Voice Testbench Bridge:**
     ```bash
+    # Inside WSL / Linux:
     python3 scripts/live_bridge_server.py
+
+    # From Windows PowerShell / CMD:
+    wsl -d Ubuntu-22.04 -- bash -c "cd /mnt/e/Arm_Corstone300_EdgeAI_Lab && python3 scripts/live_bridge_server.py"
     ```
-    *Starts REST bridge on port 8080; press key **A** in browser to record live voice ("Yes"/"No") and stream to virtual silicon.*
+    *Starts REST bridge on port 8080 (or double-click `start_live_bridge.bat` in Windows); press key **A** in browser to record live voice ("Yes"/"No") and stream to virtual silicon.*
 * **Pillar 1: Reproducible Local Setup Strategy:**
   - **Native Local Execution (No Docker / Cloud):** Runs directly in Linux or Windows WSL with standard packages (`arm-none-eabi-gcc`, Python 3). Eliminates container hypervisor overhead, Docker VPN permission issues, and AWS cloud bills.
   - **ARM Semihosting Dynamic Ingestion:** In virtual hardware, `bkpt 0xab` semihosting ingests dynamic live audio into SRAM without needing to recompile `firmware.elf` on every spoken word.
