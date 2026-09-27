@@ -67,7 +67,7 @@ LOAD build/main.o
                 0x0000000000008f70                . = ALIGN (0x10)
  *fill*         0x0000000000008f6a        0x6 
 
-.text           0x0000000000008f70     0x19a4
+.text           0x0000000000008f70     0x19a0
                 0x0000000000008f70                . = ALIGN (0x4)
  *(.text*)
  .text.Default_Handler
@@ -163,31 +163,31 @@ LOAD build/main.o
                 0x000000000000a0cc        0xc build/model_data.o
                 0x000000000000a0cc                g_golden_output_scores
  .rodata.main.str1.4
-                0x000000000000a0d8      0x83a build/main.o
-                                        0x8c6 (size before relaxing)
-                0x000000000000a914                . = ALIGN (0x4)
- *fill*         0x000000000000a912        0x2 
-                0x000000000000a914                _sidata = LOADADDR (.data)
+                0x000000000000a0d8      0x836 build/main.o
+                                        0x8c2 (size before relaxing)
+                0x000000000000a910                . = ALIGN (0x4)
+ *fill*         0x000000000000a90e        0x2 
+                0x000000000000a910                _sidata = LOADADDR (.data)
 
-.glue_7         0x000000000000a914        0x0
- .glue_7        0x000000000000a914        0x0 linker stubs
+.glue_7         0x000000000000a910        0x0
+ .glue_7        0x000000000000a910        0x0 linker stubs
 
-.glue_7t        0x000000000000a914        0x0
- .glue_7t       0x000000000000a914        0x0 linker stubs
+.glue_7t        0x000000000000a910        0x0
+ .glue_7t       0x000000000000a910        0x0 linker stubs
 
-.vfp11_veneer   0x000000000000a914        0x0
- .vfp11_veneer  0x000000000000a914        0x0 linker stubs
+.vfp11_veneer   0x000000000000a910        0x0
+ .vfp11_veneer  0x000000000000a910        0x0 linker stubs
 
-.v4_bx          0x000000000000a914        0x0
- .v4_bx         0x000000000000a914        0x0 linker stubs
+.v4_bx          0x000000000000a910        0x0
+ .v4_bx         0x000000000000a910        0x0 linker stubs
 
-.iplt           0x000000000000a914        0x0
- .iplt          0x000000000000a914        0x0 build/startup_cortex_m55.o
+.iplt           0x000000000000a910        0x0
+ .iplt          0x000000000000a910        0x0 build/startup_cortex_m55.o
 
-.rel.dyn        0x000000000000a914        0x0
- .rel.iplt      0x000000000000a914        0x0 build/startup_cortex_m55.o
+.rel.dyn        0x000000000000a910        0x0
+ .rel.iplt      0x000000000000a910        0x0 build/startup_cortex_m55.o
 
-.data           0x0000000020000000       0x14 load address 0x000000000000a914
+.data           0x0000000020000000       0x14 load address 0x000000000000a910
                 0x0000000020000000                . = ALIGN (0x4)
                 0x0000000020000000                _sdata = .
  *(.data*)
@@ -196,10 +196,10 @@ LOAD build/main.o
                 0x0000000020000014                . = ALIGN (0x4)
                 0x0000000020000014                _edata = .
 
-.igot.plt       0x0000000020000014        0x0 load address 0x000000000000a928
+.igot.plt       0x0000000020000014        0x0 load address 0x000000000000a924
  .igot.plt      0x0000000020000014        0x0 build/startup_cortex_m55.o
 
-.bss            0x0000000020000014        0x4 load address 0x000000000000a928
+.bss            0x0000000020000014        0x4 load address 0x000000000000a924
                 0x0000000020000014                . = ALIGN (0x4)
                 0x0000000020000014                _sbss = .
  *(.bss*)
@@ -210,7 +210,7 @@ LOAD build/main.o
  *fill*         0x0000000020000015        0x3 
                 0x0000000020000018                _ebss = .
 
-.stack          0x0000000020000018     0x4000 load address 0x000000000000a928
+.stack          0x0000000020000018     0x4000 load address 0x000000000000a924
                 0x0000000020000018                . = ALIGN (0x8)
                 0x0000000020004018                . = (. + _stack_size)
  *fill*         0x0000000020000018     0x4000 

@@ -31,14 +31,15 @@
 ### On-Slide Content:
 * **Header Tag:** HARDWARE CO-DESIGN &bull; BUS MATRIX &amp; MEMORY TOPOLOGY
 * **Title:** Arm Corstone-300 Subsystem & Dual-AXI microNPU Architecture
-* **Visual Schematic Link:** *Corstone-300 Multi-Layer AXI5 Interconnect Diagram*
+* **Subtitle:** *Silicon-level topology: Multi-layer 64-bit AXI5 crossbar with autonomous dual-channel DMA weight & activation streaming.*
+* **Visual Schematic:** *Embedded Silicon Interconnect & Bus Matrix Diagram showing Cortex-M55, Ethos-U55 Dual-AXI master ports (M0 Flash read, M1 SRAM R/W), AXI5 crossbar, Flash, SRAM (64 KiB Tensor Arena), and CMSDK APB UART.*
 * **Core Pillars:**
   1. **Compute Co-Design:**
      - **Cortex-M55 CPU with Helium MVE:** Vector-accelerated DSP processing raw 16 kHz audio into Mel-Frequency Cepstral Coefficients (MFCC), plus CPU fallback for non-NPU operators.
      - **Ethos-U55 microNPU:** Dedicated 128 MACs/cycle matrix engine executing dense convolutions.
   2. **Dual-AXI Master DMA:**
-     - **Port M0 (Read-Only Flash):** Dedicated to streaming pre-compiled Vela command streams and quantized INT8 weights.
-     - **Port M1 (Read/Write SRAM):** Dedicated high-speed DMA reading of input feature maps and writing intermediate layer activations into internal SRAM.
+     - **Port M0 (Read-Only Flash):** Dedicated to streaming pre-compiled Vela command streams and quantized INT8 weights (`0x00000000`).
+     - **Port M1 (Read/Write SRAM):** Dedicated high-speed DMA reading of input feature maps and writing intermediate layer activations into internal SRAM (`0x21010000`).
      - *Simultaneous Fetch & Write:* Eliminates memory bus arbitration stalls between weights and activations.
   3. **Memory & TrustZone:**
      - **Internal Shared SRAM (`0x21000000`):** Linker-partitioned 64 KiB Tensor Arena.
@@ -48,9 +49,9 @@
 ### Speaker Talking Points (Your Script):
 > *"In Slide 2, we examine the underlying silicon architecture that makes this workload viable on a microcontroller.*
 >
-> *A central question in embedded AI is: 'If we have an Ethos-U NPU, why do we need Helium vector extensions on the Cortex-M55?' The answer is the audio signal chain: raw microphone audio must first be windowed, transformed with an FFT, and passed through Mel filterbanks. Helium MVE vectorizes this DSP preprocessing, preventing the CPU from becoming the bottleneck before tensors ever reach the NPU.*
+> *Looking at our embedded interconnect diagram, you can see how the chip is partitioned. A central question in embedded AI is: 'If we have an Ethos-U NPU, why do we need Helium vector extensions on the Cortex-M55?' The answer is the audio signal chain: raw microphone audio must first be windowed, transformed with an FFT, and passed through Mel filterbanks. Helium MVE vectorizes this DSP preprocessing, preventing the CPU from becoming the bottleneck before tensors ever reach the NPU.*
 >
-> *Crucially, the Ethos-U55 is not a passive slave peripheral. It is an autonomous AXI bus master with **two independent 64-bit AXI ports**: Port M0 streams model weights from Flash, while Port M1 writes activation scratchpads into SRAM simultaneously. This dual-master architecture over a multi-layer AXI5 crossbar ensures the NPU compute units never stall waiting on bus arbitration."*
+> *Crucially, notice the Ethos-U55 bus connections: it is not a passive peripheral. It is an autonomous AXI bus master with **two independent 64-bit AXI ports**: Port M0 streams model weights from Flash, while Port M1 writes activation scratchpads into SRAM simultaneously. This dual-master architecture over a multi-layer AXI5 crossbar ensures the NPU compute units never stall waiting on bus arbitration."*
 
 ---
 
@@ -60,6 +61,10 @@
 * **Header Tag:** LIVE DEMONSTRATION ARCHITECTURE &bull; HARDWARE-IN-THE-LOOP TESTBENCH
 * **Title:** Live Speech to Virtual Silicon: Experiment Sequence Flow
 * **Subtitle:** *Simplified logical sequence tracing microphone capture, REST transport, and neural execution on virtual hardware.*
+* **3-Phase Conceptual Breadcrumb Flow:**
+  - **Phase 1: Audio DSP Preprocessing** — Web Audio API records 16 kHz PCM ➔ 490 INT8 MFCC tensor.
+  - **Phase 2: Semihosting DMA Ingestion** — Cortex-M55 executes `BKPT 0xAB` ➔ pulls `live_tensor.bin` into SRAM Arena (`0x21010000`).
+  - **Phase 3: Silicon Acceleration** — Ethos-U55 executes 24.6k cycles ➔ APB UART telemetry stream to UI.
 * **Visual Schematic:** *Interactive Visual Sequence Diagram with 5 lifelines and 7 sequential data flow arrows (Browser → Python Bridge → Cortex-M55 CPU → Ethos-U55 NPU → UART & Telemetry → Browser UI).*
 * **The 5-Actor Architecture & Sequence Flow:**
   1. **Web Browser (HTML5 Web Audio & DSP):** Captures 1-second 16 kHz PCM microphone audio and computes 40-band Mel-Scale Filterbanks + DCT into a 490-byte INT8 MFCC spectrogram.
@@ -70,13 +75,13 @@
 * **Interactive Live Mic Prompt:** Press `M` or click "Live Mic Test" to record live audio from your microphone!
 
 ### Speaker Talking Points (Your Script):
-> *"Slide 3 illustrates the complete end-to-end experiment architecture. Notice how the lifelines are organized from left to right.*
+> *"Slide 3 illustrates the complete end-to-end experiment architecture. Notice how the flow is partitioned into three distinct phases across the top breadcrumb bar.*
 >
-> *When I speak into the browser, the Web Audio DSP pipeline converts the speech into a 490-byte INT8 MFCC spectrogram and sends it to our local Python bridge.*
+> *In Phase 1, when I speak into the browser, the Web Audio DSP pipeline converts the speech into a 490-byte INT8 MFCC spectrogram and sends it to our local Python bridge.*
 >
-> *The bridge writes `live_tensor.bin` and boots the Arm Corstone-300 simulator. And here is the crucial embedded design point: **the Cortex-M55 CPU is the host brain of the chip**. The Cortex-M55 firmware boots, executes an Arm Semihosting trap (`BKPT 0xAB`), and ingests the audio tensor directly into its internal SRAM Arena at `0x21010000`—exactly emulating how physical DMA transfers I2S/PDM digital microphone data without requiring any code recompilation.*
+> *In Phase 2, the bridge writes `live_tensor.bin` and boots the Arm Corstone-300 simulator. And here is the crucial embedded design point: **the Cortex-M55 CPU is the host brain of the chip**. The Cortex-M55 firmware boots, executes an Arm Semihosting trap (`BKPT 0xAB`), and ingests the audio tensor directly into its internal SRAM Arena at `0x21010000`—exactly emulating how physical DMA transfers I2S/PDM digital microphone data without requiring any code recompilation.*
 >
-> *Once the input tensor is sitting in SRAM, the Cortex-M55 dispatches the neural model command stream to the **Ethos-U55 NPU** over the 64-bit AXI bus. The Ethos-U55 executes all matrix multiplications in just 24,650 cycles and interrupts the Cortex-M55.*
+> *In Phase 3, once the input tensor is sitting in SRAM, the Cortex-M55 dispatches the neural model command stream to the **Ethos-U55 NPU** over the 64-bit AXI bus. The Ethos-U55 executes all matrix multiplications in just 24,650 cycles and interrupts the Cortex-M55.*
 >
 > *Finally, the Cortex-M55 reads the predictions, formats the output, and transmits it over the APB UART console at `0x49303000`, which our bridge captures and presents live on the screen."*
 
@@ -88,6 +93,9 @@
 * **Header Tag:** OPERATIVE LAB GUIDE &bull; SETUP, COMPILATION &amp; VALIDATION
 * **Title:** Source Tree, Step-by-Step Build & Execution Guide
 * **Subtitle:** *Complete instructions for participants to clone, compile, and execute the Corstone-300 Edge AI lab independently.*
+* **Prerequisites Strip:** Target: Arm Corstone-300 (MPS3-AN547) | OS: Ubuntu 20.04+ / WSL2 | Toolchain: `arm-none-eabi-gcc 10.3+` | Python: 3.8+ | Compiler: Arm Vela 5.2.0 | Simulators: Arm FVP & QEMU.
+* **Operations Pipeline Flowchart (Visual Diagram):**
+  - `[1. Pre-Flight Audit]` ➔ `[2. Vela Model Compiler]` ➔ `[3. GCC Firmware Link]` ➔ `[4. FVP Test Harness]` ➔ `[5. Live Voice Testbench]`
 * **Repository Source Tree:**
   ```text
   Arm_Corstone300_EdgeAI_Lab/
@@ -109,17 +117,19 @@
   ├── slides/                         # Web presentation & mic demo
   └── Makefile                        # GNU Make build system
   ```
-* **The 5 Step-by-Step Operative Commands:**
-  1. `python3 scripts/sanity_check.py` — Audits GNU Arm GCC 10.3+, Vela 5.2.0, FVP binary, and QEMU.
-  2. `vela model/ds_cnn_s_quantized.tflite --accelerator-config ethos-u55-128 --output-dir model/output_vela` — Uses the pre-packaged Arm ML-Zoo reference model; compiles 49/49 ops for Ethos-U55 (21.7 KiB SRAM arena, 30.5 KiB Flash).
-  3. `make clean && make` — Compiles target firmware with `arm-none-eabi-gcc`. Produces `build/firmware.elf` (the executable binary loaded into virtual Flash memory containing startup vectors, APB UART, Ethos-U drivers, and model weights).
-  4. `python3 tests/test_harness.py` — Automated CI test runner: launches the Arm FVP simulator with `build/firmware.elf`, executes inference, and validates 5/5 hardware assertions in ~3.6s.
-  5. `python3 scripts/live_bridge_server.py` — Starts the live audio bridge on port 8080: dynamically feeds browser mic audio to `build/firmware.elf` running in FVP and QEMU.
+* **The 5 Step-by-Step Operative Commands (with 1-Click Copy & IO Badges):**
+  1. `python3 scripts/sanity_check.py` — [IN: Host OS & Python 3.8+ / OUT: System Audit PASS]. Audits GNU Arm GCC 10.3+, Vela 5.2.0, FVP binary, and QEMU.
+  2. `vela model/ds_cnn_s_quantized.tflite --accelerator-config ethos-u55-128 --output-dir model/output_vela` — [IN: `model/ds_cnn_s_quantized.tflite` / OUT: `model/output_vela/` (30.5 KB)]. Uses the pre-packaged Arm ML-Zoo reference model; compiles 49/49 ops for Ethos-U55 (21.7 KiB SRAM arena, 30.5 KiB Flash).
+  3. `make clean && make` — [IN: `src/*.c` & `corstone300.ld` / OUT: `build/firmware.elf`]. Compiles target firmware with `arm-none-eabi-gcc`. Produces `build/firmware.elf` (text: 43.3 KB, BSS: 82.4 KB) loaded into virtual Flash memory.
+  4. `python3 tests/test_harness.py` — [IN: `build/firmware.elf` / OUT: 5/5 Hardware UART Assertions]. Automated CI test runner: launches the Arm FVP simulator with `build/firmware.elf`, executes inference, and validates 5/5 hardware assertions in ~3.6s.
+  5. `python3 scripts/live_bridge_server.py` — [IN: Browser Mic (16 kHz PCM) / OUT: Live Dual FVP & QEMU Telemetry]. Starts the live audio bridge on port 8080: dynamically feeds browser mic audio to `build/firmware.elf` running in FVP and QEMU via semihosting audio ingestion.
 
 ### Speaker Talking Points (Your Script):
-> *"Slide 4 is the operative blueprint. Any engineer or student can clone this repository and follow these exact 5 steps to build and run the entire lab on their own workstation.*
+> *"Slide 4 is the operative blueprint for any workshop participant. Across the top, you can see our visual Operations Pipeline Flowchart mapping the exact sequence: Sanity Check, Vela Compiler, GCC Linker, FVP Test Harness, and Live Voice Testbench.*
 >
-> *Step 1 verifies all toolchains. Step 2 compiles the neural model with Vela, producing the NPU command stream. In Step 3, `make clean && make` compiles our bare-metal C firmware into `build/firmware.elf`—the exact binary image that gets flashed into the virtual SoC.*
+> *Each command card shows explicit Input and Output artifacts, accompanied by a 1-click Copy button so students can copy the commands directly to their terminal.*
+>
+> *Step 1 verifies all toolchains. Step 2 compiles the neural model with Vela, producing the NPU command stream. In Step 3, `make clean && make` compiles our bare-metal C firmware into `build/firmware.elf`—the exact binary image flashed into the virtual SoC.*
 >
 > *In Step 4, `tests/test_harness.py` launches the Arm FVP simulator, boots `firmware.elf`, and asserts all 5 hardware tests in 3.6 seconds. Finally, Step 5 starts the live speech bridge, allowing participants to test their own voices against the virtual hardware."*
 

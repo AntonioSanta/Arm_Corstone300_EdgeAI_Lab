@@ -104,7 +104,7 @@ int main(void) {
     uart_printf(" Target Architecture: Armv8.1-M Mainline (Cortex-M55)\n");
     uart_printf(" Vector Acceleration: Arm Helium MVE (M-Profile Vector Extension)\n");
     uart_printf(" Neural Accelerator:  Arm Ethos-U55 microNPU (128 MACs/cycle)\n");
-    uart_printf(" Platform Software:   Zephyr RTOS Microkernel & CMSIS-NN\n");
+    uart_printf(" Platform Software:   Bare-Metal C Runtime & CMSIS-NN\n");
     uart_printf(" Security Subsystem:  Trusted Firmware-M (TF-M) Partitioning\n");
     uart_printf(" Virtual Platform:    Arm Corstone-300 Fixed Virtual Platform / AVH\n");
     uart_printf("=================================================================\n\n");

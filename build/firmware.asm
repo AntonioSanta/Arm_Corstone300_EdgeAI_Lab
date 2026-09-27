@@ -75,7 +75,7 @@ void Reset_Handler(void) {
     8fda:	bf00      	nop
     8fdc:	20000000 	.word	0x20000000
     8fe0:	20000014 	.word	0x20000014
-    8fe4:	0000a914 	.word	0x0000a914
+    8fe4:	0000a910 	.word	0x0000a910
     8fe8:	20000014 	.word	0x20000014
     8fec:	20000018 	.word	0x20000018
 
@@ -1042,7 +1042,7 @@ int main(void) {
     uart_printf(" Neural Accelerator:  Arm Ethos-U55 microNPU (128 MACs/cycle)\n");
     9590:	4888      	ldr	r0, [pc, #544]	; (97b4 <main+0x24c>)
     9592:	f7ff fdf3 	bl	917c <uart_printf>
-    uart_printf(" Platform Software:   Zephyr RTOS Microkernel & CMSIS-NN\n");
+    uart_printf(" Platform Software:   Bare-Metal C Runtime & CMSIS-NN\n");
     9596:	4888      	ldr	r0, [pc, #544]	; (97b8 <main+0x250>)
     9598:	f7ff fdf0 	bl	917c <uart_printf>
     uart_printf(" Security Subsystem:  Trusted Firmware-M (TF-M) Partitioning\n");
@@ -1394,43 +1394,43 @@ int main(void) {
     97b0:	0000a164 	.word	0x0000a164
     97b4:	0000a1a8 	.word	0x0000a1a8
     97b8:	0000a1e8 	.word	0x0000a1e8
-    97bc:	0000a224 	.word	0x0000a224
-    97c0:	0000a264 	.word	0x0000a264
-    97c4:	0000a2ac 	.word	0x0000a2ac
-    97c8:	0000a2f0 	.word	0x0000a2f0
+    97bc:	0000a220 	.word	0x0000a220
+    97c0:	0000a260 	.word	0x0000a260
+    97c4:	0000a2a8 	.word	0x0000a2a8
+    97c8:	0000a2ec 	.word	0x0000a2ec
     97cc:	00008d80 	.word	0x00008d80
     97d0:	00000130 	.word	0x00000130
-    97d4:	0000a338 	.word	0x0000a338
+    97d4:	0000a334 	.word	0x0000a334
     97d8:	210101ea 	.word	0x210101ea
     97dc:	21000000 	.word	0x21000000
-    97e0:	0000a38c 	.word	0x0000a38c
-    97e4:	0000a3d4 	.word	0x0000a3d4
-    97e8:	0000a410 	.word	0x0000a410
-    97ec:	0000a444 	.word	0x0000a444
-    97f0:	0000a478 	.word	0x0000a478
-    97f4:	0000a4bc 	.word	0x0000a4bc
-    97f8:	0000a8fc 	.word	0x0000a8fc
+    97e0:	0000a388 	.word	0x0000a388
+    97e4:	0000a3d0 	.word	0x0000a3d0
+    97e8:	0000a40c 	.word	0x0000a40c
+    97ec:	0000a440 	.word	0x0000a440
+    97f0:	0000a474 	.word	0x0000a474
+    97f4:	0000a4b8 	.word	0x0000a4b8
+    97f8:	0000a8f8 	.word	0x0000a8f8
     97fc:	21010000 	.word	0x21010000
-    9800:	0000a4ec 	.word	0x0000a4ec
-    9804:	0000a560 	.word	0x0000a560
-    9808:	0000a640 	.word	0x0000a640
-    980c:	0000a684 	.word	0x0000a684
-    9810:	0000a6c4 	.word	0x0000a6c4
+    9800:	0000a4e8 	.word	0x0000a4e8
+    9804:	0000a55c 	.word	0x0000a55c
+    9808:	0000a63c 	.word	0x0000a63c
+    980c:	0000a680 	.word	0x0000a680
+    9810:	0000a6c0 	.word	0x0000a6c0
     9814:	0000a0d8 	.word	0x0000a0d8
     9818:	0000a0e0 	.word	0x0000a0e0
-    981c:	0000a704 	.word	0x0000a704
-    9820:	0000a740 	.word	0x0000a740
+    981c:	0000a700 	.word	0x0000a700
+    9820:	0000a73c 	.word	0x0000a73c
     9824:	0000a09c 	.word	0x0000a09c
     9828:	0000a064 	.word	0x0000a064
-    982c:	0000a780 	.word	0x0000a780
-    9830:	0000a7bc 	.word	0x0000a7bc
-    9834:	0000a854 	.word	0x0000a854
-    9838:	0000a898 	.word	0x0000a898
-    983c:	0000a800 	.word	0x0000a800
-    9840:	0000a5e4 	.word	0x0000a5e4
+    982c:	0000a77c 	.word	0x0000a77c
+    9830:	0000a7b8 	.word	0x0000a7b8
+    9834:	0000a850 	.word	0x0000a850
+    9838:	0000a894 	.word	0x0000a894
+    983c:	0000a7fc 	.word	0x0000a7fc
+    9840:	0000a5e0 	.word	0x0000a5e0
     9844:	00008d80 	.word	0x00008d80
-    9848:	0000a5b4 	.word	0x0000a5b4
-    984c:	0000a8d0 	.word	0x0000a8d0
+    9848:	0000a5b0 	.word	0x0000a5b0
+    984c:	0000a8cc 	.word	0x0000a8cc
     9850:	00020026 	.word	0x00020026
     9854:	41465b0a 	.word	0x41465b0a
     9858:	204c4154 	.word	0x204c4154
@@ -1988,117 +1988,117 @@ int main(void) {
     a1cc:	7263696d 55504e6f 32312820 414d2038     microNPU (128 MA
     a1dc:	632f7343 656c6379 00000a29 616c5020     Cs/cycle)... Pla
     a1ec:	726f6674 6f53206d 61777466 203a6572     tform Software: 
-    a1fc:	655a2020 72796870 4f545220 694d2053       Zephyr RTOS Mi
-    a20c:	6b6f7263 656e7265 2026206c 49534d43     crokernel & CMSI
-    a21c:	4e4e2d53 0000000a 63655320 74697275     S-NN.... Securit
-    a22c:	75532079 73797362 3a6d6574 72542020     y Subsystem:  Tr
-    a23c:	65747375 69462064 61776d72 4d2d6572     usted Firmware-M
-    a24c:	46542820 20294d2d 74726150 6f697469      (TF-M) Partitio
-    a25c:	676e696e 0000000a 72695620 6c617574     ning.... Virtual
-    a26c:	616c5020 726f6674 20203a6d 72412020      Platform:    Ar
-    a27c:	6f43206d 6f747372 332d656e 46203030     m Corstone-300 F
-    a28c:	64657869 72695620 6c617574 616c5020     ixed Virtual Pla
-    a29c:	726f6674 202f206d 0a485641 00000000     tform / AVH.....
+    a1fc:	61422020 4d2d6572 6c617465 52204320       Bare-Metal C R
+    a20c:	69746e75 2620656d 534d4320 4e2d5349     untime & CMSIS-N
+    a21c:	00000a4e 63655320 74697275 75532079     N... Security Su
+    a22c:	73797362 3a6d6574 72542020 65747375     bsystem:  Truste
+    a23c:	69462064 61776d72 4d2d6572 46542820     d Firmware-M (TF
+    a24c:	20294d2d 74726150 6f697469 676e696e     -M) Partitioning
+    a25c:	0000000a 72695620 6c617574 616c5020     .... Virtual Pla
+    a26c:	726f6674 20203a6d 72412020 6f43206d     tform:    Arm Co
+    a27c:	6f747372 332d656e 46203030 64657869     rstone-300 Fixed
+    a28c:	72695620 6c617574 616c5020 726f6674      Virtual Platfor
+    a29c:	202f206d 0a485641 00000000 3d3d3d3d     m / AVH.....====
     a2ac:	3d3d3d3d 3d3d3d3d 3d3d3d3d 3d3d3d3d     ================
     a2bc:	3d3d3d3d 3d3d3d3d 3d3d3d3d 3d3d3d3d     ================
     a2cc:	3d3d3d3d 3d3d3d3d 3d3d3d3d 3d3d3d3d     ================
-    a2dc:	3d3d3d3d 3d3d3d3d 3d3d3d3d 3d3d3d3d     ================
-    a2ec:	000a0a3d 2d46545b 4553204d 49525543     =...[TF-M SECURI
-    a2fc:	205d5954 696c6156 69746164 5320676e     TY] Validating S
-    a30c:	72756365 202f2065 2d6e6f4e 75636553     ecure / Non-Secu
-    a31c:	54206572 74737572 656e6f5a 756f6220     re TrustZone bou
-    a32c:	7261646e 2e2e2e79 0000000a 2d46545b     ndary.......[TF-
-    a33c:	4553204d 49525543 205d5954 75636553     M SECURITY] Secu
-    a34c:	45206572 616c636e 62206576 65746f6f     re Enclave boote
-    a35c:	50202e64 43204153 69747265 64656966     d. PSA Certified
-    a36c:	79724320 206f7470 74532026 6761726f      Crypto & Storag
-    a37c:	6e692065 61697469 657a696c 000a2e64     e initialized...
-    a38c:	2d46545b 4553204d 49525543 205d5954     [TF-M SECURITY] 
-    a39c:	2d6e6f4e 75636553 41206572 696c7070     Non-Secure Appli
-    a3ac:	69746163 52206e6f 696e6e75 6920676e     cation Running i
-    a3bc:	7369206e 74616c6f 44206465 69616d6f     n isolated Domai
-    a3cc:	0a0a2e6e 00000000 4d454d5b 2059524f     n.......[MEMORY 
-    a3dc:	4d4f4547 59525445 6556205d 79666972     GEOMETRY] Verify
-    a3ec:	20676e69 6b6e694c 41207265 636f6c6c     ing Linker Alloc
-    a3fc:	6f697461 6547206e 74656d6f 0a3a7972     ation Geometry:.
-    a40c:	00000000 202d2020 73616c46 6f4d2068     ....  - Flash Mo
-    a41c:	206c6564 67696557 3a737468 78305b20     del Weights: [0x
-    a42c:	2d205825 25783020 28205d58 62206425     %X - 0x%X] (%d b
-    a43c:	73657479 00000a29 202d2020 65746e49     ytes)...  - Inte
-    a44c:	6c616e72 41525320 7241204d 3a616e65     rnal SRAM Arena:
-    a45c:	78305b20 2d205825 25783020 28205d58      [0x%X - 0x%X] (
-    a46c:	62206425 73657479 00000a29 202d2020     %d bytes)...  - 
-    a47c:	74617453 203a7375 69727453 53207463     Status: Strict S
-    a48c:	204d4152 6e756f42 69726164 45207365     RAM Boundaries E
-    a49c:	726f666e 20646563 72655a28 764f206f     nforced (Zero Ov
-    a4ac:	6c667265 5220776f 296b7369 000a0a2e     erflow Risk)....
-    a4bc:	202d2020 4952435b 41434954 4c41204c       - [CRITICAL AL
-    a4cc:	5d545245 41525320 764f204d 6c667265     ERT] SRAM Overfl
-    a4dc:	4420776f 63657465 21646574 00000a0a     ow Detected!....
-    a4ec:	45535b0a 4f48494d 4e495453 44205d47     .[SEMIHOSTING] D
-    a4fc:	6d616e79 41206369 6f696475 676e4920     ynamic Audio Ing
-    a50c:	69747365 203a6e6f 64616f4c 34206465     estion: Loaded 4
-    a51c:	62203039 73657479 6f726620 7562206d     90 bytes from bu
-    a52c:	2f646c69 6576696c 6e65745f 2e726f73     ild/live_tensor.
-    a53c:	206e6962 6f746e69 41525320 6554204d     bin into SRAM Te
-    a54c:	726f736e 65724120 6120616e 78302074     nsor Arena at 0x
-    a55c:	000a5825 464e495b 4e455245 205d4543     %X..[INFERENCE] 
-    a56c:	64656546 20676e69 6576694c 63694d20     Feeding Live Mic
-    a57c:	68706f72 20656e6f 4343464d 6e655420     rophone MFCC Ten
-    a58c:	20726f73 34783128 49203039 2938544e     sor (1x490 INT8)
-    a59c:	206f7420 7275654e 50206c61 6c657069      to Neural Pipel
-    a5ac:	2e656e69 000a2e2e 5252455b 205d524f     ine.....[ERROR] 
-    a5bc:	65666e49 636e6572 69702065 696c6570     Inference pipeli
-    a5cc:	6520656e 75636578 6e6f6974 69616620     ne execution fai
-    a5dc:	2164656c 0000000a 4e495b0a 45524546     led!.....[INFERE
-    a5ec:	5d45434e 65654620 676e6964 61745320     NCE] Feeding Sta
-    a5fc:	20636974 646c6f47 46206e65 6873616c     tic Golden Flash
-    a60c:	43464d20 65542043 726f736e 78312820      MFCC Tensor (1x
-    a61c:	20303934 38544e49 6f742029 75654e20     490 INT8) to Neu
-    a62c:	206c6172 65706950 656e696c 0a2e2e2e     ral Pipeline....
-    a63c:	00000000 20202020 4d524120 524f5720     ....     ARM WOR
-    a64c:	524f464b 4c204543 2d204241 54554120     KFORCE LAB - AUT
-    a65c:	54414d4f 56204445 44494c41 4f495441     OMATED VALIDATIO
-    a66c:	5553204e 20455449 55534552 2053544c     N SUITE RESULTS 
-    a67c:	20202020 00000a20 53455420 3a312054          ... TEST 1:
-    a68c:	726f4320 2d786574 2035354d 696c6548      Cortex-M55 Heli
-    a69c:	56206d75 6f746365 78452072 736e6574     um Vector Extens
-    a6ac:	736e6f69 74634120 2e657669 5b202e2e     ions Active... [
-    a6bc:	53534150 00000a5d 53455420 3a322054     PASS]... TEST 2:
-    a6cc:	68744520 552d736f 4e203535 44205550      Ethos-U55 NPU D
-    a6dc:	65766972 61482072 6873646e 20656b61     river Handshake 
-    a6ec:	65532026 2e707574 2e2e2e2e 505b202e     & Setup...... [P
-    a6fc:	5d535341 0000000a 53455420 3a332054     ASS].... TEST 3:
-    a70c:	746e4920 616e7265 5253206c 54204d41      Internal SRAM T
-    a71c:	6f736e65 72412072 20616e65 6e756f42     ensor Arena Boun
-    a72c:	79726164 66615320 2e797465 255b202e     dary Safety.. [%
-    a73c:	000a5d73 53455420 3a342054 4c465420     s].. TEST 4: TFL
-    a74c:	20657469 7263694d 6f4d206f 206c6564     ite Micro Model 
-    a75c:	63657845 6f697475 6950206e 696c6570     Execution Pipeli
-    a76c:	2e2e656e 2e2e2e2e 5b202e2e 53534150     ne........ [PASS
-    a77c:	00000a5d 53455420 3a352054 79654b20     ]... TEST 5: Key
-    a78c:	64726f77 616c4320 66697373 74616369     word Classificat
-    a79c:	206e6f69 69726150 28207974 22732522     ion Parity ("%s"
-    a7ac:	2e2e2e29 2e2e2e2e 73255b20 00000a5d     )....... [%s]...
+    a2dc:	3d3d3d3d 3d3d3d3d 3d3d3d3d 000a0a3d     =============...
+    a2ec:	2d46545b 4553204d 49525543 205d5954     [TF-M SECURITY] 
+    a2fc:	696c6156 69746164 5320676e 72756365     Validating Secur
+    a30c:	202f2065 2d6e6f4e 75636553 54206572     e / Non-Secure T
+    a31c:	74737572 656e6f5a 756f6220 7261646e     rustZone boundar
+    a32c:	2e2e2e79 0000000a 2d46545b 4553204d     y.......[TF-M SE
+    a33c:	49525543 205d5954 75636553 45206572     CURITY] Secure E
+    a34c:	616c636e 62206576 65746f6f 50202e64     nclave booted. P
+    a35c:	43204153 69747265 64656966 79724320     SA Certified Cry
+    a36c:	206f7470 74532026 6761726f 6e692065     pto & Storage in
+    a37c:	61697469 657a696c 000a2e64 2d46545b     itialized...[TF-
+    a38c:	4553204d 49525543 205d5954 2d6e6f4e     M SECURITY] Non-
+    a39c:	75636553 41206572 696c7070 69746163     Secure Applicati
+    a3ac:	52206e6f 696e6e75 6920676e 7369206e     on Running in is
+    a3bc:	74616c6f 44206465 69616d6f 0a0a2e6e     olated Domain...
+    a3cc:	00000000 4d454d5b 2059524f 4d4f4547     ....[MEMORY GEOM
+    a3dc:	59525445 6556205d 79666972 20676e69     ETRY] Verifying 
+    a3ec:	6b6e694c 41207265 636f6c6c 6f697461     Linker Allocatio
+    a3fc:	6547206e 74656d6f 0a3a7972 00000000     n Geometry:.....
+    a40c:	202d2020 73616c46 6f4d2068 206c6564       - Flash Model 
+    a41c:	67696557 3a737468 78305b20 2d205825     Weights: [0x%X -
+    a42c:	25783020 28205d58 62206425 73657479      0x%X] (%d bytes
+    a43c:	00000a29 202d2020 65746e49 6c616e72     )...  - Internal
+    a44c:	41525320 7241204d 3a616e65 78305b20      SRAM Arena: [0x
+    a45c:	2d205825 25783020 28205d58 62206425     %X - 0x%X] (%d b
+    a46c:	73657479 00000a29 202d2020 74617453     ytes)...  - Stat
+    a47c:	203a7375 69727453 53207463 204d4152     us: Strict SRAM 
+    a48c:	6e756f42 69726164 45207365 726f666e     Boundaries Enfor
+    a49c:	20646563 72655a28 764f206f 6c667265     ced (Zero Overfl
+    a4ac:	5220776f 296b7369 000a0a2e 202d2020     ow Risk)....  - 
+    a4bc:	4952435b 41434954 4c41204c 5d545245     [CRITICAL ALERT]
+    a4cc:	41525320 764f204d 6c667265 4420776f      SRAM Overflow D
+    a4dc:	63657465 21646574 00000a0a 45535b0a     etected!.....[SE
+    a4ec:	4f48494d 4e495453 44205d47 6d616e79     MIHOSTING] Dynam
+    a4fc:	41206369 6f696475 676e4920 69747365     ic Audio Ingesti
+    a50c:	203a6e6f 64616f4c 34206465 62203039     on: Loaded 490 b
+    a51c:	73657479 6f726620 7562206d 2f646c69     ytes from build/
+    a52c:	6576696c 6e65745f 2e726f73 206e6962     live_tensor.bin 
+    a53c:	6f746e69 41525320 6554204d 726f736e     into SRAM Tensor
+    a54c:	65724120 6120616e 78302074 000a5825      Arena at 0x%X..
+    a55c:	464e495b 4e455245 205d4543 64656546     [INFERENCE] Feed
+    a56c:	20676e69 6576694c 63694d20 68706f72     ing Live Microph
+    a57c:	20656e6f 4343464d 6e655420 20726f73     one MFCC Tensor 
+    a58c:	34783128 49203039 2938544e 206f7420     (1x490 INT8) to 
+    a59c:	7275654e 50206c61 6c657069 2e656e69     Neural Pipeline.
+    a5ac:	000a2e2e 5252455b 205d524f 65666e49     ....[ERROR] Infe
+    a5bc:	636e6572 69702065 696c6570 6520656e     rence pipeline e
+    a5cc:	75636578 6e6f6974 69616620 2164656c     xecution failed!
+    a5dc:	0000000a 4e495b0a 45524546 5d45434e     .....[INFERENCE]
+    a5ec:	65654620 676e6964 61745320 20636974      Feeding Static 
+    a5fc:	646c6f47 46206e65 6873616c 43464d20     Golden Flash MFC
+    a60c:	65542043 726f736e 78312820 20303934     C Tensor (1x490 
+    a61c:	38544e49 6f742029 75654e20 206c6172     INT8) to Neural 
+    a62c:	65706950 656e696c 0a2e2e2e 00000000     Pipeline........
+    a63c:	20202020 4d524120 524f5720 524f464b          ARM WORKFOR
+    a64c:	4c204543 2d204241 54554120 54414d4f     CE LAB - AUTOMAT
+    a65c:	56204445 44494c41 4f495441 5553204e     ED VALIDATION SU
+    a66c:	20455449 55534552 2053544c 20202020     ITE RESULTS     
+    a67c:	00000a20 53455420 3a312054 726f4320      ... TEST 1: Cor
+    a68c:	2d786574 2035354d 696c6548 56206d75     tex-M55 Helium V
+    a69c:	6f746365 78452072 736e6574 736e6f69     ector Extensions
+    a6ac:	74634120 2e657669 5b202e2e 53534150      Active... [PASS
+    a6bc:	00000a5d 53455420 3a322054 68744520     ]... TEST 2: Eth
+    a6cc:	552d736f 4e203535 44205550 65766972     os-U55 NPU Drive
+    a6dc:	61482072 6873646e 20656b61 65532026     r Handshake & Se
+    a6ec:	2e707574 2e2e2e2e 505b202e 5d535341     tup...... [PASS]
+    a6fc:	0000000a 53455420 3a332054 746e4920     .... TEST 3: Int
+    a70c:	616e7265 5253206c 54204d41 6f736e65     ernal SRAM Tenso
+    a71c:	72412072 20616e65 6e756f42 79726164     r Arena Boundary
+    a72c:	66615320 2e797465 255b202e 000a5d73      Safety.. [%s]..
+    a73c:	53455420 3a342054 4c465420 20657469      TEST 4: TFLite 
+    a74c:	7263694d 6f4d206f 206c6564 63657845     Micro Model Exec
+    a75c:	6f697475 6950206e 696c6570 2e2e656e     ution Pipeline..
+    a76c:	2e2e2e2e 5b202e2e 53534150 00000a5d     ...... [PASS]...
+    a77c:	53455420 3a352054 79654b20 64726f77      TEST 5: Keyword
+    a78c:	616c4320 66697373 74616369 206e6f69      Classification 
+    a79c:	69726150 28207974 22732522 2e2e2e29     Parity ("%s")...
+    a7ac:	2e2e2e2e 73255b20 00000a5d 2d2d2d2d     .... [%s]...----
     a7bc:	2d2d2d2d 2d2d2d2d 2d2d2d2d 2d2d2d2d     ----------------
     a7cc:	2d2d2d2d 2d2d2d2d 2d2d2d2d 2d2d2d2d     ----------------
     a7dc:	2d2d2d2d 2d2d2d2d 2d2d2d2d 2d2d2d2d     ----------------
-    a7ec:	2d2d2d2d 2d2d2d2d 2d2d2d2d 2d2d2d2d     ----------------
-    a7fc:	00000a2d 45535b0a 4f48494d 4e495453     -....[SEMIHOSTIN
-    a80c:	4e205d47 6669746f 676e6979 72695620     G] Notifying Vir
-    a81c:	6c617574 616c5020 726f6674 4c203a6d     tual Platform: L
-    a82c:	45206261 75636578 6e6f6974 6e694620     ab Execution Fin
-    a83c:	65687369 52282064 72757465 6f43206e     ished (Return Co
-    a84c:	203a6564 000a2930 45525b20 544c5553     de: 0).. [RESULT
-    a85c:	3e3e205d 4c41203e 414c204c 43412042     ] >>> ALL LAB AC
-    a86c:	54504543 45434e41 53455420 50205354     CEPTANCE TESTS P
-    a87c:	45535341 55532044 53454343 4c554653     ASSED SUCCESSFUL
-    a88c:	2021594c 0a3c3c3c 00000000 726f4320     LY! <<<..... Cor
-    a89c:	6e6f7473 30332d65 69562030 61757472     stone-300 Virtua
-    a8ac:	6c50206c 6f667461 53206d72 6c756d69     l Platform Simul
-    a8bc:	6f697461 6f43206e 656c706d 2e646574     ation Completed.
-    a8cc:	0000000a 45525b20 544c5553 3e3e205d     .... [RESULT] >>
-    a8dc:	4341203e 54504543 45434e41 53455420     > ACCEPTANCE TES
-    a8ec:	46205354 454c4941 3c202144 000a3c3c     TS FAILED! <<<..
-    a8fc:	6c697562 696c2f64 745f6576 6f736e65     build/live_tenso
-    a90c:	69622e72 0000006e                       r.bin...
+    a7ec:	2d2d2d2d 2d2d2d2d 2d2d2d2d 00000a2d     -------------...
+    a7fc:	45535b0a 4f48494d 4e495453 4e205d47     .[SEMIHOSTING] N
+    a80c:	6669746f 676e6979 72695620 6c617574     otifying Virtual
+    a81c:	616c5020 726f6674 4c203a6d 45206261      Platform: Lab E
+    a82c:	75636578 6e6f6974 6e694620 65687369     xecution Finishe
+    a83c:	52282064 72757465 6f43206e 203a6564     d (Return Code: 
+    a84c:	000a2930 45525b20 544c5553 3e3e205d     0).. [RESULT] >>
+    a85c:	4c41203e 414c204c 43412042 54504543     > ALL LAB ACCEPT
+    a86c:	45434e41 53455420 50205354 45535341     ANCE TESTS PASSE
+    a87c:	55532044 53454343 4c554653 2021594c     D SUCCESSFULLY! 
+    a88c:	0a3c3c3c 00000000 726f4320 6e6f7473     <<<..... Corston
+    a89c:	30332d65 69562030 61757472 6c50206c     e-300 Virtual Pl
+    a8ac:	6f667461 53206d72 6c756d69 6f697461     atform Simulatio
+    a8bc:	6f43206e 656c706d 2e646574 0000000a     n Completed.....
+    a8cc:	45525b20 544c5553 3e3e205d 4341203e      [RESULT] >>> AC
+    a8dc:	54504543 45434e41 53455420 46205354     CEPTANCE TESTS F
+    a8ec:	454c4941 3c202144 000a3c3c 6c697562     AILED! <<<..buil
+    a8fc:	696c2f64 745f6576 6f736e65 69622e72     d/live_tensor.bi
+    a90c:	0000006e                                n...

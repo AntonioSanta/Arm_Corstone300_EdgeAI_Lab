@@ -615,6 +615,179 @@
             line-height: 1.35;
         }
 
+        /* Slide 2 Silicon & Interconnect Diagram Box */
+        .arch-diagram-box {
+            background: #060B12;
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 8px 12px;
+            margin-top: 8px;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
+        }
+
+        /* Slide 3 Phase Flow Breadcrumbs */
+        .phase-flow-bar {
+            display: grid;
+            grid-template-columns: 1fr 1.25fr 1fr;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .phase-badge {
+            background: rgba(0, 229, 255, 0.06);
+            border: 1px solid rgba(0, 229, 255, 0.22);
+            border-radius: 6px;
+            padding: 6px 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .phase-badge.phase-2 {
+            background: rgba(255, 183, 77, 0.08);
+            border-color: rgba(255, 183, 77, 0.3);
+        }
+
+        .phase-badge.phase-3 {
+            background: rgba(0, 230, 118, 0.08);
+            border-color: rgba(0, 230, 118, 0.3);
+        }
+
+        .phase-num {
+            font-size: 10px;
+            font-weight: 800;
+            padding: 2px 6px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.12);
+            color: #FFFFFF;
+            white-space: nowrap;
+        }
+
+        .phase-text {
+            font-size: 10.5px;
+            color: #E2E8F0;
+            line-height: 1.2;
+        }
+
+        .phase-text strong {
+            display: block;
+            font-size: 11px;
+            color: #FFFFFF;
+        }
+
+        /* Slide 4 Operations Pipeline Flowchart Box */
+        .ops-pipeline-box {
+            background: #060B12;
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 6px 10px;
+            margin-top: 6px;
+            margin-bottom: 10px;
+        }
+
+        /* Prerequisites Strip */
+        .prereq-strip {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            background: rgba(14, 165, 233, 0.08);
+            border: 1px solid rgba(14, 165, 233, 0.25);
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-size: 11px;
+            color: #CBD5E1;
+            margin-top: 6px;
+            margin-bottom: 8px;
+        }
+
+        .prereq-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .prereq-tag {
+            font-weight: 700;
+            color: var(--arm-cyan);
+        }
+
+        .prereq-val {
+            color: #F1F5F9;
+            font-family: 'Consolas', monospace;
+            font-size: 10.5px;
+            background: rgba(255,255,255,0.06);
+            padding: 1px 5px;
+            border-radius: 3px;
+        }
+
+        .cmd-code-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #04080D;
+            border: 1px solid rgba(0, 230, 118, 0.25);
+            border-radius: 4px;
+            padding: 3px 6px 3px 8px;
+            margin-bottom: 4px;
+            gap: 8px;
+        }
+
+        .cmd-code-text {
+            font-family: 'Consolas', monospace;
+            font-size: 10.5px;
+            color: #00E676;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .cmd-copy-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid #334155;
+            color: #94A3B8;
+            border-radius: 3px;
+            padding: 2px 7px;
+            font-size: 9.5px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            white-space: nowrap;
+        }
+
+        .cmd-copy-btn:hover {
+            background: var(--arm-accent);
+            color: #04080D;
+            border-color: var(--arm-accent);
+        }
+
+        .io-tag-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 4px;
+            font-size: 9.5px;
+            flex-wrap: wrap;
+        }
+
+        .io-tag {
+            padding: 1px 6px;
+            border-radius: 3px;
+            font-weight: 700;
+            font-family: monospace;
+        }
+
+        .io-in {
+            background: rgba(255, 183, 77, 0.15);
+            border: 1px solid rgba(255, 183, 77, 0.4);
+            color: #FFB74D;
+        }
+
+        .io-out {
+            background: rgba(0, 230, 118, 0.15);
+            border: 1px solid rgba(0, 230, 118, 0.4);
+            color: #00E676;
+        }
+
         /* Sequence Diagram Box on Slide 3 */
         .seq-diagram-box {
             background: #060B12;
@@ -871,34 +1044,147 @@
         <div class="slide" id="slide-2">
             <div class="category-tag">Hardware Co-Design &bull; Bus Matrix &amp; Memory Topology</div>
             <h2 class="slide-title">Arm Corstone-300 Subsystem &amp; Dual-AXI microNPU Architecture</h2>
+            <p class="slide-subtitle" style="margin-bottom: 8px;">Silicon-level topology: Multi-layer 64-bit AXI5 crossbar with autonomous dual-channel DMA weight &amp; activation streaming.</p>
+
+            <!-- Inline Hardware Architecture & Dual-AXI Interconnect Schematic -->
+            <div class="arch-diagram-box">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 215" width="100%" height="215">
+                    <defs>
+                        <linearGradient id="gradCore" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#0F3854"/>
+                            <stop offset="100%" stop-color="#1565C0"/>
+                        </linearGradient>
+                        <linearGradient id="gradNpu" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#1B4D2E"/>
+                            <stop offset="100%" stop-color="#2E7D32"/>
+                        </linearGradient>
+                        <linearGradient id="gradAxi" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#0E2338"/>
+                            <stop offset="50%" stop-color="#00838F"/>
+                            <stop offset="100%" stop-color="#0E2338"/>
+                        </linearGradient>
+                        <linearGradient id="gradFlash" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#263238"/>
+                            <stop offset="100%" stop-color="#37474F"/>
+                        </linearGradient>
+                        <linearGradient id="gradSram" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#004D40"/>
+                            <stop offset="100%" stop-color="#00695C"/>
+                        </linearGradient>
+                        <linearGradient id="gradUart" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#311B92"/>
+                            <stop offset="100%" stop-color="#4A148C"/>
+                        </linearGradient>
+                        <marker id="arrCyan" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+                            <polygon points="0 0, 7 3.5, 0 7" fill="#00E5FF"/>
+                        </marker>
+                        <marker id="arrGreen" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+                            <polygon points="0 0, 7 3.5, 0 7" fill="#00E676"/>
+                        </marker>
+                        <marker id="arrOrange" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+                            <polygon points="0 0, 7 3.5, 0 7" fill="#FFB74D"/>
+                        </marker>
+                    </defs>
+
+                    <!-- Background Frame -->
+                    <rect width="1100" height="215" rx="8" fill="#070D14" stroke="#16273A" stroke-width="1"/>
+
+                    <!-- 1. Cortex-M55 CPU Block (Left) -->
+                    <g transform="translate(18, 12)">
+                        <rect width="320" height="74" rx="6" fill="url(#gradCore)" stroke="#00E5FF" stroke-width="1.2"/>
+                        <text x="12" y="20" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">⚡ CORTEX-M55 CPU (Host Controller)</text>
+                        <text x="12" y="36" font-family="'Segoe UI', sans-serif" font-size="10.5" fill="#B3E5FC">&bull; Armv8.1-M Helium MVE (128-bit Vector DSP)</text>
+                        <text x="12" y="52" font-family="'Segoe UI', sans-serif" font-size="10.5" fill="#E1F5FE">&bull; SysTick 25MHz &amp; TF-M Non-Secure Domain</text>
+                        <text x="12" y="67" font-family="'Segoe UI', sans-serif" font-size="10.5" fill="#80D8FF">&bull; Semihosting Trap (BKPT 0xAB) Audio Ingestion</text>
+                    </g>
+
+                    <!-- 2. Ethos-U55 microNPU Block (Right) -->
+                    <g transform="translate(680, 12)">
+                        <rect width="400" height="74" rx="6" fill="url(#gradNpu)" stroke="#00E676" stroke-width="1.2"/>
+                        <text x="14" y="20" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">🧠 ETHOS-U55 microNPU (128 MACs Co-Processor)</text>
+                        <text x="14" y="36" font-family="'Segoe UI', sans-serif" font-size="10.5" fill="#C8E6C9">&bull; Clustered Weight Decompression &amp; INT8 Engine</text>
+                        <text x="14" y="52" font-family="'Segoe UI', sans-serif" font-size="10.5" font-weight="700" fill="#FFE082">&bull; Port M0: 64-bit Read-Only Flash Weights Stream</text>
+                        <text x="14" y="67" font-family="'Segoe UI', sans-serif" font-size="10.5" font-weight="700" fill="#69F0AE">&bull; Port M1: 64-bit R/W Internal SRAM Activation DMA</text>
+                    </g>
+
+                    <!-- Core to Bus link -->
+                    <line x1="178" y1="86" x2="178" y2="104" stroke="#00E5FF" stroke-width="2.5" marker-end="url(#arrCyan)"/>
+                    <text x="186" y="99" font-family="'Segoe UI', sans-serif" font-size="9" font-weight="700" fill="#80D8FF">AXI Master</text>
+
+                    <!-- NPU Port M0 & Port M1 links -->
+                    <line x1="770" y1="86" x2="770" y2="104" stroke="#FFB74D" stroke-width="2.5" marker-end="url(#arrOrange)"/>
+                    <text x="712" y="99" font-family="'Segoe UI', sans-serif" font-size="9" font-weight="700" fill="#FFB74D">Port M0 (Flash)</text>
+
+                    <line x1="970" y1="86" x2="970" y2="104" stroke="#00E676" stroke-width="2.5" marker-end="url(#arrGreen)"/>
+                    <text x="914" y="99" font-family="'Segoe UI', sans-serif" font-size="9" font-weight="700" fill="#69F0AE">Port M1 (SRAM)</text>
+
+                    <!-- 3. Multi-Layer AXI5 Crossbar Matrix (Center) -->
+                    <g transform="translate(18, 106)">
+                        <rect width="1062" height="30" rx="5" fill="url(#gradAxi)" stroke="#00E5FF" stroke-width="1.2"/>
+                        <text x="531" y="20" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11.5" font-weight="800" fill="#FFFFFF" letter-spacing="0.5">
+                            MULTI-LAYER 64-BIT AXI5 CROSSBAR &amp; MEMORY BUS MATRIX (3.73 GB/s &bull; Zero CPU/NPU Arbitration Stalls)
+                        </text>
+                    </g>
+
+                    <!-- Bus to Memory and Peripherals links -->
+                    <line x1="178" y1="136" x2="178" y2="152" stroke="#B0BEC5" stroke-width="2" marker-end="url(#arrCyan)"/>
+                    <line x1="550" y1="136" x2="550" y2="152" stroke="#00E5FF" stroke-width="2" marker-end="url(#arrCyan)"/>
+                    <line x1="920" y1="136" x2="920" y2="152" stroke="#CE93D8" stroke-width="2" marker-end="url(#arrOrange)"/>
+
+                    <!-- 4. Lower Memory & Peripheral Nodes -->
+                    <!-- Flash -->
+                    <g transform="translate(18, 154)">
+                        <rect width="320" height="50" rx="5" fill="url(#gradFlash)" stroke="#78909C" stroke-width="1"/>
+                        <text x="12" y="18" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="700" fill="#ECEFF1">📦 QSPI Flash Memory (0x00000000)</text>
+                        <text x="12" y="32" font-family="'Segoe UI', sans-serif" font-size="10" fill="#CFD8DC">• 30.5 KB Vela Weights &amp; Command Stream</text>
+                        <text x="12" y="44" font-family="'Segoe UI', sans-serif" font-size="9.5" fill="#90A4AE">• 43.3 KB Bare-Metal Vector Table &amp; Firmware</text>
+                    </g>
+
+                    <!-- Internal SRAM -->
+                    <g transform="translate(370, 154)">
+                        <rect width="360" height="50" rx="5" fill="url(#gradSram)" stroke="#00E5FF" stroke-width="1.2"/>
+                        <text x="12" y="18" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="800" fill="#E0F7FA">💾 Internal Shared SRAM (0x21000000)</text>
+                        <text x="12" y="32" font-family="'Segoe UI', sans-serif" font-size="10" fill="#B2EBF2">• 64 KiB Tensor Arena (0x21010000) &bull; MPC Guard</text>
+                        <text x="12" y="44" font-family="'Segoe UI', sans-serif" font-size="9.5" font-weight="700" fill="#69F0AE">• Consumed: 21.7 KiB (66.1% Headroom) &bull; Zero Overflow</text>
+                    </g>
+
+                    <!-- APB Peripherals & UART -->
+                    <g transform="translate(760, 154)">
+                        <rect width="320" height="50" rx="5" fill="url(#gradUart)" stroke="#BA68C8" stroke-width="1"/>
+                        <text x="12" y="18" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="700" fill="#F3E5F5">📡 APB Peripherals &amp; Console</text>
+                        <text x="12" y="32" font-family="'Segoe UI', sans-serif" font-size="10" fill="#E1BEE7">• CMSDK APB UART0 (0x49303000)</text>
+                        <text x="12" y="44" font-family="'Segoe UI', sans-serif" font-size="9.5" fill="#CE93D8">• Dual-Timer (25MHz) &amp; Semihosting Output</text>
+                    </g>
+                </svg>
+            </div>
             
             <div class="cards-grid-3">
-                <div class="card">
-                    <div class="card-icon">&#9881;</div>
-                    <h3 class="card-title">Compute Co-Design</h3>
-                    <p class="card-desc">Cortex-M55 CPU with Helium MVE handles audio MFCC/DSP feature extraction &amp; layer fallbacks; Ethos-U55 executes high-density tensor convolutions (128 MACs/cycle).</p>
-                    <div class="stat-chip">Helium MVE + 128 MACs Co-Design</div>
+                <div class="card" style="padding: 10px 14px;">
+                    <div class="card-icon" style="font-size: 16px;">&#9881;</div>
+                    <h3 class="card-title" style="font-size: 13px;">Compute Co-Design</h3>
+                    <p class="card-desc" style="font-size: 11px; line-height: 1.35;">Cortex-M55 CPU with Helium MVE handles audio DSP/MFCC feature extraction &amp; layer fallbacks; Ethos-U55 executes high-density tensor convolutions (128 MACs/cycle).</p>
+                    <div class="stat-chip" style="font-size: 9.5px; padding: 2px 6px;">Helium MVE + 128 MACs Co-Design</div>
                 </div>
-                <div class="card">
-                    <div class="card-icon">&#128260;</div>
-                    <h3 class="card-title">Dual-AXI Master DMA</h3>
-                    <p class="card-desc">Ethos-U55 operates with two independent 64-bit AXI master ports: Port M0 reads Flash weights, Port M1 reads/writes SRAM activations simultaneously without bus stalls.</p>
-                    <div class="stat-chip green">64-bit Multi-Layer AXI5 Crossbar</div>
+                <div class="card" style="padding: 10px 14px;">
+                    <div class="card-icon" style="font-size: 16px;">&#128260;</div>
+                    <h3 class="card-title" style="font-size: 13px;">Dual-AXI Master DMA</h3>
+                    <p class="card-desc" style="font-size: 11px; line-height: 1.35;">Ethos-U55 operates with two independent 64-bit AXI master ports: Port M0 reads Flash weights, Port M1 reads/writes SRAM activations simultaneously without bus stalls.</p>
+                    <div class="stat-chip green" style="font-size: 9.5px; padding: 2px 6px;">64-bit Multi-Layer AXI5 Crossbar</div>
                 </div>
-                <div class="card">
-                    <div class="card-icon">&#128737;</div>
-                    <h3 class="card-title">Memory &amp; TrustZone</h3>
-                    <p class="card-desc">Shared SRAM (0x21000000, 64 KiB arena) guarded by Memory Protection Controllers (MPC) and Trusted Firmware-M (TF-M) to prevent illegal DMA writes.</p>
-                    <div class="stat-chip orange">PSA Level 2 Bus Isolation</div>
+                <div class="card" style="padding: 10px 14px;">
+                    <div class="card-icon" style="font-size: 16px;">&#128737;</div>
+                    <h3 class="card-title" style="font-size: 13px;">Memory &amp; TrustZone</h3>
+                    <p class="card-desc" style="font-size: 11px; line-height: 1.35;">Shared SRAM (0x21000000, 64 KiB arena) guarded by Memory Protection Controllers (MPC) and Trusted Firmware-M (TF-M) to prevent illegal DMA writes.</p>
+                    <div class="stat-chip orange" style="font-size: 9.5px; padding: 2px 6px;">PSA Level 2 Bus Isolation</div>
                 </div>
             </div>
 
-            <div style="margin-top: 18px; background: rgba(0, 145, 189, 0.08); border: 1px solid var(--card-border); border-radius: 8px; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between;">
+            <div style="margin-top: 10px; background: rgba(0, 145, 189, 0.08); border: 1px solid var(--card-border); border-radius: 8px; padding: 10px 16px; display: flex; align-items: center; justify-content: space-between;">
                 <div>
-                    <span style="font-size: 13px; font-weight: 700; color: var(--arm-accent);">Hardware Interconnect Insight:</span>
-                    <span style="font-size: 12px; color: #CBD5E1; margin-left: 8px;">The multi-layer AXI5 crossbar enables the CPU to run code and the NPU to stream DMA memory transfers in parallel with zero bus arbitration contention.</span>
+                    <span style="font-size: 12px; font-weight: 700; color: var(--arm-accent);">Hardware Interconnect Insight:</span>
+                    <span style="font-size: 11.5px; color: #CBD5E1; margin-left: 8px;">The multi-layer AXI5 crossbar enables the CPU to run code and the NPU to stream DMA memory transfers in parallel with zero bus arbitration contention.</span>
                 </div>
-                <button onclick="toggleDiagram()" style="font-size: 11px; padding: 6px 14px; background: var(--arm-blue); border: 1px solid var(--arm-cyan); color: #fff; cursor: pointer; border-radius: 4px; font-weight: 700;">View Architecture Diagram (D)</button>
+                <button onclick="toggleDiagram()" style="font-size: 11px; padding: 5px 12px; background: var(--arm-blue); border: 1px solid var(--arm-cyan); color: #fff; cursor: pointer; border-radius: 4px; font-weight: 700;">Full Subsystem Map (D)</button>
             </div>
         </div>
 
@@ -907,6 +1193,31 @@
             <div class="category-tag">Live Demonstration Architecture &bull; Hardware-in-the-Loop Testbench</div>
             <h2 class="slide-title">Live Speech to Virtual Silicon: Experiment Sequence Flow</h2>
             <p class="slide-subtitle" style="margin-bottom: 8px;">Simplified logical sequence tracing microphone capture, REST transport, and neural execution on virtual hardware.</p>
+
+            <!-- 3-Phase Conceptual Breadcrumb Flow -->
+            <div class="phase-flow-bar">
+                <div class="phase-badge phase-1">
+                    <span class="phase-num">PHASE 1</span>
+                    <div class="phase-text">
+                        <strong>Audio DSP Preprocessing</strong>
+                        Web Audio API: 16 kHz PCM ➔ 490 INT8 MFCC
+                    </div>
+                </div>
+                <div class="phase-badge phase-2">
+                    <span class="phase-num">PHASE 2</span>
+                    <div class="phase-text">
+                        <strong>Semihosting DMA Ingestion</strong>
+                        Cortex-M55 traps BKPT 0xAB ➔ pulls tensor to SRAM (0x21010000)
+                    </div>
+                </div>
+                <div class="phase-badge phase-3">
+                    <span class="phase-num">PHASE 3</span>
+                    <div class="phase-text">
+                        <strong>Silicon NPU Acceleration</strong>
+                        Ethos-U55 executes 24.6k cycles ➔ APB UART telemetry stream
+                    </div>
+                </div>
+            </div>
             
             <!-- Visual Sequence Diagram / Flowchart SVG -->
             <div class="seq-diagram-box">
@@ -1068,11 +1379,94 @@
         <div class="slide" id="slide-4">
             <div class="category-tag">Operative Lab Guide &bull; Setup, Compilation &amp; Validation</div>
             <h2 class="slide-title">Source Tree, Step-by-Step Build &amp; Execution Guide</h2>
-            <p class="slide-subtitle" style="margin-bottom: 12px;">Complete instructions for participants to clone, compile, and execute the Corstone-300 Edge AI lab independently.</p>
+            <p class="slide-subtitle" style="margin-bottom: 6px;">Complete instructions for participants to clone, compile, and execute the Corstone-300 Edge AI lab independently.</p>
+
+            <!-- System Prerequisites Strip -->
+            <div class="prereq-strip">
+                <div class="prereq-item"><span class="prereq-tag">Target:</span> <span class="prereq-val">Arm Corstone-300 (MPS3-AN547)</span></div>
+                <span style="color: #334155;">&bull;</span>
+                <div class="prereq-item"><span class="prereq-tag">Host OS:</span> <span class="prereq-val">Ubuntu 20.04+ / WSL2</span></div>
+                <span style="color: #334155;">&bull;</span>
+                <div class="prereq-item"><span class="prereq-tag">Toolchain:</span> <span class="prereq-val">arm-none-eabi-gcc 10.3+</span></div>
+                <span style="color: #334155;">&bull;</span>
+                <div class="prereq-item"><span class="prereq-tag">Compiler:</span> <span class="prereq-val">Arm Vela 5.2.0</span></div>
+                <span style="color: #334155;">&bull;</span>
+                <div class="prereq-item"><span class="prereq-tag">Simulators:</span> <span class="prereq-val">Arm Fast Models FVP &amp; QEMU</span></div>
+            </div>
+
+            <!-- Operations Pipeline Flowchart -->
+            <div class="ops-pipeline-box">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 64" width="100%" height="64">
+                    <defs>
+                        <linearGradient id="opGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#006064"/><stop offset="100%" stop-color="#00838F"/>
+                        </linearGradient>
+                        <linearGradient id="opGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#E65100"/><stop offset="100%" stop-color="#FB8C00"/>
+                        </linearGradient>
+                        <linearGradient id="opGrad3" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#1565C0"/><stop offset="100%" stop-color="#1E88E5"/>
+                        </linearGradient>
+                        <linearGradient id="opGrad4" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#2E7D32"/><stop offset="100%" stop-color="#43A047"/>
+                        </linearGradient>
+                        <linearGradient id="opGrad5" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#4A148C"/><stop offset="100%" stop-color="#7B1FA2"/>
+                        </linearGradient>
+                        <marker id="arrOp" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                            <polygon points="0 0, 6 3, 0 6" fill="#00E5FF"/>
+                        </marker>
+                    </defs>
+
+                    <!-- Stage 1 -->
+                    <g transform="translate(10, 5)">
+                        <rect width="195" height="54" rx="5" fill="url(#opGrad1)" stroke="#00E5FF" stroke-width="1"/>
+                        <text x="12" y="18" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="800" fill="#FFFFFF">1. Pre-Flight Audit</text>
+                        <text x="12" y="32" font-family="'Segoe UI', sans-serif" font-size="9.5" fill="#E0F7FA">Tool: python3 sanity_check.py</text>
+                        <text x="12" y="45" font-family="'Segoe UI', sans-serif" font-size="9" fill="#B2EBF2">Audits GCC, Vela, FVP, QEMU</text>
+                    </g>
+                    <line x1="208" y1="32" x2="224" y2="32" stroke="#00E5FF" stroke-width="2" marker-end="url(#arrOp)"/>
+
+                    <!-- Stage 2 -->
+                    <g transform="translate(228, 5)">
+                        <rect width="195" height="54" rx="5" fill="url(#opGrad2)" stroke="#FFB74D" stroke-width="1"/>
+                        <text x="12" y="18" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="800" fill="#FFFFFF">2. Vela Model Compiler</text>
+                        <text x="12" y="32" font-family="'Segoe UI', sans-serif" font-size="9.5" fill="#FFF3E0">Input: ds_cnn_s_quantized.tflite</text>
+                        <text x="12" y="45" font-family="'Segoe UI', sans-serif" font-size="9" fill="#FFE0B2">Output: Vela INT8 stream (30.5 KB)</text>
+                    </g>
+                    <line x1="426" y1="32" x2="442" y2="32" stroke="#00E5FF" stroke-width="2" marker-end="url(#arrOp)"/>
+
+                    <!-- Stage 3 -->
+                    <g transform="translate(446, 5)">
+                        <rect width="195" height="54" rx="5" fill="url(#opGrad3)" stroke="#64B5F6" stroke-width="1"/>
+                        <text x="12" y="18" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="800" fill="#FFFFFF">3. GCC Firmware Link</text>
+                        <text x="12" y="32" font-family="'Segoe UI', sans-serif" font-size="9.5" fill="#E3F2FD">Command: make clean &amp;&amp; make</text>
+                        <text x="12" y="45" font-family="'Segoe UI', sans-serif" font-size="9" fill="#BBDEFB">Output: build/firmware.elf</text>
+                    </g>
+                    <line x1="644" y1="32" x2="660" y2="32" stroke="#00E5FF" stroke-width="2" marker-end="url(#arrOp)"/>
+
+                    <!-- Stage 4 -->
+                    <g transform="translate(664, 5)">
+                        <rect width="195" height="54" rx="5" fill="url(#opGrad4)" stroke="#81C784" stroke-width="1"/>
+                        <text x="12" y="18" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="800" fill="#FFFFFF">4. FVP Test Harness</text>
+                        <text x="12" y="32" font-family="'Segoe UI', sans-serif" font-size="9.5" fill="#E8F5E9">Runner: python3 test_harness.py</text>
+                        <text x="12" y="45" font-family="'Segoe UI', sans-serif" font-size="9" fill="#C8E6C9">Output: 5/5 UART Scorecard (3.6s)</text>
+                    </g>
+                    <line x1="862" y1="32" x2="878" y2="32" stroke="#00E5FF" stroke-width="2" marker-end="url(#arrOp)"/>
+
+                    <!-- Stage 5 -->
+                    <g transform="translate(882, 5)">
+                        <rect width="208" height="54" rx="5" fill="url(#opGrad5)" stroke="#BA68C8" stroke-width="1"/>
+                        <text x="12" y="18" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="800" fill="#FFFFFF">5. Live Voice Testbench</text>
+                        <text x="12" y="32" font-family="'Segoe UI', sans-serif" font-size="9.5" fill="#F3E5F5">Server: live_bridge_server.py</text>
+                        <text x="12" y="45" font-family="'Segoe UI', sans-serif" font-size="9" fill="#E1BEE7">Output: Real-Time Dual FVP &amp; QEMU</text>
+                    </g>
+                </svg>
+            </div>
             
-            <div class="guide-grid">
+            <div class="guide-grid" style="margin-top: 6px;">
                 <!-- Left: Repository Structure Tree -->
-                <pre class="tree-container"><span class="tree-folder">Arm_Corstone300_EdgeAI_Lab/</span>
+                <pre class="tree-container" style="max-height: 400px;"><span class="tree-folder">Arm_Corstone300_EdgeAI_Lab/</span>
 ├── <span class="tree-folder">model/</span>
 │   ├── <span class="tree-file">ds_cnn_s_quantized.tflite</span>   <span class="tree-comment"># Arm ML-Zoo Model (Bundled)</span>
 │   └── <span class="tree-folder">output_vela/</span>                <span class="tree-comment"># Vela command stream &amp; CSV</span>
@@ -1092,34 +1486,74 @@
 └── <span class="tree-file">Makefile</span>                        <span class="tree-comment"># GNU Make build system</span></pre>
 
                 <!-- Right: Step-by-Step Operative Commands -->
-                <div class="commands-list">
+                <div class="commands-list" style="max-height: 400px;">
+                    <!-- Step 1 -->
                     <div class="cmd-item">
-                        <div class="cmd-label"><span>1. Pre-Flight Environment Sanity Check</span> <span style="color: #00E676;">Verified</span></div>
-                        <div class="cmd-code">python3 scripts/sanity_check.py</div>
+                        <div class="cmd-label"><span>1. Pre-Flight Environment Sanity Check</span> <span style="color: #00E676;">Verified PASS</span></div>
+                        <div class="io-tag-row">
+                            <span class="io-tag io-in">IN: Host OS &amp; Python 3.8+</span>
+                            <span class="io-tag io-out">OUT: Toolchain Audit PASS</span>
+                        </div>
+                        <div class="cmd-code-row">
+                            <span class="cmd-code-text">python3 scripts/sanity_check.py</span>
+                            <button class="cmd-copy-btn" onclick="copyCmd('python3 scripts/sanity_check.py', this)">📋 Copy</button>
+                        </div>
                         <div class="cmd-result">Audits GNU Arm GCC 10.3+, Vela 5.2.0, FVP binary, and QEMU.</div>
                     </div>
 
+                    <!-- Step 2 -->
                     <div class="cmd-item">
                         <div class="cmd-label"><span>2. Vela NPU Model Compilation</span> <span style="color: #00E676;">Arm ML-Zoo Model</span></div>
-                        <div class="cmd-code">vela model/ds_cnn_s_quantized.tflite --accelerator-config ethos-u55-128 --output-dir model/output_vela</div>
-                        <div class="cmd-result">Pre-packaged from official <strong>Arm ML-Zoo</strong> (GitHub). Vela compiles 49/49 ops for Ethos-U55 (21.7 KiB SRAM arena, 30.5 KiB Flash).</div>
+                        <div class="io-tag-row">
+                            <span class="io-tag io-in">IN: model/ds_cnn_s_quantized.tflite</span>
+                            <span class="io-tag io-out">OUT: model/output_vela/ (30.5 KB)</span>
+                        </div>
+                        <div class="cmd-code-row">
+                            <span class="cmd-code-text">vela model/ds_cnn_s_quantized.tflite --accelerator-config ethos-u55-128 --output-dir model/output_vela</span>
+                            <button class="cmd-copy-btn" onclick="copyCmd('vela model/ds_cnn_s_quantized.tflite --accelerator-config ethos-u55-128 --output-dir model/output_vela', this)">📋 Copy</button>
+                        </div>
+                        <div class="cmd-result">Pre-packaged from official <strong>Arm ML-Zoo</strong> (GitHub). Vela compiles 49/49 ops for Ethos-U55 (21.7 KiB SRAM arena, 30.5 KiB Flash weights).</div>
                     </div>
 
+                    <!-- Step 3 -->
                     <div class="cmd-item">
                         <div class="cmd-label"><span>3. Compile Target Firmware (ELF Binary)</span> <span style="color: #00E676;">arm-none-eabi-gcc</span></div>
-                        <div class="cmd-code">make clean &amp;&amp; make</div>
-                        <div class="cmd-result">Produces <code>build/firmware.elf</code> (the executable flashed into virtual memory). Contains startup vectors, APB UART, Ethos-U drivers, and model weights (text: 43.3 KB, BSS: 82.4 KB).</div>
+                        <div class="io-tag-row">
+                            <span class="io-tag io-in">IN: src/*.c &amp; corstone300.ld</span>
+                            <span class="io-tag io-out">OUT: build/firmware.elf</span>
+                        </div>
+                        <div class="cmd-code-row">
+                            <span class="cmd-code-text">make clean &amp;&amp; make</span>
+                            <button class="cmd-copy-btn" onclick="copyCmd('make clean && make', this)">📋 Copy</button>
+                        </div>
+                        <div class="cmd-result">Produces <code>build/firmware.elf</code> (executable flashed into virtual memory). Contains startup vectors, APB UART, Ethos-U drivers, and model weights (text: 43.3 KB, BSS: 82.4 KB).</div>
                     </div>
 
+                    <!-- Step 4 -->
                     <div class="cmd-item">
                         <div class="cmd-label"><span>4. Automated Test Harness (Launches AVH FVP)</span> <span style="color: #00E676;">7/7 PASS</span></div>
-                        <div class="cmd-code">python3 tests/test_harness.py</div>
+                        <div class="io-tag-row">
+                            <span class="io-tag io-in">IN: build/firmware.elf</span>
+                            <span class="io-tag io-out">OUT: 5/5 Hardware UART Assertions</span>
+                        </div>
+                        <div class="cmd-code-row">
+                            <span class="cmd-code-text">python3 tests/test_harness.py</span>
+                            <button class="cmd-copy-btn" onclick="copyCmd('python3 tests/test_harness.py', this)">📋 Copy</button>
+                        </div>
                         <div class="cmd-result">Launches the Arm FVP simulator with <code>firmware.elf</code>, executes inference, and validates 5/5 hardware UART assertions (latency, SRAM bounds, accuracy) in ~3.6s.</div>
                     </div>
 
+                    <!-- Step 5 -->
                     <div class="cmd-item">
                         <div class="cmd-label"><span>5. Live Audio Testbench Bridge</span> <span style="color: #00E676;">Port 8080</span></div>
-                        <div class="cmd-code">python3 scripts/live_bridge_server.py</div>
+                        <div class="io-tag-row">
+                            <span class="io-tag io-in">IN: Browser Mic (16 kHz PCM)</span>
+                            <span class="io-tag io-out">OUT: Live FVP &amp; QEMU Telemetry</span>
+                        </div>
+                        <div class="cmd-code-row">
+                            <span class="cmd-code-text">python3 scripts/live_bridge_server.py</span>
+                            <button class="cmd-copy-btn" onclick="copyCmd('python3 scripts/live_bridge_server.py', this)">📋 Copy</button>
+                        </div>
                         <div class="cmd-result">REST server for browser mic: runs <code>firmware.elf</code> inside FVP and QEMU on every live voice capture via semihosting audio ingestion.</div>
                     </div>
                 </div>
@@ -1367,7 +1801,7 @@
  Target Architecture: Armv8.1-M Mainline (Cortex-M55)
  Vector Acceleration: Arm Helium MVE (M-Profile Vector Extension)
  Neural Accelerator:  Arm Ethos-U55 microNPU (128 MACs/cycle)
- Platform Software:   Zephyr RTOS Microkernel & CMSIS-NN
+ Platform Software:   Bare-Metal C Runtime & CMSIS-NN
  Security Subsystem:  Trusted Firmware-M (TF-M) Partitioning
  Virtual Platform:    Arm Corstone-300 Fixed Virtual Platform / AVH
 =================================================================
@@ -1569,7 +2003,7 @@ Info: /OSCI/SystemC: Simulation stopped by user.
 
               <g transform="translate(40, 48)">
                 <text font-family="'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="800" fill="#FFFFFF" letter-spacing="0.5">Arm Corstone-300: Hardware Subsystem to Software Stack Mapping</text>
-                <text y="24" font-family="'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="500" fill="#8EADC6">Comprehensive breakdown of Operating System (Zephyr), AI Engine (TFLM/Vela), Security (TF-M), and Hardware Silicon Blocks</text>
+                <text y="24" font-family="'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="500" fill="#8EADC6">Comprehensive breakdown of Bare-Metal C Runtime, AI Engine (TFLM/Vela), Security (TF-M), and Hardware Silicon Blocks</text>
               </g>
 
               <g transform="translate(860, 42)">
@@ -1580,15 +2014,15 @@ Info: /OSCI/SystemC: Simulation stopped by user.
                 <text x="162" y="21" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#B2EBF2">Hardware Block</text>
               </g>
 
-              <!-- BLOCK 1: Cortex-M55 CPU + Zephyr / TFLM / CMSIS-NN -->
+              <!-- BLOCK 1: Cortex-M55 CPU + Bare-Metal C / TFLM / CMSIS-NN -->
               <g transform="translate(40, 95)">
                 <rect width="350" height="235" fill="#0B131C" stroke="#0091BD" stroke-width="2" rx="10" filter="url(#cardShadow3)"/>
                 <rect x="1" y="1" width="348" height="24" fill="url(#swZephyrGrad3)" rx="9"/>
                 <rect x="1" y="16" width="348" height="9" fill="url(#swZephyrGrad3)"/>
                 <text x="175" y="17" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="800" fill="#FFFFFF" letter-spacing="0.5">SOFTWARE RUNNING ON CORTEX-M55</text>
                 <g transform="translate(14, 38)">
-                  <text font-family="'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#CE93D8">&bull; Zephyr RTOS Microkernel (v3.5+)</text>
-                  <text x="12" y="16" font-family="'Segoe UI', sans-serif" font-size="11" fill="#B0BEC5">Multi-threaded scheduler, SysTick preemption</text>
+                  <text font-family="'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#CE93D8">&bull; Bare-Metal CMSIS Runtime &amp; Startup</text>
+                  <text x="12" y="16" font-family="'Segoe UI', sans-serif" font-size="11" fill="#B0BEC5">Reset handler, vector table, SysTick timer &amp; semihosting</text>
                   <text y="36" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#00E5FF">&bull; CMSIS-NN &amp; Helium Vector Kernels</text>
                   <text x="12" y="52" font-family="'Segoe UI', sans-serif" font-size="11" fill="#B0BEC5">DSP Audio MFCC/FFT feature extraction (5x speedup)</text>
                   <text y="72" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#80D8FF">&bull; TensorFlow Lite for Microcontrollers (TFLM)</text>
@@ -1616,7 +2050,7 @@ Info: /OSCI/SystemC: Simulation stopped by user.
                   <text y="36" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#FFA726">&bull; Arm Vela Compiled Command Stream</text>
                   <text x="12" y="52" font-family="'Segoe UI', sans-serif" font-size="11" fill="#B0BEC5">Low-level DMA micro-ops executed autonomously</text>
                   <text y="72" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#FFE0B2">&bull; Hardware IRQ Handler (IRQ #56)</text>
-                  <text x="12" y="88" font-family="'Segoe UI', sans-serif" font-size="11" fill="#B0BEC5">Wakes Zephyr inference thread on tensor completion</text>
+                  <text x="12" y="88" font-family="'Segoe UI', sans-serif" font-size="11" fill="#B0BEC5">Raises completion IRQ to Cortex-M55 host core</text>
                 </g>
                 <line x1="1" y1="145" x2="349" y2="145" stroke="#FF6B00" stroke-width="1.5" stroke-dasharray="4,3"/>
                 <rect x="1" y="146" width="348" height="22" fill="url(#hwNpuGrad3)"/>
@@ -1640,7 +2074,7 @@ Info: /OSCI/SystemC: Simulation stopped by user.
                   <text y="36" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#C8E6C9">&bull; PSA Crypto &amp; Secure Storage</text>
                   <text x="12" y="52" font-family="'Segoe UI', sans-serif" font-size="11" fill="#B0BEC5">Hardware key store, model weight authentication</text>
                   <text y="72" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#81C784">&bull; Non-Secure Callable (NSC) Veneers</text>
-                  <text x="12" y="88" font-family="'Segoe UI', sans-serif" font-size="11" fill="#B0BEC5">Guard entry from Zephyr non-secure application</text>
+                  <text x="12" y="88" font-family="'Segoe UI', sans-serif" font-size="11" fill="#B0BEC5">Guard entry to Non-Secure bare-metal application</text>
                 </g>
                 <line x1="1" y1="145" x2="349" y2="145" stroke="#00C853" stroke-width="1.5" stroke-dasharray="4,3"/>
                 <rect x="1" y="146" width="348" height="22" fill="url(#hwTzGrad3)"/>
@@ -1674,8 +2108,8 @@ Info: /OSCI/SystemC: Simulation stopped by user.
                   <text x="12" y="16" font-family="'Segoe UI', sans-serif" font-size="11" fill="#B0BEC5">TFLM activation tensors &amp; NPU DMA scratchpad</text>
                   <text y="36" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#B2EBF2">&bull; Linker Overflow Guard (ASSERT)</text>
                   <text x="12" y="52" font-family="'Segoe UI', sans-serif" font-size="11" fill="#B0BEC5">Enforces strict 64KB boundary limit at build time</text>
-                  <text y="72" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#E0F7FA">&bull; Zephyr Kernel BSS &amp; Thread Stacks</text>
-                  <text x="12" y="88" font-family="'Segoe UI', sans-serif" font-size="11" fill="#B0BEC5">Task Control Blocks, message queues, RTOS heap</text>
+                  <text y="72" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#E0F7FA">&bull; Bare-Metal C Stack &amp; BSS Space</text>
+                  <text x="12" y="88" font-family="'Segoe UI', sans-serif" font-size="11" fill="#B0BEC5">Task memory, vector scratchpads, CMSIS-NN buffers</text>
                 </g>
                 <line x1="1" y1="145" x2="349" y2="145" stroke="#00E5FF" stroke-width="1.5" stroke-dasharray="4,3"/>
                 <rect x="1" y="146" width="348" height="22" fill="#162D3D"/>
@@ -1698,8 +2132,8 @@ Info: /OSCI/SystemC: Simulation stopped by user.
                   <text x="12" y="16" font-family="'Segoe UI', sans-serif" font-size="11" fill="#B0BEC5">Vela INT8 weights + Ethos-U command stream</text>
                   <text y="36" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#ECEFF1">&bull; 16-Byte Alignment (__aligned(16))</text>
                   <text x="12" y="52" font-family="'Segoe UI', sans-serif" font-size="11" fill="#B0BEC5">Required for burst DMA transfers into Ethos-U</text>
-                  <text y="72" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#B0BEC5">&bull; Zephyr Kernel Binary &amp; Vectors (.text)</text>
-                  <text x="12" y="88" font-family="'Segoe UI', sans-serif" font-size="11" fill="#B0BEC5">Freestanding executable image (42.8 KiB)</text>
+                  <text y="72" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#B0BEC5">&bull; Bare-Metal Binary &amp; Vectors (.text)</text>
+                  <text x="12" y="88" font-family="'Segoe UI', sans-serif" font-size="11" fill="#B0BEC5">Freestanding executable image (43.3 KiB)</text>
                 </g>
                 <line x1="1" y1="145" x2="349" y2="145" stroke="#78909C" stroke-width="1.5" stroke-dasharray="4,3"/>
                 <rect x="1" y="146" width="348" height="22" fill="#263238"/>
@@ -1801,6 +2235,25 @@ Info: /OSCI/SystemC: Simulation stopped by user.
 
         function toggleDiagram() {
             document.getElementById('diagramModal').classList.toggle('open');
+        }
+
+        function copyCmd(text, btn) {
+            navigator.clipboard.writeText(text).then(() => {
+                const orig = btn.innerText;
+                btn.innerText = '✓ Copied!';
+                btn.style.background = '#00E676';
+                btn.style.color = '#04080D';
+                btn.style.borderColor = '#00E676';
+                setTimeout(() => {
+                    btn.innerText = orig;
+                    btn.style.background = '';
+                    btn.style.color = '';
+                    btn.style.borderColor = '';
+                }, 1600);
+            }).catch(() => {
+                btn.innerText = '✓ Copied';
+                setTimeout(() => { btn.innerText = '📋 Copy'; }, 1600);
+            });
         }
 
         let lastLiveFvpLog = "";
