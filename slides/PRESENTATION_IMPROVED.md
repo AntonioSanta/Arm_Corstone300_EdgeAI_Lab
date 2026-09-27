@@ -154,66 +154,44 @@
 ### On-Slide Content:
 * **Header Tag:** OPERATIVE LAB GUIDE (PART 2) &bull; CONSOLE PLAYBOOK &amp; FACILITATOR MATRIX
 * **Title:** Console Demonstration Playbook &amp; Facilitator Troubleshooting Matrix
-* **Subtitle:** *Concrete console execution options for evaluators, reproducible local strategy, and common embedded mitigations.*
+* **Subtitle:** *Two streamlined execution modes for evaluators to run inference on Corstone-300, plus key embedded safeguards.*
 * **Host Setup & Environment Strip:**
-  - **Attendee Git Clone & Enter:** `git clone https://github.com/AntonioSanta/Arm_Corstone300_EdgeAI_Lab.git && cd Arm_Corstone300_EdgeAI_Lab`
   - **One-Time Host Package Install:** `sudo apt update && sudo apt install -y gcc-arm-none-eabi qemu-system-arm python3-pip make && pip install ethos-u-vela==5.2.0`
-* **Attendee Laptop Playbook (2 Ways to Run):**
-  - **Mode 1: Instant In-Browser Speech Recognition (Zero Installs):** Open `slides/presentation.html` in Chrome or Edge, press key **A** (or click "Live Audio Testbench"), speak *"Yes"* or *"No"*, and watch real-time keyword spotting with client-side Web Audio DSP!
-  - **Mode 2: Full Virtual Silicon Testbench (WSL / Linux):** Clone the repo and execute Option A or Option C below.
-* **Live Console Demonstration Playbook (The 3 Evaluator Options):**
-  - **Option A: The "All-in-One" Acceptance Demo (Recommended — 3.5s):**
+* **Live Console Demonstration Playbook (Two Streamlined Evaluator Modes):**
+  - **Mode 1: Automated Acceptance Test Suite (Recommended for Evaluation — 3.5s):**
     ```bash
     python3 tests/test_harness.py
     ```
-    *Executes full CI: Vela compilation, GCC link, boots official Arm Corstone-300 FVP, prints UART telemetry, and validates 5/5 hardware assertions.*
-  - **Option B: Step-by-Step Developer Workflow & Direct Simulator Launch:**
-    ```bash
-    # 1. Pre-flight check & firmware build
-    python3 scripts/sanity_check.py && make clean && make
-
-    # 2. Run directly on Official Arm Corstone-300 FVP
-    FVP_Corstone_SSE-300_Ethos-U55 \
-      -a build/firmware.elf \
-      -C mps3_board.visualisation.disable-visualisation=1 \
-      -C cpu0.semihosting-enable=1 \
-      -C mps3_board.uart0.out_file=- \
-      -C mps3_board.uart0.unbuffered_output=1 \
-      --timelimit 10
-
-    # 3. (Alternative) Run on QEMU Corstone-300
-    qemu-system-arm -M mps3-an547 -cpu cortex-m55 -display none -serial stdio -semihosting -kernel build/firmware.elf
-    ```
-  - **Option C: Live Browser Voice Testbench Bridge:**
+    *Automates the entire pipeline: compiles the INT8 model with Vela, links firmware with GCC, boots the official Arm Corstone-300 FVP, prints UART telemetry, and asserts 5/5 hardware metrics.*
+  - **Mode 2: Real-Time Interactive Voice Testbench (Browser ↔ Virtual Silicon):**
     ```bash
     # Inside WSL / Linux:
     python3 scripts/live_bridge_server.py
 
-    # From Windows PowerShell / CMD:
-    wsl -d Ubuntu-22.04 -- bash -c "cd /mnt/e/Arm_Corstone300_EdgeAI_Lab && python3 scripts/live_bridge_server.py"
+    # Or 1-click on Windows:
+    # Double-click start_live_bridge.bat
     ```
-    *Starts REST bridge on port 8080 (or double-click `start_live_bridge.bat` in Windows); press key **A** in browser to record live voice ("Yes"/"No") and stream to virtual silicon.*
-* **Pillar 1: Reproducible Local Setup Strategy:**
-  - **Native Local Execution (No Docker / Cloud):** Runs directly in Linux or Windows WSL with standard packages (`arm-none-eabi-gcc`, Python 3). Eliminates container hypervisor overhead, Docker VPN permission issues, and AWS cloud bills.
-  - **ARM Semihosting Dynamic Ingestion:** In virtual hardware, `bkpt 0xab` semihosting ingests dynamic live audio into SRAM without needing to recompile `firmware.elf` on every spoken word.
-  - **Automated Pre-Flight Sanity Script:** Single command (`python3 scripts/sanity_check.py`) audits toolchain binaries and simulator executables before exercises start.
-* **Pillar 2: Expected Technical Mitigations:**
-  - **FVP Launch Headless Errors:** Force terminal-only execution to prevent X11 GUI window crashes in headless environments:
+    *Starts the local REST bridge on port 8080. Evaluators press key **M** in the browser to record live voice ("Yes"/"No"); audio is dynamically loaded into Cortex-M55 SRAM via ARM semihosting and accelerated on Ethos-U55.*
+* **Pillar 1: Reproducible Local Strategy:**
+  - **Native Local Execution:** Runs directly in Linux or Windows WSL with standard packages (`arm-none-eabi-gcc`, Python 3). Eliminates container hypervisor overhead, Docker VPN permission issues, and AWS cloud bills.
+  - **ARM Semihosting Ingestion:** Cortex-M55 executes `bkpt 0xab` to load live voice audio directly into SRAM without recompiling firmware.
+  - **Automated Sanity Check:** Single command (`python3 scripts/sanity_check.py`) audits toolchain binaries and simulator executables in under 1 second.
+* **Pillar 2: Embedded Technical Mitigations:**
+  - **Headless FVP Mode:** Force terminal-only execution to prevent X11 GUI window crashes in headless environments:
     `-C disable-visualisation=1 -C cpu0.semihosting-enable=1`
-  - **Vela Operator Fallbacks:** Route unsupported operations (e.g., custom activations) to Cortex-M55 Helium MVE via CMSIS-NN:
+  - **Vela Operator Fallback:** Route unsupported operations to Cortex-M55 Helium MVE via CMSIS-NN:
     `--ignore-ops FULLY_CONNECTED`
-  - **Memory Region Overflow:** Hard compile-time safety check guarding against SRAM buffer overflow:
+  - **SRAM Memory Guard:** Hard compile-time safety check guarding against SRAM buffer overflow:
     `ASSERT((__tensor_arena_end - __tensor_arena_start) <= 0x10000)`
 
 ### Speaker Talking Points (Your Script):
 > *"Slide 5 is the console execution playbook and troubleshooting guide.*
 >
-> *For participants attending today's presentation who want to follow along on their own laptops, there are two distinct ways to run:*
-> * *If you want an **instant, zero-install experience**, simply open `slides/presentation.html` in Chrome or Edge, hit key **A**, and speak 'Yes' or 'No'. Our presentation includes a built-in client-side Web Audio DSP engine that performs Mel-frequency extraction and keyword classification right inside your browser.*
-> * *If you want the **full virtual silicon experience** with the official Arm Corstone-300 FVP, clone the repository, run the one-line package setup, and execute **Option A** (`python3 tests/test_harness.py`). In 3.5 seconds, it will compile the model, link the firmware, boot the virtual FVP platform, and assert that all 5 hardware metrics PASS.*
-> * *If you want to bridge your live microphone into the virtual silicon, launch **Option C** (`python3 scripts/live_bridge_server.py`) on port 8080. Every spoken word is dynamically loaded into Cortex-M55 SRAM via ARM semihosting and accelerated on Ethos-U55 in under 1 millisecond.*
+> *For evaluators and attendees wanting to run the lab, we have boiled this down to two clear, streamlined modes:*
+> * * **Mode 1 is the 3.5-second automated hardware verification** (`python3 tests/test_harness.py`). In a single command, it compiles the model, links the firmware, boots the virtual Corstone-300 FVP platform, and asserts that all 5 hardware metrics PASS.*
+> * * **Mode 2 is the real-time interactive voice testbench** (`python3 scripts/live_bridge_server.py` or double-clicking `start_live_bridge.bat`). You can then press key **M** in the presentation, speak into your microphone, and watch your voice stream live into the virtual silicon via ARM semihosting.*
 >
-> *At the bottom, we document the facilitator's local strategy—native execution without Docker friction, semihosting dynamic memory ingestion—and the three crucial mitigations: headless FVP flags, Vela CMSIS-NN fallbacks, and compile-time SRAM linker assertions."*
+> *At the bottom, we document our reproducible local strategy—native execution without Docker friction, semihosting dynamic memory ingestion—and the three crucial mitigations: headless FVP flags, Vela CMSIS-NN fallbacks, and compile-time SRAM linker assertions."*
 
 ---
 

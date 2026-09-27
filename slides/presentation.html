@@ -617,8 +617,8 @@
 
         .playbook-modes-grid {
             display: grid;
-            grid-template-columns: 1fr 1.35fr 1fr;
-            gap: 12px;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
         }
 
         .playbook-card {
@@ -2199,115 +2199,61 @@
         <div class="slide" id="slide-5">
             <div class="category-tag">Operative Lab Guide (Part 2) &bull; Console Execution &amp; Facilitator Playbook</div>
             <h2 class="slide-title">Console Demonstration Playbook &amp; Facilitator Troubleshooting Matrix</h2>
-            <p class="slide-subtitle" style="margin-bottom: 8px;">Concrete console execution options for evaluators, reproducible local strategy, and common embedded mitigations.</p>
+            <p class="slide-subtitle" style="margin-bottom: 10px;">Two streamlined execution modes for evaluators to run inference on Corstone-300, plus key embedded safeguards.</p>
             
             <!-- Live Console Operational Playbook (Evaluator & Demo Cheat Sheet) -->
-            <div class="console-playbook-box" style="margin-top: 4px; margin-bottom: 12px;">
+            <div class="console-playbook-box" style="margin-top: 4px; margin-bottom: 14px;">
                 <div class="console-playbook-header">
                     <div style="display: flex; align-items: center; gap: 8px;">
                         <span style="font-size: 15px; color: #00E5FF;">💻</span>
-                        <span style="font-size: 12.5px; font-weight: 800; color: #FFFFFF;">Live Console Demonstration Playbook &bull; Terminal Execution Notes</span>
+                        <span style="font-size: 13px; font-weight: 800; color: #FFFFFF;">One-Time Host Environment Setup</span>
                         <span style="font-size: 9.5px; background: rgba(0,229,255,0.15); color: #00E5FF; padding: 2px 6px; border-radius: 4px; font-weight: 700; border: 1px solid rgba(0,229,255,0.3);">WSL &bull; Ubuntu 22.04</span>
                     </div>
-                    <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
-                        <div style="font-size: 10.5px; color: #94A3B8; display: flex; align-items: center; gap: 4px;">
-                            <span>Step 0 (Clone Repo):</span>
-                            <code style="color: #69F0AE; background: #06101A; padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 9px;">git clone https://github.com/AntonioSanta/Arm_Corstone300_EdgeAI_Lab.git &amp;&amp; cd Arm_Corstone300_EdgeAI_Lab</code>
-                            <button class="cmd-copy-btn" onclick="copyCmd('git clone https://github.com/AntonioSanta/Arm_Corstone300_EdgeAI_Lab.git && cd Arm_Corstone300_EdgeAI_Lab', this)" style="padding: 2px 6px; font-size: 9px;">📋</button>
-                        </div>
-                        <div style="font-size: 10.5px; color: #94A3B8; display: flex; align-items: center; gap: 4px;">
-                            <span>Host Setup (One-time):</span>
-                            <code style="color: #FFB74D; background: #06101A; padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 9px;">sudo apt install -y gcc-arm-none-eabi qemu-system-arm python3-pip make &amp;&amp; pip install ethos-u-vela==5.2.0</code>
-                            <button class="cmd-copy-btn" onclick="copyCmd('sudo apt update && sudo apt install -y gcc-arm-none-eabi qemu-system-arm python3-pip make && pip install ethos-u-vela==5.2.0', this)" style="padding: 2px 6px; font-size: 9px;">📋</button>
+                    <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                        <div style="font-size: 11px; color: #94A3B8; display: flex; align-items: center; gap: 6px;">
+                            <span>Run once in terminal:</span>
+                            <code style="color: #FFB74D; background: #06101A; padding: 3px 8px; border-radius: 4px; font-family: monospace; font-size: 10px;">sudo apt install -y gcc-arm-none-eabi qemu-system-arm python3-pip make &amp;&amp; pip install ethos-u-vela==5.2.0</code>
+                            <button class="cmd-copy-btn" onclick="copyCmd('sudo apt update && sudo apt install -y gcc-arm-none-eabi qemu-system-arm python3-pip make && pip install ethos-u-vela==5.2.0', this)" style="padding: 2px 8px; font-size: 10px;">📋 Copy</button>
                         </div>
                     </div>
-                </div>
-
-                <!-- Attendee Quick Execution Guide Strip -->
-                <div style="background: rgba(0, 229, 255, 0.05); border-bottom: 1px solid rgba(0, 229, 255, 0.2); padding: 5px 12px; display: flex; justify-content: space-between; align-items: center; font-size: 10px; color: #CBD5E1;">
-                    <div>
-                        <strong style="color: #00E5FF;">🎯 2 Ways Attendees Can Run Right Now:</strong> 
-                        <span style="color: #69F0AE; margin-left: 6px;">1. Instant In-Browser:</span> Open <code>slides/presentation.html</code>, press key <strong>A</strong>, and speak! &bull; 
-                        <span style="color: #FFB74D; margin-left: 6px;">2. Virtual Silicon:</span> Clone repo, run Option A (<code>test_harness.py</code>) or Option C (<code>live_bridge_server.py</code>).
-                    </div>
-                    <span style="font-size: 9.5px; color: #94A3B8;">All scripts, C drivers, TFLite models &amp; slides included in repo</span>
                 </div>
 
                 <div class="playbook-modes-grid">
-                    <!-- Option A -->
-                    <div class="playbook-card highlight">
+                    <!-- Mode 1: Automated Acceptance Test -->
+                    <div class="playbook-card highlight" style="padding: 14px 16px;">
                         <div class="playbook-card-header">
-                            <span class="playbook-tag tag-green">Option A &bull; Recommended (3.5s)</span>
+                            <span class="playbook-tag tag-green">Mode 1 &bull; Recommended for Evaluation (3.5s)</span>
                         </div>
-                        <div class="playbook-card-title">All-in-One Acceptance Test Suite</div>
-                        <div class="playbook-note">Runs end-to-end: Vela compile &rarr; GCC link &rarr; boots FVP &rarr; validates 5/5 UART assertions &rarr; telemetry JSON.</div>
-                        <div class="playbook-cmd-entry">
-                            <span class="playbook-cmd-label">Terminal Command:</span>
-                            <div class="playbook-cmd-code">
-                                <code>python3 tests/test_harness.py</code>
-                                <button class="cmd-copy-btn" onclick="copyCmd('python3 tests/test_harness.py', this)">📋</button>
+                        <div class="playbook-card-title" style="font-size: 14px; margin-top: 4px;">All-in-One Automated Acceptance Suite</div>
+                        <div class="playbook-note" style="font-size: 11px; margin-top: 2px;">Automates the full pipeline: compiles model with Vela &rarr; links firmware with GCC &rarr; boots Corstone-300 FVP &rarr; asserts 5/5 hardware metrics via UART.</div>
+                        <div class="playbook-cmd-entry" style="margin-top: 8px;">
+                            <span class="playbook-cmd-label">Terminal Command (WSL / Linux):</span>
+                            <div class="playbook-cmd-code" style="padding: 8px 10px;">
+                                <code style="font-size: 12px; font-weight: 700;">python3 tests/test_harness.py</code>
+                                <button class="cmd-copy-btn" onclick="copyCmd('python3 tests/test_harness.py', this)" style="padding: 4px 10px; font-size: 10px;">📋 Copy</button>
                             </div>
                         </div>
-                        <div class="playbook-note" style="color: #A7F3D0; font-size: 9px;">
-                            <strong>Key Output:</strong> 24,650 NPU cyc (108.1x speedup), 21.7 KiB SRAM safety, keyword "Yes" (100% golden parity).
+                        <div class="playbook-note" style="color: #A7F3D0; font-size: 10px; margin-top: 6px; background: rgba(0,230,118,0.06); padding: 6px 10px; border-radius: 4px; border: 1px solid rgba(0,230,118,0.2);">
+                            <strong>Verified Output:</strong> 24,650 NPU cycles (108.1&times; speedup) &bull; 21.7 KiB SRAM safety &bull; 100% Golden Parity.
                         </div>
                     </div>
 
-                    <!-- Option B -->
-                    <div class="playbook-card">
+                    <!-- Mode 2: Real-Time Voice Testbench -->
+                    <div class="playbook-card" style="padding: 14px 16px;">
                         <div class="playbook-card-header">
-                            <span class="playbook-tag tag-orange">Option B &bull; Step-by-Step Bring-Up</span>
+                            <span class="playbook-tag tag-cyan">Mode 2 &bull; Interactive Voice Testbench</span>
                         </div>
-                        <div class="playbook-card-title">Developer Build &amp; Direct Simulator Launch</div>
-                        
-                        <div class="playbook-cmd-entry">
-                            <span class="playbook-cmd-label">1. Pre-Flight Check &amp; GCC Build:</span>
-                            <div class="playbook-cmd-code">
-                                <code>python3 scripts/sanity_check.py &amp;&amp; make clean &amp;&amp; make</code>
-                                <button class="cmd-copy-btn" onclick="copyCmd('python3 scripts/sanity_check.py\nmake clean && make', this)">📋</button>
+                        <div class="playbook-card-title" style="font-size: 14px; margin-top: 4px;">Real-Time Microphone Speech Classification</div>
+                        <div class="playbook-note" style="font-size: 11px; margin-top: 2px;">Starts local REST bridge on port 8080. Ingests browser microphone audio directly into Corstone-300 FVP / QEMU via ARM semihosting.</div>
+                        <div class="playbook-cmd-entry" style="margin-top: 8px;">
+                            <span class="playbook-cmd-label">Terminal Command (or 1-click Windows BAT):</span>
+                            <div class="playbook-cmd-code" style="padding: 8px 10px;">
+                                <code style="font-size: 12px; font-weight: 700;">python3 scripts/live_bridge_server.py</code>
+                                <button class="cmd-copy-btn" onclick="copyCmd('python3 scripts/live_bridge_server.py', this)" style="padding: 4px 10px; font-size: 10px;">📋 Copy</button>
                             </div>
                         </div>
-
-                        <div class="playbook-cmd-entry">
-                            <span class="playbook-cmd-label">2. Run Directly on Official Arm Corstone-300 FVP:</span>
-                            <div class="playbook-cmd-code">
-                                <code style="font-size: 8.5px;">FVP_Corstone_SSE-300_Ethos-U55 -a build/firmware.elf -C mps3_board.visualisation.disable-visualisation=1 -C cpu0.semihosting-enable=1 -C mps3_board.uart0.out_file=- -C mps3_board.uart0.unbuffered_output=1 --timelimit 10</code>
-                                <button class="cmd-copy-btn" onclick="copyCmd('FVP_Corstone_SSE-300_Ethos-U55 -a build/firmware.elf -C mps3_board.visualisation.disable-visualisation=1 -C cpu0.semihosting-enable=1 -C mps3_board.uart0.out_file=- -C mps3_board.uart0.unbuffered_output=1 --timelimit 10', this)">📋</button>
-                            </div>
-                        </div>
-
-                        <div class="playbook-cmd-entry">
-                            <span class="playbook-cmd-label">3. (Alternative) Run on QEMU Corstone-300:</span>
-                            <div class="playbook-cmd-code">
-                                <code style="font-size: 8.5px;">qemu-system-arm -M mps3-an547 -cpu cortex-m55 -display none -serial stdio -semihosting -kernel build/firmware.elf</code>
-                                <button class="cmd-copy-btn" onclick="copyCmd('qemu-system-arm -M mps3-an547 -cpu cortex-m55 -display none -serial stdio -semihosting -kernel build/firmware.elf', this)">📋</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Option C -->
-                    <div class="playbook-card">
-                        <div class="playbook-card-header">
-                            <span class="playbook-tag tag-cyan">Option C &bull; Live Voice Testbench</span>
-                        </div>
-                        <div class="playbook-card-title">Real-Time Mic Speech Classification</div>
-                        <div class="playbook-note">Starts REST bridge on port 8080. Ingests browser mic audio into FVP via semihosting.</div>
-                        <div class="playbook-cmd-entry">
-                            <span class="playbook-cmd-label">1. Inside WSL / Linux:</span>
-                            <div class="playbook-cmd-code">
-                                <code>python3 scripts/live_bridge_server.py</code>
-                                <button class="cmd-copy-btn" onclick="copyCmd('python3 scripts/live_bridge_server.py', this)">📋</button>
-                            </div>
-                        </div>
-                        <div class="playbook-cmd-entry">
-                            <span class="playbook-cmd-label">2. From Windows PowerShell / CMD:</span>
-                            <div class="playbook-cmd-code">
-                                <code style="font-size: 8px;">wsl -d Ubuntu-22.04 -- bash -c "cd /mnt/e/Arm_Corstone300_EdgeAI_Lab &amp;&amp; python3 scripts/live_bridge_server.py"</code>
-                                <button class="cmd-copy-btn" onclick="copyCmd('wsl -d Ubuntu-22.04 -- bash -c &quot;cd /mnt/e/Arm_Corstone300_EdgeAI_Lab && python3 scripts/live_bridge_server.py&quot;', this)">📋</button>
-                            </div>
-                        </div>
-                        <div class="playbook-note" style="color: #BAE6FD; font-size: 8.5px; margin-top: 3px;">
-                            💡 <em>Or double-click <strong>start_live_bridge.bat</strong>. Then press <strong>A</strong> in browser to speak!</em>
+                        <div class="playbook-note" style="color: #BAE6FD; font-size: 10px; margin-top: 6px; background: rgba(0,229,255,0.06); padding: 6px 10px; border-radius: 4px; border: 1px solid rgba(0,229,255,0.2);">
+                            💡 <strong>How to test:</strong> Run the server (or double-click <code>start_live_bridge.bat</code>), then press <strong style="color: #00E676;">M</strong> in the browser to speak!
                         </div>
                     </div>
                 </div>
@@ -2316,39 +2262,39 @@
             <!-- Facilitator's Setup Strategy & Technical Mitigations -->
             <div class="cards-grid-2">
                 <div class="card" style="padding: 12px 16px;">
-                    <h3 class="card-title" style="color: var(--arm-cyan); margin-bottom: 8px; font-size: 12.5px;">Reproducible Local Setup Strategy</h3>
+                    <h3 class="card-title" style="color: var(--arm-cyan); margin-bottom: 8px; font-size: 12.5px;">Reproducible Local Strategy</h3>
                     <ul class="bullet-list">
                         <li class="bullet-item">
-                            <span class="bullet-title">1. Native Local Execution (No Docker / Cloud):</span>
-                            <span class="bullet-desc">Runs directly in Linux or Windows WSL with standard packages (<code>arm-none-eabi-gcc</code>, Python 3). Eliminates container hypervisor overhead, Docker VPN permission issues, and AWS cloud bills.</span>
+                            <span class="bullet-title">Native Local Execution:</span>
+                            <span class="bullet-desc">Runs directly in Linux or Windows WSL with standard packages. Eliminates Docker hypervisor overhead and cloud latency.</span>
                         </li>
                         <li class="bullet-item">
-                            <span class="bullet-title">2. ARM Semihosting Dynamic Ingestion:</span>
-                            <span class="bullet-desc">In virtual hardware, <code>bkpt 0xab</code> semihosting ingests dynamic live audio into SRAM without needing to recompile <code>firmware.elf</code> on every spoken word.</span>
+                            <span class="bullet-title">ARM Semihosting Ingestion:</span>
+                            <span class="bullet-desc">Cortex-M55 executes <code>bkpt 0xab</code> to load live voice audio directly into SRAM without recompiling firmware.</span>
                         </li>
                         <li class="bullet-item">
-                            <span class="bullet-title">3. Automated Pre-Flight Sanity Script:</span>
-                            <span class="bullet-desc">Single script (<code>sanity_check.py</code>) validates toolchain binaries, compiler paths, and virtual platform executables before exercises start:</span>
+                            <span class="bullet-title">Pre-Flight Sanity Script:</span>
+                            <span class="bullet-desc">Automated check verifies GCC, Vela compiler, and virtual platforms in under 1 second:</span>
                             <div class="code-box">python3 scripts/sanity_check.py</div>
                         </li>
                     </ul>
                 </div>
 
                 <div class="card" style="padding: 12px 16px;">
-                    <h3 class="card-title" style="color: var(--orange-accent); margin-bottom: 8px; font-size: 12.5px;">Expected Technical Mitigations</h3>
+                    <h3 class="card-title" style="color: var(--orange-accent); margin-bottom: 8px; font-size: 12.5px;">Embedded Technical Mitigations</h3>
                     <ul class="bullet-list">
                         <li class="bullet-item">
-                            <span class="bullet-title">FVP Launch Headless Errors:</span>
-                            <span class="bullet-desc">Force terminal-only execution to prevent X11 GUI window crashes in headless environments:</span>
+                            <span class="bullet-title">Headless FVP Mode:</span>
+                            <span class="bullet-desc">Force terminal-only execution to prevent X11 GUI crashes in headless environments:</span>
                             <div class="code-box">-C disable-visualisation=1 -C cpu0.semihosting-enable=1</div>
                         </li>
                         <li class="bullet-item">
-                            <span class="bullet-title">Vela Operator Fallbacks:</span>
-                            <span class="bullet-desc">Route unsupported operations (e.g., custom activations) to Cortex-M55 Helium MVE via CMSIS-NN:</span>
+                            <span class="bullet-title">Vela Operator Fallback:</span>
+                            <span class="bullet-desc">Route unsupported operations to Cortex-M55 Helium MVE via CMSIS-NN:</span>
                             <div class="code-box">--ignore-ops FULLY_CONNECTED</div>
                         </li>
                         <li class="bullet-item">
-                            <span class="bullet-title">Memory Region Overflow:</span>
+                            <span class="bullet-title">SRAM Memory Guard:</span>
                             <span class="bullet-desc">Hard compile-time safety check guarding against SRAM buffer overflow:</span>
                             <div class="code-box">ASSERT((__tensor_arena_end - __tensor_arena_start) &lt;= 0x10000)</div>
                         </li>
@@ -3216,7 +3162,7 @@ Info: /OSCI/SystemC: Simulation stopped by user.
             2: "<strong>Subsystem & Bus Topology:</strong> Explain the hardware co-design: Cortex-M55 (Helium MVE) handles audio DSP/MFCC feature extraction, while Ethos-U55 accelerates matrix convolutions (128 MACs/cycle). Detail the Dual-AXI master architecture (Port M0 reads Flash weights, Port M1 reads/writes SRAM activations) over the multi-layer AXI5 crossbar with TrustZone-M memory protection.",
             3: "<strong>End-to-End Experiment Flow:</strong> Walk through the logic diagram from browser microphone to virtual silicon. The browser captures 16 kHz audio and extracts 490 INT8 MFCC features. The Python bridge evaluates the TFLite model, launches FVP and QEMU, and the Cortex-M55 firmware dynamically ingests the tensor via ARM Semihosting (bkpt 0xab) into internal SRAM at 0x21010000.",
             4: "<strong>Operative Lab Guide (Part 1) — Setup & Build Pipeline:</strong> Explain that this lab is designed to be completely reproducible for anyone starting from scratch. Point out the primary Lab Git Repository link and the one-line clone command at the top: attendees can clone everything directly (<code>git clone https://github.com/AntonioSanta/Arm_Corstone300_EdgeAI_Lab.git</code>). This single repository provides all the custom Python bridge scripts, bare-metal C drivers, linker scripts, pre-quantized DS-CNN model, and even the interactive HTML presentation deck. Mention that attendees can run a zero-install speech test immediately by opening the slides in their browser, or follow the 5 sequential build steps to compile firmware on WSL or Linux.",
-            5: "<strong>Operative Lab Guide (Part 2) — Console Playbook & Facilitator Matrix:</strong> Walk the panel and audience through how to run this on their laptops. Highlight the two attendee execution paths: Mode 1 is instant zero-install—anyone with a laptop can open the presentation HTML in Chrome or Edge, hit key 'A', and test live keyword spotting with their microphone right now. Mode 2 is full virtual silicon—they clone the repo, run the one-time host install, and execute Option A ('python3 tests/test_harness.py') for a 3.5-second verification of all 5 hardware assertions, or Option C to bridge their browser mic directly into the virtual Corstone-300 FVP and Ethos-U55 NPU.",
+            5: "<strong>Operative Lab Guide (Part 2) — Console Playbook & Facilitator Matrix:</strong> Walk the panel and audience through how to run this on their laptops. Highlight the two streamlined execution modes: Mode 1 is the 3.5-second automated hardware verification (<code>python3 tests/test_harness.py</code>), which compiles firmware, boots FVP, and asserts all 5 hardware metrics. Mode 2 is the live interactive voice testbench (<code>python3 scripts/live_bridge_server.py</code> or <code>start_live_bridge.bat</code>), bridging the browser microphone into the virtual Corstone-300 simulator in real time. Emphasize that zero cloud or physical hardware is required—everything runs locally on standard WSL/Linux.",
             6: "<strong>Benchmarking, Memory Footprint & Acceptance Scorecard:</strong> Present the grounded hardware proof from the virtual silicon execution. Walk through the direct comparison between Cortex-M55 alone vs Cortex-M55 + Ethos-U55 NPU: 24,650 cycles vs 2,664,792 cycles (108.1x speedup, 99.07% cycle reduction), dropping latency from 106.6 ms to 0.98 ms (saving 105.6 ms). Crucially highlight the ultra-compact memory footprint: the entire system fits in <strong>43.3 KiB of Flash</strong> (35.9K model + 7.4K C runtime) and requires only <strong>38.1 KiB of active RAM</strong> (21.7 KiB SRAM activations + 16.4 KiB DTCM stack), with 66.1% headroom remaining in our 64 KiB internal SRAM arena. This proves speech AI runs on cost-effective sub-$2 microcontrollers without external DRAM."
         };
 
