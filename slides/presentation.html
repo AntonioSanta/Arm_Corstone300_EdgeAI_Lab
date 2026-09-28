@@ -2353,17 +2353,18 @@
                             <!-- Step 1 & 2: Build & Flash -->
                             <div style="display: flex; flex-direction: column; gap: 6px;">
                                 <div>
-                                    <span style="font-size: 10px; font-weight: 700; color: #CBD5E1;">Step 1: Convert ELF to Flat Binary</span>
+                                    <span style="font-size: 10px; font-weight: 700; color: #CBD5E1;">Step 1: Compile for Real Hardware (Includes M55 MFCC DSP)</span>
                                     <div class="code-box" style="font-size: 9.5px; padding: 5px 8px; margin-top: 2px;">
-                                        arm-none-eabi-objcopy -O binary build/firmware.elf build/firmware.bin
+                                        make TARGET_PLATFORM=hw
                                     </div>
+                                    <span style="font-size: 8.5px; color: #64748B; margin-top: 1px; display: block;">Compiles <code>src/mfcc_dsp.c</code>, disables semihosting &amp; outputs <code>build/firmware_hw.bin</code>.</span>
                                 </div>
                                 <div>
                                     <span style="font-size: 10px; font-weight: 700; color: #CBD5E1;">Step 2: Flash Board via pyOCD or USB MSC</span>
                                     <div class="code-box" style="font-size: 9.5px; padding: 5px 8px; margin-top: 2px;">
-                                        pyocd flash -t cortex_m build/firmware.bin --base-address 0x00000000
+                                        pyocd flash -t cortex_m build/firmware_hw.bin --base-address 0x00000000
                                     </div>
-                                    <span style="font-size: 8.5px; color: #64748B; margin-top: 1px; display: block;">Or drag-and-drop <code>firmware.bin</code> into the mounted MPS3 USB drive (<code>/SOFTWARE/</code>).</span>
+                                    <span style="font-size: 8.5px; color: #64748B; margin-top: 1px; display: block;">Or drag-and-drop <code>firmware_hw.bin</code> into the mounted MPS3 USB drive (<code>/SOFTWARE/</code>).</span>
                                 </div>
                             </div>
 

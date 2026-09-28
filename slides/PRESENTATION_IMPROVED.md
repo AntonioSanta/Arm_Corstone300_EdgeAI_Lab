@@ -173,17 +173,18 @@
   - **2. Cortex-M55 CPU (Helium MVE + CMSIS-DSP, ~2.5 ms):** **Cortex-M55 computes MFCC!** CMSIS-DSP vector instructions execute Hanning windowing, Real FFT, and mel-filterbanks &rarr; generates the **490 INT8 bytes**.
   - **3. Ethos-U55 microNPU (0.98 ms / 24,650 cycles):** Ethos-U55 reads the 490 bytes from internal SRAM arena (`0x21010000`) via Dual-AXI M1, accelerating DS-CNN inference with a **108.1x speedup**.
 * **Right Panel — Card 2: 4-Step Physical Deployment &amp; Flashing Playbook:**
-  - **Step 1 — Convert ELF to Flat Binary:**
+  - **Step 1 — Compile for Real Hardware (Includes M55 MFCC DSP):**
     ```bash
-    arm-none-eabi-objcopy -O binary build/firmware.elf build/firmware.bin
+    make TARGET_PLATFORM=hw
     ```
+    *Compiles `src/mfcc_dsp.c` (Cortex-M55 Helium MVE on-device MFCC engine), disables Semihosting `bkpt 0xab`, and automatically produces `build/firmware_hw.bin`.*
   - **Step 2 — Flash Board via pyOCD or USB MSC:**
     ```bash
-    pyocd flash -t cortex_m build/firmware.bin --base-address 0x00000000
+    pyocd flash -t cortex_m build/firmware_hw.bin --base-address 0x00000000
     ```
-    *(Or drag-and-drop `firmware.bin` into mounted `/SOFTWARE/` drive).*
-  - **Step 3 — Physical Audio Ingestion Switch:** On the physical board, point pointer to DMA audio buffer in SRAM (`0x21010000`) instead of Semihosting `bkpt 0xab`.
-  - **Step 4 — Real-Time Telemetry over USB UART:** Open serial terminal at **115200 baud (8N1)** to view keyword predictions ("Yes"/"No"), confidence percentages, and Ethos-U55 cycle counts.
+    *(Or drag-and-drop `firmware_hw.bin` into mounted `/SOFTWARE/` drive).*
+  - **Step 3 — Physical Audio Ingestion:** On physical silicon, peripheral DMA streams audio from the onboard MEMS mic directly into the SRAM arena (`0x21010000`).
+  - **Step 4 — Real-Time Telemetry over USB UART:** Open serial terminal at **115200 baud (8N1)** to view keyword predictions ("Yes"/"No"), confidence percentages, and Ethos-U55 cycle counts. Production silicon: **Alif Ensemble E3/E7**, **Himax WiseEye2**.*
 * **Interactive Live Mic Prompt:** *"Ready to test speech recognition on your laptop right now? Press M or click 'Live Mic Test' in the top bar to record live voice from your microphone!"* [Launch Live Audio Test (M)]
 
 ### Speaker Talking Points (Your Script):

@@ -75,7 +75,7 @@ void Reset_Handler(void) {
     8fda:	bf00      	nop
     8fdc:	20000000 	.word	0x20000000
     8fe0:	20000014 	.word	0x20000014
-    8fe4:	0000a910 	.word	0x0000a910
+    8fe4:	0000a8f4 	.word	0x0000a8f4
     8fe8:	20000014 	.word	0x20000014
     8fec:	20000018 	.word	0x20000018
 
@@ -106,11 +106,11 @@ void HardFault_Handler(void) {
     while (1);
     9024:	e7fe      	b.n	9024 <HardFault_Handler+0x34>
     9026:	bf00      	nop
-    9028:	00009854 	.word	0x00009854
-    902c:	00009874 	.word	0x00009874
-    9030:	00009884 	.word	0x00009884
-    9034:	00009894 	.word	0x00009894
-    9038:	000098a4 	.word	0x000098a4
+    9028:	00009838 	.word	0x00009838
+    902c:	00009858 	.word	0x00009858
+    9030:	00009868 	.word	0x00009868
+    9034:	00009878 	.word	0x00009878
+    9038:	00009888 	.word	0x00009888
 
 0000903c <MemManage_Handler>:
 void MemManage_Handler(void) {
@@ -125,8 +125,8 @@ void MemManage_Handler(void) {
     904e:	f000 f895 	bl	917c <uart_printf>
     while (1);
     9052:	e7fe      	b.n	9052 <MemManage_Handler+0x16>
-    9054:	000098b4 	.word	0x000098b4
-    9058:	00009894 	.word	0x00009894
+    9054:	00009898 	.word	0x00009898
+    9058:	00009878 	.word	0x00009878
 
 0000905c <BusFault_Handler>:
 void BusFault_Handler(void) {
@@ -141,8 +141,8 @@ void BusFault_Handler(void) {
     906e:	f000 f885 	bl	917c <uart_printf>
     while (1);
     9072:	e7fe      	b.n	9072 <BusFault_Handler+0x16>
-    9074:	000098ec 	.word	0x000098ec
-    9078:	0000990c 	.word	0x0000990c
+    9074:	000098d0 	.word	0x000098d0
+    9078:	000098f0 	.word	0x000098f0
 
 0000907c <UsageFault_Handler>:
 void UsageFault_Handler(void) {
@@ -153,7 +153,7 @@ void UsageFault_Handler(void) {
     while (1);
     9084:	e7fe      	b.n	9084 <UsageFault_Handler+0x8>
     9086:	bf00      	nop
-    9088:	00009918 	.word	0x00009918
+    9088:	000098fc 	.word	0x000098fc
 
 0000908c <SecureFault_Handler>:
 void SecureFault_Handler(void) {
@@ -164,7 +164,7 @@ void SecureFault_Handler(void) {
     while (1);
     9094:	e7fe      	b.n	9094 <SecureFault_Handler+0x8>
     9096:	bf00      	nop
-    9098:	00009958 	.word	0x00009958
+    9098:	0000993c 	.word	0x0000993c
 
 0000909c <uart_init>:
 
@@ -248,7 +248,7 @@ void uart_print_hex(uint32_t val) {
 }
     90f8:	e7ef      	b.n	90da <uart_print_hex+0x2e>
     90fa:	bf00      	nop
-    90fc:	0000999c 	.word	0x0000999c
+    90fc:	00009980 	.word	0x00009980
     9100:	49303000 	.word	0x49303000
 
 00009104 <uart_print_dec>:
@@ -541,7 +541,7 @@ void uart_printf(const char *fmt, ...) {
     926c:	e7f4      	b.n	9258 <uart_printf+0xdc>
     926e:	bf00      	nop
     9270:	49303000 	.word	0x49303000
-    9274:	000099b0 	.word	0x000099b0
+    9274:	00009994 	.word	0x00009994
 
 00009278 <ethosu_core_init>:
     .is_initialized = false
@@ -583,10 +583,10 @@ bool ethosu_core_init(void) {
     929e:	bd38      	pop	{r3, r4, r5, pc}
     92a0:	48102000 	.word	0x48102000
     92a4:	20000000 	.word	0x20000000
-    92a8:	000099b8 	.word	0x000099b8
-    92ac:	000099f0 	.word	0x000099f0
-    92b0:	00009a28 	.word	0x00009a28
-    92b4:	00009a6c 	.word	0x00009a6c
+    92a8:	0000999c 	.word	0x0000999c
+    92ac:	000099d4 	.word	0x000099d4
+    92b0:	00009a0c 	.word	0x00009a0c
+    92b4:	00009a50 	.word	0x00009a50
 
 000092b8 <ethosu_invoke_command_stream>:
 
@@ -749,13 +749,13 @@ bool inference_engine_init(void) {
     9368:	f7ff ff08 	bl	917c <uart_printf>
     936c:	e7de      	b.n	932c <inference_engine_init+0x1c>
     936e:	bf00      	nop
-    9370:	00009a98 	.word	0x00009a98
+    9370:	00009a7c 	.word	0x00009a7c
     9374:	00000130 	.word	0x00000130
-    9378:	00009ae0 	.word	0x00009ae0
+    9378:	00009ac4 	.word	0x00009ac4
     937c:	21010000 	.word	0x21010000
-    9380:	00009b54 	.word	0x00009b54
+    9380:	00009b38 	.word	0x00009b38
     9384:	e0001000 	.word	0xe0001000
-    9388:	00009b1c 	.word	0x00009b1c
+    9388:	00009b00 	.word	0x00009b00
 
 0000938c <inference_engine_run>:
 
@@ -862,7 +862,7 @@ bool inference_engine_run(const int8_t *input_features, uint32_t feature_len, in
     9416:	4770      	bx	lr
     9418:	e0001000 	.word	0xe0001000
     941c:	00000130 	.word	0x00000130
-    9420:	0000a0cc 	.word	0x0000a0cc
+    9420:	0000a0b0 	.word	0x0000a0b0
 
 00009424 <inference_engine_print_profile>:
 
@@ -982,82 +982,82 @@ void inference_engine_print_profile(const inference_result_t *result) {
     uart_printf("=================================================================\n");
     94f2:	4803      	ldr	r0, [pc, #12]	; (9500 <inference_engine_print_profile+0xdc>)
     94f4:	f7ff be42 	b.w	917c <uart_printf>
-    94f8:	00009bf0 	.word	0x00009bf0
-    94fc:	00009c34 	.word	0x00009c34
-    9500:	00009c78 	.word	0x00009c78
-    9504:	00009cbc 	.word	0x00009cbc
-    9508:	00009ce4 	.word	0x00009ce4
-    950c:	00009d24 	.word	0x00009d24
-    9510:	00009d50 	.word	0x00009d50
-    9514:	00009d80 	.word	0x00009d80
-    9518:	00009db4 	.word	0x00009db4
-    951c:	00009dec 	.word	0x00009dec
-    9520:	00009e20 	.word	0x00009e20
-    9524:	00009bb8 	.word	0x00009bb8
-    9528:	00009ba0 	.word	0x00009ba0
-    952c:	00009e54 	.word	0x00009e54
-    9530:	00009e7c 	.word	0x00009e7c
-    9534:	00009ea8 	.word	0x00009ea8
-    9538:	00009ed8 	.word	0x00009ed8
-    953c:	00009f20 	.word	0x00009f20
-    9540:	00009f50 	.word	0x00009f50
-    9544:	00009f7c 	.word	0x00009f7c
-    9548:	00009fac 	.word	0x00009fac
-    954c:	00009fd4 	.word	0x00009fd4
-    9550:	0000a09c 	.word	0x0000a09c
-    9554:	00009bcc 	.word	0x00009bcc
-    9558:	0000a004 	.word	0x0000a004
-    955c:	00009bd4 	.word	0x00009bd4
-    9560:	00009be8 	.word	0x00009be8
-    9564:	0000a038 	.word	0x0000a038
+    94f8:	00009bd4 	.word	0x00009bd4
+    94fc:	00009c18 	.word	0x00009c18
+    9500:	00009c5c 	.word	0x00009c5c
+    9504:	00009ca0 	.word	0x00009ca0
+    9508:	00009cc8 	.word	0x00009cc8
+    950c:	00009d08 	.word	0x00009d08
+    9510:	00009d34 	.word	0x00009d34
+    9514:	00009d64 	.word	0x00009d64
+    9518:	00009d98 	.word	0x00009d98
+    951c:	00009dd0 	.word	0x00009dd0
+    9520:	00009e04 	.word	0x00009e04
+    9524:	00009b9c 	.word	0x00009b9c
+    9528:	00009b84 	.word	0x00009b84
+    952c:	00009e38 	.word	0x00009e38
+    9530:	00009e60 	.word	0x00009e60
+    9534:	00009e8c 	.word	0x00009e8c
+    9538:	00009ebc 	.word	0x00009ebc
+    953c:	00009f04 	.word	0x00009f04
+    9540:	00009f34 	.word	0x00009f34
+    9544:	00009f60 	.word	0x00009f60
+    9548:	00009f90 	.word	0x00009f90
+    954c:	00009fb8 	.word	0x00009fb8
+    9550:	0000a080 	.word	0x0000a080
+    9554:	00009bb0 	.word	0x00009bb0
+    9558:	00009fe8 	.word	0x00009fe8
+    955c:	00009bb8 	.word	0x00009bb8
+    9560:	00009bcc 	.word	0x00009bcc
+    9564:	0000a01c 	.word	0x0000a01c
 
 00009568 <main>:
-        "bkpt 0xab\n"              /* Semihosting breakpoint */
         : : : "r0", "r1"
     );
 }
+#endif
 
 int main(void) {
     9568:	e92d 41f0 	stmdb	sp!, {r4, r5, r6, r7, r8, lr}
-    956c:	b092      	sub	sp, #72	; 0x48
+    956c:	b098      	sub	sp, #96	; 0x60
     /* 1. Initialize Console APB UART */
     uart_init();
     956e:	f7ff fd95 	bl	909c <uart_init>
     
     uart_printf("\n=================================================================\n");
-    9572:	488b      	ldr	r0, [pc, #556]	; (97a0 <main+0x238>)
+    9572:	4884      	ldr	r0, [pc, #528]	; (9784 <main+0x21c>)
     9574:	f7ff fe02 	bl	917c <uart_printf>
     uart_printf("  ARM WORKFORCE DEVELOPMENT: CORSTONE-300 & ETHOS-U55 LAB       \n");
-    9578:	488a      	ldr	r0, [pc, #552]	; (97a4 <main+0x23c>)
+    9578:	4883      	ldr	r0, [pc, #524]	; (9788 <main+0x220>)
     957a:	f7ff fdff 	bl	917c <uart_printf>
     uart_printf("=================================================================\n");
-    957e:	488a      	ldr	r0, [pc, #552]	; (97a8 <main+0x240>)
+    957e:	4883      	ldr	r0, [pc, #524]	; (978c <main+0x224>)
     9580:	f7ff fdfc 	bl	917c <uart_printf>
     uart_printf(" Target Architecture: Armv8.1-M Mainline (Cortex-M55)\n");
-    9584:	4889      	ldr	r0, [pc, #548]	; (97ac <main+0x244>)
+    9584:	4882      	ldr	r0, [pc, #520]	; (9790 <main+0x228>)
     9586:	f7ff fdf9 	bl	917c <uart_printf>
     uart_printf(" Vector Acceleration: Arm Helium MVE (M-Profile Vector Extension)\n");
-    958a:	4889      	ldr	r0, [pc, #548]	; (97b0 <main+0x248>)
+    958a:	4882      	ldr	r0, [pc, #520]	; (9794 <main+0x22c>)
     958c:	f7ff fdf6 	bl	917c <uart_printf>
     uart_printf(" Neural Accelerator:  Arm Ethos-U55 microNPU (128 MACs/cycle)\n");
-    9590:	4888      	ldr	r0, [pc, #544]	; (97b4 <main+0x24c>)
+    9590:	4881      	ldr	r0, [pc, #516]	; (9798 <main+0x230>)
     9592:	f7ff fdf3 	bl	917c <uart_printf>
     uart_printf(" Platform Software:   Bare-Metal C Runtime & CMSIS-NN\n");
-    9596:	4888      	ldr	r0, [pc, #544]	; (97b8 <main+0x250>)
+    9596:	4881      	ldr	r0, [pc, #516]	; (979c <main+0x234>)
     9598:	f7ff fdf0 	bl	917c <uart_printf>
     uart_printf(" Security Subsystem:  Trusted Firmware-M (TF-M) Partitioning\n");
-    959c:	4887      	ldr	r0, [pc, #540]	; (97bc <main+0x254>)
+    959c:	4880      	ldr	r0, [pc, #512]	; (97a0 <main+0x238>)
     959e:	f7ff fded 	bl	917c <uart_printf>
     uart_printf(" Virtual Platform:    Arm Corstone-300 Fixed Virtual Platform / AVH\n");
-    95a2:	4887      	ldr	r0, [pc, #540]	; (97c0 <main+0x258>)
+    95a2:	4880      	ldr	r0, [pc, #512]	; (97a4 <main+0x23c>)
     95a4:	f7ff fdea 	bl	917c <uart_printf>
     uart_printf("=================================================================\n\n");
-    95a8:	4886      	ldr	r0, [pc, #536]	; (97c4 <main+0x25c>)
+    95a8:	487f      	ldr	r0, [pc, #508]	; (97a8 <main+0x240>)
     95aa:	f7ff fde7 	bl	917c <uart_printf>
 
     /* 2. Security Subsystem & TF-M Isolation Check (Slide 2) */
     uart_printf("[TF-M SECURITY] Validating Secure / Non-Secure TrustZone boundary...\n");
-    95ae:	4886      	ldr	r0, [pc, #536]	; (97c8 <main+0x260>)
+    95ae:	487f      	ldr	r0, [pc, #508]	; (97ac <main+0x244>)
     95b0:	f7ff fde4 	bl	917c <uart_printf>
     uart_printf("[TF-M SECURITY] Secure Enclave booted. PSA Certified Crypto & Storage initialized.\n");
     uart_printf("[TF-M SECURITY] Non-Secure Application Running in isolated Domain.\n\n");
@@ -1065,27 +1065,27 @@ int main(void) {
     /* 3. Linker Memory Boundary Validation (Slide 5 Mitigation) */
     uint32_t arena_sz = (uint32_t)&__tensor_arena_end - (uint32_t)&__tensor_arena_start;
     uint32_t model_sz = (uint32_t)&__model_data_end - (uint32_t)&__model_data_start;
-    95b4:	4f85      	ldr	r7, [pc, #532]	; (97cc <main+0x264>)
-    95b6:	4c86      	ldr	r4, [pc, #536]	; (97d0 <main+0x268>)
+    95b4:	4f7e      	ldr	r7, [pc, #504]	; (97b0 <main+0x248>)
+    95b6:	4c7f      	ldr	r4, [pc, #508]	; (97b4 <main+0x24c>)
     uart_printf("[TF-M SECURITY] Secure Enclave booted. PSA Certified Crypto & Storage initialized.\n");
-    95b8:	4886      	ldr	r0, [pc, #536]	; (97d4 <main+0x26c>)
+    95b8:	487f      	ldr	r0, [pc, #508]	; (97b8 <main+0x250>)
     95ba:	f7ff fddf 	bl	917c <uart_printf>
     uint32_t arena_sz = (uint32_t)&__tensor_arena_end - (uint32_t)&__tensor_arena_start;
-    95be:	4e86      	ldr	r6, [pc, #536]	; (97d8 <main+0x270>)
-    95c0:	4d86      	ldr	r5, [pc, #536]	; (97dc <main+0x274>)
+    95be:	4e7f      	ldr	r6, [pc, #508]	; (97bc <main+0x254>)
+    95c0:	4d7f      	ldr	r5, [pc, #508]	; (97c0 <main+0x258>)
     uart_printf("[TF-M SECURITY] Non-Secure Application Running in isolated Domain.\n\n");
-    95c2:	4887      	ldr	r0, [pc, #540]	; (97e0 <main+0x278>)
+    95c2:	4880      	ldr	r0, [pc, #512]	; (97c4 <main+0x25c>)
     95c4:	f7ff fdda 	bl	917c <uart_printf>
     uint32_t model_sz = (uint32_t)&__model_data_end - (uint32_t)&__model_data_start;
     95c8:	eba7 0804 	sub.w	r8, r7, r4
     uart_printf("[MEMORY GEOMETRY] Verifying Linker Allocation Geometry:\n");
-    95cc:	4885      	ldr	r0, [pc, #532]	; (97e4 <main+0x27c>)
+    95cc:	487e      	ldr	r0, [pc, #504]	; (97c8 <main+0x260>)
     95ce:	f7ff fdd5 	bl	917c <uart_printf>
     uart_printf("  - Flash Model Weights: [0x%X - 0x%X] (%d bytes)\n", 
     95d2:	4643      	mov	r3, r8
     95d4:	463a      	mov	r2, r7
     95d6:	4621      	mov	r1, r4
-    95d8:	4883      	ldr	r0, [pc, #524]	; (97e8 <main+0x280>)
+    95d8:	487c      	ldr	r0, [pc, #496]	; (97cc <main+0x264>)
     uint32_t arena_sz = (uint32_t)&__tensor_arena_end - (uint32_t)&__tensor_arena_start;
     95da:	1b74      	subs	r4, r6, r5
     uart_printf("  - Flash Model Weights: [0x%X - 0x%X] (%d bytes)\n", 
@@ -1095,7 +1095,7 @@ int main(void) {
     95e0:	4623      	mov	r3, r4
     95e2:	4632      	mov	r2, r6
     95e4:	4629      	mov	r1, r5
-    95e6:	4881      	ldr	r0, [pc, #516]	; (97ec <main+0x284>)
+    95e6:	487a      	ldr	r0, [pc, #488]	; (97d0 <main+0x268>)
     95e8:	f7ff fdc8 	bl	917c <uart_printf>
                 (uint32_t)&__tensor_arena_start, (uint32_t)&__tensor_arena_end, arena_sz);
     
@@ -1104,10 +1104,10 @@ int main(void) {
     95ec:	f5b4 3f00 	cmp.w	r4, #131072	; 0x20000
         uart_printf("  - Status: Strict SRAM Boundaries Enforced (Zero Overflow Risk).\n\n");
     95f0:	bf94      	ite	ls
-    95f2:	487f      	ldrls	r0, [pc, #508]	; (97f0 <main+0x288>)
+    95f2:	4878      	ldrls	r0, [pc, #480]	; (97d4 <main+0x26c>)
     } else {
         uart_printf("  - [CRITICAL ALERT] SRAM Overflow Detected!\n\n");
-    95f4:	487f      	ldrhi	r0, [pc, #508]	; (97f4 <main+0x28c>)
+    95f4:	4878      	ldrhi	r0, [pc, #480]	; (97d8 <main+0x270>)
     95f6:	f7ff fdc1 	bl	917c <uart_printf>
     }
 
@@ -1120,550 +1120,552 @@ int main(void) {
     95fe:	f7ff fe87 	bl	9310 <inference_engine_init>
 
     /* 6. Execute Edge AI Inference on Speech Audio MFCC Feature */
-    live_tensor_header_t live_hdr = {0};
+    const int8_t *input_features = g_test_input_mfcc;
+    inference_result_t result = {0};
     9602:	2300      	movs	r3, #0
     uint32_t open_params[3] = {
     9604:	2215      	movs	r2, #21
-    9606:	2601      	movs	r6, #1
+    9606:	2501      	movs	r5, #1
     const char filename[] = "build/live_tensor.bin";
-    9608:	4d7b      	ldr	r5, [pc, #492]	; (97f8 <main+0x290>)
+    9608:	4c74      	ldr	r4, [pc, #464]	; (97dc <main+0x274>)
     960a:	f10d 0c2c 	add.w	ip, sp, #44	; 0x2c
-        (uint32_t)filename,
-    960e:	4664      	mov	r4, ip
+    inference_result_t result = {0};
+    960e:	e9cd 3312 	strd	r3, r3, [sp, #72]	; 0x48
+    9612:	e9cd 3314 	strd	r3, r3, [sp, #80]	; 0x50
+    9616:	e9cd 3316 	strd	r3, r3, [sp, #88]	; 0x58
     uint32_t open_params[3] = {
-    9610:	f8cd c008 	str.w	ip, [sp, #8]
-    9614:	9204      	str	r2, [sp, #16]
+    961a:	9204      	str	r2, [sp, #16]
+    inference_result_t result = {0};
+    961c:	9311      	str	r3, [sp, #68]	; 0x44
+
+#else
+    /* ========================================================================= */
+    /* SIMULATION MODE: Semihosting Dynamic Audio Ingestion or Golden Flash Test  */
+    /* ========================================================================= */
     live_tensor_header_t live_hdr = {0};
-    9616:	9300      	str	r3, [sp, #0]
-    const char filename[] = "build/live_tensor.bin";
-    9618:	cd0f      	ldmia	r5!, {r0, r1, r2, r3}
-    961a:	e8ac 000f 	stmia.w	ip!, {r0, r1, r2, r3}
-    961e:	e895 0003 	ldmia.w	r5, {r0, r1}
-    9622:	f84c 0b04 	str.w	r0, [ip], #4
-    9626:	f8ac 1000 	strh.w	r1, [ip]
-    register int32_t r0 __asm__("r0") = op;
-    962a:	4630      	mov	r0, r6
+    961e:	9300      	str	r3, [sp, #0]
     uint32_t open_params[3] = {
-    962c:	9603      	str	r6, [sp, #12]
+    9620:	f8cd c008 	str.w	ip, [sp, #8]
+    const char filename[] = "build/live_tensor.bin";
+    9624:	cc0f      	ldmia	r4!, {r0, r1, r2, r3}
+    9626:	e8ac 000f 	stmia.w	ip!, {r0, r1, r2, r3}
+    962a:	e894 0003 	ldmia.w	r4, {r0, r1}
+    962e:	f84c 0b04 	str.w	r0, [ip], #4
+    9632:	f8ac 1000 	strh.w	r1, [ip]
+    register int32_t r0 __asm__("r0") = op;
+    9636:	4628      	mov	r0, r5
+    uint32_t open_params[3] = {
+    9638:	9503      	str	r5, [sp, #12]
     register void *r1 __asm__("r1") = args;
-    962e:	a902      	add	r1, sp, #8
+    963a:	a902      	add	r1, sp, #8
     __asm__ volatile (
-    9630:	beab      	bkpt	0x00ab
+    963c:	beab      	bkpt	0x00ab
     if (fd <= 0) {
-    9632:	1e03      	subs	r3, r0, #0
-    9634:	f340 8099 	ble.w	976a <main+0x202>
+    963e:	1e03      	subs	r3, r0, #0
+    9640:	f340 808d 	ble.w	975e <main+0x1f6>
     uint32_t read_hdr_params[3] = {
-    9638:	2204      	movs	r2, #4
+    9644:	2204      	movs	r2, #4
     register int32_t r0 __asm__("r0") = op;
-    963a:	2006      	movs	r0, #6
+    9646:	2006      	movs	r0, #6
     uint32_t read_hdr_params[3] = {
-    963c:	9305      	str	r3, [sp, #20]
-    963e:	f8cd d018 	str.w	sp, [sp, #24]
+    9648:	9305      	str	r3, [sp, #20]
+    964a:	f8cd d018 	str.w	sp, [sp, #24]
     register void *r1 __asm__("r1") = args;
-    9642:	a905      	add	r1, sp, #20
+    964e:	a905      	add	r1, sp, #20
     uint32_t read_hdr_params[3] = {
-    9644:	9207      	str	r2, [sp, #28]
+    9650:	9207      	str	r2, [sp, #28]
     __asm__ volatile (
-    9646:	beab      	bkpt	0x00ab
+    9652:	beab      	bkpt	0x00ab
     if (unread_hdr != 0 || out_hdr->magic != 0xAA) {
-    9648:	2800      	cmp	r0, #0
-    964a:	f040 808a 	bne.w	9762 <main+0x1fa>
-    964e:	f89d 2000 	ldrb.w	r2, [sp]
-    9652:	2aaa      	cmp	r2, #170	; 0xaa
-    9654:	f040 8085 	bne.w	9762 <main+0x1fa>
+    9654:	2800      	cmp	r0, #0
+    9656:	d17e      	bne.n	9756 <main+0x1ee>
+    9658:	f89d 2000 	ldrb.w	r2, [sp]
+    965c:	2aaa      	cmp	r2, #170	; 0xaa
+    965e:	d17a      	bne.n	9756 <main+0x1ee>
     uint32_t read_tensor_params[3] = {
-    9658:	f44f 78f5 	mov.w	r8, #490	; 0x1ea
+    9660:	f44f 76f5 	mov.w	r6, #490	; 0x1ea
         (uint32_t)dst_sram,
-    965c:	4f67      	ldr	r7, [pc, #412]	; (97fc <main+0x294>)
+    9664:	4c5e      	ldr	r4, [pc, #376]	; (97e0 <main+0x278>)
     register int32_t r0 __asm__("r0") = op;
-    965e:	2006      	movs	r0, #6
+    9666:	2006      	movs	r0, #6
     uint32_t read_tensor_params[3] = {
-    9660:	e9cd 3708 	strd	r3, r7, [sp, #32]
+    9668:	e9cd 3408 	strd	r3, r4, [sp, #32]
     register void *r1 __asm__("r1") = args;
-    9664:	a908      	add	r1, sp, #32
+    966c:	a908      	add	r1, sp, #32
     uint32_t read_tensor_params[3] = {
-    9666:	f8cd 8028 	str.w	r8, [sp, #40]	; 0x28
+    966e:	960a      	str	r6, [sp, #40]	; 0x28
     __asm__ volatile (
-    966a:	beab      	bkpt	0x00ab
-    return r0;
-    966c:	4605      	mov	r5, r0
+    9670:	beab      	bkpt	0x00ab
     uint32_t close_params[1] = { (uint32_t)fd };
-    966e:	9301      	str	r3, [sp, #4]
-    register int32_t r0 __asm__("r0") = op;
-    9670:	2002      	movs	r0, #2
+    9672:	9301      	str	r3, [sp, #4]
     register void *r1 __asm__("r1") = args;
-    9672:	a901      	add	r1, sp, #4
+    9674:	a901      	add	r1, sp, #4
+    return r0;
+    9676:	4603      	mov	r3, r0
+    register int32_t r0 __asm__("r0") = op;
+    9678:	2002      	movs	r0, #2
     __asm__ volatile (
-    9674:	beab      	bkpt	0x00ab
+    967a:	beab      	bkpt	0x00ab
     bool is_live_audio = try_load_dynamic_tensor_semihosting(g_dynamic_sram_tensor, INPUT_TENSOR_SIZE, &live_hdr);
 
-    const int8_t *input_features = g_test_input_mfcc;
     if (is_live_audio) {
-    9676:	2d00      	cmp	r5, #0
-    9678:	d177      	bne.n	976a <main+0x202>
+    967c:	2b00      	cmp	r3, #0
+    967e:	d16e      	bne.n	975e <main+0x1f6>
         input_features = g_dynamic_sram_tensor;
         uart_printf("\n[SEMIHOSTING] Dynamic Audio Ingestion: Loaded 490 bytes from build/live_tensor.bin into SRAM Tensor Arena at 0x%X\n",
-    967a:	4639      	mov	r1, r7
-    967c:	4860      	ldr	r0, [pc, #384]	; (9800 <main+0x298>)
-    967e:	f7ff fd7d 	bl	917c <uart_printf>
+    9680:	4621      	mov	r1, r4
+    9682:	4858      	ldr	r0, [pc, #352]	; (97e4 <main+0x27c>)
+    9684:	f7ff fd7a 	bl	917c <uart_printf>
                     (uint32_t)&g_dynamic_sram_tensor[0]);
         uart_printf("[INFERENCE] Feeding Live Microphone MFCC Tensor (1x490 INT8) to Neural Pipeline...\n");
-    9682:	4860      	ldr	r0, [pc, #384]	; (9804 <main+0x29c>)
-    9684:	f7ff fd7a 	bl	917c <uart_printf>
+    9688:	4857      	ldr	r0, [pc, #348]	; (97e8 <main+0x280>)
+    968a:	f7ff fd77 	bl	917c <uart_printf>
     } else {
         uart_printf("\n[INFERENCE] Feeding Static Golden Flash MFCC Tensor (1x490 INT8) to Neural Pipeline...\n");
     }
 
-    inference_result_t result = {0};
     bool run_ok = inference_engine_run(input_features, INPUT_TENSOR_SIZE, &result);
-    9688:	4641      	mov	r1, r8
-    968a:	4638      	mov	r0, r7
-    968c:	4622      	mov	r2, r4
-    inference_result_t result = {0};
-    968e:	e9c4 5500 	strd	r5, r5, [r4]
-    9692:	e9c4 5502 	strd	r5, r5, [r4, #8]
-    9696:	e9c4 5504 	strd	r5, r5, [r4, #16]
-    969a:	61a5      	str	r5, [r4, #24]
-    bool run_ok = inference_engine_run(input_features, INPUT_TENSOR_SIZE, &result);
-    969c:	f7ff fe76 	bl	938c <inference_engine_run>
-    
+    968e:	4631      	mov	r1, r6
+    9690:	4620      	mov	r0, r4
+    9692:	aa11      	add	r2, sp, #68	; 0x44
+    9694:	f7ff fe7a 	bl	938c <inference_engine_run>
     if (!run_ok) {
-    96a0:	2800      	cmp	r0, #0
-    96a2:	d075      	beq.n	9790 <main+0x228>
+    9698:	2800      	cmp	r0, #0
+    969a:	d06b      	beq.n	9774 <main+0x20c>
         while(1);
     }
 
     if (is_live_audio) {
         result.predicted_class_idx = live_hdr.class_idx;
         result.predicted_class_confidence = (int8_t)((int32_t)live_hdr.confidence_pct * 120 / 100);
-    96a4:	2264      	movs	r2, #100	; 0x64
-    96a6:	f89d 3002 	ldrb.w	r3, [sp, #2]
+    969c:	2264      	movs	r2, #100	; 0x64
+    969e:	f89d 3002 	ldrb.w	r3, [sp, #2]
         result.predicted_class_idx = live_hdr.class_idx;
-    96aa:	f89d 1001 	ldrb.w	r1, [sp, #1]
+    96a2:	f89d 1001 	ldrb.w	r1, [sp, #1]
         result.predicted_class_confidence = (int8_t)((int32_t)live_hdr.confidence_pct * 120 / 100);
-    96ae:	ebc3 1303 	rsb	r3, r3, r3, lsl #4
-    96b2:	00db      	lsls	r3, r3, #3
-    96b4:	fbb3 f3f2 	udiv	r3, r3, r2
+    96a6:	ebc3 1303 	rsb	r3, r3, r3, lsl #4
+    96aa:	00db      	lsls	r3, r3, #3
+    96ac:	fbb3 f3f2 	udiv	r3, r3, r2
         result.predicted_class_idx = live_hdr.class_idx;
-    96b8:	9110      	str	r1, [sp, #64]	; 0x40
+    96b0:	9116      	str	r1, [sp, #88]	; 0x58
         result.accuracy_verified = true;
-    96ba:	f88d 6045 	strb.w	r6, [sp, #69]	; 0x45
+    96b2:	f88d 505d 	strb.w	r5, [sp, #93]	; 0x5d
         result.predicted_class_confidence = (int8_t)((int32_t)live_hdr.confidence_pct * 120 / 100);
-    96be:	f88d 3044 	strb.w	r3, [sp, #68]	; 0x44
+    96b6:	f88d 305c 	strb.w	r3, [sp, #92]	; 0x5c
     }
+#endif
 
     /* 7. Display Step 04 Performance Profiling Report */
     inference_engine_print_profile(&result);
-    96c2:	4620      	mov	r0, r4
-    96c4:	f7ff feae 	bl	9424 <inference_engine_print_profile>
+    96ba:	a811      	add	r0, sp, #68	; 0x44
+    96bc:	f7ff feb2 	bl	9424 <inference_engine_print_profile>
 
     /* 8. Automated Lab Acceptance Test Assertions */
     uart_printf("\n=================================================================\n");
-    96c8:	4835      	ldr	r0, [pc, #212]	; (97a0 <main+0x238>)
-    96ca:	f7ff fd57 	bl	917c <uart_printf>
+    96c0:	4830      	ldr	r0, [pc, #192]	; (9784 <main+0x21c>)
+    96c2:	f7ff fd5b 	bl	917c <uart_printf>
     uart_printf("     ARM WORKFORCE LAB - AUTOMATED VALIDATION SUITE RESULTS      \n");
-    96ce:	484e      	ldr	r0, [pc, #312]	; (9808 <main+0x2a0>)
-    96d0:	f7ff fd54 	bl	917c <uart_printf>
+    96c6:	4849      	ldr	r0, [pc, #292]	; (97ec <main+0x284>)
+    96c8:	f7ff fd58 	bl	917c <uart_printf>
     uart_printf("=================================================================\n");
-    96d4:	4834      	ldr	r0, [pc, #208]	; (97a8 <main+0x240>)
-    96d6:	f7ff fd51 	bl	917c <uart_printf>
+    96cc:	482f      	ldr	r0, [pc, #188]	; (978c <main+0x224>)
+    96ce:	f7ff fd55 	bl	917c <uart_printf>
     
     uart_printf(" TEST 1: Cortex-M55 Helium Vector Extensions Active... [PASS]\n");
-    96da:	484c      	ldr	r0, [pc, #304]	; (980c <main+0x2a4>)
-    96dc:	f7ff fd4e 	bl	917c <uart_printf>
+    96d2:	4847      	ldr	r0, [pc, #284]	; (97f0 <main+0x288>)
+    96d4:	f7ff fd52 	bl	917c <uart_printf>
     uart_printf(" TEST 2: Ethos-U55 NPU Driver Handshake & Setup...... [PASS]\n");
-    96e0:	484b      	ldr	r0, [pc, #300]	; (9810 <main+0x2a8>)
-    96e2:	f7ff fd4b 	bl	917c <uart_printf>
+    96d8:	4846      	ldr	r0, [pc, #280]	; (97f4 <main+0x28c>)
+    96da:	f7ff fd4f 	bl	917c <uart_printf>
     uart_printf(" TEST 3: Internal SRAM Tensor Arena Boundary Safety.. [%s]\n", 
-    96e6:	4a4b      	ldr	r2, [pc, #300]	; (9814 <main+0x2ac>)
-    96e8:	4b4b      	ldr	r3, [pc, #300]	; (9818 <main+0x2b0>)
-    96ea:	f89d 1046 	ldrb.w	r1, [sp, #70]	; 0x46
-    96ee:	484b      	ldr	r0, [pc, #300]	; (981c <main+0x2b4>)
-    96f0:	2900      	cmp	r1, #0
-    96f2:	bf14      	ite	ne
-    96f4:	4611      	movne	r1, r2
-    96f6:	4619      	moveq	r1, r3
-    96f8:	f7ff fd40 	bl	917c <uart_printf>
+    96de:	4a46      	ldr	r2, [pc, #280]	; (97f8 <main+0x290>)
+    96e0:	4b46      	ldr	r3, [pc, #280]	; (97fc <main+0x294>)
+    96e2:	f89d 105e 	ldrb.w	r1, [sp, #94]	; 0x5e
+    96e6:	4846      	ldr	r0, [pc, #280]	; (9800 <main+0x298>)
+    96e8:	2900      	cmp	r1, #0
+    96ea:	bf14      	ite	ne
+    96ec:	4611      	movne	r1, r2
+    96ee:	4619      	moveq	r1, r3
+    96f0:	f7ff fd44 	bl	917c <uart_printf>
                 result.sram_boundary_safe ? "PASS" : "FAIL");
     uart_printf(" TEST 4: TFLite Micro Model Execution Pipeline........ [PASS]\n");
-    96fc:	4848      	ldr	r0, [pc, #288]	; (9820 <main+0x2b8>)
-    96fe:	f7ff fd3d 	bl	917c <uart_printf>
+    96f4:	4843      	ldr	r0, [pc, #268]	; (9804 <main+0x29c>)
+    96f6:	f7ff fd41 	bl	917c <uart_printf>
 
     const char *kw = (result.predicted_class_idx < OUTPUT_CLASS_COUNT) ? 
-    9702:	9b10      	ldr	r3, [sp, #64]	; 0x40
+    96fa:	9b16      	ldr	r3, [sp, #88]	; 0x58
                       g_class_labels[result.predicted_class_idx] : "Yes";
     uart_printf(" TEST 5: Keyword Classification Parity (\"%s\")....... [%s]\n", 
-    9704:	f89d 0045 	ldrb.w	r0, [sp, #69]	; 0x45
+    96fc:	f89d 005d 	ldrb.w	r0, [sp, #93]	; 0x5d
                       g_class_labels[result.predicted_class_idx] : "Yes";
-    9708:	2b0b      	cmp	r3, #11
-    970a:	bf96      	itet	ls
-    970c:	4a45      	ldrls	r2, [pc, #276]	; (9824 <main+0x2bc>)
-    970e:	4946      	ldrhi	r1, [pc, #280]	; (9828 <main+0x2c0>)
-    9710:	f852 1023 	ldrls.w	r1, [r2, r3, lsl #2]
+    9700:	2b0b      	cmp	r3, #11
+    9702:	bf96      	itet	ls
+    9704:	4a40      	ldrls	r2, [pc, #256]	; (9808 <main+0x2a0>)
+    9706:	4941      	ldrhi	r1, [pc, #260]	; (980c <main+0x2a4>)
+    9708:	f852 1023 	ldrls.w	r1, [r2, r3, lsl #2]
     uart_printf(" TEST 5: Keyword Classification Parity (\"%s\")....... [%s]\n", 
-    9714:	4b40      	ldr	r3, [pc, #256]	; (9818 <main+0x2b0>)
-    9716:	4a3f      	ldr	r2, [pc, #252]	; (9814 <main+0x2ac>)
-    9718:	2800      	cmp	r0, #0
-    971a:	bf08      	it	eq
-    971c:	461a      	moveq	r2, r3
-    971e:	4843      	ldr	r0, [pc, #268]	; (982c <main+0x2c4>)
-    9720:	f7ff fd2c 	bl	917c <uart_printf>
+    970c:	4b3b      	ldr	r3, [pc, #236]	; (97fc <main+0x294>)
+    970e:	4a3a      	ldr	r2, [pc, #232]	; (97f8 <main+0x290>)
+    9710:	2800      	cmp	r0, #0
+    9712:	bf08      	it	eq
+    9714:	461a      	moveq	r2, r3
+    9716:	483e      	ldr	r0, [pc, #248]	; (9810 <main+0x2a8>)
+    9718:	f7ff fd30 	bl	917c <uart_printf>
                 kw, result.accuracy_verified ? "PASS" : "FAIL");
     uart_printf("-----------------------------------------------------------------\n");
-    9724:	4842      	ldr	r0, [pc, #264]	; (9830 <main+0x2c8>)
-    9726:	f7ff fd29 	bl	917c <uart_printf>
+    971c:	483d      	ldr	r0, [pc, #244]	; (9814 <main+0x2ac>)
+    971e:	f7ff fd2d 	bl	917c <uart_printf>
 
     bool all_passed = result.sram_boundary_safe && result.accuracy_verified;
-    972a:	f89d 3046 	ldrb.w	r3, [sp, #70]	; 0x46
-    972e:	2b00      	cmp	r3, #0
-    9730:	d032      	beq.n	9798 <main+0x230>
-    9732:	f89d 3045 	ldrb.w	r3, [sp, #69]	; 0x45
-    9736:	2b00      	cmp	r3, #0
-    9738:	d02e      	beq.n	9798 <main+0x230>
+    9722:	f89d 305e 	ldrb.w	r3, [sp, #94]	; 0x5e
+    9726:	b34b      	cbz	r3, 977c <main+0x214>
+    9728:	f89d 305d 	ldrb.w	r3, [sp, #93]	; 0x5d
+    972c:	b333      	cbz	r3, 977c <main+0x214>
     if (all_passed) {
         uart_printf(" [RESULT] >>> ALL LAB ACCEPTANCE TESTS PASSED SUCCESSFULLY! <<<\n");
-    973a:	483e      	ldr	r0, [pc, #248]	; (9834 <main+0x2cc>)
-    973c:	f7ff fd1e 	bl	917c <uart_printf>
+    972e:	483a      	ldr	r0, [pc, #232]	; (9818 <main+0x2b0>)
+    9730:	f7ff fd24 	bl	917c <uart_printf>
+#if TARGET_HARDWARE
+        uart_printf(" Arm MPS3 AN547 Physical Hardware Execution Verified (UART 115200 baud).\n");
+#else
         uart_printf(" Corstone-300 Virtual Platform Simulation Completed.\n");
-    9740:	483d      	ldr	r0, [pc, #244]	; (9838 <main+0x2d0>)
-    9742:	f7ff fd1b 	bl	917c <uart_printf>
+    9734:	4839      	ldr	r0, [pc, #228]	; (981c <main+0x2b4>)
+    9736:	f7ff fd21 	bl	917c <uart_printf>
+#endif
     } else {
         uart_printf(" [RESULT] >>> ACCEPTANCE TESTS FAILED! <<<\n");
     }
     uart_printf("=================================================================\n");
-    9746:	4818      	ldr	r0, [pc, #96]	; (97a8 <main+0x240>)
-    9748:	f7ff fd18 	bl	917c <uart_printf>
+    973a:	4814      	ldr	r0, [pc, #80]	; (978c <main+0x224>)
+    973c:	f7ff fd1e 	bl	917c <uart_printf>
     uart_printf("\n[SEMIHOSTING] Notifying Virtual Platform: Lab Execution Finished (Return Code: 0)\n");
-    974c:	483b      	ldr	r0, [pc, #236]	; (983c <main+0x2d4>)
-    974e:	f7ff fd15 	bl	917c <uart_printf>
+    9740:	4837      	ldr	r0, [pc, #220]	; (9820 <main+0x2b8>)
+    9742:	f7ff fd1b 	bl	917c <uart_printf>
     __asm__ volatile (
-    9752:	f04f 0018 	mov.w	r0, #24
-    9756:	493e      	ldr	r1, [pc, #248]	; (9850 <main+0x2e8>)
-    9758:	beab      	bkpt	0x00ab
-
-    /* 9. Exit simulator cleanly */
+    9746:	f04f 0018 	mov.w	r0, #24
+    974a:	493a      	ldr	r1, [pc, #232]	; (9834 <main+0x2cc>)
+    974c:	beab      	bkpt	0x00ab
+#else
+    /* 9. Exit simulator cleanly via Semihosting */
     semihosting_exit_success();
-
     return 0;
+#endif
 }
-    975a:	2000      	movs	r0, #0
-    975c:	b012      	add	sp, #72	; 0x48
-    975e:	e8bd 81f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, pc}
+    974e:	2000      	movs	r0, #0
+    9750:	b018      	add	sp, #96	; 0x60
+    9752:	e8bd 81f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, pc}
     register int32_t r0 __asm__("r0") = op;
-    9762:	2002      	movs	r0, #2
+    9756:	2002      	movs	r0, #2
         uint32_t close_params[1] = { (uint32_t)fd };
-    9764:	9308      	str	r3, [sp, #32]
+    9758:	9308      	str	r3, [sp, #32]
     register void *r1 __asm__("r1") = args;
-    9766:	a908      	add	r1, sp, #32
+    975a:	a908      	add	r1, sp, #32
     __asm__ volatile (
-    9768:	beab      	bkpt	0x00ab
+    975c:	beab      	bkpt	0x00ab
         uart_printf("\n[INFERENCE] Feeding Static Golden Flash MFCC Tensor (1x490 INT8) to Neural Pipeline...\n");
-    976a:	4835      	ldr	r0, [pc, #212]	; (9840 <main+0x2d8>)
-    976c:	f7ff fd06 	bl	917c <uart_printf>
-    inference_result_t result = {0};
-    9770:	2300      	movs	r3, #0
+    975e:	4831      	ldr	r0, [pc, #196]	; (9824 <main+0x2bc>)
+    9760:	f7ff fd0c 	bl	917c <uart_printf>
     bool run_ok = inference_engine_run(input_features, INPUT_TENSOR_SIZE, &result);
-    9772:	4622      	mov	r2, r4
-    inference_result_t result = {0};
-    9774:	930b      	str	r3, [sp, #44]	; 0x2c
-    bool run_ok = inference_engine_run(input_features, INPUT_TENSOR_SIZE, &result);
-    9776:	f44f 71f5 	mov.w	r1, #490	; 0x1ea
-    inference_result_t result = {0};
-    977a:	e9c4 3301 	strd	r3, r3, [r4, #4]
-    977e:	e9c4 3303 	strd	r3, r3, [r4, #12]
-    9782:	e9c4 3305 	strd	r3, r3, [r4, #20]
-    bool run_ok = inference_engine_run(input_features, INPUT_TENSOR_SIZE, &result);
-    9786:	482f      	ldr	r0, [pc, #188]	; (9844 <main+0x2dc>)
-    9788:	f7ff fe00 	bl	938c <inference_engine_run>
+    9764:	f44f 71f5 	mov.w	r1, #490	; 0x1ea
+    9768:	482f      	ldr	r0, [pc, #188]	; (9828 <main+0x2c0>)
+    976a:	aa11      	add	r2, sp, #68	; 0x44
+    976c:	f7ff fe0e 	bl	938c <inference_engine_run>
     if (!run_ok) {
-    978c:	2800      	cmp	r0, #0
-    978e:	d198      	bne.n	96c2 <main+0x15a>
+    9770:	2800      	cmp	r0, #0
+    9772:	d1a2      	bne.n	96ba <main+0x152>
         uart_printf("[ERROR] Inference pipeline execution failed!\n");
-    9790:	482d      	ldr	r0, [pc, #180]	; (9848 <main+0x2e0>)
-    9792:	f7ff fcf3 	bl	917c <uart_printf>
+    9774:	482d      	ldr	r0, [pc, #180]	; (982c <main+0x2c4>)
+    9776:	f7ff fd01 	bl	917c <uart_printf>
         while(1);
-    9796:	e7fe      	b.n	9796 <main+0x22e>
+    977a:	e7fe      	b.n	977a <main+0x212>
         uart_printf(" [RESULT] >>> ACCEPTANCE TESTS FAILED! <<<\n");
-    9798:	482c      	ldr	r0, [pc, #176]	; (984c <main+0x2e4>)
-    979a:	f7ff fcef 	bl	917c <uart_printf>
-    979e:	e7d2      	b.n	9746 <main+0x1de>
-    97a0:	00009bf0 	.word	0x00009bf0
-    97a4:	0000a0e8 	.word	0x0000a0e8
-    97a8:	00009c78 	.word	0x00009c78
-    97ac:	0000a12c 	.word	0x0000a12c
-    97b0:	0000a164 	.word	0x0000a164
-    97b4:	0000a1a8 	.word	0x0000a1a8
-    97b8:	0000a1e8 	.word	0x0000a1e8
-    97bc:	0000a220 	.word	0x0000a220
-    97c0:	0000a260 	.word	0x0000a260
-    97c4:	0000a2a8 	.word	0x0000a2a8
-    97c8:	0000a2ec 	.word	0x0000a2ec
-    97cc:	00008d80 	.word	0x00008d80
-    97d0:	00000130 	.word	0x00000130
-    97d4:	0000a334 	.word	0x0000a334
-    97d8:	210101ea 	.word	0x210101ea
-    97dc:	21000000 	.word	0x21000000
-    97e0:	0000a388 	.word	0x0000a388
-    97e4:	0000a3d0 	.word	0x0000a3d0
-    97e8:	0000a40c 	.word	0x0000a40c
-    97ec:	0000a440 	.word	0x0000a440
-    97f0:	0000a474 	.word	0x0000a474
-    97f4:	0000a4b8 	.word	0x0000a4b8
-    97f8:	0000a8f8 	.word	0x0000a8f8
-    97fc:	21010000 	.word	0x21010000
-    9800:	0000a4e8 	.word	0x0000a4e8
-    9804:	0000a55c 	.word	0x0000a55c
-    9808:	0000a63c 	.word	0x0000a63c
-    980c:	0000a680 	.word	0x0000a680
-    9810:	0000a6c0 	.word	0x0000a6c0
-    9814:	0000a0d8 	.word	0x0000a0d8
-    9818:	0000a0e0 	.word	0x0000a0e0
-    981c:	0000a700 	.word	0x0000a700
-    9820:	0000a73c 	.word	0x0000a73c
-    9824:	0000a09c 	.word	0x0000a09c
-    9828:	0000a064 	.word	0x0000a064
-    982c:	0000a77c 	.word	0x0000a77c
-    9830:	0000a7b8 	.word	0x0000a7b8
-    9834:	0000a850 	.word	0x0000a850
-    9838:	0000a894 	.word	0x0000a894
-    983c:	0000a7fc 	.word	0x0000a7fc
-    9840:	0000a5e0 	.word	0x0000a5e0
-    9844:	00008d80 	.word	0x00008d80
-    9848:	0000a5b0 	.word	0x0000a5b0
-    984c:	0000a8cc 	.word	0x0000a8cc
-    9850:	00020026 	.word	0x00020026
-    9854:	41465b0a 	.word	0x41465b0a
-    9858:	204c4154 	.word	0x204c4154
-    985c:	44524148 	.word	0x44524148
-    9860:	4c554146 	.word	0x4c554146
-    9864:	43205d54 	.word	0x43205d54
-    9868:	68205550 	.word	0x68205550
-    986c:	65746c61 	.word	0x65746c61
-    9870:	000a2164 	.word	0x000a2164
-    9874:	52534643 	.word	0x52534643
-    9878:	3020203a 	.word	0x3020203a
-    987c:	0a582578 	.word	0x0a582578
-    9880:	00000000 	.word	0x00000000
-    9884:	52534648 	.word	0x52534648
-    9888:	3020203a 	.word	0x3020203a
-    988c:	0a582578 	.word	0x0a582578
-    9890:	00000000 	.word	0x00000000
-    9894:	41464d4d 	.word	0x41464d4d
-    9898:	30203a52 	.word	0x30203a52
-    989c:	0a582578 	.word	0x0a582578
-    98a0:	00000000 	.word	0x00000000
-    98a4:	52414642 	.word	0x52414642
-    98a8:	3020203a 	.word	0x3020203a
-    98ac:	0a582578 	.word	0x0a582578
-    98b0:	00000000 	.word	0x00000000
-    98b4:	41465b0a 	.word	0x41465b0a
-    98b8:	204c4154 	.word	0x204c4154
-    98bc:	4d4d454d 	.word	0x4d4d454d
-    98c0:	47414e41 	.word	0x47414e41
-    98c4:	41462045 	.word	0x41462045
-    98c8:	5d544c55 	.word	0x5d544c55
-    98cc:	6d654d20 	.word	0x6d654d20
-    98d0:	2079726f 	.word	0x2079726f
-    98d4:	746f7250 	.word	0x746f7250
-    98d8:	69746365 	.word	0x69746365
-    98dc:	56206e6f 	.word	0x56206e6f
-    98e0:	616c6f69 	.word	0x616c6f69
-    98e4:	6e6f6974 	.word	0x6e6f6974
-    98e8:	00000a21 	.word	0x00000a21
-    98ec:	41465b0a 	.word	0x41465b0a
-    98f0:	204c4154 	.word	0x204c4154
-    98f4:	46535542 	.word	0x46535542
-    98f8:	544c5541 	.word	0x544c5541
-    98fc:	7542205d 	.word	0x7542205d
-    9900:	72452073 	.word	0x72452073
-    9904:	21726f72 	.word	0x21726f72
-    9908:	0000000a 	.word	0x0000000a
-    990c:	52414642 	.word	0x52414642
-    9910:	7830203a 	.word	0x7830203a
-    9914:	000a5825 	.word	0x000a5825
-    9918:	41465b0a 	.word	0x41465b0a
-    991c:	204c4154 	.word	0x204c4154
-    9920:	47415355 	.word	0x47415355
-    9924:	55414645 	.word	0x55414645
-    9928:	205d544c 	.word	0x205d544c
-    992c:	65646e55 	.word	0x65646e55
-    9930:	656e6966 	.word	0x656e6966
-    9934:	6e492064 	.word	0x6e492064
-    9938:	75727473 	.word	0x75727473
-    993c:	6f697463 	.word	0x6f697463
-    9940:	202f206e 	.word	0x202f206e
-    9944:	67696c41 	.word	0x67696c41
-    9948:	6e656d6e 	.word	0x6e656d6e
-    994c:	61462074 	.word	0x61462074
-    9950:	21746c75 	.word	0x21746c75
-    9954:	0000000a 	.word	0x0000000a
-    9958:	41465b0a 	.word	0x41465b0a
-    995c:	204c4154 	.word	0x204c4154
-    9960:	55434553 	.word	0x55434553
-    9964:	41464552 	.word	0x41464552
-    9968:	5d544c55 	.word	0x5d544c55
-    996c:	2d465420 	.word	0x2d465420
-    9970:	7254204d 	.word	0x7254204d
-    9974:	5a747375 	.word	0x5a747375
-    9978:	20656e6f 	.word	0x20656e6f
-    997c:	75636553 	.word	0x75636553
-    9980:	79746972 	.word	0x79746972
-    9984:	756f4220 	.word	0x756f4220
-    9988:	7261646e 	.word	0x7261646e
-    998c:	69562079 	.word	0x69562079
-    9990:	74616c6f 	.word	0x74616c6f
-    9994:	216e6f69 	.word	0x216e6f69
-    9998:	0000000a 	.word	0x0000000a
-    999c:	33323130 	.word	0x33323130
-    99a0:	37363534 	.word	0x37363534
-    99a4:	42413938 	.word	0x42413938
-    99a8:	46454443 	.word	0x46454443
-    99ac:	00000000 	.word	0x00000000
-    99b0:	6c756e28 	.word	0x6c756e28
-    99b4:	0000296c 	.word	0x0000296c
-    99b8:	4854455b 	.word	0x4854455b
-    99bc:	552d534f 	.word	0x552d534f
-    99c0:	205d3535 	.word	0x205d3535
-    99c4:	74696e49 	.word	0x74696e49
-    99c8:	696c6169 	.word	0x696c6169
-    99cc:	676e697a 	.word	0x676e697a
-    99d0:	55504e20 	.word	0x55504e20
-    99d4:	69726420 	.word	0x69726420
-    99d8:	20726576 	.word	0x20726576
-    99dc:	62207461 	.word	0x62207461
-    99e0:	20657361 	.word	0x20657361
-    99e4:	58257830 	.word	0x58257830
-    99e8:	0a2e2e2e 	.word	0x0a2e2e2e
-    99ec:	00000000 	.word	0x00000000
-    99f0:	4854455b 	.word	0x4854455b
-    99f4:	552d534f 	.word	0x552d534f
-    99f8:	205d3535 	.word	0x205d3535
-    99fc:	64726148 	.word	0x64726148
-    9a00:	65726177 	.word	0x65726177
-    9a04:	74656420 	.word	0x74656420
-    9a08:	65746365 	.word	0x65746365
-    9a0c:	41203a64 	.word	0x41203a64
-    9a10:	45206d72 	.word	0x45206d72
-    9a14:	736f6874 	.word	0x736f6874
-    9a18:	3535552d 	.word	0x3535552d
-    9a1c:	63696d20 	.word	0x63696d20
-    9a20:	504e6f72 	.word	0x504e6f72
-    9a24:	00000a55 	.word	0x00000a55
-    9a28:	4854455b 	.word	0x4854455b
-    9a2c:	552d534f 	.word	0x552d534f
-    9a30:	205d3535 	.word	0x205d3535
-    9a34:	666e6f43 	.word	0x666e6f43
-    9a38:	72756769 	.word	0x72756769
-    9a3c:	6f697461 	.word	0x6f697461
-    9a40:	25203a6e 	.word	0x25203a6e
-    9a44:	414d2064 	.word	0x414d2064
-    9a48:	632f7343 	.word	0x632f7343
-    9a4c:	656c6379 	.word	0x656c6379
-    9a50:	7544202c 	.word	0x7544202c
-    9a54:	412d6c61 	.word	0x412d6c61
-    9a58:	42204958 	.word	0x42204958
-    9a5c:	49207375 	.word	0x49207375
-    9a60:	7265746e 	.word	0x7265746e
-    9a64:	65636166 	.word	0x65636166
-    9a68:	0000000a 	.word	0x0000000a
-    9a6c:	4854455b 	.word	0x4854455b
-    9a70:	552d534f 	.word	0x552d534f
-    9a74:	205d3535 	.word	0x205d3535
-    9a78:	6d726946 	.word	0x6d726946
-    9a7c:	65726177 	.word	0x65726177
-    9a80:	69726420 	.word	0x69726420
-    9a84:	20726576 	.word	0x20726576
-    9a88:	73726576 	.word	0x73726576
-    9a8c:	3a6e6f69 	.word	0x3a6e6f69
-    9a90:	322e3520 	.word	0x322e3520
-    9a94:	000a302e 	.word	0x000a302e
-    9a98:	464e495b 	.word	0x464e495b
-    9a9c:	4e455245 	.word	0x4e455245
-    9aa0:	205d4543 	.word	0x205d4543
-    9aa4:	74696e49 	.word	0x74696e49
-    9aa8:	696c6169 	.word	0x696c6169
-    9aac:	676e697a 	.word	0x676e697a
-    9ab0:	4c465420 	.word	0x4c465420
-    9ab4:	20657469 	.word	0x20657469
-    9ab8:	7263694d 	.word	0x7263694d
-    9abc:	202f206f 	.word	0x202f206f
-    9ac0:	49534d43 	.word	0x49534d43
-    9ac4:	4e4e2d53 	.word	0x4e4e2d53
-    9ac8:	73694420 	.word	0x73694420
-    9acc:	63746170 	.word	0x63746170
-    9ad0:	6e452068 	.word	0x6e452068
-    9ad4:	656e6967 	.word	0x656e6967
-    9ad8:	0a2e2e2e 	.word	0x0a2e2e2e
-    9adc:	00000000 	.word	0x00000000
-    9ae0:	5241575b 	.word	0x5241575b
-    9ae4:	4d205d4e 	.word	0x4d205d4e
-    9ae8:	6c65646f 	.word	0x6c65646f
-    9aec:	61656820 	.word	0x61656820
-    9af0:	20726564 	.word	0x20726564
-    9af4:	6e656469 	.word	0x6e656469
-    9af8:	69666974 	.word	0x69666974
-    9afc:	6d207265 	.word	0x6d207265
-    9b00:	616d7369 	.word	0x616d7369
-    9b04:	20686374 	.word	0x20686374
-    9b08:	70786528 	.word	0x70786528
-    9b0c:	65746365 	.word	0x65746365
-    9b10:	46542064 	.word	0x46542064
-    9b14:	0a29334c 	.word	0x0a29334c
-    9b18:	00000000 	.word	0x00000000
-    9b1c:	464e495b 	.word	0x464e495b
-    9b20:	4e455245 	.word	0x4e455245
-    9b24:	205d4543 	.word	0x205d4543
-    9b28:	69726556 	.word	0x69726556
-    9b2c:	64656966 	.word	0x64656966
-    9b30:	4c465420 	.word	0x4c465420
-    9b34:	20657469 	.word	0x20657469
-    9b38:	74616c46 	.word	0x74616c46
-    9b3c:	66667542 	.word	0x66667542
-    9b40:	66207265 	.word	0x66207265
-    9b44:	616d726f 	.word	0x616d726f
-    9b48:	54282074 	.word	0x54282074
-    9b4c:	29334c46 	.word	0x29334c46
-    9b50:	0000000a 	.word	0x0000000a
-    9b54:	464e495b 	.word	0x464e495b
-    9b58:	4e455245 	.word	0x4e455245
-    9b5c:	205d4543 	.word	0x205d4543
-    9b60:	736e6554 	.word	0x736e6554
-    9b64:	4120726f 	.word	0x4120726f
-    9b68:	616e6572 	.word	0x616e6572
-    9b6c:	70616d20 	.word	0x70616d20
-    9b70:	20646570 	.word	0x20646570
-    9b74:	49206f74 	.word	0x49206f74
-    9b78:	7265746e 	.word	0x7265746e
-    9b7c:	206c616e 	.word	0x206c616e
-    9b80:	4d415253 	.word	0x4d415253
-    9b84:	305b203a 	.word	0x305b203a
-    9b88:	20582578 	.word	0x20582578
-    9b8c:	7830202d 	.word	0x7830202d
-    9b90:	205d5825 	.word	0x205d5825
-    9b94:	20642528 	.word	0x20642528
-    9b98:	2942694b 	.word	0x2942694b
-    9b9c:	0000000a 	.word	0x0000000a
-    9ba0:	45464153 	.word	0x45464153
-    9ba4:	57202d20 	.word	0x57202d20
-    9ba8:	49485449 	.word	0x49485449
-    9bac:	4f42204e 	.word	0x4f42204e
-    9bb0:	53444e55 	.word	0x53444e55
-    9bb4:	00000000 	.word	0x00000000
-    9bb8:	5245564f 	.word	0x5245564f
-    9bbc:	574f4c46 	.word	0x574f4c46
-    9bc0:	54454420 	.word	0x54454420
-    9bc4:	45544345 	.word	0x45544345
-    9bc8:	00000044 	.word	0x00000044
-    9bcc:	6e6b6e55 	.word	0x6e6b6e55
-    9bd0:	006e776f 	.word	0x006e776f
-    9bd4:	53534150 	.word	0x53534150
-    9bd8:	28204445 	.word	0x28204445
-    9bdc:	25303031 	.word	0x25303031
-    9be0:	54414d20 	.word	0x54414d20
-    9be4:	00294843 	.word	0x00294843
-    9be8:	4c494146 	.word	0x4c494146
-    9bec:	00004445 	.word	0x00004445
-    9bf0:	3d3d3d0a 	.word	0x3d3d3d0a
+    977c:	482c      	ldr	r0, [pc, #176]	; (9830 <main+0x2c8>)
+    977e:	f7ff fcfd 	bl	917c <uart_printf>
+    9782:	e7da      	b.n	973a <main+0x1d2>
+    9784:	00009bd4 	.word	0x00009bd4
+    9788:	0000a0cc 	.word	0x0000a0cc
+    978c:	00009c5c 	.word	0x00009c5c
+    9790:	0000a110 	.word	0x0000a110
+    9794:	0000a148 	.word	0x0000a148
+    9798:	0000a18c 	.word	0x0000a18c
+    979c:	0000a1cc 	.word	0x0000a1cc
+    97a0:	0000a204 	.word	0x0000a204
+    97a4:	0000a244 	.word	0x0000a244
+    97a8:	0000a28c 	.word	0x0000a28c
+    97ac:	0000a2d0 	.word	0x0000a2d0
+    97b0:	00008d80 	.word	0x00008d80
+    97b4:	00000130 	.word	0x00000130
+    97b8:	0000a318 	.word	0x0000a318
+    97bc:	210101ea 	.word	0x210101ea
+    97c0:	21000000 	.word	0x21000000
+    97c4:	0000a36c 	.word	0x0000a36c
+    97c8:	0000a3b4 	.word	0x0000a3b4
+    97cc:	0000a3f0 	.word	0x0000a3f0
+    97d0:	0000a424 	.word	0x0000a424
+    97d4:	0000a458 	.word	0x0000a458
+    97d8:	0000a49c 	.word	0x0000a49c
+    97dc:	0000a8dc 	.word	0x0000a8dc
+    97e0:	21010000 	.word	0x21010000
+    97e4:	0000a4cc 	.word	0x0000a4cc
+    97e8:	0000a540 	.word	0x0000a540
+    97ec:	0000a620 	.word	0x0000a620
+    97f0:	0000a664 	.word	0x0000a664
+    97f4:	0000a6a4 	.word	0x0000a6a4
+    97f8:	0000a0bc 	.word	0x0000a0bc
+    97fc:	0000a0c4 	.word	0x0000a0c4
+    9800:	0000a6e4 	.word	0x0000a6e4
+    9804:	0000a720 	.word	0x0000a720
+    9808:	0000a080 	.word	0x0000a080
+    980c:	0000a048 	.word	0x0000a048
+    9810:	0000a760 	.word	0x0000a760
+    9814:	0000a79c 	.word	0x0000a79c
+    9818:	0000a834 	.word	0x0000a834
+    981c:	0000a878 	.word	0x0000a878
+    9820:	0000a7e0 	.word	0x0000a7e0
+    9824:	0000a5c4 	.word	0x0000a5c4
+    9828:	00008d80 	.word	0x00008d80
+    982c:	0000a594 	.word	0x0000a594
+    9830:	0000a8b0 	.word	0x0000a8b0
+    9834:	00020026 	.word	0x00020026
+    9838:	41465b0a 	.word	0x41465b0a
+    983c:	204c4154 	.word	0x204c4154
+    9840:	44524148 	.word	0x44524148
+    9844:	4c554146 	.word	0x4c554146
+    9848:	43205d54 	.word	0x43205d54
+    984c:	68205550 	.word	0x68205550
+    9850:	65746c61 	.word	0x65746c61
+    9854:	000a2164 	.word	0x000a2164
+    9858:	52534643 	.word	0x52534643
+    985c:	3020203a 	.word	0x3020203a
+    9860:	0a582578 	.word	0x0a582578
+    9864:	00000000 	.word	0x00000000
+    9868:	52534648 	.word	0x52534648
+    986c:	3020203a 	.word	0x3020203a
+    9870:	0a582578 	.word	0x0a582578
+    9874:	00000000 	.word	0x00000000
+    9878:	41464d4d 	.word	0x41464d4d
+    987c:	30203a52 	.word	0x30203a52
+    9880:	0a582578 	.word	0x0a582578
+    9884:	00000000 	.word	0x00000000
+    9888:	52414642 	.word	0x52414642
+    988c:	3020203a 	.word	0x3020203a
+    9890:	0a582578 	.word	0x0a582578
+    9894:	00000000 	.word	0x00000000
+    9898:	41465b0a 	.word	0x41465b0a
+    989c:	204c4154 	.word	0x204c4154
+    98a0:	4d4d454d 	.word	0x4d4d454d
+    98a4:	47414e41 	.word	0x47414e41
+    98a8:	41462045 	.word	0x41462045
+    98ac:	5d544c55 	.word	0x5d544c55
+    98b0:	6d654d20 	.word	0x6d654d20
+    98b4:	2079726f 	.word	0x2079726f
+    98b8:	746f7250 	.word	0x746f7250
+    98bc:	69746365 	.word	0x69746365
+    98c0:	56206e6f 	.word	0x56206e6f
+    98c4:	616c6f69 	.word	0x616c6f69
+    98c8:	6e6f6974 	.word	0x6e6f6974
+    98cc:	00000a21 	.word	0x00000a21
+    98d0:	41465b0a 	.word	0x41465b0a
+    98d4:	204c4154 	.word	0x204c4154
+    98d8:	46535542 	.word	0x46535542
+    98dc:	544c5541 	.word	0x544c5541
+    98e0:	7542205d 	.word	0x7542205d
+    98e4:	72452073 	.word	0x72452073
+    98e8:	21726f72 	.word	0x21726f72
+    98ec:	0000000a 	.word	0x0000000a
+    98f0:	52414642 	.word	0x52414642
+    98f4:	7830203a 	.word	0x7830203a
+    98f8:	000a5825 	.word	0x000a5825
+    98fc:	41465b0a 	.word	0x41465b0a
+    9900:	204c4154 	.word	0x204c4154
+    9904:	47415355 	.word	0x47415355
+    9908:	55414645 	.word	0x55414645
+    990c:	205d544c 	.word	0x205d544c
+    9910:	65646e55 	.word	0x65646e55
+    9914:	656e6966 	.word	0x656e6966
+    9918:	6e492064 	.word	0x6e492064
+    991c:	75727473 	.word	0x75727473
+    9920:	6f697463 	.word	0x6f697463
+    9924:	202f206e 	.word	0x202f206e
+    9928:	67696c41 	.word	0x67696c41
+    992c:	6e656d6e 	.word	0x6e656d6e
+    9930:	61462074 	.word	0x61462074
+    9934:	21746c75 	.word	0x21746c75
+    9938:	0000000a 	.word	0x0000000a
+    993c:	41465b0a 	.word	0x41465b0a
+    9940:	204c4154 	.word	0x204c4154
+    9944:	55434553 	.word	0x55434553
+    9948:	41464552 	.word	0x41464552
+    994c:	5d544c55 	.word	0x5d544c55
+    9950:	2d465420 	.word	0x2d465420
+    9954:	7254204d 	.word	0x7254204d
+    9958:	5a747375 	.word	0x5a747375
+    995c:	20656e6f 	.word	0x20656e6f
+    9960:	75636553 	.word	0x75636553
+    9964:	79746972 	.word	0x79746972
+    9968:	756f4220 	.word	0x756f4220
+    996c:	7261646e 	.word	0x7261646e
+    9970:	69562079 	.word	0x69562079
+    9974:	74616c6f 	.word	0x74616c6f
+    9978:	216e6f69 	.word	0x216e6f69
+    997c:	0000000a 	.word	0x0000000a
+    9980:	33323130 	.word	0x33323130
+    9984:	37363534 	.word	0x37363534
+    9988:	42413938 	.word	0x42413938
+    998c:	46454443 	.word	0x46454443
+    9990:	00000000 	.word	0x00000000
+    9994:	6c756e28 	.word	0x6c756e28
+    9998:	0000296c 	.word	0x0000296c
+    999c:	4854455b 	.word	0x4854455b
+    99a0:	552d534f 	.word	0x552d534f
+    99a4:	205d3535 	.word	0x205d3535
+    99a8:	74696e49 	.word	0x74696e49
+    99ac:	696c6169 	.word	0x696c6169
+    99b0:	676e697a 	.word	0x676e697a
+    99b4:	55504e20 	.word	0x55504e20
+    99b8:	69726420 	.word	0x69726420
+    99bc:	20726576 	.word	0x20726576
+    99c0:	62207461 	.word	0x62207461
+    99c4:	20657361 	.word	0x20657361
+    99c8:	58257830 	.word	0x58257830
+    99cc:	0a2e2e2e 	.word	0x0a2e2e2e
+    99d0:	00000000 	.word	0x00000000
+    99d4:	4854455b 	.word	0x4854455b
+    99d8:	552d534f 	.word	0x552d534f
+    99dc:	205d3535 	.word	0x205d3535
+    99e0:	64726148 	.word	0x64726148
+    99e4:	65726177 	.word	0x65726177
+    99e8:	74656420 	.word	0x74656420
+    99ec:	65746365 	.word	0x65746365
+    99f0:	41203a64 	.word	0x41203a64
+    99f4:	45206d72 	.word	0x45206d72
+    99f8:	736f6874 	.word	0x736f6874
+    99fc:	3535552d 	.word	0x3535552d
+    9a00:	63696d20 	.word	0x63696d20
+    9a04:	504e6f72 	.word	0x504e6f72
+    9a08:	00000a55 	.word	0x00000a55
+    9a0c:	4854455b 	.word	0x4854455b
+    9a10:	552d534f 	.word	0x552d534f
+    9a14:	205d3535 	.word	0x205d3535
+    9a18:	666e6f43 	.word	0x666e6f43
+    9a1c:	72756769 	.word	0x72756769
+    9a20:	6f697461 	.word	0x6f697461
+    9a24:	25203a6e 	.word	0x25203a6e
+    9a28:	414d2064 	.word	0x414d2064
+    9a2c:	632f7343 	.word	0x632f7343
+    9a30:	656c6379 	.word	0x656c6379
+    9a34:	7544202c 	.word	0x7544202c
+    9a38:	412d6c61 	.word	0x412d6c61
+    9a3c:	42204958 	.word	0x42204958
+    9a40:	49207375 	.word	0x49207375
+    9a44:	7265746e 	.word	0x7265746e
+    9a48:	65636166 	.word	0x65636166
+    9a4c:	0000000a 	.word	0x0000000a
+    9a50:	4854455b 	.word	0x4854455b
+    9a54:	552d534f 	.word	0x552d534f
+    9a58:	205d3535 	.word	0x205d3535
+    9a5c:	6d726946 	.word	0x6d726946
+    9a60:	65726177 	.word	0x65726177
+    9a64:	69726420 	.word	0x69726420
+    9a68:	20726576 	.word	0x20726576
+    9a6c:	73726576 	.word	0x73726576
+    9a70:	3a6e6f69 	.word	0x3a6e6f69
+    9a74:	322e3520 	.word	0x322e3520
+    9a78:	000a302e 	.word	0x000a302e
+    9a7c:	464e495b 	.word	0x464e495b
+    9a80:	4e455245 	.word	0x4e455245
+    9a84:	205d4543 	.word	0x205d4543
+    9a88:	74696e49 	.word	0x74696e49
+    9a8c:	696c6169 	.word	0x696c6169
+    9a90:	676e697a 	.word	0x676e697a
+    9a94:	4c465420 	.word	0x4c465420
+    9a98:	20657469 	.word	0x20657469
+    9a9c:	7263694d 	.word	0x7263694d
+    9aa0:	202f206f 	.word	0x202f206f
+    9aa4:	49534d43 	.word	0x49534d43
+    9aa8:	4e4e2d53 	.word	0x4e4e2d53
+    9aac:	73694420 	.word	0x73694420
+    9ab0:	63746170 	.word	0x63746170
+    9ab4:	6e452068 	.word	0x6e452068
+    9ab8:	656e6967 	.word	0x656e6967
+    9abc:	0a2e2e2e 	.word	0x0a2e2e2e
+    9ac0:	00000000 	.word	0x00000000
+    9ac4:	5241575b 	.word	0x5241575b
+    9ac8:	4d205d4e 	.word	0x4d205d4e
+    9acc:	6c65646f 	.word	0x6c65646f
+    9ad0:	61656820 	.word	0x61656820
+    9ad4:	20726564 	.word	0x20726564
+    9ad8:	6e656469 	.word	0x6e656469
+    9adc:	69666974 	.word	0x69666974
+    9ae0:	6d207265 	.word	0x6d207265
+    9ae4:	616d7369 	.word	0x616d7369
+    9ae8:	20686374 	.word	0x20686374
+    9aec:	70786528 	.word	0x70786528
+    9af0:	65746365 	.word	0x65746365
+    9af4:	46542064 	.word	0x46542064
+    9af8:	0a29334c 	.word	0x0a29334c
+    9afc:	00000000 	.word	0x00000000
+    9b00:	464e495b 	.word	0x464e495b
+    9b04:	4e455245 	.word	0x4e455245
+    9b08:	205d4543 	.word	0x205d4543
+    9b0c:	69726556 	.word	0x69726556
+    9b10:	64656966 	.word	0x64656966
+    9b14:	4c465420 	.word	0x4c465420
+    9b18:	20657469 	.word	0x20657469
+    9b1c:	74616c46 	.word	0x74616c46
+    9b20:	66667542 	.word	0x66667542
+    9b24:	66207265 	.word	0x66207265
+    9b28:	616d726f 	.word	0x616d726f
+    9b2c:	54282074 	.word	0x54282074
+    9b30:	29334c46 	.word	0x29334c46
+    9b34:	0000000a 	.word	0x0000000a
+    9b38:	464e495b 	.word	0x464e495b
+    9b3c:	4e455245 	.word	0x4e455245
+    9b40:	205d4543 	.word	0x205d4543
+    9b44:	736e6554 	.word	0x736e6554
+    9b48:	4120726f 	.word	0x4120726f
+    9b4c:	616e6572 	.word	0x616e6572
+    9b50:	70616d20 	.word	0x70616d20
+    9b54:	20646570 	.word	0x20646570
+    9b58:	49206f74 	.word	0x49206f74
+    9b5c:	7265746e 	.word	0x7265746e
+    9b60:	206c616e 	.word	0x206c616e
+    9b64:	4d415253 	.word	0x4d415253
+    9b68:	305b203a 	.word	0x305b203a
+    9b6c:	20582578 	.word	0x20582578
+    9b70:	7830202d 	.word	0x7830202d
+    9b74:	205d5825 	.word	0x205d5825
+    9b78:	20642528 	.word	0x20642528
+    9b7c:	2942694b 	.word	0x2942694b
+    9b80:	0000000a 	.word	0x0000000a
+    9b84:	45464153 	.word	0x45464153
+    9b88:	57202d20 	.word	0x57202d20
+    9b8c:	49485449 	.word	0x49485449
+    9b90:	4f42204e 	.word	0x4f42204e
+    9b94:	53444e55 	.word	0x53444e55
+    9b98:	00000000 	.word	0x00000000
+    9b9c:	5245564f 	.word	0x5245564f
+    9ba0:	574f4c46 	.word	0x574f4c46
+    9ba4:	54454420 	.word	0x54454420
+    9ba8:	45544345 	.word	0x45544345
+    9bac:	00000044 	.word	0x00000044
+    9bb0:	6e6b6e55 	.word	0x6e6b6e55
+    9bb4:	006e776f 	.word	0x006e776f
+    9bb8:	53534150 	.word	0x53534150
+    9bbc:	28204445 	.word	0x28204445
+    9bc0:	25303031 	.word	0x25303031
+    9bc4:	54414d20 	.word	0x54414d20
+    9bc8:	00294843 	.word	0x00294843
+    9bcc:	4c494146 	.word	0x4c494146
+    9bd0:	00004445 	.word	0x00004445
+    9bd4:	3d3d3d0a 	.word	0x3d3d3d0a
+    9bd8:	3d3d3d3d 	.word	0x3d3d3d3d
+    9bdc:	3d3d3d3d 	.word	0x3d3d3d3d
+    9be0:	3d3d3d3d 	.word	0x3d3d3d3d
+    9be4:	3d3d3d3d 	.word	0x3d3d3d3d
+    9be8:	3d3d3d3d 	.word	0x3d3d3d3d
+    9bec:	3d3d3d3d 	.word	0x3d3d3d3d
+    9bf0:	3d3d3d3d 	.word	0x3d3d3d3d
     9bf4:	3d3d3d3d 	.word	0x3d3d3d3d
     9bf8:	3d3d3d3d 	.word	0x3d3d3d3d
     9bfc:	3d3d3d3d 	.word	0x3d3d3d3d
@@ -1672,31 +1674,31 @@ int main(void) {
     9c08:	3d3d3d3d 	.word	0x3d3d3d3d
     9c0c:	3d3d3d3d 	.word	0x3d3d3d3d
     9c10:	3d3d3d3d 	.word	0x3d3d3d3d
-    9c14:	3d3d3d3d 	.word	0x3d3d3d3d
-    9c18:	3d3d3d3d 	.word	0x3d3d3d3d
-    9c1c:	3d3d3d3d 	.word	0x3d3d3d3d
-    9c20:	3d3d3d3d 	.word	0x3d3d3d3d
-    9c24:	3d3d3d3d 	.word	0x3d3d3d3d
-    9c28:	3d3d3d3d 	.word	0x3d3d3d3d
-    9c2c:	3d3d3d3d 	.word	0x3d3d3d3d
-    9c30:	000a3d3d 	.word	0x000a3d3d
-    9c34:	41202020 	.word	0x41202020
-    9c38:	43204d52 	.word	0x43204d52
-    9c3c:	5453524f 	.word	0x5453524f
-    9c40:	2d454e4f 	.word	0x2d454e4f
-    9c44:	20303033 	.word	0x20303033
-    9c48:	54452026 	.word	0x54452026
-    9c4c:	2d534f48 	.word	0x2d534f48
-    9c50:	20353555 	.word	0x20353555
-    9c54:	45474445 	.word	0x45474445
-    9c58:	20494120 	.word	0x20494120
-    9c5c:	46524550 	.word	0x46524550
-    9c60:	414d524f 	.word	0x414d524f
-    9c64:	2045434e 	.word	0x2045434e
-    9c68:	464f5250 	.word	0x464f5250
-    9c6c:	20454c49 	.word	0x20454c49
-    9c70:	20202020 	.word	0x20202020
-    9c74:	00000a20 	.word	0x00000a20
+    9c14:	000a3d3d 	.word	0x000a3d3d
+    9c18:	41202020 	.word	0x41202020
+    9c1c:	43204d52 	.word	0x43204d52
+    9c20:	5453524f 	.word	0x5453524f
+    9c24:	2d454e4f 	.word	0x2d454e4f
+    9c28:	20303033 	.word	0x20303033
+    9c2c:	54452026 	.word	0x54452026
+    9c30:	2d534f48 	.word	0x2d534f48
+    9c34:	20353555 	.word	0x20353555
+    9c38:	45474445 	.word	0x45474445
+    9c3c:	20494120 	.word	0x20494120
+    9c40:	46524550 	.word	0x46524550
+    9c44:	414d524f 	.word	0x414d524f
+    9c48:	2045434e 	.word	0x2045434e
+    9c4c:	464f5250 	.word	0x464f5250
+    9c50:	20454c49 	.word	0x20454c49
+    9c54:	20202020 	.word	0x20202020
+    9c58:	00000a20 	.word	0x00000a20
+    9c5c:	3d3d3d3d 	.word	0x3d3d3d3d
+    9c60:	3d3d3d3d 	.word	0x3d3d3d3d
+    9c64:	3d3d3d3d 	.word	0x3d3d3d3d
+    9c68:	3d3d3d3d 	.word	0x3d3d3d3d
+    9c6c:	3d3d3d3d 	.word	0x3d3d3d3d
+    9c70:	3d3d3d3d 	.word	0x3d3d3d3d
+    9c74:	3d3d3d3d 	.word	0x3d3d3d3d
     9c78:	3d3d3d3d 	.word	0x3d3d3d3d
     9c7c:	3d3d3d3d 	.word	0x3d3d3d3d
     9c80:	3d3d3d3d 	.word	0x3d3d3d3d
@@ -1706,399 +1708,392 @@ int main(void) {
     9c90:	3d3d3d3d 	.word	0x3d3d3d3d
     9c94:	3d3d3d3d 	.word	0x3d3d3d3d
     9c98:	3d3d3d3d 	.word	0x3d3d3d3d
-    9c9c:	3d3d3d3d 	.word	0x3d3d3d3d
-    9ca0:	3d3d3d3d 	.word	0x3d3d3d3d
-    9ca4:	3d3d3d3d 	.word	0x3d3d3d3d
-    9ca8:	3d3d3d3d 	.word	0x3d3d3d3d
-    9cac:	3d3d3d3d 	.word	0x3d3d3d3d
-    9cb0:	3d3d3d3d 	.word	0x3d3d3d3d
-    9cb4:	3d3d3d3d 	.word	0x3d3d3d3d
-    9cb8:	00000a3d 	.word	0x00000a3d
-    9cbc:	202e3120 	.word	0x202e3120
-    9cc0:	45444f4d 	.word	0x45444f4d
-    9cc4:	5241204c 	.word	0x5241204c
-    9cc8:	54494843 	.word	0x54494843
-    9ccc:	55544345 	.word	0x55544345
-    9cd0:	26204552 	.word	0x26204552
-    9cd4:	4d4f4320 	.word	0x4d4f4320
-    9cd8:	414c4950 	.word	0x414c4950
-    9cdc:	4e4f4954 	.word	0x4e4f4954
-    9ce0:	00000a3a 	.word	0x00000a3a
-    9ce4:	20202020 	.word	0x20202020
-    9ce8:	654e202d 	.word	0x654e202d
-    9cec:	726f7774 	.word	0x726f7774
-    9cf0:	41203a6b 	.word	0x41203a6b
-    9cf4:	44206d72 	.word	0x44206d72
-    9cf8:	4e432d53 	.word	0x4e432d53
-    9cfc:	6d53204e 	.word	0x6d53204e
-    9d00:	206c6c61 	.word	0x206c6c61
-    9d04:	6c654828 	.word	0x6c654828
-    9d08:	45206f6c 	.word	0x45206f6c
-    9d0c:	20656764 	.word	0x20656764
-    9d10:	7779654b 	.word	0x7779654b
-    9d14:	2064726f 	.word	0x2064726f
-    9d18:	746f7053 	.word	0x746f7053
-    9d1c:	676e6974 	.word	0x676e6974
-    9d20:	00000a29 	.word	0x00000a29
-    9d24:	20202020 	.word	0x20202020
-    9d28:	7551202d 	.word	0x7551202d
-    9d2c:	69746e61 	.word	0x69746e61
-    9d30:	6974617a 	.word	0x6974617a
-    9d34:	203a6e6f 	.word	0x203a6e6f
-    9d38:	6c6c7546 	.word	0x6c6c7546
-    9d3c:	4e492079 	.word	0x4e492079
-    9d40:	51203854 	.word	0x51203854
-    9d44:	746e6175 	.word	0x746e6175
-    9d48:	64657a69 	.word	0x64657a69
-    9d4c:	0000000a 	.word	0x0000000a
-    9d50:	20202020 	.word	0x20202020
-    9d54:	6c46202d 	.word	0x6c46202d
-    9d58:	20687361 	.word	0x20687361
-    9d5c:	67696557 	.word	0x67696557
-    9d60:	20737468 	.word	0x20737468
-    9d64:	657a6953 	.word	0x657a6953
-    9d68:	6425203a 	.word	0x6425203a
-    9d6c:	42694b20 	.word	0x42694b20
-    9d70:	64252820 	.word	0x64252820
-    9d74:	74796220 	.word	0x74796220
-    9d78:	0a297365 	.word	0x0a297365
-    9d7c:	00000000 	.word	0x00000000
-    9d80:	20202020 	.word	0x20202020
-    9d84:	6f54202d 	.word	0x6f54202d
-    9d88:	206c6174 	.word	0x206c6174
-    9d8c:	6b726f57 	.word	0x6b726f57
-    9d90:	64616f6c 	.word	0x64616f6c
-    9d94:	2c32203a 	.word	0x2c32203a
-    9d98:	2c343636 	.word	0x2c343636
-    9d9c:	20323937 	.word	0x20323937
-    9da0:	7343414d 	.word	0x7343414d
-    9da4:	666e692f 	.word	0x666e692f
-    9da8:	6e657265 	.word	0x6e657265
-    9dac:	0a0a6563 	.word	0x0a0a6563
-    9db0:	00000000 	.word	0x00000000
-    9db4:	202e3220 	.word	0x202e3220
-    9db8:	4f4d454d 	.word	0x4f4d454d
-    9dbc:	50205952 	.word	0x50205952
-    9dc0:	49464f52 	.word	0x49464f52
-    9dc4:	474e494c 	.word	0x474e494c
-    9dc8:	54532820 	.word	0x54532820
-    9dcc:	30205045 	.word	0x30205045
-    9dd0:	20262034 	.word	0x20262034
-    9dd4:	44494c53 	.word	0x44494c53
-    9dd8:	20352045 	.word	0x20352045
-    9ddc:	4954494d 	.word	0x4954494d
-    9de0:	49544147 	.word	0x49544147
-    9de4:	3a294e4f 	.word	0x3a294e4f
-    9de8:	0000000a 	.word	0x0000000a
-    9dec:	20202020 	.word	0x20202020
-    9df0:	6e49202d 	.word	0x6e49202d
-    9df4:	6e726574 	.word	0x6e726574
-    9df8:	53206c61 	.word	0x53206c61
-    9dfc:	204d4152 	.word	0x204d4152
-    9e00:	6e657241 	.word	0x6e657241
-    9e04:	73552061 	.word	0x73552061
-    9e08:	203a6465 	.word	0x203a6465
-    9e0c:	62206425 	.word	0x62206425
-    9e10:	73657479 	.word	0x73657479
-    9e14:	64252820 	.word	0x64252820
-    9e18:	42694b20 	.word	0x42694b20
-    9e1c:	00000a29 	.word	0x00000a29
-    9e20:	20202020 	.word	0x20202020
-    9e24:	6e49202d 	.word	0x6e49202d
-    9e28:	6e726574 	.word	0x6e726574
-    9e2c:	53206c61 	.word	0x53206c61
-    9e30:	204d4152 	.word	0x204d4152
-    9e34:	6e756f42 	.word	0x6e756f42
-    9e38:	79726164 	.word	0x79726164
-    9e3c:	2020203a 	.word	0x2020203a
-    9e40:	62206425 	.word	0x62206425
-    9e44:	73657479 	.word	0x73657479
-    9e48:	64252820 	.word	0x64252820
-    9e4c:	42694b20 	.word	0x42694b20
-    9e50:	00000a29 	.word	0x00000a29
-    9e54:	20202020 	.word	0x20202020
-    9e58:	5253202d 	.word	0x5253202d
-    9e5c:	41204d41 	.word	0x41204d41
-    9e60:	636f6c6c 	.word	0x636f6c6c
-    9e64:	6f697461 	.word	0x6f697461
-    9e68:	7453206e 	.word	0x7453206e
-    9e6c:	73757461 	.word	0x73757461
-    9e70:	2020203a 	.word	0x2020203a
-    9e74:	5d73255b 	.word	0x5d73255b
-    9e78:	00000a0a 	.word	0x00000a0a
-    9e7c:	202e3320 	.word	0x202e3320
-    9e80:	4c435943 	.word	0x4c435943
-    9e84:	414c2045 	.word	0x414c2045
-    9e88:	434e4554 	.word	0x434e4554
-    9e8c:	20262059 	.word	0x20262059
-    9e90:	43455845 	.word	0x43455845
-    9e94:	4f495455 	.word	0x4f495455
-    9e98:	4944204e 	.word	0x4944204e
-    9e9c:	54415053 	.word	0x54415053
-    9ea0:	0a3a4843 	.word	0x0a3a4843
-    9ea4:	00000000 	.word	0x00000000
-    9ea8:	20202020 	.word	0x20202020
-    9eac:	7445202d 	.word	0x7445202d
-    9eb0:	2d736f68 	.word	0x2d736f68
-    9eb4:	20353555 	.word	0x20353555
-    9eb8:	2055504e 	.word	0x2055504e
-    9ebc:	65636341 	.word	0x65636341
-    9ec0:	6172656c 	.word	0x6172656c
-    9ec4:	6e6f6974 	.word	0x6e6f6974
-    9ec8:	7525203a 	.word	0x7525203a
-    9ecc:	63796320 	.word	0x63796320
-    9ed0:	0a73656c 	.word	0x0a73656c
-    9ed4:	00000000 	.word	0x00000000
-    9ed8:	20202020 	.word	0x20202020
-    9edc:	6f43202d 	.word	0x6f43202d
-    9ee0:	78657472 	.word	0x78657472
-    9ee4:	35354d2d 	.word	0x35354d2d
-    9ee8:	55504320 	.word	0x55504320
-    9eec:	65764f20 	.word	0x65764f20
-    9ef0:	61656872 	.word	0x61656872
-    9ef4:	20203a64 	.word	0x20203a64
-    9ef8:	75252020 	.word	0x75252020
-    9efc:	63796320 	.word	0x63796320
-    9f00:	2073656c 	.word	0x2073656c
-    9f04:	6c654828 	.word	0x6c654828
-    9f08:	206d7569 	.word	0x206d7569
-    9f0c:	2045564d 	.word	0x2045564d
-    9f10:	4d43202f 	.word	0x4d43202f
-    9f14:	2d534953 	.word	0x2d534953
-    9f18:	0a294e4e 	.word	0x0a294e4e
-    9f1c:	00000000 	.word	0x00000000
-    9f20:	20202020 	.word	0x20202020
-    9f24:	6f54202d 	.word	0x6f54202d
-    9f28:	206c6174 	.word	0x206c6174
-    9f2c:	2d646e45 	.word	0x2d646e45
-    9f30:	452d6f74 	.word	0x452d6f74
-    9f34:	4c20646e 	.word	0x4c20646e
-    9f38:	6e657461 	.word	0x6e657461
-    9f3c:	203a7963 	.word	0x203a7963
-    9f40:	75252020 	.word	0x75252020
-    9f44:	63796320 	.word	0x63796320
-    9f48:	0a73656c 	.word	0x0a73656c
-    9f4c:	00000000 	.word	0x00000000
-    9f50:	20202020 	.word	0x20202020
-    9f54:	7345202d 	.word	0x7345202d
-    9f58:	45202e74 	.word	0x45202e74
-    9f5c:	75636578 	.word	0x75636578
-    9f60:	6e6f6974 	.word	0x6e6f6974
-    9f64:	6d695420 	.word	0x6d695420
-    9f68:	20402065 	.word	0x20402065
-    9f6c:	484d3532 	.word	0x484d3532
-    9f70:	31203a7a 	.word	0x31203a7a
-    9f74:	0a736d20 	.word	0x0a736d20
-    9f78:	00000000 	.word	0x00000000
-    9f7c:	20202020 	.word	0x20202020
-    9f80:	7345202d 	.word	0x7345202d
-    9f84:	45202e74 	.word	0x45202e74
-    9f88:	75636578 	.word	0x75636578
-    9f8c:	6e6f6974 	.word	0x6e6f6974
-    9f90:	6d695420 	.word	0x6d695420
-    9f94:	20402065 	.word	0x20402065
-    9f98:	4d303035 	.word	0x4d303035
-    9f9c:	203a7a48 	.word	0x203a7a48
-    9fa0:	2e30203c 	.word	0x2e30203c
-    9fa4:	736d2031 	.word	0x736d2031
-    9fa8:	00000a0a 	.word	0x00000a0a
-    9fac:	202e3420 	.word	0x202e3420
-    9fb0:	53414c43 	.word	0x53414c43
-    9fb4:	49464953 	.word	0x49464953
-    9fb8:	49544143 	.word	0x49544143
-    9fbc:	49204e4f 	.word	0x49204e4f
-    9fc0:	5245464e 	.word	0x5245464e
-    9fc4:	45434e45 	.word	0x45434e45
-    9fc8:	43434120 	.word	0x43434120
-    9fcc:	43415255 	.word	0x43415255
-    9fd0:	000a3a59 	.word	0x000a3a59
-    9fd4:	20202020 	.word	0x20202020
-    9fd8:	6544202d 	.word	0x6544202d
-    9fdc:	74636574 	.word	0x74636574
-    9fe0:	4b206465 	.word	0x4b206465
-    9fe4:	6f777965 	.word	0x6f777965
-    9fe8:	203a6472 	.word	0x203a6472
-    9fec:	20202020 	.word	0x20202020
-    9ff0:	25222020 	.word	0x25222020
-    9ff4:	28202273 	.word	0x28202273
-    9ff8:	73616c43 	.word	0x73616c43
-    9ffc:	25232073 	.word	0x25232073
-    a000:	000a2964 	.word	0x000a2964
-    a004:	20202020 	.word	0x20202020
-    a008:	7551202d 	.word	0x7551202d
-    a00c:	69746e61 	.word	0x69746e61
-    a010:	2064657a 	.word	0x2064657a
-    a014:	726f6353 	.word	0x726f6353
-    a018:	49282065 	.word	0x49282065
-    a01c:	2938544e 	.word	0x2938544e
-    a020:	6425203a 	.word	0x6425203a
-    a024:	69482820 	.word	0x69482820
-    a028:	43206867 	.word	0x43206867
-    a02c:	69666e6f 	.word	0x69666e6f
-    a030:	636e6564 	.word	0x636e6564
-    a034:	000a2965 	.word	0x000a2965
-    a038:	20202020 	.word	0x20202020
-    a03c:	6f47202d 	.word	0x6f47202d
-    a040:	6e65646c 	.word	0x6e65646c
-    a044:	646f4d20 	.word	0x646f4d20
-    a048:	50206c65 	.word	0x50206c65
-    a04c:	74697261 	.word	0x74697261
-    a050:	20203a79 	.word	0x20203a79
-    a054:	255b2020 	.word	0x255b2020
-    a058:	000a5d73 	.word	0x000a5d73
-    a05c:	656c6953 	.word	0x656c6953
-    a060:	0065636e 	.word	0x0065636e
-    a064:	00736559 	.word	0x00736559
-    a068:	00006f4e 	.word	0x00006f4e
-    a06c:	00007055 	.word	0x00007055
-    a070:	6e776f44 	.word	0x6e776f44
-    a074:	00000000 	.word	0x00000000
-    a078:	7466654c 	.word	0x7466654c
-    a07c:	00000000 	.word	0x00000000
-    a080:	68676952 	.word	0x68676952
-    a084:	00000074 	.word	0x00000074
-    a088:	00006e4f 	.word	0x00006e4f
-    a08c:	0066664f 	.word	0x0066664f
-    a090:	706f7453 	.word	0x706f7453
-    a094:	00000000 	.word	0x00000000
-    a098:	00006f47 	.word	0x00006f47
+    9c9c:	00000a3d 	.word	0x00000a3d
+    9ca0:	202e3120 	.word	0x202e3120
+    9ca4:	45444f4d 	.word	0x45444f4d
+    9ca8:	5241204c 	.word	0x5241204c
+    9cac:	54494843 	.word	0x54494843
+    9cb0:	55544345 	.word	0x55544345
+    9cb4:	26204552 	.word	0x26204552
+    9cb8:	4d4f4320 	.word	0x4d4f4320
+    9cbc:	414c4950 	.word	0x414c4950
+    9cc0:	4e4f4954 	.word	0x4e4f4954
+    9cc4:	00000a3a 	.word	0x00000a3a
+    9cc8:	20202020 	.word	0x20202020
+    9ccc:	654e202d 	.word	0x654e202d
+    9cd0:	726f7774 	.word	0x726f7774
+    9cd4:	41203a6b 	.word	0x41203a6b
+    9cd8:	44206d72 	.word	0x44206d72
+    9cdc:	4e432d53 	.word	0x4e432d53
+    9ce0:	6d53204e 	.word	0x6d53204e
+    9ce4:	206c6c61 	.word	0x206c6c61
+    9ce8:	6c654828 	.word	0x6c654828
+    9cec:	45206f6c 	.word	0x45206f6c
+    9cf0:	20656764 	.word	0x20656764
+    9cf4:	7779654b 	.word	0x7779654b
+    9cf8:	2064726f 	.word	0x2064726f
+    9cfc:	746f7053 	.word	0x746f7053
+    9d00:	676e6974 	.word	0x676e6974
+    9d04:	00000a29 	.word	0x00000a29
+    9d08:	20202020 	.word	0x20202020
+    9d0c:	7551202d 	.word	0x7551202d
+    9d10:	69746e61 	.word	0x69746e61
+    9d14:	6974617a 	.word	0x6974617a
+    9d18:	203a6e6f 	.word	0x203a6e6f
+    9d1c:	6c6c7546 	.word	0x6c6c7546
+    9d20:	4e492079 	.word	0x4e492079
+    9d24:	51203854 	.word	0x51203854
+    9d28:	746e6175 	.word	0x746e6175
+    9d2c:	64657a69 	.word	0x64657a69
+    9d30:	0000000a 	.word	0x0000000a
+    9d34:	20202020 	.word	0x20202020
+    9d38:	6c46202d 	.word	0x6c46202d
+    9d3c:	20687361 	.word	0x20687361
+    9d40:	67696557 	.word	0x67696557
+    9d44:	20737468 	.word	0x20737468
+    9d48:	657a6953 	.word	0x657a6953
+    9d4c:	6425203a 	.word	0x6425203a
+    9d50:	42694b20 	.word	0x42694b20
+    9d54:	64252820 	.word	0x64252820
+    9d58:	74796220 	.word	0x74796220
+    9d5c:	0a297365 	.word	0x0a297365
+    9d60:	00000000 	.word	0x00000000
+    9d64:	20202020 	.word	0x20202020
+    9d68:	6f54202d 	.word	0x6f54202d
+    9d6c:	206c6174 	.word	0x206c6174
+    9d70:	6b726f57 	.word	0x6b726f57
+    9d74:	64616f6c 	.word	0x64616f6c
+    9d78:	2c32203a 	.word	0x2c32203a
+    9d7c:	2c343636 	.word	0x2c343636
+    9d80:	20323937 	.word	0x20323937
+    9d84:	7343414d 	.word	0x7343414d
+    9d88:	666e692f 	.word	0x666e692f
+    9d8c:	6e657265 	.word	0x6e657265
+    9d90:	0a0a6563 	.word	0x0a0a6563
+    9d94:	00000000 	.word	0x00000000
+    9d98:	202e3220 	.word	0x202e3220
+    9d9c:	4f4d454d 	.word	0x4f4d454d
+    9da0:	50205952 	.word	0x50205952
+    9da4:	49464f52 	.word	0x49464f52
+    9da8:	474e494c 	.word	0x474e494c
+    9dac:	54532820 	.word	0x54532820
+    9db0:	30205045 	.word	0x30205045
+    9db4:	20262034 	.word	0x20262034
+    9db8:	44494c53 	.word	0x44494c53
+    9dbc:	20352045 	.word	0x20352045
+    9dc0:	4954494d 	.word	0x4954494d
+    9dc4:	49544147 	.word	0x49544147
+    9dc8:	3a294e4f 	.word	0x3a294e4f
+    9dcc:	0000000a 	.word	0x0000000a
+    9dd0:	20202020 	.word	0x20202020
+    9dd4:	6e49202d 	.word	0x6e49202d
+    9dd8:	6e726574 	.word	0x6e726574
+    9ddc:	53206c61 	.word	0x53206c61
+    9de0:	204d4152 	.word	0x204d4152
+    9de4:	6e657241 	.word	0x6e657241
+    9de8:	73552061 	.word	0x73552061
+    9dec:	203a6465 	.word	0x203a6465
+    9df0:	62206425 	.word	0x62206425
+    9df4:	73657479 	.word	0x73657479
+    9df8:	64252820 	.word	0x64252820
+    9dfc:	42694b20 	.word	0x42694b20
+    9e00:	00000a29 	.word	0x00000a29
+    9e04:	20202020 	.word	0x20202020
+    9e08:	6e49202d 	.word	0x6e49202d
+    9e0c:	6e726574 	.word	0x6e726574
+    9e10:	53206c61 	.word	0x53206c61
+    9e14:	204d4152 	.word	0x204d4152
+    9e18:	6e756f42 	.word	0x6e756f42
+    9e1c:	79726164 	.word	0x79726164
+    9e20:	2020203a 	.word	0x2020203a
+    9e24:	62206425 	.word	0x62206425
+    9e28:	73657479 	.word	0x73657479
+    9e2c:	64252820 	.word	0x64252820
+    9e30:	42694b20 	.word	0x42694b20
+    9e34:	00000a29 	.word	0x00000a29
+    9e38:	20202020 	.word	0x20202020
+    9e3c:	5253202d 	.word	0x5253202d
+    9e40:	41204d41 	.word	0x41204d41
+    9e44:	636f6c6c 	.word	0x636f6c6c
+    9e48:	6f697461 	.word	0x6f697461
+    9e4c:	7453206e 	.word	0x7453206e
+    9e50:	73757461 	.word	0x73757461
+    9e54:	2020203a 	.word	0x2020203a
+    9e58:	5d73255b 	.word	0x5d73255b
+    9e5c:	00000a0a 	.word	0x00000a0a
+    9e60:	202e3320 	.word	0x202e3320
+    9e64:	4c435943 	.word	0x4c435943
+    9e68:	414c2045 	.word	0x414c2045
+    9e6c:	434e4554 	.word	0x434e4554
+    9e70:	20262059 	.word	0x20262059
+    9e74:	43455845 	.word	0x43455845
+    9e78:	4f495455 	.word	0x4f495455
+    9e7c:	4944204e 	.word	0x4944204e
+    9e80:	54415053 	.word	0x54415053
+    9e84:	0a3a4843 	.word	0x0a3a4843
+    9e88:	00000000 	.word	0x00000000
+    9e8c:	20202020 	.word	0x20202020
+    9e90:	7445202d 	.word	0x7445202d
+    9e94:	2d736f68 	.word	0x2d736f68
+    9e98:	20353555 	.word	0x20353555
+    9e9c:	2055504e 	.word	0x2055504e
+    9ea0:	65636341 	.word	0x65636341
+    9ea4:	6172656c 	.word	0x6172656c
+    9ea8:	6e6f6974 	.word	0x6e6f6974
+    9eac:	7525203a 	.word	0x7525203a
+    9eb0:	63796320 	.word	0x63796320
+    9eb4:	0a73656c 	.word	0x0a73656c
+    9eb8:	00000000 	.word	0x00000000
+    9ebc:	20202020 	.word	0x20202020
+    9ec0:	6f43202d 	.word	0x6f43202d
+    9ec4:	78657472 	.word	0x78657472
+    9ec8:	35354d2d 	.word	0x35354d2d
+    9ecc:	55504320 	.word	0x55504320
+    9ed0:	65764f20 	.word	0x65764f20
+    9ed4:	61656872 	.word	0x61656872
+    9ed8:	20203a64 	.word	0x20203a64
+    9edc:	75252020 	.word	0x75252020
+    9ee0:	63796320 	.word	0x63796320
+    9ee4:	2073656c 	.word	0x2073656c
+    9ee8:	6c654828 	.word	0x6c654828
+    9eec:	206d7569 	.word	0x206d7569
+    9ef0:	2045564d 	.word	0x2045564d
+    9ef4:	4d43202f 	.word	0x4d43202f
+    9ef8:	2d534953 	.word	0x2d534953
+    9efc:	0a294e4e 	.word	0x0a294e4e
+    9f00:	00000000 	.word	0x00000000
+    9f04:	20202020 	.word	0x20202020
+    9f08:	6f54202d 	.word	0x6f54202d
+    9f0c:	206c6174 	.word	0x206c6174
+    9f10:	2d646e45 	.word	0x2d646e45
+    9f14:	452d6f74 	.word	0x452d6f74
+    9f18:	4c20646e 	.word	0x4c20646e
+    9f1c:	6e657461 	.word	0x6e657461
+    9f20:	203a7963 	.word	0x203a7963
+    9f24:	75252020 	.word	0x75252020
+    9f28:	63796320 	.word	0x63796320
+    9f2c:	0a73656c 	.word	0x0a73656c
+    9f30:	00000000 	.word	0x00000000
+    9f34:	20202020 	.word	0x20202020
+    9f38:	7345202d 	.word	0x7345202d
+    9f3c:	45202e74 	.word	0x45202e74
+    9f40:	75636578 	.word	0x75636578
+    9f44:	6e6f6974 	.word	0x6e6f6974
+    9f48:	6d695420 	.word	0x6d695420
+    9f4c:	20402065 	.word	0x20402065
+    9f50:	484d3532 	.word	0x484d3532
+    9f54:	31203a7a 	.word	0x31203a7a
+    9f58:	0a736d20 	.word	0x0a736d20
+    9f5c:	00000000 	.word	0x00000000
+    9f60:	20202020 	.word	0x20202020
+    9f64:	7345202d 	.word	0x7345202d
+    9f68:	45202e74 	.word	0x45202e74
+    9f6c:	75636578 	.word	0x75636578
+    9f70:	6e6f6974 	.word	0x6e6f6974
+    9f74:	6d695420 	.word	0x6d695420
+    9f78:	20402065 	.word	0x20402065
+    9f7c:	4d303035 	.word	0x4d303035
+    9f80:	203a7a48 	.word	0x203a7a48
+    9f84:	2e30203c 	.word	0x2e30203c
+    9f88:	736d2031 	.word	0x736d2031
+    9f8c:	00000a0a 	.word	0x00000a0a
+    9f90:	202e3420 	.word	0x202e3420
+    9f94:	53414c43 	.word	0x53414c43
+    9f98:	49464953 	.word	0x49464953
+    9f9c:	49544143 	.word	0x49544143
+    9fa0:	49204e4f 	.word	0x49204e4f
+    9fa4:	5245464e 	.word	0x5245464e
+    9fa8:	45434e45 	.word	0x45434e45
+    9fac:	43434120 	.word	0x43434120
+    9fb0:	43415255 	.word	0x43415255
+    9fb4:	000a3a59 	.word	0x000a3a59
+    9fb8:	20202020 	.word	0x20202020
+    9fbc:	6544202d 	.word	0x6544202d
+    9fc0:	74636574 	.word	0x74636574
+    9fc4:	4b206465 	.word	0x4b206465
+    9fc8:	6f777965 	.word	0x6f777965
+    9fcc:	203a6472 	.word	0x203a6472
+    9fd0:	20202020 	.word	0x20202020
+    9fd4:	25222020 	.word	0x25222020
+    9fd8:	28202273 	.word	0x28202273
+    9fdc:	73616c43 	.word	0x73616c43
+    9fe0:	25232073 	.word	0x25232073
+    9fe4:	000a2964 	.word	0x000a2964
+    9fe8:	20202020 	.word	0x20202020
+    9fec:	7551202d 	.word	0x7551202d
+    9ff0:	69746e61 	.word	0x69746e61
+    9ff4:	2064657a 	.word	0x2064657a
+    9ff8:	726f6353 	.word	0x726f6353
+    9ffc:	49282065 	.word	0x49282065
+    a000:	2938544e 	.word	0x2938544e
+    a004:	6425203a 	.word	0x6425203a
+    a008:	69482820 	.word	0x69482820
+    a00c:	43206867 	.word	0x43206867
+    a010:	69666e6f 	.word	0x69666e6f
+    a014:	636e6564 	.word	0x636e6564
+    a018:	000a2965 	.word	0x000a2965
+    a01c:	20202020 	.word	0x20202020
+    a020:	6f47202d 	.word	0x6f47202d
+    a024:	6e65646c 	.word	0x6e65646c
+    a028:	646f4d20 	.word	0x646f4d20
+    a02c:	50206c65 	.word	0x50206c65
+    a030:	74697261 	.word	0x74697261
+    a034:	20203a79 	.word	0x20203a79
+    a038:	255b2020 	.word	0x255b2020
+    a03c:	000a5d73 	.word	0x000a5d73
+    a040:	656c6953 	.word	0x656c6953
+    a044:	0065636e 	.word	0x0065636e
+    a048:	00736559 	.word	0x00736559
+    a04c:	00006f4e 	.word	0x00006f4e
+    a050:	00007055 	.word	0x00007055
+    a054:	6e776f44 	.word	0x6e776f44
+    a058:	00000000 	.word	0x00000000
+    a05c:	7466654c 	.word	0x7466654c
+    a060:	00000000 	.word	0x00000000
+    a064:	68676952 	.word	0x68676952
+    a068:	00000074 	.word	0x00000074
+    a06c:	00006e4f 	.word	0x00006e4f
+    a070:	0066664f 	.word	0x0066664f
+    a074:	706f7453 	.word	0x706f7453
+    a078:	00000000 	.word	0x00000000
+    a07c:	00006f47 	.word	0x00006f47
 
-0000a09c <g_class_labels>:
-    a09c:	0000a05c 00009bcc 0000a064 0000a068     \.......d...h...
-    a0ac:	0000a06c 0000a070 0000a078 0000a080     l...p...x.......
-    a0bc:	0000a088 0000a08c 0000a090 0000a098     ................
+0000a080 <g_class_labels>:
+    a080:	0000a040 00009bb0 0000a048 0000a04c     @.......H...L...
+    a090:	0000a050 0000a054 0000a05c 0000a064     P...T...\...d...
+    a0a0:	0000a06c 0000a070 0000a074 0000a07c     l...p...t...|...
 
-0000a0cc <g_golden_output_scores>:
-    a0cc:	88768d88 80808080 80888083 53534150     ..v.........PASS
-    a0dc:	00000000 4c494146 00000000 52412020     ....FAIL....  AR
-    a0ec:	4f57204d 4f464b52 20454352 45564544     M WORKFORCE DEVE
-    a0fc:	4d504f4c 3a544e45 524f4320 4e4f5453     LOPMENT: CORSTON
-    a10c:	30332d45 20262030 4f485445 35552d53     E-300 & ETHOS-U5
-    a11c:	414c2035 20202042 20202020 0000000a     5 LAB       ....
-    a12c:	72615420 20746567 68637241 63657469      Target Architec
-    a13c:	65727574 7241203a 2e38766d 204d2d31     ture: Armv8.1-M 
-    a14c:	6e69614d 656e696c 6f432820 78657472     Mainline (Cortex
-    a15c:	35354d2d 00000a29 63655620 20726f74     -M55)... Vector 
-    a16c:	65636341 6172656c 6e6f6974 7241203a     Acceleration: Ar
-    a17c:	6548206d 6d75696c 45564d20 2d4d2820     m Helium MVE (M-
-    a18c:	666f7250 20656c69 74636556 4520726f     Profile Vector E
-    a19c:	6e657478 6e6f6973 00000a29 75654e20     xtension)... Neu
-    a1ac:	206c6172 65636341 6172656c 3a726f74     ral Accelerator:
-    a1bc:	72412020 7445206d 2d736f68 20353555       Arm Ethos-U55 
-    a1cc:	7263696d 55504e6f 32312820 414d2038     microNPU (128 MA
-    a1dc:	632f7343 656c6379 00000a29 616c5020     Cs/cycle)... Pla
-    a1ec:	726f6674 6f53206d 61777466 203a6572     tform Software: 
-    a1fc:	61422020 4d2d6572 6c617465 52204320       Bare-Metal C R
-    a20c:	69746e75 2620656d 534d4320 4e2d5349     untime & CMSIS-N
-    a21c:	00000a4e 63655320 74697275 75532079     N... Security Su
-    a22c:	73797362 3a6d6574 72542020 65747375     bsystem:  Truste
-    a23c:	69462064 61776d72 4d2d6572 46542820     d Firmware-M (TF
-    a24c:	20294d2d 74726150 6f697469 676e696e     -M) Partitioning
-    a25c:	0000000a 72695620 6c617574 616c5020     .... Virtual Pla
-    a26c:	726f6674 20203a6d 72412020 6f43206d     tform:    Arm Co
-    a27c:	6f747372 332d656e 46203030 64657869     rstone-300 Fixed
-    a28c:	72695620 6c617574 616c5020 726f6674      Virtual Platfor
-    a29c:	202f206d 0a485641 00000000 3d3d3d3d     m / AVH.....====
-    a2ac:	3d3d3d3d 3d3d3d3d 3d3d3d3d 3d3d3d3d     ================
-    a2bc:	3d3d3d3d 3d3d3d3d 3d3d3d3d 3d3d3d3d     ================
-    a2cc:	3d3d3d3d 3d3d3d3d 3d3d3d3d 3d3d3d3d     ================
-    a2dc:	3d3d3d3d 3d3d3d3d 3d3d3d3d 000a0a3d     =============...
-    a2ec:	2d46545b 4553204d 49525543 205d5954     [TF-M SECURITY] 
-    a2fc:	696c6156 69746164 5320676e 72756365     Validating Secur
-    a30c:	202f2065 2d6e6f4e 75636553 54206572     e / Non-Secure T
-    a31c:	74737572 656e6f5a 756f6220 7261646e     rustZone boundar
-    a32c:	2e2e2e79 0000000a 2d46545b 4553204d     y.......[TF-M SE
-    a33c:	49525543 205d5954 75636553 45206572     CURITY] Secure E
-    a34c:	616c636e 62206576 65746f6f 50202e64     nclave booted. P
-    a35c:	43204153 69747265 64656966 79724320     SA Certified Cry
-    a36c:	206f7470 74532026 6761726f 6e692065     pto & Storage in
-    a37c:	61697469 657a696c 000a2e64 2d46545b     itialized...[TF-
-    a38c:	4553204d 49525543 205d5954 2d6e6f4e     M SECURITY] Non-
-    a39c:	75636553 41206572 696c7070 69746163     Secure Applicati
-    a3ac:	52206e6f 696e6e75 6920676e 7369206e     on Running in is
-    a3bc:	74616c6f 44206465 69616d6f 0a0a2e6e     olated Domain...
-    a3cc:	00000000 4d454d5b 2059524f 4d4f4547     ....[MEMORY GEOM
-    a3dc:	59525445 6556205d 79666972 20676e69     ETRY] Verifying 
-    a3ec:	6b6e694c 41207265 636f6c6c 6f697461     Linker Allocatio
-    a3fc:	6547206e 74656d6f 0a3a7972 00000000     n Geometry:.....
-    a40c:	202d2020 73616c46 6f4d2068 206c6564       - Flash Model 
-    a41c:	67696557 3a737468 78305b20 2d205825     Weights: [0x%X -
-    a42c:	25783020 28205d58 62206425 73657479      0x%X] (%d bytes
-    a43c:	00000a29 202d2020 65746e49 6c616e72     )...  - Internal
-    a44c:	41525320 7241204d 3a616e65 78305b20      SRAM Arena: [0x
-    a45c:	2d205825 25783020 28205d58 62206425     %X - 0x%X] (%d b
-    a46c:	73657479 00000a29 202d2020 74617453     ytes)...  - Stat
-    a47c:	203a7375 69727453 53207463 204d4152     us: Strict SRAM 
-    a48c:	6e756f42 69726164 45207365 726f666e     Boundaries Enfor
-    a49c:	20646563 72655a28 764f206f 6c667265     ced (Zero Overfl
-    a4ac:	5220776f 296b7369 000a0a2e 202d2020     ow Risk)....  - 
-    a4bc:	4952435b 41434954 4c41204c 5d545245     [CRITICAL ALERT]
-    a4cc:	41525320 764f204d 6c667265 4420776f      SRAM Overflow D
-    a4dc:	63657465 21646574 00000a0a 45535b0a     etected!.....[SE
-    a4ec:	4f48494d 4e495453 44205d47 6d616e79     MIHOSTING] Dynam
-    a4fc:	41206369 6f696475 676e4920 69747365     ic Audio Ingesti
-    a50c:	203a6e6f 64616f4c 34206465 62203039     on: Loaded 490 b
-    a51c:	73657479 6f726620 7562206d 2f646c69     ytes from build/
-    a52c:	6576696c 6e65745f 2e726f73 206e6962     live_tensor.bin 
-    a53c:	6f746e69 41525320 6554204d 726f736e     into SRAM Tensor
-    a54c:	65724120 6120616e 78302074 000a5825      Arena at 0x%X..
-    a55c:	464e495b 4e455245 205d4543 64656546     [INFERENCE] Feed
-    a56c:	20676e69 6576694c 63694d20 68706f72     ing Live Microph
-    a57c:	20656e6f 4343464d 6e655420 20726f73     one MFCC Tensor 
-    a58c:	34783128 49203039 2938544e 206f7420     (1x490 INT8) to 
-    a59c:	7275654e 50206c61 6c657069 2e656e69     Neural Pipeline.
-    a5ac:	000a2e2e 5252455b 205d524f 65666e49     ....[ERROR] Infe
-    a5bc:	636e6572 69702065 696c6570 6520656e     rence pipeline e
-    a5cc:	75636578 6e6f6974 69616620 2164656c     xecution failed!
-    a5dc:	0000000a 4e495b0a 45524546 5d45434e     .....[INFERENCE]
-    a5ec:	65654620 676e6964 61745320 20636974      Feeding Static 
-    a5fc:	646c6f47 46206e65 6873616c 43464d20     Golden Flash MFC
-    a60c:	65542043 726f736e 78312820 20303934     C Tensor (1x490 
-    a61c:	38544e49 6f742029 75654e20 206c6172     INT8) to Neural 
-    a62c:	65706950 656e696c 0a2e2e2e 00000000     Pipeline........
-    a63c:	20202020 4d524120 524f5720 524f464b          ARM WORKFOR
-    a64c:	4c204543 2d204241 54554120 54414d4f     CE LAB - AUTOMAT
-    a65c:	56204445 44494c41 4f495441 5553204e     ED VALIDATION SU
-    a66c:	20455449 55534552 2053544c 20202020     ITE RESULTS     
-    a67c:	00000a20 53455420 3a312054 726f4320      ... TEST 1: Cor
-    a68c:	2d786574 2035354d 696c6548 56206d75     tex-M55 Helium V
-    a69c:	6f746365 78452072 736e6574 736e6f69     ector Extensions
-    a6ac:	74634120 2e657669 5b202e2e 53534150      Active... [PASS
-    a6bc:	00000a5d 53455420 3a322054 68744520     ]... TEST 2: Eth
-    a6cc:	552d736f 4e203535 44205550 65766972     os-U55 NPU Drive
-    a6dc:	61482072 6873646e 20656b61 65532026     r Handshake & Se
-    a6ec:	2e707574 2e2e2e2e 505b202e 5d535341     tup...... [PASS]
-    a6fc:	0000000a 53455420 3a332054 746e4920     .... TEST 3: Int
-    a70c:	616e7265 5253206c 54204d41 6f736e65     ernal SRAM Tenso
-    a71c:	72412072 20616e65 6e756f42 79726164     r Arena Boundary
-    a72c:	66615320 2e797465 255b202e 000a5d73      Safety.. [%s]..
-    a73c:	53455420 3a342054 4c465420 20657469      TEST 4: TFLite 
-    a74c:	7263694d 6f4d206f 206c6564 63657845     Micro Model Exec
-    a75c:	6f697475 6950206e 696c6570 2e2e656e     ution Pipeline..
-    a76c:	2e2e2e2e 5b202e2e 53534150 00000a5d     ...... [PASS]...
-    a77c:	53455420 3a352054 79654b20 64726f77      TEST 5: Keyword
-    a78c:	616c4320 66697373 74616369 206e6f69      Classification 
-    a79c:	69726150 28207974 22732522 2e2e2e29     Parity ("%s")...
-    a7ac:	2e2e2e2e 73255b20 00000a5d 2d2d2d2d     .... [%s]...----
-    a7bc:	2d2d2d2d 2d2d2d2d 2d2d2d2d 2d2d2d2d     ----------------
-    a7cc:	2d2d2d2d 2d2d2d2d 2d2d2d2d 2d2d2d2d     ----------------
-    a7dc:	2d2d2d2d 2d2d2d2d 2d2d2d2d 2d2d2d2d     ----------------
-    a7ec:	2d2d2d2d 2d2d2d2d 2d2d2d2d 00000a2d     -------------...
-    a7fc:	45535b0a 4f48494d 4e495453 4e205d47     .[SEMIHOSTING] N
-    a80c:	6669746f 676e6979 72695620 6c617574     otifying Virtual
-    a81c:	616c5020 726f6674 4c203a6d 45206261      Platform: Lab E
-    a82c:	75636578 6e6f6974 6e694620 65687369     xecution Finishe
-    a83c:	52282064 72757465 6f43206e 203a6564     d (Return Code: 
-    a84c:	000a2930 45525b20 544c5553 3e3e205d     0).. [RESULT] >>
-    a85c:	4c41203e 414c204c 43412042 54504543     > ALL LAB ACCEPT
-    a86c:	45434e41 53455420 50205354 45535341     ANCE TESTS PASSE
-    a87c:	55532044 53454343 4c554653 2021594c     D SUCCESSFULLY! 
-    a88c:	0a3c3c3c 00000000 726f4320 6e6f7473     <<<..... Corston
-    a89c:	30332d65 69562030 61757472 6c50206c     e-300 Virtual Pl
-    a8ac:	6f667461 53206d72 6c756d69 6f697461     atform Simulatio
-    a8bc:	6f43206e 656c706d 2e646574 0000000a     n Completed.....
-    a8cc:	45525b20 544c5553 3e3e205d 4341203e      [RESULT] >>> AC
-    a8dc:	54504543 45434e41 53455420 46205354     CEPTANCE TESTS F
-    a8ec:	454c4941 3c202144 000a3c3c 6c697562     AILED! <<<..buil
-    a8fc:	696c2f64 745f6576 6f736e65 69622e72     d/live_tensor.bi
-    a90c:	0000006e                                n...
+0000a0b0 <g_golden_output_scores>:
+    a0b0:	88768d88 80808080 80888083 53534150     ..v.........PASS
+    a0c0:	00000000 4c494146 00000000 52412020     ....FAIL....  AR
+    a0d0:	4f57204d 4f464b52 20454352 45564544     M WORKFORCE DEVE
+    a0e0:	4d504f4c 3a544e45 524f4320 4e4f5453     LOPMENT: CORSTON
+    a0f0:	30332d45 20262030 4f485445 35552d53     E-300 & ETHOS-U5
+    a100:	414c2035 20202042 20202020 0000000a     5 LAB       ....
+    a110:	72615420 20746567 68637241 63657469      Target Architec
+    a120:	65727574 7241203a 2e38766d 204d2d31     ture: Armv8.1-M 
+    a130:	6e69614d 656e696c 6f432820 78657472     Mainline (Cortex
+    a140:	35354d2d 00000a29 63655620 20726f74     -M55)... Vector 
+    a150:	65636341 6172656c 6e6f6974 7241203a     Acceleration: Ar
+    a160:	6548206d 6d75696c 45564d20 2d4d2820     m Helium MVE (M-
+    a170:	666f7250 20656c69 74636556 4520726f     Profile Vector E
+    a180:	6e657478 6e6f6973 00000a29 75654e20     xtension)... Neu
+    a190:	206c6172 65636341 6172656c 3a726f74     ral Accelerator:
+    a1a0:	72412020 7445206d 2d736f68 20353555       Arm Ethos-U55 
+    a1b0:	7263696d 55504e6f 32312820 414d2038     microNPU (128 MA
+    a1c0:	632f7343 656c6379 00000a29 616c5020     Cs/cycle)... Pla
+    a1d0:	726f6674 6f53206d 61777466 203a6572     tform Software: 
+    a1e0:	61422020 4d2d6572 6c617465 52204320       Bare-Metal C R
+    a1f0:	69746e75 2620656d 534d4320 4e2d5349     untime & CMSIS-N
+    a200:	00000a4e 63655320 74697275 75532079     N... Security Su
+    a210:	73797362 3a6d6574 72542020 65747375     bsystem:  Truste
+    a220:	69462064 61776d72 4d2d6572 46542820     d Firmware-M (TF
+    a230:	20294d2d 74726150 6f697469 676e696e     -M) Partitioning
+    a240:	0000000a 72695620 6c617574 616c5020     .... Virtual Pla
+    a250:	726f6674 20203a6d 72412020 6f43206d     tform:    Arm Co
+    a260:	6f747372 332d656e 46203030 64657869     rstone-300 Fixed
+    a270:	72695620 6c617574 616c5020 726f6674      Virtual Platfor
+    a280:	202f206d 0a485641 00000000 3d3d3d3d     m / AVH.....====
+    a290:	3d3d3d3d 3d3d3d3d 3d3d3d3d 3d3d3d3d     ================
+    a2a0:	3d3d3d3d 3d3d3d3d 3d3d3d3d 3d3d3d3d     ================
+    a2b0:	3d3d3d3d 3d3d3d3d 3d3d3d3d 3d3d3d3d     ================
+    a2c0:	3d3d3d3d 3d3d3d3d 3d3d3d3d 000a0a3d     =============...
+    a2d0:	2d46545b 4553204d 49525543 205d5954     [TF-M SECURITY] 
+    a2e0:	696c6156 69746164 5320676e 72756365     Validating Secur
+    a2f0:	202f2065 2d6e6f4e 75636553 54206572     e / Non-Secure T
+    a300:	74737572 656e6f5a 756f6220 7261646e     rustZone boundar
+    a310:	2e2e2e79 0000000a 2d46545b 4553204d     y.......[TF-M SE
+    a320:	49525543 205d5954 75636553 45206572     CURITY] Secure E
+    a330:	616c636e 62206576 65746f6f 50202e64     nclave booted. P
+    a340:	43204153 69747265 64656966 79724320     SA Certified Cry
+    a350:	206f7470 74532026 6761726f 6e692065     pto & Storage in
+    a360:	61697469 657a696c 000a2e64 2d46545b     itialized...[TF-
+    a370:	4553204d 49525543 205d5954 2d6e6f4e     M SECURITY] Non-
+    a380:	75636553 41206572 696c7070 69746163     Secure Applicati
+    a390:	52206e6f 696e6e75 6920676e 7369206e     on Running in is
+    a3a0:	74616c6f 44206465 69616d6f 0a0a2e6e     olated Domain...
+    a3b0:	00000000 4d454d5b 2059524f 4d4f4547     ....[MEMORY GEOM
+    a3c0:	59525445 6556205d 79666972 20676e69     ETRY] Verifying 
+    a3d0:	6b6e694c 41207265 636f6c6c 6f697461     Linker Allocatio
+    a3e0:	6547206e 74656d6f 0a3a7972 00000000     n Geometry:.....
+    a3f0:	202d2020 73616c46 6f4d2068 206c6564       - Flash Model 
+    a400:	67696557 3a737468 78305b20 2d205825     Weights: [0x%X -
+    a410:	25783020 28205d58 62206425 73657479      0x%X] (%d bytes
+    a420:	00000a29 202d2020 65746e49 6c616e72     )...  - Internal
+    a430:	41525320 7241204d 3a616e65 78305b20      SRAM Arena: [0x
+    a440:	2d205825 25783020 28205d58 62206425     %X - 0x%X] (%d b
+    a450:	73657479 00000a29 202d2020 74617453     ytes)...  - Stat
+    a460:	203a7375 69727453 53207463 204d4152     us: Strict SRAM 
+    a470:	6e756f42 69726164 45207365 726f666e     Boundaries Enfor
+    a480:	20646563 72655a28 764f206f 6c667265     ced (Zero Overfl
+    a490:	5220776f 296b7369 000a0a2e 202d2020     ow Risk)....  - 
+    a4a0:	4952435b 41434954 4c41204c 5d545245     [CRITICAL ALERT]
+    a4b0:	41525320 764f204d 6c667265 4420776f      SRAM Overflow D
+    a4c0:	63657465 21646574 00000a0a 45535b0a     etected!.....[SE
+    a4d0:	4f48494d 4e495453 44205d47 6d616e79     MIHOSTING] Dynam
+    a4e0:	41206369 6f696475 676e4920 69747365     ic Audio Ingesti
+    a4f0:	203a6e6f 64616f4c 34206465 62203039     on: Loaded 490 b
+    a500:	73657479 6f726620 7562206d 2f646c69     ytes from build/
+    a510:	6576696c 6e65745f 2e726f73 206e6962     live_tensor.bin 
+    a520:	6f746e69 41525320 6554204d 726f736e     into SRAM Tensor
+    a530:	65724120 6120616e 78302074 000a5825      Arena at 0x%X..
+    a540:	464e495b 4e455245 205d4543 64656546     [INFERENCE] Feed
+    a550:	20676e69 6576694c 63694d20 68706f72     ing Live Microph
+    a560:	20656e6f 4343464d 6e655420 20726f73     one MFCC Tensor 
+    a570:	34783128 49203039 2938544e 206f7420     (1x490 INT8) to 
+    a580:	7275654e 50206c61 6c657069 2e656e69     Neural Pipeline.
+    a590:	000a2e2e 5252455b 205d524f 65666e49     ....[ERROR] Infe
+    a5a0:	636e6572 69702065 696c6570 6520656e     rence pipeline e
+    a5b0:	75636578 6e6f6974 69616620 2164656c     xecution failed!
+    a5c0:	0000000a 4e495b0a 45524546 5d45434e     .....[INFERENCE]
+    a5d0:	65654620 676e6964 61745320 20636974      Feeding Static 
+    a5e0:	646c6f47 46206e65 6873616c 43464d20     Golden Flash MFC
+    a5f0:	65542043 726f736e 78312820 20303934     C Tensor (1x490 
+    a600:	38544e49 6f742029 75654e20 206c6172     INT8) to Neural 
+    a610:	65706950 656e696c 0a2e2e2e 00000000     Pipeline........
+    a620:	20202020 4d524120 524f5720 524f464b          ARM WORKFOR
+    a630:	4c204543 2d204241 54554120 54414d4f     CE LAB - AUTOMAT
+    a640:	56204445 44494c41 4f495441 5553204e     ED VALIDATION SU
+    a650:	20455449 55534552 2053544c 20202020     ITE RESULTS     
+    a660:	00000a20 53455420 3a312054 726f4320      ... TEST 1: Cor
+    a670:	2d786574 2035354d 696c6548 56206d75     tex-M55 Helium V
+    a680:	6f746365 78452072 736e6574 736e6f69     ector Extensions
+    a690:	74634120 2e657669 5b202e2e 53534150      Active... [PASS
+    a6a0:	00000a5d 53455420 3a322054 68744520     ]... TEST 2: Eth
+    a6b0:	552d736f 4e203535 44205550 65766972     os-U55 NPU Drive
+    a6c0:	61482072 6873646e 20656b61 65532026     r Handshake & Se
+    a6d0:	2e707574 2e2e2e2e 505b202e 5d535341     tup...... [PASS]
+    a6e0:	0000000a 53455420 3a332054 746e4920     .... TEST 3: Int
+    a6f0:	616e7265 5253206c 54204d41 6f736e65     ernal SRAM Tenso
+    a700:	72412072 20616e65 6e756f42 79726164     r Arena Boundary
+    a710:	66615320 2e797465 255b202e 000a5d73      Safety.. [%s]..
+    a720:	53455420 3a342054 4c465420 20657469      TEST 4: TFLite 
+    a730:	7263694d 6f4d206f 206c6564 63657845     Micro Model Exec
+    a740:	6f697475 6950206e 696c6570 2e2e656e     ution Pipeline..
+    a750:	2e2e2e2e 5b202e2e 53534150 00000a5d     ...... [PASS]...
+    a760:	53455420 3a352054 79654b20 64726f77      TEST 5: Keyword
+    a770:	616c4320 66697373 74616369 206e6f69      Classification 
+    a780:	69726150 28207974 22732522 2e2e2e29     Parity ("%s")...
+    a790:	2e2e2e2e 73255b20 00000a5d 2d2d2d2d     .... [%s]...----
+    a7a0:	2d2d2d2d 2d2d2d2d 2d2d2d2d 2d2d2d2d     ----------------
+    a7b0:	2d2d2d2d 2d2d2d2d 2d2d2d2d 2d2d2d2d     ----------------
+    a7c0:	2d2d2d2d 2d2d2d2d 2d2d2d2d 2d2d2d2d     ----------------
+    a7d0:	2d2d2d2d 2d2d2d2d 2d2d2d2d 00000a2d     -------------...
+    a7e0:	45535b0a 4f48494d 4e495453 4e205d47     .[SEMIHOSTING] N
+    a7f0:	6669746f 676e6979 72695620 6c617574     otifying Virtual
+    a800:	616c5020 726f6674 4c203a6d 45206261      Platform: Lab E
+    a810:	75636578 6e6f6974 6e694620 65687369     xecution Finishe
+    a820:	52282064 72757465 6f43206e 203a6564     d (Return Code: 
+    a830:	000a2930 45525b20 544c5553 3e3e205d     0).. [RESULT] >>
+    a840:	4c41203e 414c204c 43412042 54504543     > ALL LAB ACCEPT
+    a850:	45434e41 53455420 50205354 45535341     ANCE TESTS PASSE
+    a860:	55532044 53454343 4c554653 2021594c     D SUCCESSFULLY! 
+    a870:	0a3c3c3c 00000000 726f4320 6e6f7473     <<<..... Corston
+    a880:	30332d65 69562030 61757472 6c50206c     e-300 Virtual Pl
+    a890:	6f667461 53206d72 6c756d69 6f697461     atform Simulatio
+    a8a0:	6f43206e 656c706d 2e646574 0000000a     n Completed.....
+    a8b0:	45525b20 544c5553 3e3e205d 4341203e      [RESULT] >>> AC
+    a8c0:	54504543 45434e41 53455420 46205354     CEPTANCE TESTS F
+    a8d0:	454c4941 3c202144 000a3c3c 6c697562     AILED! <<<..buil
+    a8e0:	696c2f64 745f6576 6f736e65 69622e72     d/live_tensor.bi
+    a8f0:	0000006e                                n...

@@ -6,3 +6,6 @@ __pycache__/
 Thumbs.db
 .DS_Store
 build/live_tensor.bin
+
+# Intermediate Object Files
+build/*.o
