@@ -122,6 +122,7 @@
   │   ├── uart_corstone.c             # APB UART driver (0x49303000)
   │   ├── ethos_u_core.c              # Ethos-U55 NPU driver & DMA
   │   ├── inference_engine.c          # TFLM / CMSIS-NN dispatch
+  │   ├── mfcc_dsp.c                  # Cortex-M55 Helium MVE on-device MFCC DSP engine
   │   ├── main.c                      # Semihosting & test harness
   │   └── corstone300.ld              # Linker script & SRAM guards
   ├── scripts/
@@ -130,12 +131,12 @@
   ├── tests/
   │   └── test_harness.py             # 7-stage automated validation
   ├── slides/                         # Web presentation & mic demo
-  └── Makefile                        # GNU Make build system
+  └── Makefile                        # Dual-target GNU Make build system (sim & hw)
   ```
 * **The 5 Step-by-Step Operative Commands (with 1-Click Copy & IO Badges):**
   1. `python3 scripts/sanity_check.py` — [IN: Host OS & Python 3.8+ / OUT: System Audit PASS]. Audits GNU Arm GCC 10.3+, Vela 5.2.0, FVP binary, and QEMU.
   2. `vela model/ds_cnn_s_quantized.tflite --accelerator-config ethos-u55-128 --output-dir model/output_vela` — [IN: `model/ds_cnn_s_quantized.tflite` / OUT: `model/output_vela/` (30.5 KB)]. Uses the pre-packaged Arm ML-Zoo reference model; compiles 49/49 ops for Ethos-U55 (21.7 KiB SRAM arena, 30.5 KiB Flash).
-  3. `make clean && make` — [IN: `src/*.c` & `corstone300.ld` / OUT: `build/firmware.elf`]. Compiles target firmware with `arm-none-eabi-gcc`. Produces `build/firmware.elf` (text: 43.3 KB, BSS: 82.4 KB) loaded into virtual Flash memory.
+  3. `make clean && make TARGET_PLATFORM=sim` — [IN: `src/*.c` & `corstone300.ld` / OUT: `build/firmware.elf`]. Compiles target simulation firmware with `arm-none-eabi-gcc` (`TARGET_PLATFORM=sim` is default). Produces `build/firmware.elf` (text: 43.3 KB, BSS: 82.4 KB) enabled with semihosting audio ingestion for Fast Models FVP & QEMU.
   4. `python3 tests/test_harness.py` — [IN: `build/firmware.elf` / OUT: 5/5 Hardware UART Assertions]. Automated CI test runner: launches the Arm FVP simulator with `build/firmware.elf`, executes inference, and validates 5/5 hardware assertions in ~3.6s.
   5. `python3 scripts/live_bridge_server.py` — [IN: Browser Mic (16 kHz PCM) / OUT: Live Dual FVP & QEMU Telemetry]. Starts the live audio bridge on port 8080: dynamically feeds browser mic audio to `build/firmware.elf` running in FVP and QEMU via semihosting audio ingestion. *(From Windows PowerShell: `wsl -d Ubuntu-22.04 -- bash -c "cd /mnt/e/Arm_Corstone300_EdgeAI_Lab && python3 scripts/live_bridge_server.py"` or double-click `start_live_bridge.bat`)*.
 

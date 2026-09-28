@@ -2145,7 +2145,8 @@
 │   ├── <span class="tree-file">uart_corstone.c</span>             <span class="tree-comment"># APB UART (0x49303000)</span>
 │   ├── <span class="tree-file">ethos_u_core.c</span>              <span class="tree-comment"># Ethos-U55 NPU driver &amp; DMA</span>
 │   ├── <span class="tree-file">inference_engine.c</span>          <span class="tree-comment"># TFLM / CMSIS-NN dispatch</span>
-│   ├── <span class="tree-file">main.c</span>                      <span class="tree-comment"># Semihosting &amp; test harness</span>
+│   ├── <span class="tree-file">mfcc_dsp.c</span>                  <span class="tree-comment"># Cortex-M55 Helium MFCC DSP</span>
+│   ├── <span class="tree-file">main.c</span>                      <span class="tree-comment"># Dual-target (Sim &amp; Hardware)</span>
 │   └── <span class="tree-file">corstone300.ld</span>              <span class="tree-comment"># Linker script &amp; SRAM guards</span>
 ├── <span class="tree-folder">scripts/</span>
 │   ├── <span class="tree-file">sanity_check.py</span>             <span class="tree-comment"># Pre-flight check</span>
@@ -2153,7 +2154,7 @@
 ├── <span class="tree-folder">tests/</span>
 │   └── <span class="tree-file">test_harness.py</span>             <span class="tree-comment"># 7-stage CI validation</span>
 ├── <span class="tree-folder">slides/</span>                         <span class="tree-comment"># Presentation &amp; mic test</span>
-└── <span class="tree-file">Makefile</span>                        <span class="tree-comment"># GNU Make build system</span></pre>
+└── <span class="tree-file">Makefile</span>                        <span class="tree-comment"># Dual-target Make build system</span></pre>
 
                 <!-- Right: Step-by-Step Operative Commands -->
                 <div class="commands-list" style="max-height: 400px;">
@@ -2187,16 +2188,16 @@
 
                     <!-- Step 3 -->
                     <div class="cmd-item">
-                        <div class="cmd-label"><span>3. Compile Target Firmware (ELF Binary)</span> <span style="color: #00E676;">arm-none-eabi-gcc</span></div>
+                        <div class="cmd-label"><span>3. Compile Target Firmware (Simulation Mode)</span> <span style="color: #00E676;">arm-none-eabi-gcc</span></div>
                         <div class="io-tag-row">
                             <span class="io-tag io-in">IN: src/*.c &amp; corstone300.ld</span>
-                            <span class="io-tag io-out">OUT: build/firmware.elf</span>
+                            <span class="io-tag io-out">OUT: build/firmware.elf (43.2 KB)</span>
                         </div>
                         <div class="cmd-code-row">
-                            <span class="cmd-code-text">make clean &amp;&amp; make</span>
-                            <button class="cmd-copy-btn" onclick="copyCmd('make clean && make', this)">📋 Copy</button>
+                            <span class="cmd-code-text">make clean &amp;&amp; make TARGET_PLATFORM=sim</span>
+                            <button class="cmd-copy-btn" onclick="copyCmd('make clean && make TARGET_PLATFORM=sim', this)">📋 Copy</button>
                         </div>
-                        <div class="cmd-result">Produces <code>build/firmware.elf</code> (executable flashed into virtual memory). Contains startup vectors, APB UART, Ethos-U drivers, and model weights (text: 43.3 KB, BSS: 82.4 KB).</div>
+                        <div class="cmd-result">Produces <code>build/firmware.elf</code> (defaults to <code>TARGET_PLATFORM=sim</code> with semihosting audio bridge enabled for FVP / QEMU). For real physical silicon, see Slide 5 (<code>make TARGET_PLATFORM=hw</code>).</div>
                     </div>
 
                     <!-- Step 4 -->
