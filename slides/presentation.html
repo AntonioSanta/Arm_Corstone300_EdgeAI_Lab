@@ -2213,146 +2213,169 @@
 
             <!-- Slide 4 Bottom Transition Banner to Slide 5 -->
             <div style="margin-top: 10px; background: rgba(0, 229, 255, 0.06); border: 1px solid rgba(0, 229, 255, 0.25); border-radius: 6px; padding: 8px 14px; display: flex; justify-content: space-between; align-items: center; font-size: 11px;">
-                <span style="color: #CBD5E1;">✅ Firmware ready at <code>build/firmware.elf</code>. Proceed to Slide 5 for live console execution modes, reproducible setup strategy &amp; troubleshooting.</span>
-                <button onclick="nextSlide()" style="padding: 4px 12px; background: var(--arm-accent); color: #04080D; border: none; border-radius: 4px; font-weight: 800; cursor: pointer;">Next: Console Playbook &rarr;</button>
+                <span style="color: #CBD5E1;">✅ Firmware compiled &amp; verified. Proceed to Slide 5 for Physical Reference Silicon (Arm MPS3 FPGA AN547) &amp; Real Hardware Deployment.</span>
+                <button onclick="nextSlide()" style="padding: 4px 12px; background: var(--arm-accent); color: #04080D; border: none; border-radius: 4px; font-weight: 800; cursor: pointer;">Next: Real Hardware Deployment &rarr;</button>
             </div>
         </div>
 
-        <!-- SLIDE 5: OPERATIVE LAB GUIDE (PART 2) -->
+        <!-- SLIDE 5: PHYSICAL SILICON DEPLOYMENT & REFERENCE HARDWARE -->
         <div class="slide" id="slide-5">
-            <div class="category-tag">Operative Lab Guide (Part 2) &bull; Console Execution &amp; Facilitator Playbook</div>
-            <h2 class="slide-title">Console Demonstration Playbook &amp; Facilitator Troubleshooting Matrix</h2>
-            <p class="slide-subtitle" style="margin-bottom: 10px;">Two streamlined virtual execution modes for evaluators and physical silicon deployment (Arm MPS3 FPGA &amp; Alif silicon).</p>
-            
-            <!-- Live Console Operational Playbook (Evaluator & Demo Cheat Sheet) -->
-            <div class="console-playbook-box" style="margin-top: 4px; margin-bottom: 14px;">
-                <div class="console-playbook-header">
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <span style="font-size: 15px; color: #00E5FF;">💻</span>
-                        <span style="font-size: 13px; font-weight: 800; color: #FFFFFF;">One-Time Host Environment Setup</span>
-                        <span style="font-size: 9.5px; background: rgba(0,229,255,0.15); color: #00E5FF; padding: 2px 6px; border-radius: 4px; font-weight: 700; border: 1px solid rgba(0,229,255,0.3);">WSL &bull; Ubuntu 22.04</span>
-                    </div>
-                    <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
-                        <div style="font-size: 11px; color: #94A3B8; display: flex; align-items: center; gap: 6px;">
-                            <span>Run once in terminal:</span>
-                            <code style="color: #FFB74D; background: #06101A; padding: 3px 8px; border-radius: 4px; font-family: monospace; font-size: 10px;">sudo apt install -y gcc-arm-none-eabi qemu-system-arm python3-pip make &amp;&amp; pip install ethos-u-vela==5.2.0</code>
-                            <button class="cmd-copy-btn" onclick="copyCmd('sudo apt update && sudo apt install -y gcc-arm-none-eabi qemu-system-arm python3-pip make && pip install ethos-u-vela==5.2.0', this)" style="padding: 2px 8px; font-size: 10px;">📋 Copy</button>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
+                <div class="category-tag">Physical Silicon Deployment &bull; Reference Hardware &amp; Production Chips</div>
+                <div style="display: flex; gap: 8px; align-items: center;">
+                    <span style="font-size: 10px; background: rgba(0, 230, 118, 0.15); color: #00E676; padding: 2px 8px; border-radius: 4px; font-weight: 700; border: 1px solid rgba(0, 230, 118, 0.3);">100% Binary Compatible</span>
+                    <button onclick="toggleHardware()" style="padding: 2px 10px; font-size: 10.5px; background: rgba(255, 145, 0, 0.2); border: 1px solid #FF9100; color: #FFE082; border-radius: 4px; font-weight: 700; cursor: pointer;">🔍 Enlarge Lightbox (H)</button>
+                </div>
+            </div>
+            <h2 class="slide-title">Physical Reference Platform &amp; Silicon Deployment Playbook</h2>
+            <p class="slide-subtitle" style="margin-bottom: 12px;">Transitioning from Fast Models FVP to the physical Arm MPS3 FPGA board (AN547) and production silicon (Alif Semiconductor Ensemble).</p>
+
+            <!-- Main Hardware Grid: Left = Board & Silicon Specs, Right = Pipeline & Deployment -->
+            <div style="display: grid; grid-template-columns: 350px 1fr; gap: 18px; margin-top: 2px;">
+                <!-- Left Panel: Physical Board Photo & Silicon Profile -->
+                <div class="card" style="padding: 14px; background: #060B12; border: 1px solid rgba(255, 145, 0, 0.4); display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <span style="font-size: 12px; font-weight: 800; color: #FFCC80;">Arm MPS3 FPGA Prototyping Board</span>
+                            <span style="font-size: 9.5px; color: #94A3B8;">AN547 Bitstream</span>
                         </div>
-                        <button onclick="toggleHardware()" style="padding: 3px 10px; font-size: 10.5px; background: rgba(255, 145, 0, 0.15); border: 1px solid #FF9100; color: #FFB74D; border-radius: 4px; font-weight: 700; cursor: pointer; transition: all 0.2s ease;">🔌 Real Silicon Lightbox (H)</button>
+                        
+                        <!-- Photo container with click-to-enlarge -->
+                        <div style="position: relative; cursor: pointer; border-radius: 6px; overflow: hidden; border: 1px solid #1C2D40; background: #020408; box-shadow: 0 4px 16px rgba(0,0,0,0.6);" onclick="toggleHardware()" title="Click to enlarge board photo and view complete hardware specifications">
+                            <img src="arm_mps3_board.png" alt="Arm MPS3 FPGA Prototyping Board" style="width: 100%; height: 165px; object-fit: contain; display: block; padding: 4px;">
+                            <div style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.85); font-size: 9.5px; color: #FFCC80; padding: 4px 8px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255, 145, 0, 0.3);">
+                                <span>Model: <strong>V2M-MPS3 / HBI-0309B</strong></span>
+                                <span style="color: #00E5FF; font-weight: 700;">🔍 Enlarge (H) &rarr;</span>
+                            </div>
+                        </div>
+
+                        <!-- Hardware Specs Summary List -->
+                        <div style="margin-top: 10px; display: flex; flex-direction: column; gap: 5px; font-size: 10.5px;">
+                            <div style="display: flex; justify-content: space-between; padding: 3px 6px; background: #09121D; border-radius: 4px; border: 1px solid #162638;">
+                                <span style="color: #94A3B8;">FPGA Target:</span>
+                                <span style="color: #CBD5E1; font-weight: 700;">Xilinx Virtex UltraScale+ (VU19P)</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; padding: 3px 6px; background: #09121D; border-radius: 4px; border: 1px solid #162638;">
+                                <span style="color: #94A3B8;">Compute Core:</span>
+                                <span style="color: var(--arm-cyan); font-weight: 700;">Cortex-M55 @ 25-32 MHz (Helium MVE)</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; padding: 3px 6px; background: #09121D; border-radius: 4px; border: 1px solid #162638;">
+                                <span style="color: #94A3B8;">Neural Accelerator:</span>
+                                <span style="color: var(--arm-accent); font-weight: 700;">Ethos-U55 (128 MACs/cycle Dual-AXI)</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; padding: 3px 6px; background: #09121D; border-radius: 4px; border: 1px solid #162638;">
+                                <span style="color: #94A3B8;">On-Chip Memory:</span>
+                                <span style="color: #00E676; font-weight: 700;">8 MB BRAM &bull; 16 MB PSRAM</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Commercial Production Equivalents -->
+                    <div style="margin-top: 10px; padding: 8px 10px; background: rgba(0, 229, 255, 0.05); border: 1px solid rgba(0, 229, 255, 0.2); border-radius: 4px; font-size: 10px;">
+                        <span style="color: #00E5FF; font-weight: 700; display: block; margin-bottom: 2px;">Commercial Silicon Equivalents:</span>
+                        <span style="color: #CBD5E1; line-height: 1.35; display: block;">
+                            Production microcontrollers running this identical Corstone-300 IP include <strong>Alif Semiconductor Ensemble E3/E5/E7</strong> and <strong>Himax WiseEye2</strong>.
+                        </span>
                     </div>
                 </div>
 
-                <div class="playbook-modes-grid">
-                    <!-- Mode 1: Automated Acceptance Test -->
-                    <div class="playbook-card highlight" style="padding: 14px 16px;">
-                        <div class="playbook-card-header">
-                            <span class="playbook-tag tag-green">Mode 1 &bull; Recommended for Evaluation (3.5s)</span>
-                        </div>
-                        <div class="playbook-card-title" style="font-size: 14px; margin-top: 4px;">All-in-One Automated Acceptance Suite</div>
-                        <div class="playbook-note" style="font-size: 11px; margin-top: 2px;">Automates the full pipeline: compiles model with Vela &rarr; links firmware with GCC &rarr; boots Corstone-300 FVP &rarr; asserts 5/5 hardware metrics via UART.</div>
-                        <div class="playbook-cmd-entry" style="margin-top: 8px;">
-                            <span class="playbook-cmd-label">Terminal Command (WSL / Linux):</span>
-                            <div class="playbook-cmd-code" style="padding: 8px 10px;">
-                                <code style="font-size: 12px; font-weight: 700;">python3 tests/test_harness.py</code>
-                                <button class="cmd-copy-btn" onclick="copyCmd('python3 tests/test_harness.py', this)" style="padding: 4px 10px; font-size: 10px;">📋 Copy</button>
+                <!-- Right Panel: Physical Audio & Neural Pipeline + 4-Step Flashing Playbook -->
+                <div style="display: flex; flex-direction: column; gap: 14px;">
+                    <!-- Card 1: Heterogeneous Physical Signal Division of Labor (Who makes MFCC?) -->
+                    <div class="card" style="padding: 12px 16px; background: #09121D; border: 1px solid #162638;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <span style="font-size: 14px;">🎙️</span>
+                                <span style="font-size: 12.5px; font-weight: 800; color: #FFFFFF;">Physical Audio Ingestion &amp; Heterogeneous Division of Labor</span>
                             </div>
+                            <span style="font-size: 10px; color: #FFCC80; font-weight: 700;">Who produces the 490 INT8 bytes?</span>
                         </div>
-                        <div class="playbook-note" style="color: #A7F3D0; font-size: 10px; margin-top: 6px; background: rgba(0,230,118,0.06); padding: 6px 10px; border-radius: 4px; border: 1px solid rgba(0,230,118,0.2);">
-                            <strong>Verified Output:</strong> 24,650 NPU cycles (108.1&times; speedup) &bull; 21.7 KiB SRAM safety &bull; 100% Golden Parity.
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;">
+                            <!-- Stage A: DMA Audio Collection -->
+                            <div style="background: #04080D; border: 1px solid #1A2E44; border-radius: 6px; padding: 8px 10px;">
+                                <div style="font-size: 11px; font-weight: 700; color: #00E5FF; margin-bottom: 2px;">1. Peripheral DMA</div>
+                                <div style="font-size: 9px; color: var(--success-green); font-weight: 700; margin-bottom: 4px;">0% CPU Overhead</div>
+                                <p style="font-size: 9.5px; color: #94A3B8; line-height: 1.35; margin: 0;">
+                                    Hardware DMA transfers 16 kHz 16-bit PCM audio stream from physical I2S/PDM MEMS mic into a circular double buffer in SRAM.
+                                </p>
+                            </div>
+
+                            <!-- Stage B: Cortex-M55 DSP -->
+                            <div style="background: #04080D; border: 1px solid rgba(255, 183, 77, 0.4); border-radius: 6px; padding: 8px 10px;">
+                                <div style="font-size: 11px; font-weight: 700; color: #FFB74D; margin-bottom: 2px;">2. Cortex-M55 (DSP)</div>
+                                <div style="font-size: 9px; color: #FFB74D; font-weight: 700; margin-bottom: 4px;">Helium MVE &bull; ~2.5 ms</div>
+                                <p style="font-size: 9.5px; color: #CBD5E1; line-height: 1.35; margin: 0;">
+                                    <strong>Cortex-M55 computes MFCC!</strong> CMSIS-DSP vector instructions execute Hanning windowing, Real FFT, and mel-filterbanks &rarr; generates the <strong>490 INT8 bytes</strong>.
+                                </p>
+                            </div>
+
+                            <!-- Stage C: Ethos-U55 NPU -->
+                            <div style="background: #04080D; border: 1px solid rgba(0, 230, 118, 0.4); border-radius: 6px; padding: 8px 10px;">
+                                <div style="font-size: 11px; font-weight: 700; color: #00E676; margin-bottom: 2px;">3. Ethos-U55 microNPU</div>
+                                <div style="font-size: 9px; color: #00E676; font-weight: 700; margin-bottom: 4px;">108.1x Faster &bull; 0.98 ms</div>
+                                <p style="font-size: 9.5px; color: #94A3B8; line-height: 1.35; margin: 0;">
+                                    Ethos-U55 reads the 490 bytes from internal SRAM arena (<code>0x21010000</code>) via Dual-AXI M1, accelerating DS-CNN in <strong>24,650 cycles</strong>.
+                                </p>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Mode 2: Real-Time Voice Testbench -->
-                    <div class="playbook-card" style="padding: 14px 16px;">
-                        <div class="playbook-card-header">
-                            <span class="playbook-tag tag-cyan">Mode 2 &bull; Interactive Voice Testbench</span>
-                        </div>
-                        <div class="playbook-card-title" style="font-size: 14px; margin-top: 4px;">Real-Time Microphone Speech Classification</div>
-                        <div class="playbook-note" style="font-size: 11px; margin-top: 2px;">Starts local REST bridge on port 8080. Ingests browser microphone audio directly into Corstone-300 FVP / QEMU via ARM semihosting.</div>
-                        <div class="playbook-cmd-entry" style="margin-top: 8px;">
-                            <span class="playbook-cmd-label">Terminal Command (or 1-click Windows BAT):</span>
-                            <div class="playbook-cmd-code" style="padding: 8px 10px;">
-                                <code style="font-size: 12px; font-weight: 700;">python3 scripts/live_bridge_server.py</code>
-                                <button class="cmd-copy-btn" onclick="copyCmd('python3 scripts/live_bridge_server.py', this)" style="padding: 4px 10px; font-size: 10px;">📋 Copy</button>
+                    <!-- Card 2: 4-Step Physical Deployment & Flashing Playbook -->
+                    <div class="card" style="padding: 12px 16px; background: #09121D; border: 1px solid #162638;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <span style="font-size: 14px;">⚡</span>
+                                <span style="font-size: 12.5px; font-weight: 800; color: #FFFFFF;">Physical Silicon Flashing &amp; Deployment Playbook</span>
                             </div>
+                            <span style="font-size: 10px; color: #94A3B8;">Memory Map: Flash <code>0x00000000</code> &bull; SRAM <code>0x21000000</code> &bull; UART <code>0x49303000</code></span>
                         </div>
-                        <div class="playbook-note" style="color: #BAE6FD; font-size: 10px; margin-top: 6px; background: rgba(0,229,255,0.06); padding: 6px 10px; border-radius: 4px; border: 1px solid rgba(0,229,255,0.2);">
-                            💡 <strong>How to test:</strong> Run the server (or double-click <code>start_live_bridge.bat</code>), then press <strong style="color: #00E676;">M</strong> in the browser to speak!
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                            <!-- Step 1 & 2: Build & Flash -->
+                            <div style="display: flex; flex-direction: column; gap: 6px;">
+                                <div>
+                                    <span style="font-size: 10px; font-weight: 700; color: #CBD5E1;">Step 1: Convert ELF to Flat Binary</span>
+                                    <div class="code-box" style="font-size: 9.5px; padding: 5px 8px; margin-top: 2px;">
+                                        arm-none-eabi-objcopy -O binary build/firmware.elf build/firmware.bin
+                                    </div>
+                                </div>
+                                <div>
+                                    <span style="font-size: 10px; font-weight: 700; color: #CBD5E1;">Step 2: Flash Board via pyOCD or USB MSC</span>
+                                    <div class="code-box" style="font-size: 9.5px; padding: 5px 8px; margin-top: 2px;">
+                                        pyocd flash -t cortex_m build/firmware.bin --base-address 0x00000000
+                                    </div>
+                                    <span style="font-size: 8.5px; color: #64748B; margin-top: 1px; display: block;">Or drag-and-drop <code>firmware.bin</code> into the mounted MPS3 USB drive (<code>/SOFTWARE/</code>).</span>
+                                </div>
+                            </div>
+
+                            <!-- Step 3 & 4: Ingestion & Telemetry -->
+                            <div style="display: flex; flex-direction: column; gap: 6px;">
+                                <div style="background: #04080D; border: 1px solid #1A2E44; border-radius: 4px; padding: 6px 8px;">
+                                    <span style="font-size: 10px; font-weight: 700; color: #00E676;">Step 3: Physical Audio Ingestion Switch</span>
+                                    <span style="font-size: 9px; color: #CBD5E1; display: block; margin-top: 2px; line-height: 1.35;">
+                                        In virtual simulation, Cortex-M55 executes <code>bkpt 0xab</code> (ARM Semihosting). On physical board, point pointer to DMA audio buffer in SRAM (<code>0x21010000</code>).
+                                    </span>
+                                </div>
+                                <div style="background: #04080D; border: 1px solid #1A2E44; border-radius: 4px; padding: 6px 8px;">
+                                    <span style="font-size: 10px; font-weight: 700; color: #00E5FF;">Step 4: Real-Time Telemetry over USB UART</span>
+                                    <span style="font-size: 9px; color: #CBD5E1; display: block; margin-top: 2px; line-height: 1.35;">
+                                        Open serial terminal at <strong>115200 baud (8N1)</strong> to stream keyword predictions ("Yes"/"No"), confidence percentages, and Ethos-U55 cycle counts.
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Physical Reference Silicon & Hardware Deployment Section -->
-            <div class="card" style="padding: 12px 16px; margin-top: 2px; border: 1px solid rgba(255, 145, 0, 0.45); background: linear-gradient(180deg, rgba(255, 145, 0, 0.07) 0%, rgba(10, 18, 28, 0.95) 100%);">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; border-bottom: 1px solid rgba(255, 145, 0, 0.25); padding-bottom: 6px;">
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <span style="font-size: 15px;">🔌</span>
-                        <h3 class="card-title" style="color: #FFB74D; font-size: 13px; margin-bottom: 0; font-weight: 800;">Physical Reference Hardware &amp; Real Silicon Deployment</h3>
-                        <span style="font-size: 9px; background: rgba(0, 230, 118, 0.15); color: #00E676; padding: 2px 7px; border-radius: 4px; font-weight: 700; border: 1px solid rgba(0, 230, 118, 0.3);">100% Binary Compatible</span>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <span style="font-size: 10.5px; color: #94A3B8;">Target: <strong>Arm MPS3 FPGA (AN547)</strong> &bull; Commercial: <strong>Alif Ensemble E3/E7</strong></span>
-                        <button onclick="toggleHardware()" style="padding: 2px 10px; font-size: 10.5px; background: rgba(255, 145, 0, 0.2); border: 1px solid #FF9100; color: #FFE082; border-radius: 4px; font-weight: 700; cursor: pointer;">🔍 Enlarge Lightbox (H)</button>
-                    </div>
-                </div>
-
-                <div style="display: grid; grid-template-columns: 200px 1fr 1.15fr; gap: 14px; align-items: stretch;">
-                    <!-- Column 1: Board Photo Thumbnail -->
-                    <div style="background: #03070C; border: 1px solid rgba(255, 145, 0, 0.35); border-radius: 6px; padding: 5px; text-align: center; cursor: pointer; display: flex; flex-direction: column; justify-content: space-between;" onclick="toggleHardware()" title="Click to enlarge board photo and view full specifications">
-                        <img src="arm_mps3_board.png" alt="Arm MPS3 FPGA Prototyping Board" style="width: 100%; height: 96px; object-fit: contain; border-radius: 4px; display: block; background: #000;">
-                        <div style="font-size: 9.5px; color: #CBD5E1; margin-top: 3px; font-weight: 700;">
-                            Arm MPS3 FPGA Board (AN547)
-                        </div>
-                        <div style="font-size: 8.5px; color: #00E5FF; font-weight: 600;">🔍 Click to enlarge &rarr;</div>
-                    </div>
-
-                    <!-- Column 2: Memory Map & Audio Ingestion -->
-                    <div style="background: #060B12; border: 1px solid #162638; border-radius: 6px; padding: 8px 10px; display: flex; flex-direction: column; justify-content: space-between;">
-                        <div>
-                            <span style="font-size: 10.5px; font-weight: 700; color: #FFCC80; display: block; margin-bottom: 3px;">🎯 Drop-In Silicon Memory Map</span>
-                            <p style="font-size: 9.5px; color: #94A3B8; margin-bottom: 4px; line-height: 1.3;">
-                                The virtual FVP simulator is the bit-for-bit digital twin of the physical MPS3 AN547 FPGA board. Memory addresses match with zero code modifications:
-                            </p>
-                            <div style="font-size: 9px; font-family: monospace; color: #CBD5E1; background: #03070D; padding: 4px 6px; border-radius: 4px; border: 1px solid #1C2D40;">
-                                Flash: <code>0x00000000</code> &bull; SRAM: <code>0x21000000</code> &bull; UART: <code>0x49303000</code>
-                            </div>
-                        </div>
-                        <div style="margin-top: 4px; padding-top: 4px; border-top: 1px solid #162638;">
-                            <span style="font-size: 9.5px; font-weight: 700; color: #00E676;">🎙️ Physical DMA Audio Ingestion:</span>
-                            <span style="font-size: 9px; color: #94A3B8; display: block; line-height: 1.3;">
-                                Replace virtual semihosting (<code>bkpt 0xab</code>) with onboard I2S/PDM digital mic DMA directly streaming audio to SRAM arena (<code>0x21010000</code>).
-                            </span>
-                        </div>
-                    </div>
-
-                    <!-- Column 3: 4-Step Flashing Playbook -->
-                    <div style="background: #060B12; border: 1px solid #162638; border-radius: 6px; padding: 8px 10px; display: flex; flex-direction: column; justify-content: space-between;">
-                        <span style="font-size: 10.5px; font-weight: 700; color: #FFCC80; display: block; margin-bottom: 3px;">⚡ Flash &amp; Run on Physical Silicon</span>
-                        <div style="display: flex; flex-direction: column; gap: 4px; font-size: 9px; color: #CBD5E1;">
-                            <div>
-                                <span style="color: #00E5FF; font-weight: 700;">1. Convert ELF to flat binary:</span>
-                                <div class="code-box" style="font-size: 8.5px; padding: 2px 6px; margin-top: 1px;">arm-none-eabi-objcopy -O binary build/firmware.elf build/firmware.bin</div>
-                            </div>
-                            <div>
-                                <span style="color: #00E5FF; font-weight: 700;">2. Flash via pyOCD or USB Mass Storage:</span>
-                                <div class="code-box" style="font-size: 8.5px; padding: 2px 6px; margin-top: 1px;">pyocd flash -t cortex_m build/firmware.bin --base-address 0x00000000</div>
-                            </div>
-                            <div style="color: #94A3B8; font-size: 8.5px; margin-top: 1px;">
-                                <strong>3. Telemetry:</strong> Read UART at 115200 baud (8N1) for real-time keyword predictions &amp; NPU cycle counts. Commercial: <strong>Alif Ensemble E3/E7</strong>.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Interactive Live Mic Callout -->
-            <div style="margin-top: 14px; background: rgba(0, 230, 118, 0.08); border: 1px solid rgba(0, 230, 118, 0.3); border-radius: 8px; padding: 10px 18px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+            <!-- Slide 5 Bottom Mic Prompt Banner -->
+            <div style="margin-top: 12px; background: rgba(0, 230, 118, 0.08); border: 1px solid rgba(0, 230, 118, 0.3); border-radius: 6px; padding: 8px 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
                 <div>
-                    <span style="font-size: 13px; font-weight: 700; color: #00E676;">Ready to test live speech recognition?</span>
-                    <span style="font-size: 12px; color: #CBD5E1; margin-left: 8px;">Press <strong>M</strong> or click "Live Mic Test" in the top bar to record live voice from your microphone!</span>
+                    <span style="font-size: 12px; font-weight: 700; color: #00E676;">Ready to test speech recognition on your laptop right now?</span>
+                    <span style="font-size: 11px; color: #CBD5E1; margin-left: 8px;">Press <strong>M</strong> or click "Live Mic Test" in the top bar to record live voice from your microphone!</span>
                 </div>
-                <button onclick="toggleAudioDemo()" style="font-size: 11px; padding: 6px 14px; background: #00E676; color: #04080D; border: none; cursor: pointer; border-radius: 4px; font-weight: 800;">Launch Live Audio Test (M)</button>
+                <button onclick="toggleAudioDemo()" style="font-size: 10.5px; padding: 5px 12px; background: #00E676; color: #04080D; border: none; cursor: pointer; border-radius: 4px; font-weight: 800;">Launch Live Audio Test (M)</button>
             </div>
         </div>
 
@@ -3280,7 +3303,7 @@ Info: /OSCI/SystemC: Simulation stopped by user.
             2: "<strong>Subsystem & Bus Topology:</strong> Explain the hardware co-design: Cortex-M55 (Helium MVE) handles audio DSP/MFCC feature extraction, while Ethos-U55 accelerates matrix convolutions (128 MACs/cycle). Detail the Dual-AXI master architecture (Port M0 reads Flash weights, Port M1 reads/writes SRAM activations) over the multi-layer AXI5 crossbar with TrustZone-M memory protection.",
             3: "<strong>End-to-End Experiment Flow:</strong> Walk through the logic diagram from browser microphone to virtual silicon. The browser captures 16 kHz audio and extracts 490 INT8 MFCC features. The Python bridge evaluates the TFLite model, launches FVP and QEMU, and the Cortex-M55 firmware dynamically ingests the tensor via ARM Semihosting (bkpt 0xab) into internal SRAM at 0x21010000.",
             4: "<strong>Operative Lab Guide (Part 1) — Setup & Build Pipeline:</strong> Explain that this lab is designed to be completely reproducible for anyone starting from scratch. Point out the primary Lab Git Repository link and the one-line clone command at the top: attendees can clone everything directly (<code>git clone https://github.com/AntonioSanta/Arm_Corstone300_EdgeAI_Lab.git</code>). This single repository provides all the custom Python bridge scripts, bare-metal C drivers, linker scripts, pre-quantized DS-CNN model, and even the interactive HTML presentation deck. Mention that attendees can run a zero-install speech test immediately by opening the slides in their browser, or follow the 5 sequential build steps to compile firmware on WSL or Linux.",
-            5: "<strong>Operative Lab Guide (Part 2) — Console Playbook & Facilitator Matrix:</strong> Walk the panel and audience through how to run this on their laptops. Highlight the two streamlined execution modes: Mode 1 is the 3.5-second automated hardware verification (<code>python3 tests/test_harness.py</code>), which compiles firmware, boots FVP, and asserts all 5 hardware metrics. Mode 2 is the live interactive voice testbench (<code>python3 scripts/live_bridge_server.py</code> or <code>start_live_bridge.bat</code>), bridging the browser microphone into the virtual Corstone-300 simulator in real time. <strong>Real Silicon Deployment:</strong> Press <strong>'H'</strong> or click the <strong>Real Silicon Deployment</strong> button to display the physical Arm MPS3 FPGA board (AN547) and commercial chips (Alif Ensemble, Himax WiseEye2). Because our memory map is 100% binary-compatible, deploying to physical silicon requires zero code changes—only routing DMA from an onboard I2S/PDM microphone instead of Semihosting.",
+            5: "<strong>Physical Silicon Deployment & Reference Hardware:</strong> Walk the panel through the transition from virtual simulation to physical hardware. Emphasize that the Corstone-300 Fast Models FVP is the bit-for-bit digital twin of the <strong>Arm MPS3 FPGA Prototyping Board (AN547)</strong>. Because our linker script (<code>src/corstone300.ld</code>) maps Flash to <code>0x00000000</code>, internal SRAM to <code>0x21000000</code>, and UART to <code>0x49303000</code>, our firmware binary is <strong>100% drop-in compatible</strong> with physical silicon. Detail the heterogeneous physical audio pipeline: peripheral DMA streams raw 16 kHz audio into SRAM with 0% CPU load; <strong>Cortex-M55 (using Helium MVE and CMSIS-DSP)</strong> computes the 490 INT8 MFCC features in ~2.5 ms; and Ethos-U55 executes neural inference in 0.98 ms. Explain the 4-step deployment playbook (objcopy, pyocd flash, DMA mic, UART at 115200 baud) and reference commercial production chips like Alif Semiconductor Ensemble E3/E7 and Himax WiseEye2.",
             6: "<strong>Benchmarking, Memory Footprint & Acceptance Scorecard:</strong> Present the grounded hardware proof from the virtual silicon execution. Walk through the direct comparison between Cortex-M55 alone vs Cortex-M55 + Ethos-U55 NPU: 24,650 cycles vs 2,664,792 cycles (108.1x speedup, 99.07% cycle reduction), dropping latency from 106.6 ms to 0.98 ms (saving 105.6 ms). Crucially highlight the ultra-compact memory footprint: the entire system fits in <strong>43.3 KiB of Flash</strong> (35.9K model + 7.4K C runtime) and requires only <strong>38.1 KiB of active RAM</strong> (21.7 KiB SRAM activations + 16.4 KiB DTCM stack), with 66.1% headroom remaining in our 64 KiB internal SRAM arena. This proves speech AI runs on cost-effective sub-$2 microcontrollers without external DRAM."
         };
 
