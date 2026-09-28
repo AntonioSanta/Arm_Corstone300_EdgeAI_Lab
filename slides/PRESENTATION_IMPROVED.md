@@ -72,8 +72,6 @@
   3. **Cortex-M55 CPU (Host Controller / `firmware.elf`):** The master processor boots `firmware.elf`, executes Semihosting trap (`BKPT 0xAB`) to load `live_tensor.bin` directly into the SRAM Tensor Arena (`0x21010000`), emulating physical DMA ingestion.
   4. **Ethos-U55 microNPU (Hardware Neural Co-Processor):** Cortex-M55 configures and dispatches the compiled neural model command stream across the 64-bit AXI bus. Ethos-U executes 49/49 convolution layers in 24,650 cycles and signals completion back to Cortex-M55.
   5. **UART & UI Telemetry:** Cortex-M55 prints classification ("Yes", "No", "Silence") and cycle metrics to CMSDK APB UART (`0x49303000`). Bridge server forwards results as SSE/JSON back to the Browser UI.
-* **Interactive Live Mic Prompt:** Press `M` or click "Live Mic Test" to record live audio from your microphone!
-
 ### Speaker Talking Points (Your Script):
 > *"Slide 3 illustrates the complete end-to-end experiment architecture. Notice how the flow is partitioned into three distinct phases across the top breadcrumb bar.*
 >
@@ -183,6 +181,7 @@
     `--ignore-ops FULLY_CONNECTED`
   - **SRAM Memory Guard:** Hard compile-time safety check guarding against SRAM buffer overflow:
     `ASSERT((__tensor_arena_end - __tensor_arena_start) <= 0x10000)`
+* **Interactive Live Mic Prompt:** *"Ready to test live speech recognition? Press M or click 'Live Mic Test' in the top bar to record live voice from your microphone!"* [Launch Live Audio Test (M)]
 
 ### Speaker Talking Points (Your Script):
 > *"Slide 5 is the console execution playbook and troubleshooting guide.*
