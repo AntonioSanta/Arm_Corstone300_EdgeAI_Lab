@@ -99,6 +99,11 @@
   - **Arm GNU Embedded Toolchain:** [`https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads`](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads) (`arm-none-eabi-gcc 10.3+` / `sudo apt install gcc-arm-none-eabi`)
   - **Arm Vela NPU Compiler:** [`https://pypi.org/project/ethos-u-vela/`](https://pypi.org/project/ethos-u-vela/) (`pip install ethos-u-vela==5.2.0`)
   - **QEMU Machine Emulator:** [`https://www.qemu.org/download/`](https://www.qemu.org/download/) (`sudo apt install qemu-system-arm`)
+* **One-Time Host Package Installation (WSL / Ubuntu 22.04):**
+  ```bash
+  sudo apt update && sudo apt install -y gcc-arm-none-eabi qemu-system-arm python3-pip make && pip install ethos-u-vela==5.2.0
+  ```
+  *Installs the GCC toolchain, QEMU ARM simulator, Python build tools, and the Arm Vela NPU compiler in <60 seconds.*
 * **Attendee Fast Clone Bar (Run on Your Laptop):**
   ```bash
   git clone https://github.com/AntonioSanta/Arm_Corstone300_EdgeAI_Lab.git && cd Arm_Corstone300_EdgeAI_Lab

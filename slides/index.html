@@ -2033,16 +2033,34 @@
                 </div>
             </div>
 
-            <!-- Attendee Fast Clone & Laptop Quick-Start Bar -->
-            <div style="margin-top: 6px; margin-bottom: 6px; background: rgba(0, 230, 118, 0.06); border: 1px solid rgba(0, 230, 118, 0.3); border-radius: 6px; padding: 6px 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
-                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-                    <span style="font-size: 13px;">💻</span>
-                    <span style="font-size: 11px; font-weight: 800; color: #FFFFFF;">Attendee Clone &amp; Run on Your Laptop:</span>
-                    <code style="color: #69F0AE; background: #06101A; padding: 3px 8px; border-radius: 4px; font-family: monospace; font-size: 10px;">git clone https://github.com/AntonioSanta/Arm_Corstone300_EdgeAI_Lab.git &amp;&amp; cd Arm_Corstone300_EdgeAI_Lab</code>
-                    <button class="cmd-copy-btn" onclick="copyCmd('git clone https://github.com/AntonioSanta/Arm_Corstone300_EdgeAI_Lab.git && cd Arm_Corstone300_EdgeAI_Lab', this)" style="padding: 2px 8px; font-size: 10px;">📋 Copy</button>
+            <!-- Attendee Fast Clone & Environment Setup Bars -->
+            <div style="margin-top: 6px; margin-bottom: 6px; display: flex; flex-direction: column; gap: 4px;">
+                <!-- Row 1: One-Time Host Package Installation -->
+                <div style="background: rgba(0, 229, 255, 0.05); border: 1px solid rgba(0, 229, 255, 0.25); border-radius: 6px; padding: 5px 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                    <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                        <span style="font-size: 12px; color: #00E5FF;">💻</span>
+                        <span style="font-size: 11px; font-weight: 800; color: #FFFFFF;">One-Time Host Environment Setup:</span>
+                        <span style="font-size: 9.5px; background: rgba(0,229,255,0.15); color: #00E5FF; padding: 1px 6px; border-radius: 3px; font-weight: 700; border: 1px solid rgba(0,229,255,0.3);">WSL &bull; Ubuntu 22.04</span>
+                        <span style="font-size: 10px; color: #94A3B8;">Run once in terminal:</span>
+                        <code style="color: #FFB74D; background: #06101A; padding: 2px 7px; border-radius: 4px; font-family: monospace; font-size: 10px;">sudo apt update &amp;&amp; sudo apt install -y gcc-arm-none-eabi qemu-system-arm python3-pip make &amp;&amp; pip install ethos-u-vela==5.2.0</code>
+                        <button class="cmd-copy-btn" onclick="copyCmd('sudo apt update && sudo apt install -y gcc-arm-none-eabi qemu-system-arm python3-pip make && pip install ethos-u-vela==5.2.0', this)" style="padding: 2px 8px; font-size: 10px;">📋 Copy</button>
+                    </div>
+                    <div style="font-size: 9.5px; color: #94A3B8;">
+                        ⏱️ Installs GCC, QEMU &amp; Vela in &lt;60s
+                    </div>
                 </div>
-                <div style="font-size: 10px; color: #94A3B8;">
-                    ⚡ <strong style="color: #00E5FF;">Zero-Install Test:</strong> Open <code style="color: #CBD5E1;">slides/presentation.html</code> in browser &amp; press key <strong style="color: #00E676;">A</strong>!
+
+                <!-- Row 2: Clone Repo -->
+                <div style="background: rgba(0, 230, 118, 0.06); border: 1px solid rgba(0, 230, 118, 0.3); border-radius: 6px; padding: 5px 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                    <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                        <span style="font-size: 12px;">📂</span>
+                        <span style="font-size: 11px; font-weight: 800; color: #FFFFFF;">Clone Lab Repository:</span>
+                        <code style="color: #69F0AE; background: #06101A; padding: 2px 7px; border-radius: 4px; font-family: monospace; font-size: 10px;">git clone https://github.com/AntonioSanta/Arm_Corstone300_EdgeAI_Lab.git &amp;&amp; cd Arm_Corstone300_EdgeAI_Lab</code>
+                        <button class="cmd-copy-btn" onclick="copyCmd('git clone https://github.com/AntonioSanta/Arm_Corstone300_EdgeAI_Lab.git && cd Arm_Corstone300_EdgeAI_Lab', this)" style="padding: 2px 8px; font-size: 10px;">📋 Copy</button>
+                    </div>
+                    <div style="font-size: 9.5px; color: #94A3B8;">
+                        ⚡ <strong style="color: #00E5FF;">Zero-Install Test:</strong> Open <code style="color: #CBD5E1;">slides/presentation.html</code> in browser &amp; press key <strong style="color: #00E676;">A</strong>!
+                    </div>
                 </div>
             </div>
 
