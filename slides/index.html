@@ -2254,46 +2254,31 @@
                 </div>
             </div>
 
-            <!-- Facilitator's Setup Strategy & Technical Mitigations -->
-            <div class="cards-grid-2">
-                <div class="card" style="padding: 12px 16px;">
-                    <h3 class="card-title" style="color: var(--arm-cyan); margin-bottom: 8px; font-size: 12.5px;">Reproducible Local Strategy</h3>
-                    <ul class="bullet-list">
-                        <li class="bullet-item">
-                            <span class="bullet-title">Native Local Execution:</span>
-                            <span class="bullet-desc">Runs directly in Linux or Windows WSL with standard packages. Eliminates Docker hypervisor overhead and cloud latency.</span>
-                        </li>
-                        <li class="bullet-item">
-                            <span class="bullet-title">ARM Semihosting Ingestion:</span>
-                            <span class="bullet-desc">Cortex-M55 executes <code>bkpt 0xab</code> to load live voice audio directly into SRAM without recompiling firmware.</span>
-                        </li>
-                        <li class="bullet-item">
-                            <span class="bullet-title">Pre-Flight Sanity Script:</span>
-                            <span class="bullet-desc">Automated check verifies GCC, Vela compiler, and virtual platforms in under 1 second:</span>
-                            <div class="code-box">python3 scripts/sanity_check.py</div>
-                        </li>
-                    </ul>
+            <!-- Embedded Technical Mitigations (3-Column Strip) -->
+            <div class="card" style="padding: 12px 16px; margin-top: 2px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 14px; color: var(--orange-accent);">🛡️</span>
+                        <h3 class="card-title" style="color: var(--orange-accent); font-size: 13px; margin-bottom: 0;">Embedded Technical Mitigations &amp; Hardware Safeguards</h3>
+                    </div>
+                    <span style="font-size: 10px; color: #94A3B8;">Built-in compile-time &amp; runtime protections</span>
                 </div>
-
-                <div class="card" style="padding: 12px 16px;">
-                    <h3 class="card-title" style="color: var(--orange-accent); margin-bottom: 8px; font-size: 12.5px;">Embedded Technical Mitigations</h3>
-                    <ul class="bullet-list">
-                        <li class="bullet-item">
-                            <span class="bullet-title">Headless FVP Mode:</span>
-                            <span class="bullet-desc">Force terminal-only execution to prevent X11 GUI crashes in headless environments:</span>
-                            <div class="code-box">-C disable-visualisation=1 -C cpu0.semihosting-enable=1</div>
-                        </li>
-                        <li class="bullet-item">
-                            <span class="bullet-title">Vela Operator Fallback:</span>
-                            <span class="bullet-desc">Route unsupported operations to Cortex-M55 Helium MVE via CMSIS-NN:</span>
-                            <div class="code-box">--ignore-ops FULLY_CONNECTED</div>
-                        </li>
-                        <li class="bullet-item">
-                            <span class="bullet-title">SRAM Memory Guard:</span>
-                            <span class="bullet-desc">Hard compile-time safety check guarding against SRAM buffer overflow:</span>
-                            <div class="code-box">ASSERT((__tensor_arena_end - __tensor_arena_start) &lt;= 0x10000)</div>
-                        </li>
-                    </ul>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;">
+                    <div style="background: #060B12; border: 1px solid #162638; border-radius: 6px; padding: 10px 12px;">
+                        <span style="font-size: 11px; font-weight: 700; color: #FFCC80; display: block; margin-bottom: 4px;">1. Headless FVP Execution</span>
+                        <span style="font-size: 10px; color: #CBD5E1; display: block; margin-bottom: 6px; line-height: 1.35;">Forces terminal-only execution to prevent X11 GUI crashes in headless WSL or CI/CD pipelines:</span>
+                        <div class="code-box" style="font-size: 9.5px; padding: 4px 8px;">-C disable-visualisation=1 -C cpu0.semihosting-enable=1</div>
+                    </div>
+                    <div style="background: #060B12; border: 1px solid #162638; border-radius: 6px; padding: 10px 12px;">
+                        <span style="font-size: 11px; font-weight: 700; color: #FFCC80; display: block; margin-bottom: 4px;">2. Vela Operator Fallback</span>
+                        <span style="font-size: 10px; color: #CBD5E1; display: block; margin-bottom: 6px; line-height: 1.35;">Automatically routes unsupported layers from NPU to Cortex-M55 Helium MVE via CMSIS-NN:</span>
+                        <div class="code-box" style="font-size: 9.5px; padding: 4px 8px;">--ignore-ops FULLY_CONNECTED</div>
+                    </div>
+                    <div style="background: #060B12; border: 1px solid #162638; border-radius: 6px; padding: 10px 12px;">
+                        <span style="font-size: 11px; font-weight: 700; color: #FFCC80; display: block; margin-bottom: 4px;">3. SRAM Memory Linker Guard</span>
+                        <span style="font-size: 10px; color: #CBD5E1; display: block; margin-bottom: 6px; line-height: 1.35;">Hard compile-time linker script assertion guarding against internal 64 KiB SRAM buffer overflow:</span>
+                        <div class="code-box" style="font-size: 9.5px; padding: 4px 8px;">ASSERT((__tensor_arena_end - __tensor_arena_start) &lt;= 0x10000)</div>
+                    </div>
                 </div>
             </div>
 

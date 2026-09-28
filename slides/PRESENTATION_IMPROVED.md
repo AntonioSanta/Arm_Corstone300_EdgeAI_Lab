@@ -170,16 +170,12 @@
     # Double-click start_live_bridge.bat
     ```
     *Starts the local REST bridge on port 8080. Evaluators press key **M** in the browser to record live voice ("Yes"/"No"); audio is dynamically loaded into Cortex-M55 SRAM via ARM semihosting and accelerated on Ethos-U55.*
-* **Pillar 1: Reproducible Local Strategy:**
-  - **Native Local Execution:** Runs directly in Linux or Windows WSL with standard packages (`arm-none-eabi-gcc`, Python 3). Eliminates container hypervisor overhead, Docker VPN permission issues, and AWS cloud bills.
-  - **ARM Semihosting Ingestion:** Cortex-M55 executes `bkpt 0xab` to load live voice audio directly into SRAM without recompiling firmware.
-  - **Automated Sanity Check:** Single command (`python3 scripts/sanity_check.py`) audits toolchain binaries and simulator executables in under 1 second.
-* **Pillar 2: Embedded Technical Mitigations:**
-  - **Headless FVP Mode:** Force terminal-only execution to prevent X11 GUI window crashes in headless environments:
+* **Embedded Technical Mitigations &amp; Hardware Safeguards (3-Column Strip):**
+  - **1. Headless FVP Execution:** Force terminal-only execution to prevent X11 GUI window crashes in headless environments or CI:
     `-C disable-visualisation=1 -C cpu0.semihosting-enable=1`
-  - **Vela Operator Fallback:** Route unsupported operations to Cortex-M55 Helium MVE via CMSIS-NN:
+  - **2. Vela Operator Fallback:** Route unsupported operations to Cortex-M55 Helium MVE via CMSIS-NN:
     `--ignore-ops FULLY_CONNECTED`
-  - **SRAM Memory Guard:** Hard compile-time safety check guarding against SRAM buffer overflow:
+  - **3. SRAM Memory Linker Guard:** Hard compile-time safety check guarding against SRAM buffer overflow:
     `ASSERT((__tensor_arena_end - __tensor_arena_start) <= 0x10000)`
 * **Interactive Live Mic Prompt:** *"Ready to test live speech recognition? Press M or click 'Live Mic Test' in the top bar to record live voice from your microphone!"* [Launch Live Audio Test (M)]
 
@@ -190,7 +186,7 @@
 > * * **Mode 1 is the 3.5-second automated hardware verification** (`python3 tests/test_harness.py`). In a single command, it compiles the model, links the firmware, boots the virtual Corstone-300 FVP platform, and asserts that all 5 hardware metrics PASS.*
 > * * **Mode 2 is the real-time interactive voice testbench** (`python3 scripts/live_bridge_server.py` or double-clicking `start_live_bridge.bat`). You can then press key **M** in the presentation, speak into your microphone, and watch your voice stream live into the virtual silicon via ARM semihosting.*
 >
-> *At the bottom, we document our reproducible local strategy—native execution without Docker friction, semihosting dynamic memory ingestion—and the three crucial mitigations: headless FVP flags, Vela CMSIS-NN fallbacks, and compile-time SRAM linker assertions."*
+> *At the bottom, we highlight the three crucial embedded mitigations: headless FVP flags for CI, Vela CMSIS-NN fallbacks, and compile-time SRAM linker assertions."*
 
 ---
 
