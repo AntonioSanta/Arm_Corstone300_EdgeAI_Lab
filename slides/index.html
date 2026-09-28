@@ -617,8 +617,8 @@
 
         .playbook-modes-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
+            grid-template-columns: 1fr 1fr 1.15fr;
+            gap: 14px;
         }
 
         .playbook-card {
@@ -1644,7 +1644,10 @@
 
         <!-- SLIDE 2 -->
         <div class="slide" id="slide-2">
-            <div class="category-tag">Hardware Co-Design &bull; Bus Matrix &amp; Memory Topology</div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
+                <div class="category-tag">Hardware Co-Design &bull; Bus Matrix &amp; Memory Topology</div>
+                <button onclick="toggleHardware()" style="font-size: 10px; color: #FFB74D; background: rgba(255,145,0,0.15); border: 1px solid rgba(255,145,0,0.4); padding: 2px 10px; border-radius: 4px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 5px;">🔌 Physical Silicon: Arm MPS3 FPGA (AN547) &bull; View Board (H)</button>
+            </div>
             <h2 class="slide-title">Arm Corstone-300 Subsystem &amp; Dual-AXI microNPU Architecture</h2>
             <p class="slide-subtitle" style="margin-bottom: 8px;">Silicon-level topology: Multi-layer 64-bit AXI5 crossbar with autonomous dual-channel DMA weight &amp; activation streaming.</p>
 
@@ -2219,7 +2222,7 @@
         <div class="slide" id="slide-5">
             <div class="category-tag">Operative Lab Guide (Part 2) &bull; Console Execution &amp; Facilitator Playbook</div>
             <h2 class="slide-title">Console Demonstration Playbook &amp; Facilitator Troubleshooting Matrix</h2>
-            <p class="slide-subtitle" style="margin-bottom: 10px;">Two streamlined execution modes for evaluators to run inference on Corstone-300, plus key embedded safeguards.</p>
+            <p class="slide-subtitle" style="margin-bottom: 10px;">Two virtual execution modes for evaluators, physical silicon deployment (Arm MPS3 FPGA &amp; Alif silicon), plus embedded safeguards.</p>
             
             <!-- Live Console Operational Playbook (Evaluator & Demo Cheat Sheet) -->
             <div class="console-playbook-box" style="margin-top: 4px; margin-bottom: 14px;">
@@ -2275,6 +2278,37 @@
                         </div>
                         <div class="playbook-note" style="color: #BAE6FD; font-size: 10px; margin-top: 6px; background: rgba(0,229,255,0.06); padding: 6px 10px; border-radius: 4px; border: 1px solid rgba(0,229,255,0.2);">
                             💡 <strong>How to test:</strong> Run the server (or double-click <code>start_live_bridge.bat</code>), then press <strong style="color: #00E676;">M</strong> in the browser to speak!
+                        </div>
+                    </div>
+
+                    <!-- Target 3: Real Physical Hardware (Arm MPS3 FPGA & Commercial Silicon) -->
+                    <div class="playbook-card" style="padding: 12px 14px; border-color: rgba(255, 145, 0, 0.45); background: linear-gradient(180deg, rgba(255, 145, 0, 0.08) 0%, rgba(13, 22, 33, 0.95) 100%);">
+                        <div class="playbook-card-header" style="display: flex; justify-content: space-between; align-items: center;">
+                            <span class="playbook-tag" style="background: rgba(255, 145, 0, 0.2); color: #FFB74D; border: 1px solid rgba(255, 145, 0, 0.4);">Target 3 &bull; Real Hardware</span>
+                            <span style="font-size: 9px; color: #00E676; font-weight: 700; background: rgba(0, 230, 118, 0.1); padding: 1px 6px; border-radius: 3px; border: 1px solid rgba(0, 230, 118, 0.3);">100% Binary Match</span>
+                        </div>
+                        <div class="playbook-card-title" style="font-size: 13.5px; margin-top: 4px; color: #FFE082;">Arm MPS3 FPGA (AN547) &amp; Alif Silicon</div>
+                        
+                        <!-- Embedded Board Photo with Enlarge Prompt -->
+                        <div style="margin: 6px 0; position: relative; cursor: pointer; border-radius: 6px; overflow: hidden; border: 1px solid rgba(255, 145, 0, 0.35); background: #03070C; box-shadow: 0 4px 12px rgba(0,0,0,0.5);" onclick="toggleHardware()" title="Click to open full-screen lightbox with specifications and deployment guide">
+                            <img src="arm_mps3_board.png" alt="Arm MPS3 FPGA Prototyping Board" style="width: 100%; height: 86px; object-fit: contain; display: block; padding: 2px;">
+                            <div style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.85); font-size: 9.5px; color: #FFCC80; padding: 3px 8px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255, 145, 0, 0.3);">
+                                <span>🔌 <strong>Arm MPS3 FPGA Board</strong></span>
+                                <span style="color: #00E5FF; font-weight: 700;">🔍 Enlarge Specs (H) &rarr;</span>
+                            </div>
+                        </div>
+
+                        <!-- Deploy Command -->
+                        <div class="playbook-cmd-entry" style="margin-top: 4px;">
+                            <span class="playbook-cmd-label" style="font-size: 9.5px;">Flash to Board (USB MSC / pyOCD):</span>
+                            <div class="playbook-cmd-code" style="padding: 5px 8px;">
+                                <code style="font-size: 10.5px; font-weight: 700;">pyocd flash -t cortex_m build/firmware.bin</code>
+                                <button class="cmd-copy-btn" onclick="copyCmd('pyocd flash -t cortex_m build/firmware.bin --base-address 0x00000000', this)" style="padding: 2px 6px; font-size: 9px;">📋</button>
+                            </div>
+                        </div>
+
+                        <div class="playbook-note" style="color: #FFCC80; font-size: 9.5px; margin-top: 5px; background: rgba(255, 145, 0, 0.08); padding: 5px 8px; border-radius: 4px; border: 1px solid rgba(255, 145, 0, 0.25); line-height: 1.35;">
+                            💡 <strong>DMA Audio:</strong> Onboard I2S/PDM mic streams to SRAM at <code>0x21010000</code>. Production silicon: <strong>Alif Ensemble E3/E7</strong>.
                         </div>
                     </div>
                 </div>
