@@ -617,8 +617,8 @@
 
         .playbook-modes-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr 1.15fr;
-            gap: 14px;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
         }
 
         .playbook-card {
@@ -2222,7 +2222,7 @@
         <div class="slide" id="slide-5">
             <div class="category-tag">Operative Lab Guide (Part 2) &bull; Console Execution &amp; Facilitator Playbook</div>
             <h2 class="slide-title">Console Demonstration Playbook &amp; Facilitator Troubleshooting Matrix</h2>
-            <p class="slide-subtitle" style="margin-bottom: 10px;">Two virtual execution modes for evaluators, physical silicon deployment (Arm MPS3 FPGA &amp; Alif silicon), plus embedded safeguards.</p>
+            <p class="slide-subtitle" style="margin-bottom: 10px;">Two streamlined virtual execution modes for evaluators and physical silicon deployment (Arm MPS3 FPGA &amp; Alif silicon).</p>
             
             <!-- Live Console Operational Playbook (Evaluator & Demo Cheat Sheet) -->
             <div class="console-playbook-box" style="margin-top: 4px; margin-bottom: 14px;">
@@ -2238,7 +2238,7 @@
                             <code style="color: #FFB74D; background: #06101A; padding: 3px 8px; border-radius: 4px; font-family: monospace; font-size: 10px;">sudo apt install -y gcc-arm-none-eabi qemu-system-arm python3-pip make &amp;&amp; pip install ethos-u-vela==5.2.0</code>
                             <button class="cmd-copy-btn" onclick="copyCmd('sudo apt update && sudo apt install -y gcc-arm-none-eabi qemu-system-arm python3-pip make && pip install ethos-u-vela==5.2.0', this)" style="padding: 2px 8px; font-size: 10px;">📋 Copy</button>
                         </div>
-                        <button onclick="toggleHardware()" style="padding: 3px 10px; font-size: 10.5px; background: rgba(255, 145, 0, 0.15); border: 1px solid #FF9100; color: #FFB74D; border-radius: 4px; font-weight: 700; cursor: pointer; transition: all 0.2s ease;">🔌 Real Silicon Deployment (MPS3 AN547) ➔</button>
+                        <button onclick="toggleHardware()" style="padding: 3px 10px; font-size: 10.5px; background: rgba(255, 145, 0, 0.15); border: 1px solid #FF9100; color: #FFB74D; border-radius: 4px; font-weight: 700; cursor: pointer; transition: all 0.2s ease;">🔌 Real Silicon Lightbox (H)</button>
                     </div>
                 </div>
 
@@ -2280,64 +2280,68 @@
                             💡 <strong>How to test:</strong> Run the server (or double-click <code>start_live_bridge.bat</code>), then press <strong style="color: #00E676;">M</strong> in the browser to speak!
                         </div>
                     </div>
-
-                    <!-- Target 3: Real Physical Hardware (Arm MPS3 FPGA & Commercial Silicon) -->
-                    <div class="playbook-card" style="padding: 12px 14px; border-color: rgba(255, 145, 0, 0.45); background: linear-gradient(180deg, rgba(255, 145, 0, 0.08) 0%, rgba(13, 22, 33, 0.95) 100%);">
-                        <div class="playbook-card-header" style="display: flex; justify-content: space-between; align-items: center;">
-                            <span class="playbook-tag" style="background: rgba(255, 145, 0, 0.2); color: #FFB74D; border: 1px solid rgba(255, 145, 0, 0.4);">Target 3 &bull; Real Hardware</span>
-                            <span style="font-size: 9px; color: #00E676; font-weight: 700; background: rgba(0, 230, 118, 0.1); padding: 1px 6px; border-radius: 3px; border: 1px solid rgba(0, 230, 118, 0.3);">100% Binary Match</span>
-                        </div>
-                        <div class="playbook-card-title" style="font-size: 13.5px; margin-top: 4px; color: #FFE082;">Arm MPS3 FPGA (AN547) &amp; Alif Silicon</div>
-                        
-                        <!-- Embedded Board Photo with Enlarge Prompt -->
-                        <div style="margin: 6px 0; position: relative; cursor: pointer; border-radius: 6px; overflow: hidden; border: 1px solid rgba(255, 145, 0, 0.35); background: #03070C; box-shadow: 0 4px 12px rgba(0,0,0,0.5);" onclick="toggleHardware()" title="Click to open full-screen lightbox with specifications and deployment guide">
-                            <img src="arm_mps3_board.png" alt="Arm MPS3 FPGA Prototyping Board" style="width: 100%; height: 86px; object-fit: contain; display: block; padding: 2px;">
-                            <div style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.85); font-size: 9.5px; color: #FFCC80; padding: 3px 8px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255, 145, 0, 0.3);">
-                                <span>🔌 <strong>Arm MPS3 FPGA Board</strong></span>
-                                <span style="color: #00E5FF; font-weight: 700;">🔍 Enlarge Specs (H) &rarr;</span>
-                            </div>
-                        </div>
-
-                        <!-- Deploy Command -->
-                        <div class="playbook-cmd-entry" style="margin-top: 4px;">
-                            <span class="playbook-cmd-label" style="font-size: 9.5px;">Flash to Board (USB MSC / pyOCD):</span>
-                            <div class="playbook-cmd-code" style="padding: 5px 8px;">
-                                <code style="font-size: 10.5px; font-weight: 700;">pyocd flash -t cortex_m build/firmware.bin</code>
-                                <button class="cmd-copy-btn" onclick="copyCmd('pyocd flash -t cortex_m build/firmware.bin --base-address 0x00000000', this)" style="padding: 2px 6px; font-size: 9px;">📋</button>
-                            </div>
-                        </div>
-
-                        <div class="playbook-note" style="color: #FFCC80; font-size: 9.5px; margin-top: 5px; background: rgba(255, 145, 0, 0.08); padding: 5px 8px; border-radius: 4px; border: 1px solid rgba(255, 145, 0, 0.25); line-height: 1.35;">
-                            💡 <strong>DMA Audio:</strong> Onboard I2S/PDM mic streams to SRAM at <code>0x21010000</code>. Production silicon: <strong>Alif Ensemble E3/E7</strong>.
-                        </div>
-                    </div>
                 </div>
             </div>
 
-            <!-- Embedded Technical Mitigations (3-Column Strip) -->
-            <div class="card" style="padding: 12px 16px; margin-top: 2px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <!-- Physical Reference Silicon & Hardware Deployment Section -->
+            <div class="card" style="padding: 12px 16px; margin-top: 2px; border: 1px solid rgba(255, 145, 0, 0.45); background: linear-gradient(180deg, rgba(255, 145, 0, 0.07) 0%, rgba(10, 18, 28, 0.95) 100%);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; border-bottom: 1px solid rgba(255, 145, 0, 0.25); padding-bottom: 6px;">
                     <div style="display: flex; align-items: center; gap: 8px;">
-                        <span style="font-size: 14px; color: var(--orange-accent);">🛡️</span>
-                        <h3 class="card-title" style="color: var(--orange-accent); font-size: 13px; margin-bottom: 0;">Embedded Technical Mitigations &amp; Hardware Safeguards</h3>
+                        <span style="font-size: 15px;">🔌</span>
+                        <h3 class="card-title" style="color: #FFB74D; font-size: 13px; margin-bottom: 0; font-weight: 800;">Physical Reference Hardware &amp; Real Silicon Deployment</h3>
+                        <span style="font-size: 9px; background: rgba(0, 230, 118, 0.15); color: #00E676; padding: 2px 7px; border-radius: 4px; font-weight: 700; border: 1px solid rgba(0, 230, 118, 0.3);">100% Binary Compatible</span>
                     </div>
-                    <span style="font-size: 10px; color: #94A3B8;">Built-in compile-time &amp; runtime protections</span>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 10.5px; color: #94A3B8;">Target: <strong>Arm MPS3 FPGA (AN547)</strong> &bull; Commercial: <strong>Alif Ensemble E3/E7</strong></span>
+                        <button onclick="toggleHardware()" style="padding: 2px 10px; font-size: 10.5px; background: rgba(255, 145, 0, 0.2); border: 1px solid #FF9100; color: #FFE082; border-radius: 4px; font-weight: 700; cursor: pointer;">🔍 Enlarge Lightbox (H)</button>
+                    </div>
                 </div>
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;">
-                    <div style="background: #060B12; border: 1px solid #162638; border-radius: 6px; padding: 10px 12px;">
-                        <span style="font-size: 11px; font-weight: 700; color: #FFCC80; display: block; margin-bottom: 4px;">1. Headless FVP Execution</span>
-                        <span style="font-size: 10px; color: #CBD5E1; display: block; margin-bottom: 6px; line-height: 1.35;">Forces terminal-only execution to prevent X11 GUI crashes in headless WSL or CI/CD pipelines:</span>
-                        <div class="code-box" style="font-size: 9.5px; padding: 4px 8px;">-C disable-visualisation=1 -C cpu0.semihosting-enable=1</div>
+
+                <div style="display: grid; grid-template-columns: 200px 1fr 1.15fr; gap: 14px; align-items: stretch;">
+                    <!-- Column 1: Board Photo Thumbnail -->
+                    <div style="background: #03070C; border: 1px solid rgba(255, 145, 0, 0.35); border-radius: 6px; padding: 5px; text-align: center; cursor: pointer; display: flex; flex-direction: column; justify-content: space-between;" onclick="toggleHardware()" title="Click to enlarge board photo and view full specifications">
+                        <img src="arm_mps3_board.png" alt="Arm MPS3 FPGA Prototyping Board" style="width: 100%; height: 96px; object-fit: contain; border-radius: 4px; display: block; background: #000;">
+                        <div style="font-size: 9.5px; color: #CBD5E1; margin-top: 3px; font-weight: 700;">
+                            Arm MPS3 FPGA Board (AN547)
+                        </div>
+                        <div style="font-size: 8.5px; color: #00E5FF; font-weight: 600;">🔍 Click to enlarge &rarr;</div>
                     </div>
-                    <div style="background: #060B12; border: 1px solid #162638; border-radius: 6px; padding: 10px 12px;">
-                        <span style="font-size: 11px; font-weight: 700; color: #FFCC80; display: block; margin-bottom: 4px;">2. Vela Operator Fallback</span>
-                        <span style="font-size: 10px; color: #CBD5E1; display: block; margin-bottom: 6px; line-height: 1.35;">Automatically routes unsupported layers from NPU to Cortex-M55 Helium MVE via CMSIS-NN:</span>
-                        <div class="code-box" style="font-size: 9.5px; padding: 4px 8px;">--ignore-ops FULLY_CONNECTED</div>
+
+                    <!-- Column 2: Memory Map & Audio Ingestion -->
+                    <div style="background: #060B12; border: 1px solid #162638; border-radius: 6px; padding: 8px 10px; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div>
+                            <span style="font-size: 10.5px; font-weight: 700; color: #FFCC80; display: block; margin-bottom: 3px;">🎯 Drop-In Silicon Memory Map</span>
+                            <p style="font-size: 9.5px; color: #94A3B8; margin-bottom: 4px; line-height: 1.3;">
+                                The virtual FVP simulator is the bit-for-bit digital twin of the physical MPS3 AN547 FPGA board. Memory addresses match with zero code modifications:
+                            </p>
+                            <div style="font-size: 9px; font-family: monospace; color: #CBD5E1; background: #03070D; padding: 4px 6px; border-radius: 4px; border: 1px solid #1C2D40;">
+                                Flash: <code>0x00000000</code> &bull; SRAM: <code>0x21000000</code> &bull; UART: <code>0x49303000</code>
+                            </div>
+                        </div>
+                        <div style="margin-top: 4px; padding-top: 4px; border-top: 1px solid #162638;">
+                            <span style="font-size: 9.5px; font-weight: 700; color: #00E676;">🎙️ Physical DMA Audio Ingestion:</span>
+                            <span style="font-size: 9px; color: #94A3B8; display: block; line-height: 1.3;">
+                                Replace virtual semihosting (<code>bkpt 0xab</code>) with onboard I2S/PDM digital mic DMA directly streaming audio to SRAM arena (<code>0x21010000</code>).
+                            </span>
+                        </div>
                     </div>
-                    <div style="background: #060B12; border: 1px solid #162638; border-radius: 6px; padding: 10px 12px;">
-                        <span style="font-size: 11px; font-weight: 700; color: #FFCC80; display: block; margin-bottom: 4px;">3. SRAM Memory Linker Guard</span>
-                        <span style="font-size: 10px; color: #CBD5E1; display: block; margin-bottom: 6px; line-height: 1.35;">Hard compile-time linker script assertion guarding against internal 64 KiB SRAM buffer overflow:</span>
-                        <div class="code-box" style="font-size: 9.5px; padding: 4px 8px;">ASSERT((__tensor_arena_end - __tensor_arena_start) &lt;= 0x10000)</div>
+
+                    <!-- Column 3: 4-Step Flashing Playbook -->
+                    <div style="background: #060B12; border: 1px solid #162638; border-radius: 6px; padding: 8px 10px; display: flex; flex-direction: column; justify-content: space-between;">
+                        <span style="font-size: 10.5px; font-weight: 700; color: #FFCC80; display: block; margin-bottom: 3px;">⚡ Flash &amp; Run on Physical Silicon</span>
+                        <div style="display: flex; flex-direction: column; gap: 4px; font-size: 9px; color: #CBD5E1;">
+                            <div>
+                                <span style="color: #00E5FF; font-weight: 700;">1. Convert ELF to flat binary:</span>
+                                <div class="code-box" style="font-size: 8.5px; padding: 2px 6px; margin-top: 1px;">arm-none-eabi-objcopy -O binary build/firmware.elf build/firmware.bin</div>
+                            </div>
+                            <div>
+                                <span style="color: #00E5FF; font-weight: 700;">2. Flash via pyOCD or USB Mass Storage:</span>
+                                <div class="code-box" style="font-size: 8.5px; padding: 2px 6px; margin-top: 1px;">pyocd flash -t cortex_m build/firmware.bin --base-address 0x00000000</div>
+                            </div>
+                            <div style="color: #94A3B8; font-size: 8.5px; margin-top: 1px;">
+                                <strong>3. Telemetry:</strong> Read UART at 115200 baud (8N1) for real-time keyword predictions &amp; NPU cycle counts. Commercial: <strong>Alif Ensemble E3/E7</strong>.
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
